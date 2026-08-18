@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ImageView
+            android:id="@id/logo"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_91sdp"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:src="@drawable/battlepass_logo_prem"
+            android:scaleType="fitCenter" />
+        <TextView
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/white"
+            android:gravity="center_vertical"
+            android:id="@id/main_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Покупка уровней:"
+            android:fontFamily="@font/heading_now_66_bold" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/background_battlepass_buy_premium_alert_2"
+            android:paddingLeft="@dimen/_6sdp"
+            android:paddingTop="@dimen/_9sdp"
+            android:paddingRight="@dimen/_6sdp"
+            android:paddingBottom="@dimen/_9sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_22sdp"
+            android:paddingHorizontal="@dimen/_6sdp"
+            android:paddingVertical="@dimen/_9sdp">
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_6sdp"
+                android:layout_marginRight="@dimen/_6sdp"
+                android:src="@drawable/battlepass_alert_ic_2"
+                android:layout_marginHorizontal="@dimen/_6sdp" />
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ffffffff"
+                android:layout_gravity="center"
+                android:paddingLeft="6.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_7sdp"
+                android:text="Вы достигли максимального уровня Боевого Пропуска.\n Покупка уровней - невозможна!"
+                android:fontFamily="@font/heading_now_64_regular" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@id/buttonReturn"
+            android:background="@drawable/background_az_battlepass_type_task_enabled"
+            android:paddingLeft="@dimen/_18sdp"
+            android:paddingTop="@dimen/_7sdp"
+            android:paddingRight="@dimen/_18sdp"
+            android:paddingBottom="@dimen/_7sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_22sdp"
+            android:paddingHorizontal="@dimen/_18sdp"
+            android:paddingVertical="@dimen/_7sdp">
+            <ImageView
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:src="@drawable/battlepass_alert_ic_3" />
+            <TextView
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:text="Вернуться на главную"
+                android:fontFamily="@font/heading_now_64_regular" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/player_list_dialog_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_gravity="center"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_margin="8.0dip"
+        app:layout_constraintBottom_toTopOf="@id/guideline6"
+        app:layout_constraintDimensionRatio=""
+        app:layout_constraintEnd_toStartOf="@id/guideline4"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/guideline5">
+        <include
+            android:id="@id/bg"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            layout="@layout/dialog_background" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@id/textInputLayout"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16.0dip"
+            android:layout_marginRight="16.0dip"
+            android:layout_marginStart="16.0dip"
+            android:layout_marginEnd="16.0dip"
+            app:boxBackgroundColor="#80000000"
+            app:boxCornerRadiusBottomEnd="8.0dip"
+            app:boxCornerRadiusBottomStart="8.0dip"
+            app:boxCornerRadiusTopEnd="8.0dip"
+            app:boxCornerRadiusTopStart="8.0dip"
+            app:boxStrokeColor="#00000000"
+            app:boxStrokeWidth="0.0dip"
+            app:boxStrokeWidthFocused="0.0dip"
+            app:counterEnabled="false"
+            app:endIconDrawable="@drawable/search"
+            app:endIconMode="custom"
+            app:endIconTint="@color/white"
+            app:errorEnabled="false"
+            app:helperTextEnabled="false"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCaption"
+            app:passwordToggleEnabled="false"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+            <TextView
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/white"
+                android:id="@id/tv_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:imeOptions="flagNoFullscreen"
+                android:alpha="0.5"
+                android:fontFamily="@font/heading_now_64_regular" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/white"
+                android:id="@id/user_input"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:imeOptions="flagNoFullscreen"
+                android:fontFamily="@font/heading_now_64_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@id/header"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginTop="8.0dip"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginStart="20.0dip"
+            android:layout_marginEnd="20.0dip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout">
+            <TextView
+                android:textSize="@dimen/_11sdp"
+                android:gravity="start"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:text="ID  "
+                android:layout_weight="2.0"
+                style="@style/users_table_header" />
+            <TextView
+                android:textSize="@dimen/_11sdp"
+                android:gravity="start"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:text="Никнейм"
+                android:layout_weight="8.0"
+                style="@style/users_table_header" />
+            <TextView
+                android:textSize="@dimen/_11sdp"
+                android:gravity="center_horizontal"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:text="Уровень"
+                android:layout_weight="3.0"
+                style="@style/users_table_header" />
+            <TextView
+                android:textSize="@dimen/_11sdp"
+                android:gravity="end"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:text="Пинг"
+                android:layout_weight="3.0"
+                style="@style/users_table_header" />
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:scrollbarSize="4.0dip"
+            android:scrollbarThumbVertical="@color/white"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarStyle="insideInset"
+            android:id="@id/rvPLayerList"
+            android:scrollbars="vertical"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="15.0dip"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:layout_marginLeft="4.0dip"
+            android:layout_marginTop="8.0dip"
+            android:layout_marginRight="4.0dip"
+            android:fadeScrollbars="false"
+            android:requiresFadingEdge="vertical"
+            android:layout_marginStart="4.0dip"
+            android:layout_marginEnd="4.0dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:spanCount="4" />
+        <TextView
+            android:textSize="@dimen/_11sdp"
+            android:gravity="start|center"
+            android:id="@id/tvCaption"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24.0dip"
+            android:layout_marginEnd="24.0dip"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toStartOf="@id/tvPlayersCount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/dialog_header" />
+        <TextView
+            android:textSize="@dimen/_11sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="end|center"
+            android:id="@id/tvPlayersCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8.0dip"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:layout_marginEnd="8.0dip"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.2" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.8" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.01" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.99" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@id/tvQuestCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gotham_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/white"
+        android:gravity="start"
+        android:id="@id/tvQuestInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="@dimen/_80sdp"
+        android:maxLines="2"
+        android:fontFamily="@font/gotham_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvQuestCount"
+        app:layout_constraintTop_toBottomOf="@id/tvQuestCount" />
+</androidx.constraintlayout.widget.ConstraintLayout>

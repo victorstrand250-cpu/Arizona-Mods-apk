@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@drawable/rodina_rectangle_gray_bg"
+    android:padding="12.0dip"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.emoji.widget.EmojiTextView
+        android:textSize="18.0sp"
+        android:layout_gravity="center"
+        android:id="@id/rodina_quest_dialog_item_emoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8.0dip"
+        android:text="🥰" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/rodina_white"
+        android:layout_gravity="center"
+        android:id="@id/rodina_quest_dialog_item_text"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:text="Конечно, друг! Я тебе помогу"
+        android:layout_weight="1.0"
+        style="@style/rodina_title_4_text" />
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/radial_menu_center_element_bg"
+    android:layout_width="@dimen/_105sdp"
+    android:layout_height="@dimen/_105sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@id/center_iv_icon"
+        android:layout_width="@dimen/_33sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:src="@drawable/radial_menu_cross_icon" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:id="@id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Закрыть" />
+</LinearLayout>

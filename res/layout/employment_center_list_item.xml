@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.mrlargha.commonui.utils.ui.CustomCardView
+    android:id="@id/item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_2sdp"
+    android:minHeight="@dimen/_58sdp"
+    android:layout_marginVertical="@dimen/_2sdp"
+    app:borderMainColor="#ff364b84"
+    app:borderSecondColor="#ffcc3048"
+    app:borderWidth="@dimen/_1sdp"
+    app:corners="@dimen/_6sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:background="@drawable/employment_center_bg1"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp">
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@id/image"
+                android:layout_width="@dimen/_44sdp"
+                android:layout_height="@dimen/_44sdp" />
+        </FrameLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="@drawable/employment_center_bg2"
+            android:paddingLeft="@dimen/_6sdp"
+            android:paddingRight="@dimen/_6sdp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingHorizontal="@dimen/_6sdp">
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <TextView
+                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/white"
+                android:id="@id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Механик"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <include
+                    android:id="@id/label1"
+                    layout="@layout/employment_center_label_item" />
+                <View
+                    android:layout_width="@dimen/_4sdp"
+                    android:layout_height="@dimen/_1sdp" />
+                <include
+                    android:id="@id/label2"
+                    layout="@layout/employment_center_label_item" />
+            </LinearLayout>
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+        </LinearLayout>
+    </LinearLayout>
+</ru.mrlargha.commonui.utils.ui.CustomCardView>

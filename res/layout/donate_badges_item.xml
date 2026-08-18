@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/white"
+        android:id="@id/tv_title"
+        android:background="@drawable/donate_buttons_bg"
+        android:paddingLeft="@dimen/_5sdp"
+        android:paddingTop="@dimen/_3sdp"
+        android:paddingRight="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:layout_marginRight="@dimen/_1sdp"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:text="@string/title"
+        android:fontFamily="@font/heading_now_66_bold"
+        android:layout_marginHorizontal="@dimen/_1sdp"
+        android:layout_marginVertical="@dimen/_1sdp"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingVertical="@dimen/_3sdp" />
+</FrameLayout>

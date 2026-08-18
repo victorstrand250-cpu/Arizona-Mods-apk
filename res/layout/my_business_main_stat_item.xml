@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/my_business_main_stat_item"
+    android:background="@drawable/my_biz_main_stat_bg"
+    android:layout_width="@dimen/_88sdp"
+    android:layout_height="fill_parent"
+    android:layout_marginRight="@dimen/_6sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_7sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/white"
+            android:id="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Налог к оплате"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/label_container"
+            android:background="@drawable/my_biz_payday_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_3sdp"
+            app:layout_constraintBottom_toBottomOf="@id/title"
+            app:layout_constraintLeft_toRightOf="@id/title"
+            app:layout_constraintTop_toTopOf="@id/title">
+            <TextView
+                android:textSize="@dimen/_4sdp"
+                android:textColor="#ff131516"
+                android:id="@id/label"
+                android:paddingLeft="@dimen/_3sdp"
+                android:paddingTop="@dimen/_1sdp"
+                android:paddingRight="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_1sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30 PayDay’s"
+                android:fontFamily="@font/heading_now_64_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/white"
+            android:id="@id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="$ 200 000"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff999999"
+            android:id="@id/max_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:text="/ 200 000"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toRightOf="@id/value"
+            app:layout_constraintTop_toTopOf="@id/value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

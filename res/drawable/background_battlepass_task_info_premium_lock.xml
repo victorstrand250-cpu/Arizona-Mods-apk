@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="660.0dip"
+    android:width="616.0dip"
+    android:viewportWidth="616.0"
+    android:viewportHeight="660.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$background_battlepass_task_info_premium_lock__0"
+        android:pathData="M16,0L600,0A16,16 0,0 1,616 16L616,644A16,16 0,0 1,600 660L16,660A16,16 0,0 1,0 644L0,16A16,16 0,0 1,16 0z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M16,1L600,1A15,15 0,0 1,615 16L615,644A15,15 0,0 1,600 659L16,659A15,15 0,0 1,1 644L1,16A15,15 0,0 1,16 1z"
+        android:strokeColor="@drawable/$background_battlepass_task_info_premium_lock__1"
+        android:strokeWidth="2.0" />
+</vector>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:background="@drawable/arizona_cases_prize_item_bg"
+    android:paddingLeft="@dimen/_8sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_2sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0">
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:id="@id/progress_bar_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            app:backgroundMainColor="#40000000"
+            app:corners="@dimen/_8sdp">
+            <ru.mrlargha.commonui.utils.ui.CustomCardView
+                android:id="@id/progress_bar"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                app:backgroundMainColor="#ff008666">
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/tv_item_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_1sdp"
+                    android:text="x100"
+                    android:fontFamily="@font/heading_now_64_regular"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:layout_marginVertical="@dimen/_1sdp" />
+            </ru.mrlargha.commonui.utils.ui.CustomCardView>
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+        <ImageView
+            android:id="@id/done_ic"
+            android:visibility="gone"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/done_ic" />
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:id="@id/tv_prize_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Кастомный Паз с отбойниками"
+            android:layout_weight="1.0"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+    </LinearLayout>
+    <ImageView
+        android:id="@id/iv_prize"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true" />
+</LinearLayout>

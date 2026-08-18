@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/rewards_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:id="@id/short_prize"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:backgroundMainColor="@color/black"
+        app:borderMainColor="#ff6c044a"
+        app:borderWidth="@dimen/_1sdp"
+        app:corners="@dimen/_8sdp" />
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:id="@id/short_prize_ic_container"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="fill_parent"
+        app:backgroundMainColor="#ff6c044a"
+        app:corners="@dimen/_8sdp"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <ImageView
+            android:id="@id/short_prize_ic"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/linking_vip_ic"
+            android:scaleType="fitXY" />
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/short_prize_time_container"
+        android:background="@drawable/rewards_timer_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="@dimen/_9sdp"
+            android:layout_height="@dimen/_9sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:src="@drawable/rewards_timer_ic" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff000000"
+            android:id="@id/short_prize_time_description"
+            android:paddingRight="@dimen/_4sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:text="24 PayDay (часа)"
+            android:fontFamily="@font/heading_now_64_regular" />
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/short_prize_ic_container"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:gravity="left"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:ellipsize="end"
+                android:id="@id/short_prize_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD VIP"
+                android:maxLines="1"
+                android:fontFamily="@font/pfdregular" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#ffffffff"
+                android:ellipsize="end"
+                android:id="@id/short_prize_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 дня"
+                android:maxLines="1"
+                android:fontFamily="@font/pfdbold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

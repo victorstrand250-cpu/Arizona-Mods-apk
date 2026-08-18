@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/ap_shop_root"
+    android:background="@drawable/game_pass_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/imageView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:layout_marginStart="8.0dip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/standard_pass_logo" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/close_shop_button"
+        android:layout_width="40.0dip"
+        android:layout_height="40.0dip"
+        android:layout_marginTop="16.0dip"
+        android:layout_marginEnd="16.0dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cross" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/imageView9"
+        android:layout_width="50.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginEnd="12.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/shop_balance"
+        app:layout_constraintEnd_toStartOf="@id/close_shop_button"
+        app:layout_constraintTop_toTopOf="@id/shop_balance"
+        app:srcCompat="@drawable/game_pass_shop_coins" />
+    <TextView
+        android:textSize="@dimen/_11sdp"
+        android:textColor="@color/white"
+        android:id="@id/shop_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:fontFamily="@font/pfdbold"
+        android:layout_marginEnd="4.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/close_shop_button"
+        app:layout_constraintEnd_toStartOf="@id/imageView9"
+        app:layout_constraintTop_toTopOf="@id/close_shop_button" />
+    <TextView
+        android:textSize="@dimen/_6sdp"
+        android:textColor="#80ffffff"
+        android:id="@id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Баланс"
+        android:fontFamily="@font/pfdregular"
+        app:layout_constraintBottom_toTopOf="@id/shop_balance"
+        app:layout_constraintStart_toStartOf="@id/shop_balance" />
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
+        android:id="@id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Магазин"
+        android:fontFamily="@font/pfdbold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/close_shop_button" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarThumbVertical="@drawable/rodina_vert_scroll_thumb"
+        android:scrollbarTrackVertical="@drawable/rodina_vert_scrollbar_track"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarStyle="insideInset"
+        android:id="@id/recycler"
+        android:scrollbars="vertical"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="8.0dip"
+        android:fadeScrollbars="false"
+        android:layout_marginStart="16.0dip"
+        android:layout_marginEnd="16.0dip"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView19"
+        app:spanCount="5" />
+</androidx.constraintlayout.widget.ConstraintLayout>

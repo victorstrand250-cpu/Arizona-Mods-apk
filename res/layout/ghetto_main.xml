@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/family_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/family_overlay"
+        android:background="#fa17181b"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <include
+            android:id="@id/map"
+            android:visibility="gone"
+            layout="@layout/ghetto_map" />
+        <include
+            android:id="@id/war"
+            android:visibility="gone"
+            layout="@layout/ghetto_war" />
+        <include
+            android:id="@id/frame_map"
+            android:visibility="gone"
+            layout="@layout/ghetto_map_frame" />
+        <include
+            android:id="@id/topbar"
+            android:visibility="visible"
+            layout="@layout/ghetto_topbar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@id/item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6.0dip"
+    android:layout_marginStart="6.0dip"
+    app:cardBackgroundColor="@color/transparent100"
+    app:cardCornerRadius="10.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/bg_item" />
+    <ImageView
+        android:id="@id/ivItemImage"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_gravity="center|right|top"
+        android:id="@id/ivActiveItem"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:src="@drawable/ic_active_item"
+        android:layout_marginEnd="8.0dip" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold"
+        android:textColor="@color/green_type1"
+        android:layout_gravity="end|bottom|center"
+        android:id="@id/tvTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8.0dip"
+        android:shadowColor="@color/black"
+        android:shadowDx="-4.0"
+        android:shadowDy="-2.0"
+        android:shadowRadius="1.0"
+        android:fontFamily="@font/pfdregular"
+        android:layout_marginEnd="4.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivDollar" />
+    <ImageView
+        android:id="@id/ivDollar"
+        android:visibility="gone"
+        android:layout_width="8.0dip"
+        android:layout_height="8.0dip"
+        android:src="@drawable/ic_rubble_green_8"
+        android:layout_marginEnd="10.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitleText" />
+    <View
+        android:layout_gravity="center"
+        android:id="@id/viewCenter"
+        android:background="@color/black_type1"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="80.0dip"
+    android:width="245.0dip"
+    android:viewportWidth="245.0"
+    android:viewportHeight="80.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$hud_quest_button_bg__0"
+        android:pathData="M15,0L230,0A15,15 0,0 1,245 15L245,65A15,15 0,0 1,230 80L15,80A15,15 0,0 1,0 65L0,15A15,15 0,0 1,15 0z"
+        android:fillAlpha="0.8" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M15,2.5L230,2.5A12.5,12.5 0,0 1,242.5 15L242.5,65A12.5,12.5 0,0 1,230 77.5L15,77.5A12.5,12.5 0,0 1,2.5 65L2.5,15A12.5,12.5 0,0 1,15 2.5z"
+        android:strokeColor="@drawable/$hud_quest_button_bg__1"
+        android:strokeWidth="5.0"
+        android:strokeAlpha="0.1" />
+</vector>

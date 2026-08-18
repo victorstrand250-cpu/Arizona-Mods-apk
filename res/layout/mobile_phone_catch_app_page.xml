@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/mp_catch_app_page"
+    android:layout_width="160.0dip"
+    android:layout_height="300.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/back_button"
+        android:layout_width="14.399994dip"
+        android:layout_height="11.099976dip"
+        android:layout_marginLeft="7.399994dip"
+        android:layout_marginTop="21.399994dip"
+        android:src="@drawable/catch_app_back_ic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@id/info_button"
+        android:layout_width="21.399994dip"
+        android:layout_height="21.399994dip"
+        android:layout_marginRight="4.399994dip"
+        android:src="@drawable/catch_app_info_button"
+        app:layout_constraintBottom_toBottomOf="@id/back_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_button" />
+    <TextView
+        android:textSize="13.299988dip"
+        android:textColor="#ffffffff"
+        android:id="@id/season_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10.699982dip"
+        android:text="сезон"
+        android:shadowColor="#80000000"
+        android:shadowDx="0.0"
+        android:shadowDy="2.0"
+        android:shadowRadius="0.0"
+        android:textAllCaps="true"
+        android:fontFamily="@font/druk_cyr_bold"
+        android:letterSpacing="0.15"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/info_button" />
+    <TextView
+        android:textSize="@dimen/_20sdp"
+        android:textColor="#ffffd66c"
+        android:gravity="center"
+        android:id="@id/season_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="«СКОРОСТРЕЛЫ»"
+        android:shadowColor="#80000000"
+        android:shadowDx="0.0"
+        android:shadowDy="2.0"
+        android:shadowRadius="0.0"
+        android:textAllCaps="true"
+        android:fontFamily="@font/druk_cyr_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/info_button" />
+    <TextView
+        android:textSize="7.399994dip"
+        android:textColor="#80ffffff"
+        android:id="@id/end_of_season_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7.399994dip"
+        android:text="до конца сезона"
+        android:fontFamily="@font/heading_now_64_regular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/season_name" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/timer_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3.6999817dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/end_of_season_title">
+        <ImageView
+            android:id="@id/clock_ic"
+            android:layout_width="10.299988dip"
+            android:layout_height="10.299988dip"
+            android:src="@drawable/catch_app_clock_ic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="11.799988dip"
+            android:textColor="@color/white"
+            android:id="@id/left_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4.0dip"
+            android:text="3 д. 7 ч. 12 м."
+            android:fontFamily="@font/pfdbold"
+            app:layout_constraintLeft_toRightOf="@id/clock_ic"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@id/statistic_card"
+        android:layout_width="98.79999dip"
+        android:layout_height="39.599976dip"
+        android:layout_marginTop="7.399994dip"
+        app:cardBackgroundColor="#ff000000"
+        app:cardCornerRadius="4.399994dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timer_container">
+        <TextView
+            android:textSize="7.399994dip"
+            android:textColor="#80ffffff"
+            android:layout_gravity="center|top"
+            android:id="@id/stat_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7.399994dip"
+            android:text="за текущий сезон поймано:"
+            android:fontFamily="@font/heading_now_64_regular" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8.0dip">
+            <ImageView
+                android:id="@id/home_ic"
+                android:layout_width="11.099976dip"
+                android:layout_height="10.0dip"
+                android:src="@drawable/catch_app_home_ic"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="11.799988dip"
+                android:textColor="@color/white"
+                android:id="@id/home_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.5dip"
+                android:layout_marginTop="1.0dip"
+                android:text="58"
+                android:fontFamily="@font/pfdbold"
+                app:layout_constraintBottom_toBottomOf="@id/home_ic"
+                app:layout_constraintLeft_toRightOf="@id/home_ic"
+                app:layout_constraintTop_toTopOf="@id/home_ic" />
+            <ImageView
+                android:id="@id/biz_ic"
+                android:layout_width="11.799988dip"
+                android:layout_height="11.799988dip"
+                android:layout_marginLeft="12.0dip"
+                android:src="@drawable/catch_app_biz_ic"
+                app:layout_constraintLeft_toRightOf="@id/home_count"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="11.799988dip"
+                android:textColor="@color/white"
+                android:id="@id/biz_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.5dip"
+                android:layout_marginTop="1.0dip"
+                android:text="58"
+                android:fontFamily="@font/pfdbold"
+                app:layout_constraintBottom_toBottomOf="@id/home_ic"
+                app:layout_constraintLeft_toRightOf="@id/biz_ic"
+                app:layout_constraintTop_toTopOf="@id/home_ic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/permission_button"
+        android:background="@drawable/catch_app_permission_button_first_type_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="28.5dip"
+        android:layout_marginLeft="8.099976dip"
+        android:layout_marginRight="8.099976dip"
+        android:layout_marginBottom="4.5999756dip"
+        app:layout_constraintBottom_toTopOf="@id/catch_button">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@id/location_ic"
+                android:layout_width="4.899994dip"
+                android:layout_height="7.0999756dip"
+                android:src="@drawable/catch_app_location_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="8.799988dip"
+                android:textColor="#ffffd66d"
+                android:id="@id/permission_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.399994dip"
+                android:text="Разрешение на ловлю"
+                android:fontFamily="@font/pfdbold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/location_ic"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/catch_button"
+        android:background="@drawable/catch_app_button_first_type_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="28.5dip"
+        android:layout_marginLeft="8.099976dip"
+        android:layout_marginRight="8.099976dip"
+        android:layout_marginBottom="12.199982dip"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:textSize="8.799988dip"
+            android:textColor="#ff000000"
+            android:id="@id/catch_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ловить"
+            android:fontFamily="@font/pfdbold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

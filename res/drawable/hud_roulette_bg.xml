@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="85.0dip"
+    android:width="325.0dip"
+    android:viewportWidth="325.0"
+    android:viewportHeight="85.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$hud_roulette_bg__0"
+        android:pathData="M0,15C0,6.72 6.72,0 15,0H310C318.28,0 325,6.72 325,15V70C325,78.28 318.28,85 310,85H15C6.72,85 0,78.28 0,70V15Z"
+        android:fillAlpha="0.9" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M2.5,15C2.5,8.1 8.1,2.5 15,2.5H310C316.9,2.5 322.5,8.1 322.5,15V70C322.5,76.9 316.9,82.5 310,82.5H15C8.1,82.5 2.5,76.9 2.5,70V15Z"
+        android:strokeColor="@drawable/$hud_roulette_bg__1"
+        android:strokeWidth="5.0"
+        android:strokeAlpha="0.1" />
+</vector>

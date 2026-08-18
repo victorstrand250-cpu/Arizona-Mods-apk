@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/transport_screen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:id="@id/bg"
+        android:background="#ff0d1011"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginRight="@dimen/_24sdp"
+            android:layout_marginHorizontal="@dimen/_24sdp">
+            <TextView
+                android:textSize="@dimen/_18sdp"
+                android:textColor="#e6ffffff"
+                android:id="@id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="общий"
+                android:layout_weight="1.0"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <ru.mrlargha.commonui.utils.ui.CustomCardView
+                android:id="@id/close"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_28sdp"
+                app:backgroundMainColor="#33ffffff"
+                app:borderMainColor="#4dffffff"
+                app:borderWidth="@dimen/_1sdp"
+                app:corners="@dimen/_6sdp">
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_6sdp"
+                    android:layout_marginRight="@dimen/_6sdp"
+                    android:layout_marginHorizontal="@dimen/_6sdp">
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:layout_marginRight="@dimen/_6sdp"
+                        android:src="@drawable/rodina_close" />
+                    <TextView
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="#e6ffffff"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="закрыть"
+                        android:layout_weight="1.0"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/heading_now_66_bold" />
+                </LinearLayout>
+            </ru.mrlargha.commonui.utils.ui.CustomCardView>
+        </LinearLayout>
+        <include
+            android:id="@id/fullscreen"
+            android:visibility="gone"
+            layout="@layout/rating_fullscreen_item" />
+        <include
+            android:id="@id/list"
+            android:visibility="gone"
+            layout="@layout/rating_list" />
+    </LinearLayout>
+    <View
+        android:id="@id/filter_overlay"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:id="@id/filter_layout"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_48sdp"
+        android:layout_marginTop="@dimen/_80sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        app:backgroundMainColor="@color/white"
+        app:corners="@dimen/_8sdp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@id/filter1"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_24sdp">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#80223144"
+                android:layout_width="@dimen/_48sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:text="Качество:"
+                android:fontFamily="@font/heading_now_64_regular" />
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ff223144"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
+                android:text="от низкого"
+                android:fontFamily="@font/heading_now_65_medium" />
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@id/filter1ic"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:src="@drawable/rating_ic_filter1" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:id="@id/filter2"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_24sdp">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#80223144"
+                android:layout_width="@dimen/_48sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:text="Качество:"
+                android:fontFamily="@font/heading_now_64_regular" />
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ff223144"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
+                android:text="от высокого"
+                android:fontFamily="@font/heading_now_65_medium" />
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@id/filter2ic"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:src="@drawable/rating_ic_filter2" />
+        </LinearLayout>
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    <ProgressBar
+        android:id="@id/loader_bar"
+        android:background="@drawable/circle_shape"
+        android:visibility="gone"
+        android:layout_width="@dimen/_16sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:elevation="2.0dip"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@id/search_not_found"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_24sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:src="@drawable/search_not_found" />
+        <TextView
+            android:textSize="@dimen/_13sdp"
+            android:textColor="#e6ffffff"
+            android:id="@id/search_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:text="общий"
+            android:layout_weight="1.0"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="#80ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="По вашему запросу ничего не найдено"
+            android:layout_weight="1.0"
+            android:fontFamily="@font/heading_now_64_regular" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

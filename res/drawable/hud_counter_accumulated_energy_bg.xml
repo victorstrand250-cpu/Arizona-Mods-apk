@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="1.0dip"
+    android:width="1.0dip"
+    android:viewportWidth="325.0"
+    android:viewportHeight="108.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$hud_counter_accumulated_energy_bg__0"
+        android:pathData="M0,96C0,102.63 5.37,108 12,108H325V9H12C5.37,9 0,14.37 0,21V96Z" />
+    <path
+        android:fillColor="@drawable/$hud_counter_accumulated_energy_bg__1"
+        android:pathData="M151,9C151,4.03 155.03,0 160,0H242C246.97,0 251,4.03 251,9V9H151V9Z" />
+    <group>
+        <clip-path
+            android:pathData="M151,9C151,4.03 155.03,0 160,0H242C246.97,0 251,4.03 251,9V9H151V9Z" />
+        <path
+            android:fillColor="#ff000000"
+            android:pathData="M151,0H251H151ZM251,11H151V9C151,8.33 151.07,7.66 151.23,7L160,7H250.78L250.77,7C250.93,7.66 251,8.33 251,9V11ZM151,9V0V9ZM251,0V9V0Z"
+            android:fillAlpha="0.25" />
+    </group>
+    <path
+        android:fillColor="@drawable/$hud_counter_accumulated_energy_bg__2"
+        android:pathData="M255,9C255,4.03 259.03,0 264,0H299C303.97,0 308,4.03 308,9V9H255V9Z" />
+    <group>
+        <clip-path
+            android:pathData="M255,9C255,4.03 259.03,0 264,0H299C303.97,0 308,4.03 308,9V9H255V9Z" />
+        <path
+            android:fillColor="#ff000000"
+            android:pathData="M255,0H308H255ZM308,11H255V9C255,8.33 255.07,7.66 255.23,7L264,7H307.78L307.77,7C307.92,7.66 308,8.33 308,9V11ZM255,9V0V9ZM308,0V9V0Z"
+            android:fillAlpha="0.25" />
+    </group>
+</vector>

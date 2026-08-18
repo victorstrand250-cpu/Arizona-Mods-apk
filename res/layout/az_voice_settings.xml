@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/form_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/appCompatImageView2"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/bg_form"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="@id/verticalGuide"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/bg_form" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/rightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.82" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/leftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.18" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/verticalGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.14355232" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/closeButton"
+        android:layout_width="20.0dip"
+        android:layout_height="20.0dip"
+        android:layout_marginTop="20.0dip"
+        android:layout_marginRight="20.0dip"
+        android:layout_marginEnd="20.0dip"
+        android:elevation="10.0dip"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toTopOf="@id/verticalGuide"
+        app:srcCompat="@drawable/cross_transperent" />
+    <TextView
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Настройка AZVoice v1.1.3"
+        android:fontFamily="@font/gotham"
+        app:layout_constraintBottom_toBottomOf="@id/closeButton"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="@id/closeButton" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/linearLayout6"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7.0dip"
+        app:layout_constraintBottom_toTopOf="@id/nearestPlayers"
+        app:layout_constraintStart_toStartOf="@id/nearestPlayers"
+        app:layout_constraintTop_toTopOf="@id/verticalGuide"
+        app:layout_constraintVertical_chainStyle="packed">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:padding="4.0dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/microphone" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="4.0dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Микрофон"
+                android:fontFamily="@font/gotham" />
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@id/micro_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    app:thumbTint="@color/switch_on_off_thumb"
+                    app:trackTint="#40ffffff" />
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="#ffff2323"
+                    android:id="@id/micro_state_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Выкл."
+                    android:fontFamily="@font/gotham" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/nearestPlayers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24.0dip"
+        android:layout_marginStart="24.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout6">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:padding="4.0dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/team" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="4.0dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/white"
+                android:padding="4.0dip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Игроки рядом"
+                android:fontFamily="@font/gotham" />
+            <TextView
+                android:textSize="@dimen/_9sdp"
+                android:textColor="#80ffffff"
+                android:id="@id/viewPlayers"
+                android:padding="4.0dip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Посмотреть"
+                android:fontFamily="@font/gotham" />
+        </LinearLayout>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:id="@id/slidersRecycler"
+        android:scrollbars="vertical"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="16.0dip"
+        android:layout_marginBottom="8.0dip"
+        android:overScrollMode="never"
+        android:layout_marginStart="16.0dip"
+        android:layout_marginEnd="16.0dip"
+        app:fastScrollEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/appCompatImageView2"
+        app:layout_constraintStart_toEndOf="@id/nearestPlayers"
+        app:layout_constraintTop_toBottomOf="@id/textView5" />
+</androidx.constraintlayout.widget.ConstraintLayout>

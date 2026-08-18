@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.mrlargha.commonui.utils.ui.CustomCardView
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_2sdp"
+    app:backgroundMainColor="@color/black"
+    app:borderMainColor="#1affffff"
+    app:borderWidth="@dimen/_1sdp"
+    app:corners="@dimen/_3sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:layout_gravity="end|center"
+        android:id="@id/iv_spinner_arrow"
+        android:layout_width="@dimen/_6sdp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mp_arrow_h_ic"
+        android:adjustViewBounds="true"
+        android:scaleY="-1.0"
+        android:layout_marginEnd="@dimen/_6sdp" />
+</ru.mrlargha.commonui.utils.ui.CustomCardView>

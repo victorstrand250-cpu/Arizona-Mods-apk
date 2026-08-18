@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginTop="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:layout_marginHorizontal="10.0dip">
+        <com.arizona.common.ui.AvatarView
+            android:id="@id/avatar"
+            android:layout_width="28.0dip"
+            android:layout_height="28.0dip"
+            android:layout_marginRight="5.0dip" />
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="65.0dip">
+            <LinearLayout
+                android:gravity="start|center"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@id/ic_attach"
+                    android:visibility="gone"
+                    android:layout_width="6.0dip"
+                    android:layout_height="6.0dip"
+                    android:src="@drawable/ic_paperclip"
+                    android:layout_marginEnd="3.0dip" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textSize="8.0sp"
+                    android:textColor="#ffffffff"
+                    android:ellipsize="end"
+                    android:id="@id/contact_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="65.0dip"
+                    android:maxLines="2" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@id/ic_notification_off"
+                    android:visibility="gone"
+                    android:layout_width="8.0dip"
+                    android:layout_height="8.0dip"
+                    android:src="@drawable/ic_notification_off"
+                    android:layout_marginStart="2.0dip" />
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textSize="8.0sp"
+                android:textColor="#ffaaaaaa"
+                android:id="@id/message_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2.0dip"
+                android:maxWidth="65.0dip"
+                android:maxLines="1" />
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_weight="1.0" />
+        <LinearLayout
+            android:gravity="end|center"
+            android:orientation="horizontal"
+            android:id="@id/actions_container"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@id/add_or_remove_user_btn"
+                android:layout_width="14.0dip"
+                android:layout_height="14.0dip"
+                android:src="@drawable/ic_remove_user_messenger" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@id/send_message_btn"
+                android:layout_width="14.0dip"
+                android:layout_height="14.0dip"
+                android:src="@drawable/ic_send_messenger"
+                android:tint="#ffaaaaaa"
+                android:layout_marginStart="10.0dip"
+                android:layout_marginEnd="2.0dip" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="end|center"
+            android:orientation="vertical"
+            android:id="@id/status_container"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textSize="8.0sp"
+                android:textColor="#ffaaaaaa"
+                android:id="@id/last_time_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22:00" />
+            <androidx.cardview.widget.CardView
+                android:layout_gravity="center"
+                android:id="@id/message_status"
+                android:visibility="visible"
+                android:layout_width="5.0dip"
+                android:layout_height="5.0dip"
+                android:layout_marginTop="5.0dip"
+                android:layout_marginBottom="2.0dip"
+                android:elevation="0.0dip"
+                app:cardBackgroundColor="#ff4a8ef4"
+                app:cardCornerRadius="50.0dip"
+                app:cardElevation="0.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:id="@id/item_divider"
+        android:background="#ff2f2f2f"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:layout_marginLeft="4.0dip"
+        android:layout_marginTop="10.0dip"
+        android:layout_marginRight="4.0dip"
+        android:layout_marginHorizontal="4.0dip" />
+</LinearLayout>

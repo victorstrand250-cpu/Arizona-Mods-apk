@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/common_task_item"
+    android:background="@drawable/az_battlepass_common_task_bg_unselected"
+    android:paddingBottom="@dimen/_8sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/white"
+        android:id="@id/item_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_50sdp"
+        android:text="Тяжелый день в больнице Los-Santos"
+        android:fontFamily="@font/heading_now_65"
+        app:layout_constraintRight_toLeftOf="@id/item_reward_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/white"
+        android:id="@id/item_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_50sdp"
+        android:text="Вылечите 40 игроков в интерьере больницы"
+        android:fontFamily="@font/heading_now_64_regular"
+        app:layout_constraintRight_toLeftOf="@id/item_reward_container"
+        app:layout_constraintStart_toStartOf="@id/item_title"
+        app:layout_constraintTop_toBottomOf="@id/item_title" />
+    <TextView
+        android:textSize="@dimen/_4sdp"
+        android:textColor="@color/white"
+        android:id="@id/item_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:text="0/40"
+        android:fontFamily="@font/heading_now_65"
+        app:layout_constraintStart_toStartOf="@id/item_description"
+        app:layout_constraintTop_toBottomOf="@id/item_description" />
+    <ProgressBar
+        android:id="@id/day_task_progress_bar"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:max="100"
+        android:progress="65"
+        android:progressTint="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/item_count"
+        app:layout_constraintTop_toBottomOf="@id/item_count"
+        app:layout_constraintWidth_percent="0.8"
+        style="?android:progressBarStyleHorizontal" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/progress_done_container"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_3sdp"
+        app:layout_constraintBottom_toTopOf="@id/day_task_progress_bar"
+        app:layout_constraintEnd_toEndOf="@id/day_task_progress_bar">
+        <ImageView
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:src="@drawable/check_mark"
+            android:tint="@color/battlepass13" />
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="@color/battlepass13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Выполнено"
+            android:fontFamily="@font/pfdindisplaypro_regular"
+            android:layout_marginStart="4.0dip" />
+    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/_4sdp"
+        android:textColor="@color/white"
+        android:id="@id/progress_in_percent_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:text="65%"
+        android:fontFamily="@font/heading_now_65"
+        app:layout_constraintBottom_toTopOf="@id/day_task_progress_bar"
+        app:layout_constraintEnd_toEndOf="@id/day_task_progress_bar" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/item_reward_container"
+        android:background="@drawable/az_battlepass_gold_bg"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginRight="@dimen/_9sdp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@id/item_reward_ic"
+            android:layout_width="@dimen/_21sdp"
+            android:layout_height="@dimen/_21sdp"
+            android:src="@drawable/az_battlepass_exp_ic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:textSize="@dimen/_5sdp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@id/item_reward_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:maxWidth="@dimen/_28sdp"
+        android:text="+1 ед. опыта"
+        android:fontFamily="@font/heading_now_64_regular"
+        app:layout_constraintEnd_toEndOf="@id/item_reward_container"
+        app:layout_constraintStart_toStartOf="@id/item_reward_container"
+        app:layout_constraintTop_toBottomOf="@id/item_reward_container" />
+</androidx.constraintlayout.widget.ConstraintLayout>

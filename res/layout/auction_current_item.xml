@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="horizontal"
+    android:layout_width="49.0dip"
+    android:layout_height="58.0dip"
+    android:layout_marginRight="20.0dip"
+    android:layout_marginBottom="38.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@id/ac_item_card"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:cardBackgroundColor="#00ffffff"
+        app:cardElevation="0.0dip"
+        app:cardMaxElevation="0.0dip">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/ac_item_image"
+            android:layout_width="49.0dip"
+            android:layout_height="49.0dip"
+            android:src="@drawable/item" />
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="#ffffffff"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:id="@id/ac_item_tittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Маска демона"
+            android:fontFamily="@font/gotham"
+            android:textFontWeight="700" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,117 @@
+[
+  {
+    "number": 1,
+    "name": "Vice City",
+    "ip": "80.66.82.147",
+    "port": 7777,
+    "online": 750,
+    "queue": 0,
+    "maxplayers": 750,
+    "password": true,
+    "plotPoints": [
+      {
+        "online": 548,
+        "time": 1766819341
+      },
+      {
+        "online": 750,
+        "time": 1766822941
+      },
+      {
+        "online": 750,
+        "time": 1766826541
+      },
+      {
+        "online": 750,
+        "time": 1766830141
+      },
+      {
+        "online": 750,
+        "time": 1766833742
+      },
+      {
+        "online": 750,
+        "time": 1766837342
+      },
+      {
+        "online": 750,
+        "time": 1766841003
+      },
+      {
+        "online": 750,
+        "time": 1766844663
+      },
+      {
+        "online": 750,
+        "time": 1766848322
+      },
+      {
+        "online": 750,
+        "time": 1766851981
+      },
+      {
+        "online": 750,
+        "time": 1766855581
+      },
+      {
+        "online": 750,
+        "time": 1766859181
+      },
+      {
+        "online": 750,
+        "time": 1766862781
+      },
+      {
+        "online": 750,
+        "time": 1766866382
+      },
+      {
+        "online": 750,
+        "time": 1766869982
+      },
+      {
+        "online": 750,
+        "time": 1766873641
+      },
+      {
+        "online": 750,
+        "time": 1766877241
+      },
+      {
+        "online": 750,
+        "time": 1766880841
+      },
+      {
+        "online": 750,
+        "time": 1766884441
+      },
+      {
+        "online": 750,
+        "time": 1766888041
+      },
+      {
+        "online": 750,
+        "time": 1766891641
+      },
+      {
+        "online": 750,
+        "time": 1766895242
+      },
+      {
+        "online": 750,
+        "time": 1766898842
+      },
+      {
+        "online": 750,
+        "time": 1766902442
+      }
+    ],
+    "tg": "https://t.me/arizona_rpcom",
+    "vk": "https://vk.com/arzmobile1",
+    "inst": "https://instagram.com/arizonagames_",
+    "icon": "https://pc.az-ins.com/resource/image/project_icons/101.png",
+    "additionalIps": [
+      "80.66.82.147"
+    ]
+  }
+]

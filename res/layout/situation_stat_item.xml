@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/situation_award_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/_22sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/stat_ic"
+        android:layout_width="@dimen/_34sdp"
+        android:layout_height="@dimen/_34sdp"
+        android:src="@drawable/situation_stat_clock_ic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@id/stat_ic"
+        app:layout_constraintLeft_toRightOf="@id/stat_ic"
+        app:layout_constraintTop_toTopOf="@id/stat_ic">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#50ffffff"
+            android:id="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сколько длилось"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:textColor="#fff1f1f1"
+            android:id="@id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="12 ч. 52 м."
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="#ffffcb5a"
+            android:id="@id/sub_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:text="+15 AZ-coin"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toRightOf="@id/value"
+            app:layout_constraintTop_toTopOf="@id/value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

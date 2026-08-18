@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:id="@id/slider_name"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="16.0dip"
+        android:maxLines="1"
+        android:fontFamily="@font/gotham"
+        android:layout_marginStart="10.0dip"
+        android:layout_marginEnd="16.0dip"
+        app:layout_constraintEnd_toStartOf="@id/slider_value"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/slider"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:id="@id/slider_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10.0dip"
+        android:fontFamily="@font/gotham"
+        android:layout_marginEnd="10.0dip"
+        app:layout_constraintEnd_toEndOf="@id/slider"
+        app:layout_constraintTop_toTopOf="@id/slider_name" />
+    <com.google.android.material.slider.Slider
+        android:value="0.5"
+        android:id="@id/slider"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:thumbColor="@color/arizona_accent"
+        app:trackColorActive="@color/arizona_accent"
+        app:trackColorInactive="#40ffffff" />
+</androidx.constraintlayout.widget.ConstraintLayout>

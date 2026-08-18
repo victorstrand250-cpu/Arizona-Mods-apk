@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/neighbor_game_task_screen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarThumbVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_track"
+        android:scrollbarStyle="outsideInset"
+        android:orientation="vertical"
+        android:id="@id/menu_items_rv"
+        android:paddingRight="@dimen/_8sdp"
+        android:visibility="visible"
+        android:scrollbars="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_12sdp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="4" />
+</androidx.constraintlayout.widget.ConstraintLayout>

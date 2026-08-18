@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="50.0dip"
+    android:width="50.0dip"
+    android:viewportWidth="50.0"
+    android:viewportHeight="50.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$currency_rubble__0"
+        android:pathData="M22.5,22.5m-22.5,0a22.5,22.5 0,1 1,45 0a22.5,22.5 0,1 1,-45 0" />
+    <path
+        android:fillColor="#ff0d0e17"
+        android:pathData="M17.465,31V13.864H22.937C25.145,13.864 26.753,14.312 27.761,15.208C28.785,16.104 29.297,17.336 29.297,18.904C29.297,19.832 29.089,20.704 28.673,21.52C28.257,22.336 27.561,22.992 26.585,23.488C25.625,23.984 24.313,24.232 22.649,24.232H21.089V31H17.465ZM15.545,28.432V26.104H24.785V28.432H15.545ZM15.545,24.232V21.256H22.577V24.232H15.545ZM22.289,21.256C22.977,21.256 23.569,21.184 24.065,21.04C24.561,20.88 24.945,20.632 25.217,20.296C25.489,19.96 25.625,19.536 25.625,19.024C25.625,18.288 25.393,17.744 24.929,17.392C24.465,17.024 23.737,16.84 22.745,16.84H21.089V21.256H22.289Z" />
+</vector>

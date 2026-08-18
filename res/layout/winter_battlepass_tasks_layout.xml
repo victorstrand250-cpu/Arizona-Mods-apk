@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    android:id="@id/az_battlepass_layout_tasks_container"
+    android:layout_width="0.0dip"
+    android:layout_height="0.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_12sdp"
+        android:paddingRight="@dimen/_12sdp"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_weight="3.0"
+        android:paddingHorizontal="@dimen/_12sdp">
+        <RelativeLayout
+            android:id="@id/button_daily_tasks"
+            android:background="@drawable/background_az_battlepass_type_task_enabled"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_31sdp">
+            <TextView
+                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:id="@id/button_daily_tasks_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Ежедневные задания"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/heading_now_65" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@id/button_shop_tasks"
+            android:background="@drawable/background_az_battlepass_type_task_disabled"
+            android:visibility="gone"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_marginTop="@dimen/_7sdp">
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@id/button_shop_tasks_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Задания магазина"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@id/button_long_tasks"
+            android:background="@drawable/background_az_battlepass_type_task_disabled"
+            android:visibility="gone"
+            android:layout_width="170.0dip"
+            android:layout_height="40.0dip"
+            android:layout_marginTop="10.0dip">
+            <TextView
+                android:textSize="14.0sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@id/button_long_tasks_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Долгосрочные задания"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@id/button_premium_tasks"
+            android:background="@drawable/background_az_battlepass_type_task_premium"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_marginTop="@dimen/_7sdp">
+            <TextView
+                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/battlepass_text"
+                android:gravity="center"
+                android:id="@id/button_premium_tasks_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Premium задания"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/heading_now_65" />
+        </RelativeLayout>
+        <View
+            android:layout_width="1.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0" />
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@id/container_tasks_timer"
+            android:background="@drawable/background_az_battlepass_type_task_disabled"
+            android:paddingLeft="@dimen/_5sdp"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingVertical="@dimen/_8sdp">
+            <ImageView
+                android:layout_width="@dimen/_23sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:src="@drawable/ic_battlepass_tasks_timer" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp">
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/battlepass4"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="До обновления заданий: "
+                    android:fontFamily="@font/heading_now_64_regular" />
+                <TextView
+                    android:textSize="@dimen/_11sdp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:id="@id/tasks_time_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="05 ч. 05 м."
+                    android:fontFamily="@font/heading_now_65" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarThumbVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_track"
+        android:scrollbarStyle="outsideInset"
+        android:orientation="vertical"
+        android:id="@id/common_task_recycle_view"
+        android:paddingRight="@dimen/_4sdp"
+        android:visibility="visible"
+        android:scrollbars="vertical"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="5.0"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@id/task_container_list_is_empty"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_14sdp"
+        android:layout_weight="5.0">
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="@dimen/_76sdp"
+            android:layout_height="@dimen/_76sdp"
+            android:src="@drawable/ic_empty_tasks" />
+        <TextView
+            android:textSize="@dimen/_14sdp"
+            android:textColor="#ff666161"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:text="Поздравляем!\nВы выполнили все задания."
+            android:fontFamily="@font/pfdindisplaypro_regular"
+            android:lineHeight="@dimen/_25sdp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_12sdp"
+        android:paddingRight="@dimen/_12sdp"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="4.0"
+        android:paddingHorizontal="@dimen/_12sdp">
+        <RelativeLayout
+            android:id="@id/curr_task_info_container"
+            android:visibility="visible"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@id/task_info"
+                android:visibility="visible"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:id="@id/level_container"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/level_items_rc"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent">
+                        <TextView
+                            android:textSize="@dimen/_11sdp"
+                            android:textColor="@color/white"
+                            android:id="@id/level_pass_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ур."
+                            android:fontFamily="@font/heading_now_64_regular" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="start|center"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:layout_marginStart="@dimen/_7sdp">
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Опыт пропуска"
+                            android:fontFamily="@font/heading_now_64_regular" />
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textSize="@dimen/_7sdp"
+                                android:textColor="#ffb8b8b8"
+                                android:id="@id/main_experience_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1200/2400"
+                                android:fontFamily="@font/heading_now_64_regular" />
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:src="@drawable/battlepass_2025_ic_expirience"
+                                android:layout_marginStart="@dimen/_5sdp" />
+                        </LinearLayout>
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@id/progress_experience"
+                            android:visibility="visible"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_4sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            app:indicatorColor="@color/battlepass5"
+                            app:trackColor="@color/battlepass_text"
+                            app:trackCornerRadius="@dimen/_6sdp"
+                            app:trackThickness="@dimen/_2sdp" />
+                    </LinearLayout>
+                    <ImageView
+                        android:id="@id/buy_levels_btn_sd"
+                        android:layout_width="@dimen/_55sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:src="@drawable/battlepass_2025_btn_buy_levels"
+                        android:scaleType="fitEnd" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@id/remaining_time"
+                    android:background="@drawable/battlepass_remaining_time_task"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_17sdp"
+                    android:layout_marginTop="@dimen/_7sdp">
+                    <ImageView
+                        android:layout_width="@dimen/_7sdp"
+                        android:layout_height="@dimen/_7sdp"
+                        android:src="@drawable/battlepass_remaining_time_ic"
+                        android:layout_marginEnd="@dimen/_3sdp" />
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="До окончания: "
+                        android:fontFamily="@font/heading_now_64_regular" />
+                    <TextView
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="@color/white"
+                        android:id="@id/remaining_time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="150 дней"
+                        android:fontFamily="@font/heading_now_65" />
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@id/task_info_blur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp">
+                    <LinearLayout
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:background="@drawable/battlepass_task_info_bg"
+                        android:paddingLeft="@dimen/_12sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingRight="@dimen/_12sdp"
+                        android:paddingBottom="@dimen/_6sdp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/_12sdp"
+                        android:paddingVertical="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+                        <TextView
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/white"
+                            android:gravity="start"
+                            android:id="@id/task_info_title"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Вращайте барабан"
+                            android:fontFamily="@font/heading_now_65" />
+                        <TextView
+                            android:textSize="@dimen/_7sdp"
+                            android:textColor="#ffdadada"
+                            android:gravity="start"
+                            android:id="@id/task_info_desc"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:text="Прокрутите бесплатную рулетку 1 раз. \n\nБесплатная рулетка находится:\nМеню - Кейсы - Бесплатная рулетка"
+                            android:fontFamily="@font/heading_now_64_regular"
+                            android:layout_marginVertical="@dimen/_4sdp" />
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:textSize="@dimen/_6sdp"
+                                    android:textColor="@color/white"
+                                    android:id="@id/item_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0/40"
+                                    android:fontFamily="@font/heading_now_65" />
+                                <View
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1.0dip"
+                                    android:layout_weight="1.0" />
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:id="@id/progress_done_container"
+                                    android:visibility="gone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/_2sdp"
+                                    app:layout_constraintBottom_toTopOf="@id/day_task_progress_bar"
+                                    app:layout_constraintEnd_toEndOf="@id/day_task_progress_bar">
+                                    <ImageView
+                                        android:layout_width="@dimen/_5sdp"
+                                        android:layout_height="@dimen/_5sdp"
+                                        android:src="@drawable/check_mark"
+                                        android:tint="#ff74c5ee" />
+                                    <TextView
+                                        android:textSize="@dimen/_6sdp"
+                                        android:textColor="#ff74c5ee"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Выполнено"
+                                        android:fontFamily="@font/pfdregular"
+                                        android:layout_marginStart="@dimen/_3sdp" />
+                                </LinearLayout>
+                                <TextView
+                                    android:textSize="@dimen/_6sdp"
+                                    android:textColor="@color/white"
+                                    android:id="@id/progress_in_percent_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/_2sdp"
+                                    android:text="65%"
+                                    android:fontFamily="@font/heading_now_65"
+                                    app:layout_constraintBottom_toTopOf="@id/day_task_progress_bar"
+                                    app:layout_constraintEnd_toEndOf="@id/day_task_progress_bar" />
+                            </LinearLayout>
+                            <ProgressBar
+                                android:id="@id/task_info_progress_bar"
+                                android:layout_width="fill_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:max="100"
+                                android:progress="65"
+                                android:progressTint="@color/white"
+                                style="?android:progressBarStyleHorizontal" />
+                        </LinearLayout>
+                        <TextView
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/white"
+                            android:gravity="start"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:text="Награды:"
+                            android:fontFamily="@font/heading_now_65"
+                            android:layout_marginVertical="@dimen/_5sdp" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:orientation="horizontal"
+                            android:id="@id/task_items_rewards_list"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        <RelativeLayout
+                            android:id="@id/button_task_info_get_reward"
+                            android:background="@drawable/background_az_battlepass_type_task_enabled"
+                            android:visibility="gone"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp">
+                            <TextView
+                                android:textSize="@dimen/_5sdp"
+                                android:textColor="@color/black"
+                                android:gravity="center"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginBottom="@dimen/_3sdp"
+                                android:text="Получить"
+                                android:fontFamily="@font/heading_now_64_regular"
+                                android:layout_marginVertical="@dimen/_3sdp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@id/task_info_premium_lock_container"
+                        android:background="@drawable/background_battlepass_buy_premium_plus_inner"
+                        android:paddingLeft="10.0dip"
+                        android:paddingTop="6.0dip"
+                        android:paddingRight="10.0dip"
+                        android:paddingBottom="6.0dip"
+                        android:visibility="invisible"
+                        android:layout_width="0.0dip"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentBottom="true"
+                        android:paddingHorizontal="10.0dip"
+                        android:paddingVertical="6.0dip"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+                        <ImageView
+                            android:layout_width="40.0dip"
+                            android:layout_height="40.0dip"
+                            android:src="@drawable/ic_battlepass_lock"
+                            android:tint="@color/white" />
+                        <TextView
+                            android:textSize="10.0sp"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10.0dip"
+                            android:layout_marginBottom="10.0dip"
+                            android:text="Эти задания доступны только с Premium"
+                            android:fontFamily="@font/gotham"
+                            android:layout_marginVertical="10.0dip" />
+                        <TextView
+                            android:textSize="@dimen/_7sdp"
+                            android:textColor="@color/battlepass_text"
+                            android:gravity="center"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@id/btn_buy_premium_lock"
+                            android:background="@drawable/battlepass_2025_buy_premium_btn"
+                            android:layout_width="126.0dip"
+                            android:layout_height="27.0dip"
+                            android:layout_marginLeft="20.0dip"
+                            android:layout_marginRight="20.0dip"
+                            android:layout_marginBottom="10.0dip"
+                            android:text="КУПИТЬ PREMIUM"
+                            android:fontFamily="@font/heading_now_65"
+                            android:layout_marginHorizontal="20.0dip" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="56.0dip"
+    android:width="249.0dip"
+    android:viewportWidth="249.0"
+    android:viewportHeight="56.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M10,0L239,0A10,10 0,0 1,249 10L249,46A10,10 0,0 1,239 56L10,56A10,10 0,0 1,0 46L0,10A10,10 0,0 1,10 0z"
+        android:fillAlpha="0.1" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M10,0.5L239,0.5A9.5,9.5 0,0 1,248.5 10L248.5,46A9.5,9.5 0,0 1,239 55.5L10,55.5A9.5,9.5 0,0 1,0.5 46L0.5,10A9.5,9.5 0,0 1,10 0.5z"
+        android:strokeColor="@drawable/$craft_item_bg_selected__0"
+        android:strokeWidth="1.0"
+        android:strokeAlpha="0.35" />
+</vector>

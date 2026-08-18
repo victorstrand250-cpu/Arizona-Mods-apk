@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/hud_timer_bg"
+    android:layout_width="@dimen/_130sdp"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:gravity="center"
+        android:id="@id/timer_container"
+        android:background="@drawable/hud_timer_time_yellow_bg"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingRight="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_5sdp">
+        <ImageView
+            android:id="@id/iv_time_icon"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/hud_timer_time_icon"
+            android:tint="#ffffc700"
+            android:layout_marginEnd="@dimen/_2sdp" />
+        <TextView
+            android:textSize="@dimen/_12sdp"
+            android:textColor="#ffffc700"
+            android:id="@id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3:12"
+            android:fontFamily="@font/gotham_medium" />
+    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/white"
+        android:id="@id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вернитесь в машину"
+        android:fontFamily="@font/gotham_medium" />
+</LinearLayout>

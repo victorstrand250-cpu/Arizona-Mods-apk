@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="128.0dip"
+    android:width="128.0dip"
+    android:viewportWidth="128.0"
+    android:viewportHeight="128.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$pie_open_glass__0"
+        android:pathData="M9.731,63.231C15.063,44.184 31.121,30.07 50.695,27.227L116.563,17.661C122.594,16.785 128,21.462 128,27.557V88C128,93.523 123.523,98 118,98H13.183C6.562,98 1.769,91.681 3.553,85.305L9.731,63.231Z" />
+    <path
+        android:fillColor="#ff399337"
+        android:pathData="M69.843,37L69.842,82.407L88.407,82.406L63.501,112L38.593,82.407L57.159,82.407L57.159,37H69.843Z" />
+</vector>

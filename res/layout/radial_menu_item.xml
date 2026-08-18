@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:background="@drawable/radial_menu_item_bg"
+    android:paddingLeft="@dimen/_15sdp"
+    android:paddingRight="@dimen/_15sdp"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_30sdp"
+    android:paddingHorizontal="@dimen/_15sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@id/iv_icon"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/radial_menu_money_icon"
+        android:layout_marginEnd="@dimen/_2sdp" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:id="@id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Передать деньги" />
+</LinearLayout>

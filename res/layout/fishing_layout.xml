@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/fishing_layout"
+    android:background="@drawable/fishing_bg"
+    android:clickable="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/exit_button"
+        android:layout_width="@dimen/_33sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_11sdp"
+        android:src="@drawable/fishing_exit_ic"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_17sdp"
+        android:textColor="@color/white"
+        android:id="@id/main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_18sdp"
+        android:text="Ловля рыбы"
+        android:fontFamily="@font/pfdbold"
+        app:layout_constraintBottom_toBottomOf="@id/exit_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/exit_button" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/dark_white"
+        android:id="@id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Нажмите на всех рыб, которые отображаются на экране"
+        android:fontFamily="@font/heading_now_64_regular"
+        app:layout_constraintBottom_toBottomOf="@id/exit_button"
+        app:layout_constraintLeft_toRightOf="@id/main_title"
+        app:layout_constraintRight_toLeftOf="@id/exit_button"
+        app:layout_constraintTop_toTopOf="@id/exit_button" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/rc_container"
+        android:background="@drawable/fishing_lines"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8411">
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="vertical"
+            android:id="@id/fishing_rc"
+            android:visibility="visible"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.837"
+            app:layout_constraintStart_toStartOf="@id/left_line"
+            app:layout_constraintWidth_percent="0.977"
+            app:spanCount="7" />
+        <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:id="@id/left_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.02" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

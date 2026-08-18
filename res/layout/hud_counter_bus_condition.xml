@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/hud_counter_bus_condition_bg"
+        android:paddingLeft="@dimen/_6sdp"
+        android:paddingTop="@dimen/_3sdp"
+        android:paddingRight="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:paddingHorizontal="@dimen/_6sdp"
+        android:paddingVertical="@dimen/_3sdp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@drawable/hud_counter_bus_condition_item_bg"
+            android:paddingTop="@dimen/_2sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:paddingStart="@dimen/_26sdp"
+            android:paddingEnd="@dimen/_8sdp">
+            <TextView
+                android:textSize="@dimen/_3sdp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="прочность"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:id="@id/tv_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_minus3sdp"
+                android:text="100%"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </LinearLayout>
+    </FrameLayout>
+    <ImageView
+        android:layout_gravity="start|center"
+        android:layout_width="@dimen/_46sdp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hud_counter_bus_condition_image"
+        android:adjustViewBounds="true" />
+</FrameLayout>

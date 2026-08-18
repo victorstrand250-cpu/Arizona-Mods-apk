@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    android:id="@id/topbar"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_24sdp"
+    android:layout_marginTop="@dimen/_16sdp"
+    android:layout_marginRight="@dimen/_24sdp"
+    android:layout_marginBottom="@dimen/_16sdp"
+    android:layout_marginHorizontal="@dimen/_24sdp"
+    android:layout_marginVertical="@dimen/_16sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_17sdp"
+        android:textColor="#ffffffff"
+        android:id="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Центр занятости"
+        android:layout_weight="1.0"
+        android:textAllCaps="true"
+        android:fontFamily="@font/heading_now_66_bold" />
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:id="@id/close"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_28sdp"
+        app:backgroundMainColor="#33ffffff"
+        app:borderMainColor="#4dffffff"
+        app:borderWidth="@dimen/_1sdp"
+        app:corners="@dimen/_6sdp">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_6sdp"
+            android:layout_marginRight="@dimen/_6sdp"
+            android:layout_marginHorizontal="@dimen/_6sdp">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginRight="@dimen/_6sdp"
+                android:src="@drawable/rodina_close" />
+            <TextView
+                android:textSize="@dimen/_8sdp"
+                android:textColor="#e6ffffff"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="закрыть"
+                android:layout_weight="1.0"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </LinearLayout>
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.mrlargha.commonui.utils.ui.CustomCardView
+    android:layout_width="fill_parent"
+    android:layout_height="32.0dip"
+    app:backgroundMainColor="#21ffffff"
+    app:backgroundSecondColor="#4bffffff"
+    app:borderMainColor="@color/transparent100"
+    app:borderSecondColor="#4bffffff"
+    app:borderWidth="@dimen/_1sdp"
+    app:corners="@dimen/_4sdp"
+    app:gradientAngle="90"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_7sdp"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:id="@id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Информация"
+        android:textAllCaps="true"
+        android:fontFamily="@font/pfdbold" />
+</ru.mrlargha.commonui.utils.ui.CustomCardView>

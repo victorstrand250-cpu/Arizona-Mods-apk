@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_6sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:layout_marginHorizontal="@dimen/_8sdp">
+        <ImageView
+            android:layout_gravity="start|center"
+            android:id="@id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_10sdp"
+            android:src="@drawable/mp_arrow_v_ic"
+            android:adjustViewBounds="true" />
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_8sdp"
+            android:src="@drawable/mp_arizona_rent_logo"
+            android:adjustViewBounds="true" />
+        <ImageView
+            android:layout_gravity="end|center"
+            android:id="@id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/mp_plus_ic"
+            android:adjustViewBounds="true" />
+    </FrameLayout>
+    <View
+        android:background="#1affffff"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:layout_marginTop="@dimen/_4sdp" />
+</LinearLayout>

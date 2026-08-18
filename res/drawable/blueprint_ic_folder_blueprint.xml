@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="32.0dip"
+    android:width="32.0dip"
+    android:viewportWidth="32.0"
+    android:viewportHeight="32.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ff557ebf"
+        android:pathData="M27.9,6H18.1L16.1,10H5V27H30V6H27.9ZM28,10H20.2L21.2,8H28V10Z" />
+    <path
+        android:fillColor="@drawable/$blueprint_ic_folder_blueprint__0"
+        android:pathData="M11,11H31V31H11V11Z" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M13.679,11H14.036V31H13.679V11ZM16.536,11H16.893V31H16.536V11ZM19.393,11H19.75V31H19.393V11ZM22.25,11H22.607V31H22.25V11ZM25.107,11H25.464V31H25.107V11ZM27.964,11H28.321V31H27.964V11Z"
+        android:strokeAlpha="0.23"
+        android:fillAlpha="0.23" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M11,13.679H31V14.036H11V13.679ZM11,16.536H31V16.893H11V16.536ZM11,19.393H31V19.75H11V19.393ZM11,22.25H31V22.607H11V22.25ZM11,25.107H31V25.464H11V25.107ZM11,27.964H31V28.321H11V27.964Z"
+        android:strokeAlpha="0.23"
+        android:fillAlpha="0.23" />
+</vector>

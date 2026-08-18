@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/ship"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginHorizontal="@dimen/_24sdp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:id="@id/level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1 уровень"
+                        android:textEditSuggestionItemLayout="@dimen/_12sdp"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/heading_now_66_bold" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@id/parent"
+                        android:layout_width="@dimen/_140sdp"
+                        android:layout_height="@dimen/_12sdp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            app:cardBackgroundColor="#ff343940"
+                            app:cardCornerRadius="@dimen/_4sdp"
+                            app:cardElevation="0.0dip" />
+                        <ru.mrlargha.commonui.utils.ui.CustomCardView
+                            android:id="@id/progress_bar"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            app:backgroundMainColor="@color/gradient"
+                            app:backgroundSecondColor="@color/main"
+                            app:corners="@dimen/_4sdp" />
+                        <TextView
+                            android:textSize="@dimen/_7sdp"
+                            android:textColor="@color/white"
+                            android:gravity="center_vertical"
+                            android:id="@id/current_exp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:text="0"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/heading_now_66_bold"
+                            app:layout_constraintLeft_toLeftOf="parent" />
+                        <TextView
+                            android:textSize="@dimen/_7sdp"
+                            android:textColor="@color/white"
+                            android:id="@id/max_exp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="@dimen/_8sdp"
+                            android:text="0"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/heading_now_66_bold"
+                            app:layout_constraintRight_toRightOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </FrameLayout>
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/upgrade1"
+                layout="@layout/pirates_ship_upgrade_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="3.0" />
+            <include
+                android:id="@id/upgrade3"
+                layout="@layout/pirates_ship_upgrade_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="3.0" />
+        </LinearLayout>
+        <View
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp">
+                <ru.mrlargha.commonui.utils.ui.CustomCardView
+                    android:layout_gravity="right"
+                    android:id="@id/rating"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    app:backgroundMainColor="@color/main"
+                    app:corners="@dimen/_6sdp">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_gravity="center_vertical"
+                            android:id="@id/currency"
+                            android:layout_width="@dimen/_8sdp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/pirates_rating" />
+                        <TextView
+                            android:textSize="@dimen/_9sdp"
+                            android:textColor="@color/color6"
+                            android:id="@id/tab_ship"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:text="Рейтинг"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                    </LinearLayout>
+                </ru.mrlargha.commonui.utils.ui.CustomCardView>
+            </FrameLayout>
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/upgrade2"
+                layout="@layout/pirates_ship_upgrade_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="3.0" />
+            <include
+                android:id="@id/upgrade4"
+                layout="@layout/pirates_ship_upgrade_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="3.0" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

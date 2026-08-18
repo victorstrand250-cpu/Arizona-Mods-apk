@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/hud_counter_taximeter_new_year_bg"
+        android:adjustViewBounds="true"
+        android:layout_marginEnd="@dimen/_6sdp" />
+    <ImageView
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_40sdp"
+        android:src="@drawable/hud_counter_taximeter_new_year_ic"
+        android:adjustViewBounds="true" />
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_6sdp">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/bg_taximeter_sum"
+                android:adjustViewBounds="true" />
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_4sdp">
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Сумма"
+                    android:fontFamily="@font/pfdindisplaypro_bold" />
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="@color/black"
+                    android:id="@id/tv_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$99999"
+                    android:fontFamily="@font/ds_digital_bold" />
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_4sdp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/bg_taximeter_time"
+                android:adjustViewBounds="true" />
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="#ffffdd28"
+                    android:id="@id/tv_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10:00"
+                    android:fontFamily="@font/ds_digital_bold" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

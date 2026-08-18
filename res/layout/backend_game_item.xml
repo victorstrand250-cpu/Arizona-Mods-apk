@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/fishing_item"
+    android:layout_width="@dimen/_55sdp"
+    android:layout_height="@dimen/_55sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/accept_mask"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/fishing_accept_bg"
+        android:scaleType="fitXY"
+        android:elevation="@dimen/_2sdp" />
+    <ImageView
+        android:id="@id/item_img"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

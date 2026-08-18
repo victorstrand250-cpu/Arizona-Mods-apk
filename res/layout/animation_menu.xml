@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/animation_menu"
+    android:background="@drawable/animation_menu_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/category_list_hz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.143" />
+    <LinearLayout
+        android:gravity="center"
+        android:id="@id/category_list_container"
+        android:layout_width="215.0dip"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/category_tittle_vc"
+        app:layout_constraintTop_toTopOf="@id/category_list_hz">
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="vertical"
+            android:id="@id/category_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isScrollContainer="false"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3" />
+    </LinearLayout>
+    <TextView
+        android:textSize="16.0sp"
+        android:textStyle="bold"
+        android:textColor="#ffffffff"
+        android:id="@id/animation_list_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5.0dip"
+        android:text="Список анимаций"
+        android:fontFamily="@font/pfdbold"
+        android:autoSizeMaxTextSize="14.0sp"
+        app:layout_constraintLeft_toLeftOf="@id/category_tittle_vc"
+        app:layout_constraintTop_toBottomOf="@id/category_list_container" />
+    <EditText
+        android:textSize="8.0sp"
+        android:textColorHint="#ffffffff"
+        android:gravity="center"
+        android:id="@id/animation_search"
+        android:background="@drawable/ic_animation_search_bg"
+        android:layout_width="215.0dip"
+        android:layout_height="23.0dip"
+        android:layout_marginTop="10.0dip"
+        android:hint="Поиск..."
+        android:imeOptions="flagNoFullscreen"
+        android:fontFamily="@font/heading_now_64_regular"
+        android:autoSizeMinTextSize="6.0sp"
+        app:layout_constraintLeft_toLeftOf="@id/category_tittle_vc"
+        app:layout_constraintTop_toBottomOf="@id/animation_list_tittle" />
+    <LinearLayout
+        android:id="@id/animation_list_container"
+        android:layout_width="215.0dip"
+        android:layout_height="125.0dip"
+        android:layout_marginTop="12.0dip"
+        app:layout_constraintLeft_toLeftOf="@id/category_tittle_vc"
+        app:layout_constraintTop_toBottomOf="@id/animation_search">
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="vertical"
+            android:id="@id/animation_list"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="50.0dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:requiresFadingEdge="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3" />
+    </LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/exit_button_vc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.93" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@id/am_exit_button"
+        android:background="@drawable/animation_exit_button"
+        android:layout_width="29.0dip"
+        android:layout_height="29.0dip"
+        app:layout_constraintLeft_toLeftOf="@id/exit_button_vc"
+        app:layout_constraintTop_toTopOf="@id/category_tittle_hz" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/category_tittle_vc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.674" />
+    <TextView
+        android:textSize="16.0sp"
+        android:textStyle="bold"
+        android:textColor="#ffffffff"
+        android:id="@id/am_category_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Категории"
+        android:fontFamily="@font/pfdbold"
+        android:autoSizeMaxTextSize="14.0sp"
+        app:layout_constraintLeft_toLeftOf="@id/category_tittle_vc"
+        app:layout_constraintTop_toTopOf="@id/category_tittle_hz" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/category_tittle_hz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.0574" />
+</androidx.constraintlayout.widget.ConstraintLayout>

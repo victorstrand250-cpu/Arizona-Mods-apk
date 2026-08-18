@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="horizontal"
+    android:id="@id/donate_category_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_11sdp"
+        android:textColor="@color/white"
+        android:id="@id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5.0dip"
+        android:text="Валюта"
+        android:alpha="0.25"
+        android:textAllCaps="true"
+        android:fontFamily="@font/gotham"
+        android:textFontWeight="400"
+        app:layout_constraintBottom_toTopOf="@id/card"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <androidx.cardview.widget.CardView
+        android:orientation="horizontal"
+        android:id="@id/card"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2.0dip"
+        app:cardBackgroundColor="#00ffffff"
+        app:cardElevation="0.0dip"
+        app:cardMaxElevation="0.0dip"
+        app:layout_constraintLeft_toLeftOf="@id/description"
+        app:layout_constraintRight_toRightOf="@id/description"
+        app:layout_constraintTop_toBottomOf="@id/description">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/donate_category_icon"
+            android:layout_width="34.0dip"
+            android:layout_height="100.0px"
+            android:layout_marginLeft="100.0px"
+            android:layout_marginRight="100.0px"
+            android:layout_marginBottom="5.0dip"
+            android:src="@drawable/ic_menu"
+            android:alpha="0.25" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="end"
+        android:id="@id/available"
+        android:layout_width="@dimen/_8sdp"
+        android:layout_height="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/red"
+        app:cardCornerRadius="@dimen/_10sdp" />
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:background="@drawable/promo_item_bg"
+        android:paddingLeft="@dimen/_7sdp"
+        android:paddingRight="@dimen/_7sdp"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginLeft="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginRight="@dimen/_2sdp"
+        android:layout_marginHorizontal="@dimen/_2sdp"
+        android:paddingHorizontal="@dimen/_7sdp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="horizontal"
+            android:id="@id/rv"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_weight="1.0"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginStart="@dimen/_10sdp">
+            <LinearLayout
+                android:gravity="right"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="0.0dip"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_weight="1.0">
+                <TextView
+                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\#mirondesigners"
+                    android:layout_weight="1.0"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/timer_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0">
+                    <TextView
+                        android:textSize="@dimen/_5sdp"
+                        android:textColor="#80ffffff"
+                        android:id="@id/timer_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="До получения награды"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                    <ImageView
+                        android:id="@id/timer_ic"
+                        android:layout_width="@dimen/_6sdp"
+                        android:layout_height="@dimen/_6sdp"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_marginRight="@dimen/_2sdp"
+                        android:src="@drawable/promo_timer_ic"
+                        android:tint="#ffffbf00"
+                        android:layout_marginHorizontal="@dimen/_2sdp" />
+                    <TextView
+                        android:textSize="@dimen/_5sdp"
+                        android:textColor="#ffffbf00"
+                        android:id="@id/timer_text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1д"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                </LinearLayout>
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="#ffffbf00"
+                    android:id="@id/bottom_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\#mirondesigners"
+                    android:layout_weight="1.0"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_64_regular" />
+            </LinearLayout>
+            <ru.mrlargha.commonui.utils.ui.CustomCardView
+                android:layout_gravity="right"
+                android:id="@id/button_card"
+                android:layout_width="@dimen/_66sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                app:backgroundMainColor="@color/white"
+                app:borderMainColor="@color/transparent100"
+                app:borderWidth="@dimen/_1sdp"
+                app:corners="@dimen/_4sdp">
+                <TextView
+                    android:textSize="@dimen/_7sdp"
+                    android:textColor="#e5000000"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:id="@id/button_get"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Получить"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+            </ru.mrlargha.commonui.utils.ui.CustomCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:gravity="center"
+                android:layout_gravity="right"
+                android:id="@id/button_done"
+                android:visibility="gone"
+                android:layout_width="@dimen/_66sdp"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/transparent100"
+                app:cardCornerRadius="@dimen/_4sdp"
+                app:cardElevation="0.0dip"
+                app:strokeColor="#33ffffff"
+                app:strokeWidth="@dimen/_1sdp">
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp"
+                    android:paddingVertical="@dimen/_6sdp">
+                    <ImageView
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:layout_marginRight="@dimen/_4sdp"
+                        android:src="@drawable/promo_recieved_ic" />
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="#80ffffff"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Получен "
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/heading_now_66_bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

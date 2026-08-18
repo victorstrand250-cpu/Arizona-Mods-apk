@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View
+    android:id="@id/bar"
+    android:background="@drawable/documents_bar_item_bg"
+    android:layout_width="@dimen/_18sdp"
+    android:layout_height="@dimen/_24sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

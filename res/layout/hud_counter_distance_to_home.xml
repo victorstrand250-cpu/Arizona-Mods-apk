@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:background="@drawable/hud_counter_distance_to_home_bg"
+        android:paddingLeft="@dimen/_6sdp"
+        android:paddingTop="@dimen/_6sdp"
+        android:paddingRight="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_6sdp">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/hud_counter_distance_to_home_item_one_bg"
+            android:paddingLeft="@dimen/_2sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:paddingHorizontal="@dimen/_2sdp">
+            <TextView
+                android:textSize="@dimen/_3sdp"
+                android:textColor="#ff0d2b25"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Расстояние до дома"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold"
+                android:lineHeight="@dimen/_4sdp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="#ff0d2b25"
+                    android:gravity="center"
+                    android:id="@id/tv_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/ds_digital_bold" />
+                <TextView
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="#ff0d2b25"
+                    android:layout_gravity="start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="m"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/ds_digital_bold"
+                    android:layout_marginStart="@dimen/_2sdp" />
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="@dimen/_3sdp"
+            android:layout_height="0.0dip" />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/hud_counter_distance_to_home_item_two_bg"
+            android:paddingLeft="@dimen/_4sdp"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingRight="@dimen/_4sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:paddingHorizontal="@dimen/_4sdp">
+            <TextView
+                android:textSize="@dimen/_14sdp"
+                android:textColor="#ff2b2000"
+                android:id="@id/tv_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="@dimen/_30sdp"
+                android:text="100%"
+                android:fontFamily="@font/ds_digital_bold" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

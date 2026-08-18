@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="#ff1a1a1a"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:id="@id/divider"
+        android:background="#ff2f2f2f"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/block_user_container"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10.0dip"
+        android:layout_marginBottom="10.0dip"
+        android:fontFamily="@font/pfdindisplaypro_regular">
+        <TextView
+            android:textSize="8.0sp"
+            android:textColor="#ffb94c4c"
+            android:gravity="center"
+            android:id="@id/block_user_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5.0dip"
+            android:layout_marginRight="5.0dip"
+            android:text="Вы заблокировали контакт"
+            android:layout_marginHorizontal="5.0dip" />
+        <TextView
+            android:textSize="8.0sp"
+            android:textColor="#ffaaaaaa"
+            android:gravity="center"
+            android:id="@id/block_user_description"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3.0dip"
+            android:layout_marginTop="3.0dip"
+            android:layout_marginRight="3.0dip"
+            android:text="Пользователь не может вам написать"
+            android:fontFamily="@font/pfdindisplaypro_regular"
+            android:layout_marginHorizontal="3.0dip" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@id/input_container"
+        android:visibility="visible"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="start|center"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:id="@id/messenge_container"
+            android:background="@drawable/messenger_message_background"
+            android:visibility="visible"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5.0dip"
+            android:layout_marginTop="8.0dip"
+            android:layout_marginRight="5.0dip"
+            android:layout_marginBottom="8.0dip"
+            android:layout_weight="0.7"
+            android:layout_marginHorizontal="5.0dip">
+            <EditText
+                android:textSize="10.0sp"
+                android:textStyle="normal"
+                android:textColor="@color/white"
+                android:textColorHint="#ffaaaaaa"
+                android:gravity="start|center"
+                android:id="@id/message_edit_text"
+                android:background="@color/ap_transparent"
+                android:focusable="false"
+                android:scrollbars="vertical"
+                android:clickable="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8.0dip"
+                android:layout_marginBottom="8.0dip"
+                android:hint="Напишите что нибудь..."
+                android:maxLength="200"
+                android:layout_weight="0.8"
+                android:inputType="textMultiLine"
+                android:imeOptions="actionDone|flagNoExtractUi|flagNoFullscreen"
+                android:overScrollMode="ifContentScrolls"
+                android:fontFamily="@font/pfdindisplaypro_regular"
+                android:layout_marginStart="10.0dip"
+                android:layout_marginEnd="2.0dip"
+                android:layout_marginVertical="8.0dip" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_gravity="center"
+                android:id="@id/emoji_btn"
+                android:layout_width="20.0dip"
+                android:layout_height="20.0dip"
+                android:src="@drawable/ic_keyboard_smile"
+                android:layout_weight="0.2"
+                android:layout_marginEnd="8.0dip" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5.0dip">
+            <RelativeLayout
+                android:id="@id/send_btn"
+                android:background="@drawable/circle_white"
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:padding="8.0dip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/ic_send_messenger" />
+            </RelativeLayout>
+            <TextView
+                android:textSize="8.0sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@id/message_limit_text"
+                android:visibility="gone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.0dip"
+                android:text="100/200"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="vertical"
+        android:id="@id/emoji_bar"
+        android:visibility="gone"
+        android:scrollbars="none"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:layout_marginLeft="5.0dip"
+        android:layout_marginTop="4.0dip"
+        android:layout_marginRight="5.0dip"
+        android:layout_marginHorizontal="5.0dip"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="7" />
+</LinearLayout>

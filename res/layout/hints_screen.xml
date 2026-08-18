@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/street_food"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/left_hint"
+        android:layout_width="@dimen/_210sdp"
+        android:layout_height="@dimen/_210sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <ImageView
+            android:id="@id/left_hint_person"
+            android:layout_width="@dimen/_210sdp"
+            android:layout_height="@dimen/_210sdp"
+            android:src="@drawable/hints_person"
+            android:scaleType="fitEnd"
+            android:scaleX="-1.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <ImageView
+            android:id="@id/left_hint_close_button"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:src="@drawable/hint_close_ic"
+            android:elevation="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/left_hint_container"
+            app:layout_constraintLeft_toRightOf="@id/left_hint_container"
+            app:layout_constraintRight_toRightOf="@id/left_hint_container"
+            app:layout_constraintTop_toTopOf="@id/left_hint_container" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/left_hint_container"
+            android:background="@drawable/hint_bg"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_83sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/white"
+                android:gravity="left"
+                android:id="@id/left_hint_container_text"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Задание выполнено, можно забрать приз"
+                android:fontFamily="@font/pfdindisplaypro_italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/right_hint"
+        android:layout_width="@dimen/_210sdp"
+        android:layout_height="@dimen/_210sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+        <ImageView
+            android:id="@id/right_hint_person"
+            android:layout_width="@dimen/_210sdp"
+            android:layout_height="@dimen/_210sdp"
+            android:src="@drawable/hints_person"
+            android:scaleType="fitEnd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+        <ImageView
+            android:id="@id/right_hint_close_button"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:src="@drawable/hint_close_ic"
+            android:elevation="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/right_hint_container"
+            app:layout_constraintLeft_toLeftOf="@id/right_hint_container"
+            app:layout_constraintRight_toLeftOf="@id/right_hint_container"
+            app:layout_constraintTop_toTopOf="@id/right_hint_container" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/right_hint_container"
+            android:background="@drawable/hint_bg"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_83sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/white"
+                android:gravity="left"
+                android:id="@id/right_hint_container_text"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Задание выполнено, можно забрать приз"
+                android:fontFamily="@font/pfdindisplaypro_italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

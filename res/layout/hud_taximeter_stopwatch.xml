@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="@dimen/_88sdp"
+    android:elevation="@dimen/_10sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@id/iv_bg_smaller"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hud_taximeter_stopwatch_army_bg"
+        android:adjustViewBounds="true" />
+    <ImageView
+        android:id="@id/iv_bg_bigger"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hud_taximeter_stopwatch_easter_relay_bg"
+        android:adjustViewBounds="true" />
+    <FrameLayout
+        android:layout_gravity="center"
+        android:id="@id/second_container"
+        android:background="@drawable/hud_taximeter_stopwatch_army_second_bg"
+        android:paddingLeft="@dimen/_4sdp"
+        android:paddingRight="@dimen/_4sdp"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:paddingHorizontal="@dimen/_4sdp">
+        <ImageView
+            android:layout_gravity="start|center"
+            android:id="@id/army_second_title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_6sdp"
+            android:src="@drawable/hud_taximeter_stopwatch_army_logo"
+            android:adjustViewBounds="true" />
+        <LinearLayout
+            android:layout_gravity="end|center"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:layout_marginVertical="@dimen/_2sdp">
+            <TextView
+                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/green_type1"
+                android:layout_gravity="center"
+                android:id="@id/tv_army_second_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01:35"
+                android:fontFamily="@font/ds_digital"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:textFontWeight="700" />
+            <ImageView
+                android:id="@id/iv_goals_icon"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:src="@drawable/hud_taximeter_stopwatch_soccer_goals_icon"
+                android:adjustViewBounds="true" />
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

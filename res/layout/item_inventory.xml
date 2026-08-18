@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@id/item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4.0dip"
+    android:layout_marginStart="4.0dip"
+    app:cardCornerRadius="10.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/iv_effect_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:scaleType="fitEnd" />
+    <ImageView
+        android:id="@id/iv_effect_background_top"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:scaleType="fitEnd" />
+    <ImageView
+        android:id="@id/ivDefaultItem"
+        android:background="@color/ap_transparent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/bg_item" />
+    <ImageView
+        android:id="@id/ivItemImage"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="center|left|top"
+        android:id="@id/cvColoredItem"
+        android:visibility="gone"
+        android:layout_width="8.0dip"
+        android:layout_height="8.0dip"
+        android:layout_marginTop="8.0dip"
+        android:layout_marginStart="8.0dip"
+        app:cardCornerRadius="2.0dip" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_gravity="center|right|top"
+        android:id="@id/ivActiveItem"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:src="@drawable/ic_active_item"
+        android:layout_marginEnd="8.0dip" />
+    <LinearLayout
+        android:layout_gravity="end|bottom|center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:layout_marginEnd="@dimen/_6sdp">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="end|center"
+            android:id="@id/tvTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:shadowColor="@color/black"
+            android:shadowDx="-4.0"
+            android:shadowDy="-2.0"
+            android:shadowRadius="1.0"
+            android:fontFamily="@font/pfdregular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="end|center"
+            android:id="@id/tvNeedRes"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:shadowColor="@color/black"
+            android:shadowDx="-4.0"
+            android:shadowDy="-2.0"
+            android:shadowRadius="1.0"
+            android:fontFamily="@font/pfdregular" />
+    </LinearLayout>
+    <ImageView
+        android:id="@id/iv_effect_foreground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/_1sdp" />
+    <View
+        android:layout_gravity="center"
+        android:id="@id/viewCenter"
+        android:background="@color/black_type1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.cardview.widget.CardView>

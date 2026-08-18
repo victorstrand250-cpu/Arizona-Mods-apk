@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@id/case_img"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arizona_cases_main_box"
+            android:adjustViewBounds="true" />
+        <TextView
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Откройте содержимое кейса"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:layout_marginStart="@dimen/_8sdp" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/rv_winner_prizes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_weight="1.0"
+        android:layout_marginVertical="@dimen/_10sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@id/open_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/_12sdp"
+            android:textColor="#ff000000"
+            android:gravity="center"
+            android:id="@id/tv_open_all"
+            android:background="@drawable/cases_top_bar_gold_box_bg"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:text="Открыть все"
+            android:layout_weight="1.0"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:paddingVertical="@dimen/_8sdp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@id/get_container"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/_12sdp"
+            android:textColor="#ff000000"
+            android:gravity="center"
+            android:id="@id/tv_get"
+            android:background="@drawable/cases_top_bar_gold_box_bg"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:text="Забрать"
+            android:layout_weight="1.0"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:paddingVertical="@dimen/_8sdp" />
+        <LinearLayout
+            android:gravity="center"
+            android:id="@id/schism_container"
+            android:background="@drawable/cases_top_bar_gold_box_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:backgroundTint="#ff8a00e2">
+            <TextView
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:id="@id/tv_schism"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Расколоть"
+                android:fontFamily="@font/heading_now_66_bold"
+                android:paddingVertical="@dimen/_8sdp" />
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@drawable/cases_top_bar_gold_box_bg"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:backgroundTint="@color/white"
+                android:paddingHorizontal="@dimen/_10sdp">
+                <TextView
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"
+                    android:id="@id/tv_cost"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+0"
+                    android:fontFamily="@font/heading_now_66_bold"
+                    android:paddingVertical="@dimen/_4sdp" />
+                <ImageView
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arizona_cases_diamond_icon"
+                    android:adjustViewBounds="true"
+                    android:layout_marginStart="@dimen/_2sdp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/pm_image"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/pm_empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3" />
+    <RelativeLayout
+        android:id="@id/pm_touch_area_stage_1"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_pm_stage_2_horizontal_1"
+        app:layout_constraintEnd_toEndOf="@id/pm_image"
+        app:layout_constraintStart_toStartOf="@id/pm_image"
+        app:layout_constraintTop_toTopOf="@id/guideline_pm_stage_1_1">
+        <ImageView
+            android:layout_width="35.0dip"
+            android:layout_height="35.0dip"
+            android:layout_marginTop="10.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@id/pm_touch_area_stage_2"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_pm_stage_2_horizontal_2"
+        app:layout_constraintEnd_toEndOf="@id/guideline_pm_stage_2_vertical_2"
+        app:layout_constraintStart_toStartOf="@id/guideline_pm_stage_2_vertical_1"
+        app:layout_constraintTop_toTopOf="@id/guideline_pm_stage_2_horizontal_1">
+        <ImageView
+            android:layout_width="35.0dip"
+            android:layout_height="35.0dip"
+            android:layout_marginTop="10.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@id/pm_touch_area_stage_3"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_pm_stage_3_horizontal_1"
+        app:layout_constraintEnd_toEndOf="@id/guideline_pm_stage_3_vertical_2"
+        app:layout_constraintStart_toStartOf="@id/guideline_pm_stage_3_vertical_1"
+        app:layout_constraintTop_toTopOf="@id/guideline_pm_stage_1">
+        <ImageView
+            android:layout_width="35.0dip"
+            android:layout_height="35.0dip"
+            android:layout_marginTop="10.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_pm_stage_1_1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.23" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_pm_stage_1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.36" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_pm_stage_2_horizontal_1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.38" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_pm_stage_2_horizontal_2"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.55" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_pm_stage_2_vertical_1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.46" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_pm_stage_2_vertical_2"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.57" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_pm_stage_3_vertical_1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.36" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_pm_stage_3_vertical_2"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.47" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_pm_stage_3_horizontal_1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.75"
+        app:layout_constraintTop_toBottomOf="@id/pm_image" />
+</androidx.constraintlayout.widget.ConstraintLayout>

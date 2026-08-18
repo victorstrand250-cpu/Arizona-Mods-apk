@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:paddingTop="@dimen/_10sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarThumbVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_track"
+        android:scrollbarStyle="outsideInset"
+        android:layout_gravity="center"
+        android:id="@id/rv_task"
+        android:paddingRight="@dimen/_4sdp"
+        android:scrollbars="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2" />
+</FrameLayout>

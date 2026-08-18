@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="25.0dip"
+    android:width="25.0dip"
+    android:viewportWidth="25.0"
+    android:viewportHeight="25.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <path
+        android:fillColor="#ffba2222"
+        android:pathData="M0.7324,10.8887V20.7275H22.4121V10.8887L11.7676,9.9365L0.7324,10.8887Z" />
+    <path
+        android:fillColor="#ffff2323"
+        android:pathData="M0.7324,1.3916H22.4121V10.8887H0.7324V1.3916Z" />
+    <path
+        android:fillColor="#ffba2222"
+        android:pathData="M1.4648,21.0229H7.0313V24.3408H1.4648V21.0229Z" />
+    <path
+        android:fillColor="#ffba2222"
+        android:pathData="M16.1133,21.0229H21.6797V24.3408H16.1133V21.0229Z" />
+    <path
+        android:fillColor="#ffff2323"
+        android:pathData="M2.9297,10.8887V18.2861H18.1641V10.8887L10.6445,10.0342L2.9297,10.8887Z" />
+    <path
+        android:fillColor="#ffba2222"
+        android:pathData="M2.9297,3.5889H18.1641V10.8887H2.9297V3.5889Z" />
+    <path
+        android:fillColor="#ffba2222"
+        android:pathData="M8.0566,8.6914C6.8451,8.6914 5.8594,9.6771 5.8594,10.8887L8.0566,11.2549L10.2539,10.8887C10.2539,9.6771 9.2682,8.6914 8.0566,8.6914Z" />
+    <path
+        android:fillColor="#ffba2222"
+        android:pathData="M8.0566,13.0859C9.2682,13.0859 10.2539,12.1002 10.2539,10.8887H5.8594C5.8594,12.1002 6.8451,13.0859 8.0566,13.0859Z" />
+    <path
+        android:fillColor="#ffff2323"
+        android:pathData="M21.6797,10.8887V19.9951H1.4648V10.8887L0.7324,10.5713L0,10.8887V21.46H23.1445V10.8887L22.4609,10.6689L21.6797,10.8887Z" />
+    <path
+        android:fillColor="#ffba2222"
+        android:pathData="M1.4648,2.124H21.6797V10.8887H23.1445V0.6592H0V10.8887H1.4648V2.124Z" />
+    <path
+        android:fillColor="#ffba2222"
+        android:pathData="M19.8242,3.5889H25V7.0068H19.8242V3.5889Z" />
+    <path
+        android:fillColor="#ffba2222"
+        android:pathData="M19.8242,14.8682H25V18.2861H19.8242V14.8682Z" />
+</vector>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="17.0dip"
+    android:width="84.0dip"
+    android:viewportWidth="84.0"
+    android:viewportHeight="17.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$hud_taximeter_button_bg__0"
+        android:pathData="M3.877,0.258L80.123,0.258A3.618,3.618 0,0 1,83.742 3.877L83.742,12.923A3.618,3.618 0,0 1,80.123 16.542L3.877,16.542A3.618,3.618 0,0 1,0.258 12.923L0.258,3.877A3.618,3.618 0,0 1,3.877 0.258z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M3.877,0.258L80.123,0.258A3.618,3.618 0,0 1,83.742 3.877L83.742,12.923A3.618,3.618 0,0 1,80.123 16.542L3.877,16.542A3.618,3.618 0,0 1,0.258 12.923L0.258,3.877A3.618,3.618 0,0 1,3.877 0.258z"
+        android:strokeColor="@drawable/$hud_taximeter_button_bg__1"
+        android:strokeWidth="0.516923" />
+</vector>

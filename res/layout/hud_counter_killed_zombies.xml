@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:background="@drawable/hud_counter_killed_zombies_bg"
+        android:padding="@dimen/_2sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_36sdp">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/hud_counter_killed_zombies_item_one_bg"
+            android:paddingLeft="@dimen/_2sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:paddingHorizontal="@dimen/_2sdp">
+            <TextView
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@id/tv_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold"
+                android:lineHeight="@dimen/_4sdp" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:background="@drawable/hud_counter_killed_zombies_item_two_bg"
+            android:paddingLeft="@dimen/_4sdp"
+            android:paddingRight="@dimen/_4sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:paddingHorizontal="@dimen/_4sdp">
+            <ImageView
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hud_counter_killed_zombies_image"
+                android:adjustViewBounds="true" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Убито зомби"
+                    android:fontFamily="@font/heading_now_66_bold" />
+                <TextView
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/tv_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_minus4sdp"
+                    android:text="25"
+                    android:fontFamily="@font/heading_now_66_bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

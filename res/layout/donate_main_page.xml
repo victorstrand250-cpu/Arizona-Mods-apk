@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rv_main_items"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_140sdp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@id/view_pager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0" />
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:layout_gravity="center"
+            android:id="@id/dotsIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_6sdp"
+            app:dotsClickable="true"
+            app:dotsColor="@color/gray"
+            app:dotsSize="@dimen/_5sdp"
+            app:dotsSpacing="@dimen/_2sdp"
+            app:dotsWidthFactor="1.0"
+            app:selectedDotColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

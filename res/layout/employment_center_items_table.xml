@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:background="#b3000000"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:layout_gravity="center"
+        android:layout_width="@dimen/_440sdp"
+        android:layout_height="fill_parent"
+        android:layout_margin="@dimen/_24sdp"
+        app:backgroundMainColor="#ff131516"
+        app:corners="@dimen/_8sdp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="@dimen/_440sdp"
+            android:layout_height="fill_parent">
+            <ru.mrlargha.commonui.utils.ui.CustomCardView
+                android:background="#ff131516"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/_42sdp"
+                app:borderMainColor="#0dffffff"
+                app:borderWidth="@dimen/_1sdp"
+                app:gradientList="\#00000000, #161a1f,#1f283b, #364B84, #CC3048">
+                <TextView
+                    android:textSize="@dimen/_11sdp"
+                    android:textColor="#d9ffffff"
+                    android:layout_gravity="center"
+                    android:id="@id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Мои бонусы"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+                <ImageView
+                    android:layout_gravity="center|right"
+                    android:id="@id/close"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginRight="@dimen/_8sdp"
+                    android:src="@drawable/cross" />
+            </ru.mrlargha.commonui.utils.ui.CustomCardView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:scrollbarSize="@dimen/_4sdp"
+                android:scrollbarThumbVertical="@drawable/rodina_vert_scroll_thumb"
+                android:scrollbarTrackVertical="@drawable/rodina_vert_scrollbar_track"
+                android:scrollbarStyle="outsideInset"
+                android:id="@id/rv_info"
+                android:scrollbars="vertical"
+                android:clipToPadding="false"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
+                android:verticalScrollbarPosition="right"
+                android:paddingEnd="@dimen/_8sdp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2" />
+        </LinearLayout>
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+</LinearLayout>

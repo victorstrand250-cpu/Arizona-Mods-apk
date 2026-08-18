@@ -1,0 +1,69 @@
+{
+  "apkFileName": "ARIZONA MOD_v17.0.3_src.apk",
+  "PackageInfo": {
+    "forcedPackageId": "127",
+    "renameManifestPackage": null
+  },
+  "doNotCompress": [
+    "resources.arsc",
+    "webp",
+    "png",
+    "gif",
+    "mp3",
+    "webm",
+    "ogg",
+    "assets/dexopt/baseline.prof",
+    "assets/dexopt/baseline.profm"
+  ],
+  "compressionType": false,
+  "sparseResources": false,
+  "version": "2.4.0-251224",
+  "sharedLibrary": false,
+  "VersionInfo": {
+    "versionName": "v17.0.3",
+    "versionCode": "1703"
+  },
+  "UsesFramework": {
+    "ids": [1],
+    "tag": null
+  },
+  "unknownFiles": {
+    "play-services-measurement.properties": "8",
+    "firebase-encoders-proto.properties": "8",
+    "firebase-iid-interop.properties": "8",
+    "LICENSE_OFL": "8",
+    "play-services-ads-identifier.properties": "8",
+    "play-services-appset.properties": "8",
+    "play-services-cloud-messaging.properties": "8",
+    "messaging_event.proto": "8",
+    "play-services-tasks.properties": "8",
+    "play-services-measurement-sdk-api.properties": "8",
+    "feature-delivery.properties": "8",
+    "firebase-encoders.properties": "8",
+    "play-services-basement.properties": "8",
+    "LICENSE_UNICODE": "8",
+    "firebase-measurement-connector.properties": "8",
+    "DebugProbesKt.bin": "8",
+    "app-update-ktx.properties": "8",
+    "play-services-measurement-api.properties": "8",
+    "core-common.properties": "8",
+    "play-services-measurement-base.properties": "8",
+    "play-services-stats.properties": "8",
+    "messaging_event_extension.proto": "8",
+    "play-services-measurement-sdk.properties": "8",
+    "androidsupportmultidexversion.txt": "0",
+    "play-services-base.properties": "8",
+    "app-update.properties": "8",
+    "client_analytics.proto": "8",
+    "kotlin-tooling-metadata.json": "8",
+    "firebase-analytics.properties": "8",
+    "play-services-measurement-impl.properties": "8"
+  },
+  "apkFilePath": "/storage/emulated/0/MT2/apks/ARIZONA MOD_v17.0.3.apk",
+  "compactEntries": false,
+  "isFrameworkApk": false,
+  "sdkInfo": {
+    "minSdkVersion": "24",
+    "targetSdkVersion": "36"
+  }
+}

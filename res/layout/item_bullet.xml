@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="56.0dip"
+    android:layout_marginTop="4.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:id="@id/selectedView"
+        android:background="@drawable/bg_success_chance_test"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <ImageView
+        android:id="@id/ivItemIcon"
+        android:visibility="visible"
+        android:layout_width="56.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginStart="4.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:ellipsize="end"
+        android:gravity="start|center"
+        android:id="@id/tvItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:layout_marginStart="12.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivItemIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

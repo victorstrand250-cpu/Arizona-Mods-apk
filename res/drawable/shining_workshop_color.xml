@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="36.0dip"
+    android:width="36.0dip"
+    android:viewportWidth="36.0"
+    android:viewportHeight="36.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$shining_workshop_color__0"
+        android:pathData="M5,0L31,0A5,5 0,0 1,36 5L36,31A5,5 0,0 1,31 36L5,36A5,5 0,0 1,0 31L0,5A5,5 0,0 1,5 0z"
+        android:strokeAlpha="0.6"
+        android:fillAlpha="0.4" />
+    <path
+        android:fillColor="@drawable/$shining_workshop_color__1"
+        android:pathData="M5,0L31,0A5,5 0,0 1,36 5L36,31A5,5 0,0 1,31 36L5,36A5,5 0,0 1,0 31L0,5A5,5 0,0 1,5 0z"
+        android:strokeAlpha="0.6"
+        android:fillAlpha="0.4" />
+    <path
+        android:fillColor="@drawable/$shining_workshop_color__2"
+        android:pathData="M5,0L31,0A5,5 0,0 1,36 5L36,31A5,5 0,0 1,31 36L5,36A5,5 0,0 1,0 31L0,5A5,5 0,0 1,5 0z"
+        android:strokeAlpha="0.6"
+        android:fillAlpha="0.4" />
+    <path
+        android:fillColor="@drawable/$shining_workshop_color__3"
+        android:pathData="M5,0L31,0A5,5 0,0 1,36 5L36,31A5,5 0,0 1,31 36L5,36A5,5 0,0 1,0 31L0,5A5,5 0,0 1,5 0z"
+        android:strokeAlpha="0.6"
+        android:fillAlpha="0.4" />
+</vector>

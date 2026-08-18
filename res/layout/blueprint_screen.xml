@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/rodina_proposal_screen"
+    android:background="@drawable/blueprint_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include
+        android:id="@id/rpg_container"
+        android:visibility="gone"
+        layout="@layout/blueprint_layout_rpg" />
+    <include
+        android:id="@id/pm_container"
+        android:visibility="gone"
+        layout="@layout/blueprint_layout_pm" />
+    <include
+        android:id="@id/ak_container"
+        android:visibility="gone"
+        layout="@layout/blueprint_layout_ak" />
+    <include
+        android:id="@id/snipe_container"
+        android:visibility="gone"
+        layout="@layout/blueprint_layout_snipe" />
+    <include
+        android:id="@id/rifle_container"
+        android:visibility="gone"
+        layout="@layout/blueprint_layout_rifle" />
+    <include
+        android:id="@id/pipe_one"
+        android:visibility="gone"
+        layout="@layout/blueprint_pipe_one" />
+    <include
+        android:id="@id/pipe_two"
+        android:visibility="gone"
+        layout="@layout/blueprint_pipe_two" />
+    <include
+        android:id="@id/pipe_three"
+        android:visibility="gone"
+        layout="@layout/blueprint_pipe_three" />
+    <include
+        android:id="@id/pipe_four"
+        android:visibility="gone"
+        layout="@layout/blueprint_pipe_four" />
+    <include
+        android:id="@id/pipe_five"
+        android:visibility="gone"
+        layout="@layout/blueprint_pipe_five" />
+    <include
+        android:id="@id/halloween"
+        android:visibility="visible"
+        layout="@layout/blueprint_halloween" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btn_close"
+        android:background="@drawable/btn_close"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="24.0sp"
+        android:textColor="@color/white"
+        android:id="@id/weapon_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20.0dip"
+        android:text="РУЧНОЙ ПРОТИВОТАНКОВЫЙ ГРАНАТОМЕТ"
+        android:fontFamily="@font/din_pro_condensed_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/blueprint_info_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20.0dip"
+        android:layout_marginStart="24.0dip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12.0dip"
+            android:layout_marginTop="8.0dip"
+            android:layout_marginRight="12.0dip"
+            android:layout_marginBottom="8.0dip"
+            android:layout_marginHorizontal="12.0dip"
+            android:layout_marginVertical="8.0dip">
+            <ImageView
+                android:layout_width="10.0dip"
+                android:layout_height="10.0dip"
+                android:layout_marginTop="2.0dip"
+                android:src="@drawable/blueprint_ic_info_yellow" />
+            <TextView
+                android:textSize="12.0sp"
+                android:textColor="@color/white"
+                android:id="@id/info_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ИНФОРМАЦИЯ"
+                android:fontFamily="@font/din_pro_condensed_black"
+                android:layout_marginStart="6.0dip" />
+        </LinearLayout>
+        <View
+            android:background="#33ffffff"
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginLeft="6.0dip"
+            android:layout_marginRight="6.0dip"
+            android:layout_marginHorizontal="6.0dip" />
+        <TextView
+            android:textSize="10.0sp"
+            android:textColor="@color/white"
+            android:id="@id/info_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12.0dip"
+            android:layout_marginTop="6.0dip"
+            android:layout_marginRight="12.0dip"
+            android:layout_marginBottom="16.0dip"
+            android:text="Кликайте на выделенную область \nдля восстановления чертежа"
+            android:fontFamily="@font/din_pro_condensed_black"
+            android:layout_marginHorizontal="12.0dip" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/rewards_panel_container"
+        android:background="@drawable/blueprint_info_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24.0dip"
+        android:layout_alignParentEnd="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:textSize="12.0sp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginRight="16.0dip"
+            android:layout_marginBottom="10.0dip"
+            android:text="Вы получите"
+            android:fontFamily="@font/din_pro_condensed_black"
+            android:layout_marginHorizontal="16.0dip"
+            android:layout_marginVertical="10.0dip" />
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16.0dip"
+            android:layout_marginTop="2.0dip"
+            android:layout_marginRight="16.0dip"
+            android:layout_marginBottom="12.0dip"
+            android:layout_marginHorizontal="16.0dip">
+            <LinearLayout
+                android:id="@id/money_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@id/img_money"
+                    android:layout_width="10.0dip"
+                    android:layout_height="10.0dip"
+                    android:layout_marginTop="1.0dip"
+                    android:src="@drawable/blueprint_ic_rub" />
+                <TextView
+                    android:textSize="8.0sp"
+                    android:textColor="@color/white"
+                    android:id="@id/money_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30000"
+                    android:fontFamily="@font/din_pro_condensed_black"
+                    android:layout_marginStart="4.0dip" />
+                <Space
+                    android:layout_width="10.0dip"
+                    android:layout_height="1.0dip" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@id/container_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="10.0dip"
+                    android:layout_height="10.0dip"
+                    android:layout_marginTop="1.0dip"
+                    android:src="@drawable/blueprint_ic_rank" />
+                <TextView
+                    android:textSize="8.0sp"
+                    android:textColor="@color/white"
+                    android:id="@id/experience_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="35 опыта"
+                    android:fontFamily="@font/din_pro_condensed_black"
+                    android:layout_marginStart="4.0dip" />
+                <Space
+                    android:layout_width="10.0dip"
+                    android:layout_height="1.0dip" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@id/container_drawing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="10.0dip"
+                    android:layout_height="10.0dip"
+                    android:layout_marginTop="1.0dip"
+                    android:src="@drawable/blueprint_ic_folder_blueprint" />
+                <TextView
+                    android:textSize="8.0sp"
+                    android:textColor="@color/white"
+                    android:id="@id/blueprints_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25 чертежей"
+                    android:fontFamily="@font/din_pro_condensed_black"
+                    android:layout_marginStart="4.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

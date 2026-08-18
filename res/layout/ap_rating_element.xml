@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ap_rating_element_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="30.0dip"
+        android:layout_marginTop="4.0dip"
+        android:layout_marginBottom="4.0dip"
+        android:layout_marginStart="8.0dip"
+        android:layout_marginEnd="8.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ap_rating_bg_rect"
+        app:tint="#63e39c01"
+        app:tintMode="src_over" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textSize="12.0sp"
+        android:textStyle="italic"
+        android:textColor="#80ffffff"
+        android:id="@id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="exp "
+        android:fontFamily="@font/pfdbold"
+        android:layout_marginEnd="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/ap_rating_element_bg"
+        app:layout_constraintEnd_toEndOf="@id/ap_rating_element_bg"
+        app:layout_constraintTop_toTopOf="@id/ap_rating_element_bg" />
+    <TextView
+        android:textSize="@dimen/_11sdp"
+        android:textStyle="bold|italic"
+        android:textColor="#80ffffff"
+        android:id="@id/ap_rating_element_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 10 "
+        android:fontFamily="@font/pfdbold"
+        android:layout_marginStart="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/ap_rating_element_bg"
+        app:layout_constraintStart_toStartOf="@id/ap_rating_element_bg"
+        app:layout_constraintTop_toTopOf="@id/ap_rating_element_bg" />
+    <TextView
+        android:textSize="@dimen/_11sdp"
+        android:textColor="@color/white"
+        android:id="@id/ap_element_exp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10 000"
+        android:fontFamily="@font/pfdbold"
+        android:layout_marginEnd="4.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/ap_rating_element_bg"
+        app:layout_constraintEnd_toStartOf="@id/textView6"
+        app:layout_constraintTop_toTopOf="@id/ap_rating_element_bg" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ap_rating_element_crown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/ap_rating_element_bg"
+        app:layout_constraintStart_toStartOf="@id/ap_rating_element_bg"
+        app:layout_constraintTop_toTopOf="@id/ap_rating_element_bg"
+        app:srcCompat="@drawable/crown_bronze" />
+    <TextView
+        android:textSize="@dimen/_11sdp"
+        android:textColor="@color/white"
+        android:id="@id/ap_rating_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valik_Gomenuk"
+        android:fontFamily="@font/heading_now_64_regular"
+        android:layout_marginStart="44.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/ap_rating_element_bg"
+        app:layout_constraintStart_toStartOf="@id/ap_rating_element_bg"
+        app:layout_constraintTop_toTopOf="@id/ap_rating_element_bg" />
+</androidx.constraintlayout.widget.ConstraintLayout>

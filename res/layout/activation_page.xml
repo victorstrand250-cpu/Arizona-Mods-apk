@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:paddingLeft="@dimen/_24sdp"
+    android:paddingRight="@dimen/_24sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="@dimen/_18sdp"
+    android:paddingHorizontal="@dimen/_24sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/_17sdp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Есть промокод?"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <ru.mrlargha.commonui.utils.ui.GradientText.ArizonaGradientTextView
+                android:textSize="@dimen/_17sdp"
+                android:textColor="#fffcd80f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Активируй его!"
+                android:fontFamily="@font/heading_now_66_bold"
+                android:layout_marginStart="@dimen/_10sdp" />
+        </LinearLayout>
+        <LinearLayout
+            android:background="@drawable/gray_with_border_7r"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp">
+            <EditText
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#99ffffff"
+                android:textColorHint="#99ffffff"
+                android:id="@id/edit_text"
+                android:background="@color/transparent100"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_7sdp"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:hint="ВВЕДИТЕ ПРОМОКОД"
+                android:maxLines="1"
+                android:layout_weight="1.0"
+                android:inputType="text"
+                android:imeOptions="actionDone|flagNoExtractUi"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_7sdp" />
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:id="@id/send_button"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:src="@drawable/plane_ic"
+                android:layout_marginEnd="@dimen/_8sdp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:text="Мои промокоды"
+                android:fontFamily="@font/heading_now_64_regular" />
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="#80ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:text=""
+                android:fontFamily="@font/heading_now_64_regular" />
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:scrollbarThumbVertical="@drawable/custom_thumb_bg"
+            android:scrollbarTrackVertical="@drawable/custom_track"
+            android:scrollbarStyle="outsideInset"
+            android:orientation="vertical"
+            android:id="@id/rv"
+            android:scrollbars="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_weight="1.0"
+            android:paddingEnd="@dimen/_10sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginStart="@dimen/_16sdp">
+        <FrameLayout
+            android:layout_gravity="top"
+            android:layout_width="@dimen/_190sdp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@id/image_poster"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/poster_img"
+                android:adjustViewBounds="true" />
+            <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_18sdp">
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="зови друзей"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+                <ru.mrlargha.commonui.utils.ui.GradientText.ArizonaGradientTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="#fffcd80f"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="и получай награды"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginBottom="@dimen/_4sdp">
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="@color/rodina_white"
+                        android:gravity="center"
+                        android:background="@drawable/transparent_with_border_4r"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_7sdp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Транспорт"
+                        android:layout_weight="1.0"
+                        android:fontFamily="@font/heading_now_64_regular"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:paddingVertical="@dimen/_7sdp" />
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="@color/rodina_white"
+                        android:gravity="center"
+                        android:id="@id/project_bonus_text"
+                        android:background="@drawable/transparent_with_border_4r"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_7sdp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="VIP статус"
+                        android:layout_weight="1.0"
+                        android:fontFamily="@font/heading_now_64_regular"
+                        android:paddingVertical="@dimen/_7sdp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_4sdp">
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="@color/rodina_white"
+                        android:gravity="center"
+                        android:background="@drawable/transparent_with_border_4r"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_7sdp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Уникальные скины"
+                        android:layout_weight="1.0"
+                        android:fontFamily="@font/heading_now_64_regular"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:paddingVertical="@dimen/_7sdp" />
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="@color/rodina_white"
+                        android:gravity="center"
+                        android:background="@drawable/transparent_with_border_4r"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_7sdp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="% AZ-Coins от друзей"
+                        android:layout_weight="1.0"
+                        android:fontFamily="@font/heading_now_64_regular"
+                        android:paddingVertical="@dimen/_7sdp" />
+                </LinearLayout>
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="#e5000000"
+                    android:gravity="center"
+                    android:id="@id/details_button"
+                    android:background="@drawable/gold_gradient_4r"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:text="подробнее"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold"
+                    android:paddingVertical="@dimen/_6sdp" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

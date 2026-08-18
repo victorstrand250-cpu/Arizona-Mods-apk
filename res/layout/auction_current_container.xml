@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/auction_current_container"
+    android:background="@drawable/auction_container_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@id/cc_rc_view"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="20.0dip"
+        android:layout_width="400.0dip"
+        android:layout_height="154.0dip"
+        android:layout_marginTop="38.0dip"
+        android:requiresFadingEdge="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_menu_name"
+        app:layout_constraintTop_toBottomOf="@id/cc_item_list_tittle" />
+    <TextView
+        android:textSize="@dimen/_6sdp"
+        android:textColor="#ffffffff"
+        android:gravity="center"
+        android:id="@id/cc_item_list_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Возможное содержимое"
+        android:fontFamily="@font/gotham"
+        android:textFontWeight="700"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_menu_name"
+        app:layout_constraintTop_toTopOf="@id/cc_horizontal_list_item" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ac_general_exit"
+        android:layout_width="58.0dip"
+        android:layout_height="18.0dip"
+        android:src="@drawable/auction_button_exit"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_menu_exit"
+        app:layout_constraintTop_toTopOf="@id/cc_horizontal_menu_name" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="#ffffffff"
+        android:gravity="center"
+        android:id="@id/cc_item_menu_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6.0dip"
+        android:text="Аукцион за контейнер"
+        android:textAllCaps="true"
+        android:fontFamily="@font/gotham"
+        android:textFontWeight="700"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_menu_name"
+        app:layout_constraintTop_toTopOf="@id/cc_horizontal_menu_name" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="133.0dip"
+        android:layout_height="40.0dip"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_last_bet"
+        app:layout_constraintTop_toTopOf="@id/cc_horizontal_tittle">
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="#ffffffff"
+            android:gravity="center"
+            android:id="@id/cc_item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Обычный контейнер"
+            android:fontFamily="@font/gotham"
+            android:textFontWeight="400" />
+        <TextView
+            android:textSize="@dimen/_4sdp"
+            android:textColor="#75ffffff"
+            android:gravity="center"
+            android:id="@id/cc_item_tittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6.0dip"
+            android:text="Начальная цена"
+            android:fontFamily="@font/gotham"
+            android:textFontWeight="400" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4.0dip">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ffffffff"
+                android:gravity="center"
+                android:id="@id/cc_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 500 000"
+                android:fontFamily="@font/gotham"
+                android:textFontWeight="700" />
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ff52ff4f"
+                android:gravity="center"
+                android:id="@id/cc_item_price_icone"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="2.0dip"
+                android:text="AZ"
+                android:fontFamily="@font/gotham"
+                android:textFontWeight="700" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="133.0dip"
+        android:layout_height="34.0dip"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_last_bet"
+        app:layout_constraintTop_toBottomOf="@id/cc_horizontal_timer">
+        <TextView
+            android:textSize="@dimen/_4sdp"
+            android:textColor="#75ffffff"
+            android:gravity="center"
+            android:id="@id/cc_item_time_left_tittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Времени осталось"
+            android:fontFamily="@font/gotham"
+            android:textFontWeight="400" />
+        <LinearLayout
+            android:gravity="center"
+            android:background="@drawable/ic_auction_container_timer_bg"
+            android:layout_width="55.0dip"
+            android:layout_height="18.0dip"
+            android:layout_marginTop="4.0dip">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ffffffff"
+                android:gravity="center"
+                android:id="@id/cc_item_time_left_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="10:25"
+                android:fontFamily="@font/gotham"
+                android:textFontWeight="700" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="133.0dip"
+        android:layout_height="34.0dip"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_last_bet"
+        app:layout_constraintTop_toBottomOf="@id/cc_horizontal_last_bet">
+        <TextView
+            android:textSize="@dimen/_4sdp"
+            android:textColor="#75ffffff"
+            android:gravity="center"
+            android:id="@id/cc_item_last_bet_tittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Последняя ставка"
+            android:fontFamily="@font/gotham"
+            android:textFontWeight="700" />
+        <RelativeLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@id/cc_last_bet_bg"
+            android:background="@drawable/ic_auction_container_last_bet_bg"
+            android:layout_width="133.0dip"
+            android:layout_height="19.0dip"
+            android:layout_marginTop="8.0dip">
+            <TextView
+                android:textSize="@dimen/_4sdp"
+                android:textColor="#ffffcb5a"
+                android:gravity="center"
+                android:id="@id/cc_item_last_bet_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:text="Ivan_Ivanov"
+                android:layout_alignParentLeft="true"
+                android:fontFamily="@font/gotham"
+                android:textFontWeight="400" />
+            <TextView
+                android:textSize="@dimen/_4sdp"
+                android:textColor="#ffffcb5a"
+                android:gravity="center"
+                android:id="@id/cc_item_last_bet_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10.0dip"
+                android:text="2 600 000 $"
+                android:layout_alignParentRight="true"
+                android:fontFamily="@font/gotham"
+                android:textFontWeight="700" />
+        </RelativeLayout>
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ac_run"
+        android:layout_width="86.0dip"
+        android:layout_height="25.0dip"
+        android:src="@drawable/auction_container_accept_button"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_button"
+        app:layout_constraintTop_toBottomOf="@id/cc_horizontal_button" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/cc_item_image"
+        android:layout_width="182.0dip"
+        android:layout_height="182.0dip"
+        android:src="@drawable/auction_container_item"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_item_line"
+        app:layout_constraintTop_toTopOf="@id/cc_horizontal_item_line" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/cc_vertical_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.108" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/cc_horizontal_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.858" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/cc_vertical_last_bet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.08" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/cc_horizontal_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.243" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/cc_horizontal_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.63" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/cc_horizontal_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.305" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/cc_vertical_menu_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.88" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/cc_vertical_menu_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.383" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/cc_horizontal_menu_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.046" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/cc_horizontal_last_bet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.73" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/cc_vertical_item_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.052" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/cc_horizontal_item_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.28" />
+    <LinearLayout
+        android:id="@id/ac_bet_bg"
+        android:background="#ff20232f"
+        android:visibility="invisible"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha="0.95"
+        android:layout_marginStart="16.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ac_exit_button"
+        android:layout_width="58.0dip"
+        android:layout_height="18.0dip"
+        android:src="@drawable/auction_button_exit"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_menu_exit"
+        app:layout_constraintTop_toTopOf="@id/cc_horizontal_menu_name" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ac_set_bet_button"
+        android:visibility="invisible"
+        android:layout_width="86.0dip"
+        android:layout_height="25.0dip"
+        android:layout_marginLeft="49.0dip"
+        android:layout_marginTop="21.0dip"
+        android:src="@drawable/auction_container_accept_button"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_input"
+        app:layout_constraintTop_toBottomOf="@id/cc_input_bet_bg" />
+    <TextView
+        android:textSize="@dimen/_4sdp"
+        android:textColor="#ffffcb5a"
+        android:gravity="center"
+        android:id="@id/cc_input_bet_price"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="115.0dip"
+        android:layout_marginTop="6.0dip"
+        android:text="2 600 000 $"
+        android:fontFamily="@font/gotham"
+        android:textFontWeight="700"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_input"
+        app:layout_constraintTop_toTopOf="@id/cc_input_bet_bg" />
+    <TextView
+        android:textSize="@dimen/_4sdp"
+        android:textColor="#ffffcb5a"
+        android:gravity="center"
+        android:id="@id/cc_input_bet_name"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="38.0dip"
+        android:layout_marginTop="6.0dip"
+        android:text="Ivan_Ivanov"
+        android:fontFamily="@font/gotham"
+        android:textFontWeight="400"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_input"
+        app:layout_constraintTop_toTopOf="@id/cc_input_bet_bg" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@id/cc_input_bet_bg"
+        android:background="@drawable/ic_auction_container_last_bet_bg"
+        android:visibility="invisible"
+        android:layout_width="133.0dip"
+        android:layout_height="19.0dip"
+        android:layout_marginLeft="26.0dip"
+        android:layout_marginTop="7.0dip"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_input"
+        app:layout_constraintTop_toBottomOf="@id/cc_input_bet_tittle" />
+    <TextView
+        android:textSize="@dimen/_4sdp"
+        android:textColor="#75ffffff"
+        android:gravity="center"
+        android:id="@id/cc_input_bet_tittle"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="64.0dip"
+        android:layout_marginTop="20.0dip"
+        android:text="Последняя ставка"
+        android:fontFamily="@font/gotham"
+        android:textFontWeight="700"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_input"
+        app:layout_constraintTop_toBottomOf="@id/cc_input_form" />
+    <EditText
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/gray"
+        android:textColorHint="@color/gray"
+        android:gravity="center"
+        android:id="@id/cc_input_form"
+        android:background="@drawable/auction_intput_style"
+        android:visibility="invisible"
+        android:layout_width="190.0dip"
+        android:layout_height="30.0dip"
+        android:layout_marginTop="20.0dip"
+        android:hint="10 000$"
+        android:inputType="number"
+        android:imeOptions="flagNoFullscreen"
+        android:fontFamily="@font/gotham"
+        android:labelFor="@id/cc_input_tittle"
+        android:importantForAutofill="no"
+        android:textFontWeight="400"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_input"
+        app:layout_constraintTop_toBottomOf="@id/cc_input_tittle" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textColor="#ffffffff"
+        android:gravity="center"
+        android:id="@id/cc_input_tittle"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25.0dip"
+        android:text="Введите сумму ставки"
+        android:fontFamily="@font/gotham"
+        android:textFontWeight="700"
+        app:layout_constraintLeft_toLeftOf="@id/cc_vertical_input"
+        app:layout_constraintTop_toTopOf="@id/cc_horizontal_list_item" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/cc_vertical_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.372" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@id/parentLayout"
+    android:layout_width="120.0dip"
+    android:layout_height="120.0dip"
+    android:layout_marginTop="4.0dip"
+    android:layout_marginStart="4.0dip"
+    app:cardBackgroundColor="@color/transparent100"
+    app:cardCornerRadius="10.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="start|center|top"
+        android:id="@id/topRightColor"
+        android:visibility="gone"
+        android:layout_width="12.0dip"
+        android:layout_height="12.0dip"
+        android:layout_marginTop="10.0dip"
+        android:layout_marginStart="10.0dip"
+        app:cardBackgroundColor="@color/red_type1"
+        app:cardCornerRadius="4.0dip" />
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@id/ivItemImage"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="end|bottom|center"
+        android:id="@id/tvTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8.0dip"
+        android:layout_marginEnd="8.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/snackbar_root_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:elevation="100.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/snackbar_bg"
+        android:layout_width="@dimen/_240sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/success_snackbar_bg" />
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/snack_title"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:text="Задача выполнена"
+        android:fontFamily="@font/gotham"
+        android:layout_marginStart="@dimen/_60sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        app:layout_constraintBottom_toTopOf="@id/snack_text"
+        app:layout_constraintEnd_toEndOf="@id/snackbar_bg"
+        app:layout_constraintStart_toStartOf="@id/snackbar_bg"
+        app:layout_constraintTop_toTopOf="@id/snackbar_bg"
+        app:layout_constraintVertical_chainStyle="packed" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="#ffb4b4b4"
+        android:id="@id/snack_text"
+        android:visibility="visible"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gotham"
+        android:layout_marginStart="@dimen/_60sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="@id/snackbar_bg"
+        app:layout_constraintEnd_toEndOf="@id/snackbar_bg"
+        app:layout_constraintStart_toStartOf="@id/snackbar_bg"
+        app:layout_constraintTop_toBottomOf="@id/snack_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

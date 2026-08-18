@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="859.0dip"
+    android:width="524.0dip"
+    android:viewportWidth="524.0"
+    android:viewportHeight="859.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M479,889H494V874V50C494,30.67 478.33,15 459,15H64C44.67,15 29,30.67 29,50V874V889H44H479Z"
+        android:strokeColor="@drawable/$ic_phone_case__0"
+        android:strokeWidth="30.0" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M479,876.5H481.5V874V50C481.5,37.57 471.43,27.5 459,27.5H64C51.57,27.5 41.5,37.57 41.5,50V874V876.5H44H479Z"
+        android:strokeColor="@drawable/$ic_phone_case__1"
+        android:strokeWidth="5.0"
+        android:strokeAlpha="0.25" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M479,876.5H481.5V874V50C481.5,37.57 471.43,27.5 459,27.5H64C51.57,27.5 41.5,37.57 41.5,50V874V876.5H44H479Z"
+        android:strokeColor="@drawable/$ic_phone_case__2"
+        android:strokeWidth="5.0"
+        android:strokeAlpha="0.5" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M16.5,50C16.5,23.77 37.77,2.5 64,2.5H459C485.23,2.5 506.5,23.77 506.5,50V758.5H16.5V50Z"
+        android:strokeColor="@drawable/$ic_phone_case__3"
+        android:strokeWidth="5.0"
+        android:strokeAlpha="0.5" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M17.5,40C17.5,19.29 34.29,2.5 55,2.5H462C482.71,2.5 499.5,19.29 499.5,40V899.5H17.5V40Z"
+        android:strokeColor="@drawable/$ic_phone_case__4"
+        android:strokeWidth="5.0"
+        android:strokeAlpha="0.25" />
+    <path
+        android:fillColor="@drawable/$ic_phone_case__5"
+        android:pathData="M509,94.81H513.44C518.97,94.81 523.44,99.29 523.44,104.81V183.25C523.44,188.77 518.97,193.25 513.44,193.25H509V94.81Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M510.5,96.31H513.44C518.14,96.31 521.94,100.12 521.94,104.81V183.25C521.94,187.94 518.14,191.75 513.44,191.75H510.5V96.31Z"
+        android:strokeColor="@drawable/$ic_phone_case__6"
+        android:strokeWidth="3.0"
+        android:strokeAlpha="0.15" />
+    <path
+        android:fillColor="@drawable/$ic_phone_case__7"
+        android:pathData="M170,30.13H350.56V40.28C350.56,54.09 339.36,65.28 325.56,65.28H195C181.19,65.28 170,54.09 170,40.28V30.13Z" />
+    <path
+        android:fillColor="@drawable/$ic_phone_case__8"
+        android:pathData="M509,228.41H513.44C518.97,228.41 523.44,232.88 523.44,238.41V316.84C523.44,322.37 518.97,326.84 513.44,326.84H509V228.41Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M510.5,229.91H513.44C518.14,229.91 521.94,233.71 521.94,238.41V316.84C521.94,321.54 518.14,325.34 513.44,325.34H510.5V229.91Z"
+        android:strokeColor="@drawable/$ic_phone_case__9"
+        android:strokeWidth="3.0"
+        android:strokeAlpha="0.15" />
+    <path
+        android:fillColor="@drawable/$ic_phone_case__10"
+        android:pathData="M0,113.25C0,107.73 4.48,103.25 10,103.25H14.44V284.66H10C4.48,284.66 0,280.18 0,274.66V113.25Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M1.5,113.25C1.5,108.56 5.31,104.75 10,104.75H12.94V283.16H10C5.31,283.16 1.5,279.35 1.5,274.66V113.25Z"
+        android:strokeColor="@drawable/$ic_phone_case__11"
+        android:strokeWidth="3.0"
+        android:strokeAlpha="0.15" />
+    <path
+        android:fillColor="#ff7a7a7a"
+        android:pathData="M253.78,14.66a7.22,7.03 0,1 0,14.44 0a7.22,7.03 0,1 0,-14.44 0z" />
+</vector>

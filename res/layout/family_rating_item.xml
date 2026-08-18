@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:id="@id/neighbor_game_task_screen"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/_24sdp"
+    android:layout_marginTop="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_2sdp"
+    android:layout_marginVertical="@dimen/_2sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="fill_parent">
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:id="@id/top_image"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:src="@drawable/family_rv_ic_top1" />
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="@color/white"
+            android:id="@id/top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="222"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="@dimen/_114sdp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:id="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAMETOP CLAN"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="@dimen/_38sdp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:id="@id/lvl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N1"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="@dimen/_54sdp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:id="@id/members"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N1"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="@dimen/_112sdp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0">
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:id="@id/leader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N1"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <ImageView
+        android:layout_gravity="center_vertical"
+        android:id="@id/flag"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/family_rv_ic_empty_flag" />
+</LinearLayout>

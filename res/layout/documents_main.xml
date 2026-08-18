@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/document_main_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/photo"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginLeft="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_88sdp"
+        android:src="@drawable/documents_vip_ic"
+        app:layout_constraintHeight_percent="0.46"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.24" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_24sdp"
+        app:layout_constraintLeft_toRightOf="@id/photo"
+        app:layout_constraintTop_toTopOf="@id/photo">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Имя Фамилия:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="Имя Фамилия"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Пол:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="Мужской"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Дата рождения:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/birth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="01.01.1999"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Гражданство:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/citizenship"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="Имеется"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Семейное положение:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/family_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="Не женат(а)"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table2"
+        android:layout_width="@dimen/_106sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_150sdp"
+        app:layout_constraintLeft_toRightOf="@id/photo"
+        app:layout_constraintTop_toTopOf="@id/photo">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:id="@id/tv_years_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Лет в штате:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/years_citizen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="72 года"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:id="@id/tv_law"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Законопослушность:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/law_abiding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="100/100"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Работа:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/job"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="Развозчик продуктов"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:id="@id/tv_army_writ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Повестка:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/army_writ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="Имеется"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff4a578e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Организация:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/charity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="Los Santos Vagos"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="#ff000000"
+            android:id="@id/rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Мл.Специалист имущественного страхования"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_14sdp"
+        app:layout_constraintLeft_toLeftOf="@id/photo"
+        app:layout_constraintTop_toBottomOf="@id/photo">
+        <TextView
+            android:textSize="@dimen/_16sdp"
+            android:textColor="#ff868686"
+            android:id="@id/series"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="0000"
+            android:fontFamily="@font/pfdindisplaypro_thin"
+            android:letterSpacing="0.5" />
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="#ff98a2c9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:text="СЕРИЯ"
+            android:fontFamily="@font/pfdindisplaypro_medium"
+            android:letterSpacing="0.1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_32sdp"
+        app:layout_constraintLeft_toRightOf="@id/table3"
+        app:layout_constraintTop_toTopOf="@id/table3">
+        <TextView
+            android:textSize="@dimen/_16sdp"
+            android:textColor="#ff868686"
+            android:id="@id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="000000"
+            android:fontFamily="@font/pfdindisplaypro_thin"
+            android:letterSpacing="0.5" />
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="#ff98a2c9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:text="НОМЕР"
+            android:fontFamily="@font/pfdindisplaypro_medium"
+            android:letterSpacing="0.1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@id/table5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_32sdp"
+        app:layout_constraintLeft_toRightOf="@id/table4"
+        app:layout_constraintTop_toTopOf="@id/table4">
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="#ff4a578e"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Подпись\nвладельца:"
+            android:fontFamily="@font/pfdindisplaypro_medium"
+            android:letterSpacing="0.1" />
+        <TextView
+            android:textSize="@dimen/_16sdp"
+            android:textColor="#ff4a578e"
+            android:id="@id/signature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="ИФамилия"
+            android:fontFamily="@font/steven_signature_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@id/notAvailableContainer"
+        android:background="@drawable/documents_main_not_bg"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/_11sdp"
+        android:layout_marginTop="@dimen/_37sdp"
+        android:layout_marginRight="@dimen/_11sdp"
+        android:layout_marginBottom="@dimen/_11sdp">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/documents_main_not_desc_bg"
+            android:paddingLeft="@dimen/_24sdp"
+            android:paddingTop="@dimen/_18sdp"
+            android:paddingRight="@dimen/_24sdp"
+            android:paddingBottom="@dimen/_18sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_24sdp"
+            android:paddingVertical="@dimen/_18sdp">
+            <ImageView
+                android:id="@id/alert_not"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:src="@drawable/documents_allert_ic"
+                android:tint="#ff333d49"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#ff333d49" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#ff333d49"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:id="@id/documents_main_desc"
+                android:layout_width="@dimen/_184sdp"
+                android:layout_height="wrap_content"
+                android:text="У вас нет пасспорта. Вы можете оформить его в Мэрии штата. Используйте кнопку снизу, чтобы отметить Мэрию на GPS."
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@id/gps_button"
+            android:background="@drawable/documents_gps_bg"
+            android:paddingLeft="@dimen/_48sdp"
+            android:paddingTop="@dimen/_7sdp"
+            android:paddingRight="@dimen/_48sdp"
+            android:paddingBottom="@dimen/_7sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:paddingHorizontal="@dimen/_48sdp"
+            android:paddingVertical="@dimen/_7sdp">
+            <ImageView
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:src="@drawable/documents_gps_ic"
+                android:tint="#ff333d49"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#ff333d49" />
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ff333d49"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Отметить в GPS"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

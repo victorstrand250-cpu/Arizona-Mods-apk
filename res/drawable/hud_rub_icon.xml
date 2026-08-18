@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="35.0dip"
+    android:width="35.0dip"
+    android:viewportWidth="35.0"
+    android:viewportHeight="35.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$hud_rub_icon__0"
+        android:pathData="M17.5,17.5m-16,0a16,16 0,1 1,32 0a16,16 0,1 1,-32 0"
+        android:strokeColor="@drawable/$hud_rub_icon__1"
+        android:strokeWidth="3.0" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M12.955,26.294V9H18.525C20.773,9 22.41,9.452 23.436,10.356C24.479,11.261 25,12.504 25,14.087C25,15.023 24.788,15.903 24.365,16.727C23.941,17.55 23.233,18.212 22.239,18.713C21.262,19.213 19.926,19.464 18.232,19.464H16.644V26.294H12.955ZM11,23.702V21.353H20.407V23.702H11ZM11,19.464V16.46H18.159V19.464H11ZM17.866,16.46C18.566,16.46 19.169,16.388 19.674,16.242C20.179,16.081 20.569,15.83 20.846,15.491C21.123,15.152 21.262,14.724 21.262,14.208C21.262,13.465 21.026,12.916 20.553,12.561C20.081,12.189 19.34,12.003 18.33,12.003H16.644V16.46H17.866Z" />
+</vector>

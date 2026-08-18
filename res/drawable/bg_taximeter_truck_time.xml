@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="74.0dip"
+    android:width="140.0dip"
+    android:viewportWidth="140.0"
+    android:viewportHeight="74.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ff0d0d0d"
+        android:pathData="M9.25,74L130.75,74A9.25,9.25 0,0 0,140 64.75L140,9.25A9.25,9.25 0,0 0,130.75 0L9.25,0A9.25,9.25 0,0 0,0 9.25L0,64.75A9.25,9.25 0,0 0,9.25 74z"
+        android:fillAlpha="0.9" />
+    <path
+        android:fillColor="@drawable/$bg_taximeter_truck_time__0"
+        android:pathData="M9.25,74L130.75,74A9.25,9.25 0,0 0,140 64.75L140,9.25A9.25,9.25 0,0 0,130.75 0L9.25,0A9.25,9.25 0,0 0,0 9.25L0,64.75A9.25,9.25 0,0 0,9.25 74z"
+        android:fillAlpha="0.2" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M9.25,72L130.75,72A7.25,7.25 0,0 0,138 64.75L138,9.25A7.25,7.25 0,0 0,130.75 2L9.25,2A7.25,7.25 0,0 0,2 9.25L2,64.75A7.25,7.25 0,0 0,9.25 72z"
+        android:strokeColor="#ff5d6f0f"
+        android:strokeWidth="4.0"
+        android:strokeAlpha="0.35" />
+</vector>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/transport_screen"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_24sdp"
+        android:minWidth="@dimen/_100sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <View
+            android:background="@color/white"
+            android:layout_width="@dimen/_2sdp"
+            android:layout_height="fill_parent" />
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:minWidth="@dimen/_100sdp"
+            app:backgroundMainColor="@color/black"
+            app:backgroundSecondColor="@color/transparent100">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:id="@id/ic"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    android:layout_marginRight="@dimen/_8sdp"
+                    android:src="@drawable/sertificate_ic_engine"
+                    android:layout_marginHorizontal="@dimen/_8sdp" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="#80ffffff"
+                        android:id="@id/type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Скорость"
+                        android:textEditSuggestionItemLayout="@dimen/_12sdp"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Скорость"
+                            android:textEditSuggestionItemLayout="@dimen/_12sdp"
+                            android:fontFamily="@font/heading_now_65_medium" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

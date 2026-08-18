@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="32.0dip"
+    android:width="32.0dip"
+    android:viewportWidth="32.0"
+    android:viewportHeight="32.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M0.941,13.176H4.706V15.058H0.941V13.176Z" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M0.941,9.41H6.588V11.292H0.941V9.41Z" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M0.941,16.941H6.588V18.824H0.941V16.941Z" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M0.941,0V7.529H4.706V3.765H27.294V24.471H4.706V20.706H0.941V28.235H31.059V0H0.941Z" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M3.766,32H7.154L8.283,30.117H3.766V32Z" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M24.848,32H28.236V30.117H23.719L24.848,32Z" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M6.59,13.178V15.06H8.472V20.707H6.59V22.59H25.413V20.707H23.531V18.825H25.413V9.413H23.531V7.531H25.413V5.648H6.59V7.531H8.472V13.178H6.59ZM11.296,13.178H13.297C13.386,12.833 13.524,12.507 13.701,12.208L12.284,10.791L13.615,9.46L15.032,10.877C15.331,10.7 15.657,10.562 16.002,10.473V8.472H17.884V10.473C18.229,10.563 18.554,10.7 18.854,10.877L20.27,9.46L21.601,10.792L20.185,12.208C20.362,12.507 20.499,12.833 20.588,13.178H22.59V15.06H20.588C20.499,15.405 20.362,15.731 20.185,16.03L21.601,17.447L20.27,18.778L18.854,17.361C18.554,17.538 18.229,17.676 17.884,17.765V19.766H16.002V17.765C15.657,17.676 15.331,17.538 15.032,17.361L13.615,18.778L12.284,17.447L13.701,16.03C13.524,15.73 13.386,15.405 13.297,15.06H11.296V13.178Z" />
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M16.941,15.999C17.98,15.999 18.823,15.156 18.823,14.117C18.823,13.077 17.98,12.234 16.941,12.234C15.901,12.234 15.059,13.077 15.059,14.117C15.059,15.156 15.901,15.999 16.941,15.999Z" />
+</vector>

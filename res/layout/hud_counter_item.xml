@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_20sdp"
+    android:layout_weight="1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@id/iv_item_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:src="@drawable/hud_counter_interception_data_item_bg"
+        android:adjustViewBounds="true" />
+    <FrameLayout
+        android:layout_gravity="start|center"
+        android:id="@id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@id/text_with_icon"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@id/iv_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_10sdp"
+                android:src="@drawable/hud_counter_man_ic"
+                android:adjustViewBounds="true" />
+            <TextView
+                android:textSize="@dimen/_5sdp"
+                android:textColor="#ff072100"
+                android:id="@id/tv_title_with_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recording"
+                android:fontFamily="@font/moscow_2024"
+                android:layout_marginStart="@dimen/_2sdp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="start|center"
+            android:orientation="vertical"
+            android:id="@id/text_with_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_2sdp">
+            <TextView
+                android:textSize="@dimen/_3sdp"
+                android:textColor="#ff072100"
+                android:id="@id/tv_title_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/progress"
+                android:textAllCaps="true"
+                android:fontFamily="@font/moscow_2024"
+                android:layout_marginStart="@dimen/_4sdp" />
+            <TextView
+                android:textSize="@dimen/_9sdp"
+                android:textColor="#ff072100"
+                android:id="@id/tv_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_percent_value"
+                android:fontFamily="@font/moscow_2024"
+                android:layout_marginStart="@dimen/_2sdp" />
+        </LinearLayout>
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff072100"
+            android:layout_gravity="center"
+            android:id="@id/tv_simple_time"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_format"
+            android:fontFamily="@font/moscow_2024" />
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@id/parentCardView"
+    android:layout_width="252.0dip"
+    android:layout_height="72.0dip"
+    android:layout_marginTop="4.0dip"
+    android:layout_marginStart="4.0dip"
+    app:cardBackgroundColor="@color/red_type1"
+    app:cardCornerRadius="10.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:layout_gravity="end|bottom|center"
+        android:id="@id/tvColorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20.0dip"
+        android:fontFamily="@font/pfdregular"
+        android:layout_marginEnd="20.0dip" />
+    <View
+        android:layout_gravity="center"
+        android:id="@id/viewBgLocked"
+        android:background="@drawable/shining_craft_color_test"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.cardview.widget.CardView>

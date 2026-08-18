@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_36sdp"
+        android:src="@drawable/hud_counter_ghosts_bg"
+        android:adjustViewBounds="true" />
+    <LinearLayout
+        android:layout_gravity="start|center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp">
+        <TextView
+            android:textSize="@dimen/_3sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="до выхода из"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_64_regular" />
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="мира \nпризраков"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="end|center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_16sdp">
+        <TextView
+            android:textSize="@dimen/_4sdp"
+            android:textColor="#ff3c424c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="осталось"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+        <TextView
+            android:textSize="@dimen/_14sdp"
+            android:textColor="#ff3c424c"
+            android:id="@id/tv_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_minus5sdp"
+            android:text="10:23"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+    </LinearLayout>
+</FrameLayout>

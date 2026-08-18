@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/video"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.media3.ui.PlayerView
+        android:id="@id/playerView"
+        android:focusable="false"
+        android:clickable="false"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:resize_mode="zoom"
+        app:use_controller="false" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/exit_button"
+        android:layout_width="25.0dip"
+        android:layout_height="25.0dip"
+        android:layout_marginTop="28.0dip"
+        android:src="@drawable/hud_exit_icon"
+        android:layout_marginStart="16.0dip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_11sdp"
+        android:textColor="@color/white"
+        android:id="@id/loading_text"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25.0dip"
+        android:layout_marginBottom="25.0dip"
+        android:maxWidth="210.0dip"
+        android:minWidth="100.0dip"
+        android:text="@string/connecting_game"
+        android:fontFamily="@font/gotham"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <ProgressBar
+        android:id="@id/loader_bar"
+        android:background="@drawable/circle_shape"
+        android:layout_width="40.0dip"
+        android:layout_height="40.0dip"
+        android:layout_marginRight="4.0dip"
+        android:elevation="2.0dip"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/loading_text"
+        app:layout_constraintRight_toLeftOf="@id/loading_text"
+        app:layout_constraintTop_toTopOf="@id/loading_text" />
+</androidx.constraintlayout.widget.ConstraintLayout>

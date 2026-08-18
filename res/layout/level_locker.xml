@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="@dimen/_15sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_24sdp">
+        <TextView
+            android:textSize="@dimen/_20sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="создать свой\nпромокод можно"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+        <ru.mrlargha.commonui.utils.ui.GradientText.ArizonaGradientTextView
+            android:textSize="@dimen/_20sdp"
+            android:textColor="@color/white"
+            android:id="@id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="c 10 уровня"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold"
+            app:endColor="#ffff9112"
+            app:startColor="#fffcd80f" />
+    </LinearLayout>
+    <ImageView
+        android:layout_gravity="right"
+        android:id="@id/bg_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/promo_level_locker_image"
+        android:scaleType="fitEnd" />
+</FrameLayout>

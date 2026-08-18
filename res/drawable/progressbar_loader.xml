@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="60.0dip"
+    android:width="60.0dip"
+    android:viewportWidth="60.0"
+    android:viewportHeight="60.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$progressbar_loader__0"
+        android:pathData="M55,30C55,43.807 43.807,55 30,55C16.193,55 5,43.807 5,30C5,16.193 16.193,5 30,5C43.807,5 55,16.193 55,30ZM13.75,30C13.75,38.975 21.025,46.25 30,46.25C38.975,46.25 46.25,38.975 46.25,30C46.25,21.025 38.975,13.75 30,13.75C21.025,13.75 13.75,21.025 13.75,30Z" />
+    <path
+        android:fillColor="@drawable/$progressbar_loader__1"
+        android:pathData="M30,5C33.283,5 36.534,5.647 39.567,6.903C42.6,8.159 45.356,10.001 47.678,12.322C49.999,14.644 51.841,17.4 53.097,20.433C54.353,23.466 55,26.717 55,30L46.25,30C46.25,27.866 45.83,25.753 45.013,23.781C44.196,21.81 42.999,20.018 41.491,18.51C39.981,17.001 38.19,15.804 36.219,14.987C34.247,14.17 32.134,13.75 30,13.75L30,5Z" />
+</vector>

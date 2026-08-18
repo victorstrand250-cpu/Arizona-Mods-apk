@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@id/pirates"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_52sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/iv_bg"
+        android:layout_width="@dimen/_156sdp"
+        android:layout_height="@dimen/_52sdp"
+        android:src="@drawable/hud_element_cyber_bg"
+        android:scaleType="fitEnd" />
+    <ImageView
+        android:id="@id/iv_image"
+        android:layout_width="@dimen/_52sdp"
+        android:layout_height="@dimen/_52sdp"
+        android:src="@drawable/hud_element_cyber_image"
+        android:scaleType="fitEnd" />
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_54sdp"
+        android:layout_marginBottom="@dimen/_4sdp">
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="космический корабль"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_65" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/_94sdp"
+            android:layout_height="@dimen/_5sdp">
+            <ru.mrlargha.commonui.utils.ui.CustomCardView
+                android:id="@id/progress_bar_bg"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                app:backgroundMainColor="#4dffffff"
+                app:corners="@dimen/_1sdp" />
+            <ru.mrlargha.commonui.utils.ui.CustomCardView
+                android:id="@id/progress_bar"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                app:backgroundMainColor="#ff008666"
+                app:backgroundSecondColor="#ff30ffe7"
+                app:corners="@dimen/_1sdp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/progressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200 / 4000"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_64_regular" />
+    </LinearLayout>
+</FrameLayout>

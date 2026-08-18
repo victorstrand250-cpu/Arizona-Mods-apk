@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_gravity="end|bottom|center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginVertical="@dimen/_10sdp">
+        <FrameLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@id/iv_scanner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/radar_scaner"
+                android:adjustViewBounds="true" />
+            <ru.mrlargha.commonui.elements.metaldetector.LocatorView
+                android:id="@id/locatorView"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/_90sdp"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </FrameLayout>
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:paddingLeft="@dimen/_4sdp"
+            android:paddingTop="@dimen/_3sdp"
+            android:paddingRight="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_3sdp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:paddingHorizontal="@dimen/_4sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            app:backgroundMainColor="#33ffffff"
+            app:corners="@dimen/_6sdp">
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/radar_info_ic"
+                    android:adjustViewBounds="true" />
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="@color/rodina_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radar_info"
+                    android:fontFamily="@font/heading_now_64_regular"
+                    android:layout_marginStart="@dimen/_4sdp" />
+            </LinearLayout>
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:id="@id/btn_unlock"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:paddingVertical="@dimen/_4sdp"
+            app:backgroundMainColor="#ff74fff3"
+            app:corners="@dimen/_6sdp">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/unlock"
+                android:fontFamily="@font/heading_now_64_regular" />
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    </LinearLayout>
+</FrameLayout>

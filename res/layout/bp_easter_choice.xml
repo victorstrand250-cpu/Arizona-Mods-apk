@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/bp_event_choice"
+    android:background="#cd16191d"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_180sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@id/item1"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="fill_parent"
+            android:src="@drawable/bp_event_choice_item3" />
+        <ImageView
+            android:id="@id/item2"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="fill_parent"
+            android:src="@drawable/bp_event_choice_item4" />
+    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/_14sdp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:text="ВЫБОР ПРОПУСКА"
+        android:fontFamily="@font/heading_now_66_bold"
+        app:layout_constraintBottom_toTopOf="@id/container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <ImageView
+        android:layout_gravity="start|center|top"
+        android:id="@id/back_button"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_26sdp"
+        android:src="@drawable/back_button"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

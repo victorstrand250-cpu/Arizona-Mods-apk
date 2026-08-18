@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center_vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/_29sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@id/documents_transport_item_ic"
+        android:background="@drawable/document_transport_item_bg"
+        android:layout_width="@dimen/_29sdp"
+        android:layout_height="@dimen/_29sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:src="@drawable/documents_ic_icon_house" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff8681a5"
+            android:id="@id/documents_transport_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:text="Состояние здоровья:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            <TextView
+                android:textSize="@dimen/_9sdp"
+                android:textColor="#ff575757"
+                android:id="@id/documents_transport_item_number"
+                android:background="@drawable/document_transport_cars_number_bg"
+                android:paddingLeft="@dimen/_4sdp"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingRight="@dimen/_4sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:text="AA0000AA"
+                android:fontFamily="@font/pfdindisplaypro_regular"
+                android:paddingHorizontal="@dimen/_4sdp"
+                android:paddingVertical="@dimen/_2sdp" />
+            <LinearLayout
+                android:gravity="center"
+                android:id="@id/cost_container"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_4sdp">
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:src="@drawable/document_transport_icon_dollar" />
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="#ff8681a5"
+                    android:id="@id/documents_transport_item_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="800000"
+                    android:fontFamily="@font/pfdindisplaypro_regular" />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:id="@id/milliage_container"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_4sdp">
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:src="@drawable/document_transport_icon_speed" />
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="#ff8681a5"
+                    android:id="@id/documents_transport_item_milliage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000000"
+                    android:fontFamily="@font/pfdindisplaypro_regular" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:id="@id/status_container"
+                android:background="@drawable/document_transport_status_green_bg"
+                android:paddingLeft="@dimen/_4sdp"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingRight="@dimen/_4sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:paddingHorizontal="@dimen/_4sdp"
+                android:paddingVertical="@dimen/_2sdp">
+                <ImageView
+                    android:id="@id/status_image"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:src="@drawable/document_transport_icon_green_status" />
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="#ff4eb74b"
+                    android:id="@id/documents_transport_car_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="на штраф стоянке"
+                    android:fontFamily="@font/pfdindisplaypro_regular" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

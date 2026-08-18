@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="157.0dip"
+    android:width="76.0dip"
+    android:viewportWidth="76.0"
+    android:viewportHeight="157.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$bg_guard_shining_gradient__0"
+        android:pathData="M10,0L66,0A10,10 0,0 1,76 10L76,147A10,10 0,0 1,66 157L10,157A10,10 0,0 1,0 147L0,10A10,10 0,0 1,10 0z" />
+    <path
+        android:fillColor="@drawable/$bg_guard_shining_gradient__1"
+        android:pathData="M10,0L66,0A10,10 0,0 1,76 10L76,147A10,10 0,0 1,66 157L10,157A10,10 0,0 1,0 147L0,10A10,10 0,0 1,10 0z" />
+    <path
+        android:fillColor="@drawable/$bg_guard_shining_gradient__2"
+        android:pathData="M10,0L66,0A10,10 0,0 1,76 10L76,147A10,10 0,0 1,66 157L10,157A10,10 0,0 1,0 147L0,10A10,10 0,0 1,10 0z" />
+    <path
+        android:fillColor="@drawable/$bg_guard_shining_gradient__3"
+        android:pathData="M10,0L66,0A10,10 0,0 1,76 10L76,147A10,10 0,0 1,66 157L10,157A10,10 0,0 1,0 147L0,10A10,10 0,0 1,10 0z" />
+    <path
+        android:fillColor="@drawable/$bg_guard_shining_gradient__4"
+        android:pathData="M10,0L66,0A10,10 0,0 1,76 10L76,147A10,10 0,0 1,66 157L10,157A10,10 0,0 1,0 147L0,10A10,10 0,0 1,10 0z" />
+</vector>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="@dimen/_52sdp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1.0"
+    android:layout_marginEnd="@dimen/_3sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:background="@drawable/winter_battlepass_roulette_bg_transparent_white"
+        android:layout_width="@dimen/_42sdp"
+        android:layout_height="@dimen/_42sdp"
+        android:layout_marginBottom="@dimen/_3sdp">
+        <androidx.cardview.widget.CardView
+            android:layout_gravity="bottom"
+            android:id="@id/bg"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            app:cardBackgroundColor="@color/transparent100"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="0.0dip" />
+        <View
+            android:layout_gravity="bottom|center"
+            android:id="@id/rarity"
+            android:background="@color/yellow"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_1sdp" />
+        <ImageView
+            android:id="@id/imagePrise"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="@dimen/_3sdp" />
+    </FrameLayout>
+    <TextView
+        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test_item"
+        android:fontFamily="@font/heading_now_64_regular" />
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:background="@drawable/arizona_cases_prize_item_bg"
+    android:paddingLeft="@dimen/_6sdp"
+    android:paddingTop="@dimen/_4sdp"
+    android:paddingRight="@dimen/_6sdp"
+    android:paddingBottom="@dimen/_4sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_2sdp"
+    android:layout_marginVertical="@dimen/_2sdp"
+    android:paddingHorizontal="@dimen/_6sdp"
+    android:paddingVertical="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent">
+        <ImageView
+            android:id="@id/iv_prize"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:src="@drawable/auth_error_ic"
+            android:scaleType="fitXY" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp">
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/white"
+                android:id="@id/tv_prize_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Десятилетия"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp">
+                <TextView
+                    android:textSize="@dimen/_4sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/tv_prize_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25 000"
+                    android:fontFamily="@font/heading_now_64_regular" />
+                <ImageView
+                    android:id="@id/iv_rub"
+                    android:layout_width="@dimen/_6sdp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dollar_universal"
+                    android:adjustViewBounds="true"
+                    android:tint="#ff95ff00"
+                    android:layout_marginStart="@dimen/_3sdp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="end|bottom|center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:id="@id/tv_benefit"
+            android:background="@drawable/cases_benefit_bg"
+            android:paddingLeft="@dimen/_2sdp"
+            android:paddingTop="@dimen/_1sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_1sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ВЫГОДА 60%"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:paddingHorizontal="@dimen/_2sdp"
+            android:paddingVertical="@dimen/_1sdp" />
+        <TextView
+            android:textSize="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:id="@id/tv_top"
+            android:background="@drawable/cases_top_bg"
+            android:paddingLeft="@dimen/_2sdp"
+            android:paddingTop="@dimen/_1sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_1sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔥 ТОП"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:layout_marginStart="@dimen/_1sdp"
+            android:paddingHorizontal="@dimen/_2sdp"
+            android:paddingVertical="@dimen/_1sdp" />
+        <TextView
+            android:textSize="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:id="@id/tv_new"
+            android:background="@drawable/cases_new_bg"
+            android:paddingLeft="@dimen/_2sdp"
+            android:paddingTop="@dimen/_1sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_1sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🚀 NEW"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:layout_marginStart="@dimen/_1sdp"
+            android:paddingHorizontal="@dimen/_2sdp"
+            android:paddingVertical="@dimen/_1sdp" />
+    </LinearLayout>
+</FrameLayout>

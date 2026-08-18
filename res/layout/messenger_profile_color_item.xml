@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:orientation="vertical"
+    android:id="@id/color_selectable_background"
+    android:background="@drawable/border_selected_color"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5.0dip"
+    android:layout_marginStart="2.0dip"
+    android:layout_marginEnd="2.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="center"
+        android:id="@id/color_cv"
+        android:visibility="visible"
+        android:layout_width="14.0dip"
+        android:layout_height="14.0dip"
+        android:layout_margin="3.0dip"
+        app:cardBackgroundColor="#ff000000"
+        app:cardCornerRadius="50.0dip"
+        app:cardElevation="0.0dip"
+        app:cardMaxElevation="0.0dip"
+        app:cardPreventCornerOverlap="true" />
+</FrameLayout>

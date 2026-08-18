@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="@dimen/_100sdp"
+    android:layout_height="fill_parent"
+    android:layout_marginLeft="@dimen/_6sdp"
+    android:layout_marginRight="@dimen/_6sdp"
+    android:layout_marginHorizontal="@dimen/_6sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:id="@id/bg"
+        android:background="@drawable/arizona_cases_can_win_item_default_bg"
+        android:padding="@dimen/_10sdp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0">
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/arizona_cases_prize_item_bg_pattern"
+            android:scaleType="fitXY" />
+        <FrameLayout
+            android:id="@id/open_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <ImageView
+                android:layout_gravity="end|center|top"
+                android:id="@id/iv_check"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cases_mark_ckeck_icon"
+                android:adjustViewBounds="true"
+                android:alpha="0.35" />
+            <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@id/iv_prize"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_54sdp"
+                    android:src="@drawable/auth_error_ic"
+                    android:adjustViewBounds="true" />
+                <TextView
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:id="@id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="Пазик с отбойником"
+                    android:fontFamily="@font/heading_64" />
+            </LinearLayout>
+            <FrameLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/tv_got_it"
+                    android:background="@drawable/cases_top_bar_gold_box_bg"
+                    android:paddingLeft="@dimen/_4sdp"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:paddingRight="@dimen/_4sdp"
+                    android:paddingBottom="@dimen/_2sdp"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ПОЛУЧЕН"
+                    android:fontFamily="@font/heading_64"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:paddingVertical="@dimen/_2sdp" />
+                <TextView
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/tv_schism"
+                    android:background="@drawable/cases_top_bar_gold_box_bg"
+                    android:paddingLeft="@dimen/_4sdp"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:paddingRight="@dimen/_4sdp"
+                    android:paddingBottom="@dimen/_2sdp"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="РАСПЫЛЕН"
+                    android:fontFamily="@font/heading_64"
+                    android:backgroundTint="#ff8a00e2"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:paddingVertical="@dimen/_2sdp" />
+            </FrameLayout>
+        </FrameLayout>
+        <TextView
+            android:textSize="@dimen/_50sdp"
+            android:textColor="#40ffffff"
+            android:layout_gravity="center"
+            android:id="@id/tv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\?"
+            android:fontFamily="@font/heading_now_66_bold" />
+    </FrameLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:id="@id/cost_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp">
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:id="@id/tv_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+2000"
+            android:fontFamily="@font/heading_now_64_regular" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_10sdp"
+            android:src="@drawable/arizona_cases_diamond_icon"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="@dimen/_3sdp" />
+    </LinearLayout>
+</LinearLayout>

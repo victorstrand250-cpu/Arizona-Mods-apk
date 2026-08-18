@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/document_licenses_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_80sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@id/dipl_container_top"
+            android:background="@drawable/documents_licenses_dipl_bg"
+            android:paddingLeft="@dimen/_16sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingRight="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingVertical="@dimen/_6sdp">
+            <ImageView
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
+                android:src="@drawable/documents_ic_dipl" />
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp">
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="#ff2e5356"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Лицензия дипломата"
+                    android:fontFamily="@font/pfdindisplaypro_regular" />
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="#ffffffff"
+                    android:id="@id/dipl_top"
+                    android:background="@drawable/documents_licenses_text_bg"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_1sdp"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_1sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="Вечный пакет всех лицензий"
+                    android:fontFamily="@font/pfdindisplaypro_regular"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_1sdp" />
+            </LinearLayout>
+        </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@id/table1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_40sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/auto_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_auto"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_auto" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/auto_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия на авто"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/auto"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/moto_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_moto"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_moto" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/moto_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия на мото"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/moto"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/flight_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_flight"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_flight" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/flight_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия на полеты"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/flight"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/boat_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_boat"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_boat" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/boat_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия на плавание"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/boat"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/gun_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_gun"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_gun" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/gun_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия на оружие"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/gun"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="top"
+                android:orientation="vertical"
+                android:id="@id/table2"
+                android:layout_width="wrap_content"
+                android:layout_height="0.0dip"
+                android:layout_marginLeft="@dimen/_150sdp"
+                app:layout_constraintBottom_toBottomOf="@id/table1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/table1">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/fish_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_fish"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_fish" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/fish_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия на ловлю рыбы"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/fish"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/hunt_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_hunt"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_hunt" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/hunt_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия на охоту"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/hunt"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/shave_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_shave"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_shave" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#332e5356"
+                            android:id="@id/shave_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия на раскопки"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/shave"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/taxi_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_taxi"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_taxi" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/taxi_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия таксиста"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/taxi"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/mech_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_mech"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_mech" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/mech_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия механика"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/mech"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/trolleybus_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_trolleybus"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/document_ic_railways" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/trolleybus_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия на Ж/Д транспорт"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/trolleybus"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@id/table3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_260sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/table2">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/advocate_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_advocate"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_advocate" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/advocate_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия адвоката"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/advocate"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/tax_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_tax"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_tax" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/tax_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия налоговика"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/tax"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/dipl_container_column"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_dipl"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_dipl" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/dipl_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Лицензия дипломата"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/dipl"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Отсутствует"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@id/miner_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/documents_ic_miner"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:src="@drawable/documents_ic_miner" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ff2e5356"
+                            android:id="@id/miner_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Разрешение на добычу ресурсов"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <TextView
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="#ffffffff"
+                            android:id="@id/miner"
+                            android:background="@drawable/documents_licenses_text_bg"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Имя Фамилия"
+                            android:fontFamily="@font/pfdindisplaypro_regular"
+                            android:paddingHorizontal="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="#802e5356"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:id="@id/container_description"
+            android:background="@drawable/documents_licenses_desc_bg"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_40sdp"
+            android:text="Получить лицензии можно в Центре Лицензирования или\nкупить в донат-меню"
+            android:fontFamily="@font/pfdindisplaypro_medium"
+            android:layout_marginHorizontal="@dimen/_40sdp"
+            android:paddingVertical="@dimen/_8sdp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

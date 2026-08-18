@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/rifle_image"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/snipe_empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
+    <RelativeLayout
+        android:id="@id/riffle_touch_area_stage_2"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_snipe_stage_2_horizontal_2"
+        app:layout_constraintEnd_toEndOf="@id/guideline_snipe_stage_1_vertical"
+        app:layout_constraintStart_toStartOf="@id/rifle_image"
+        app:layout_constraintTop_toTopOf="@id/guideline_snipe_stage_1_horizontal">
+        <ImageView
+            android:layout_width="35.0dip"
+            android:layout_height="35.0dip"
+            android:layout_marginTop="10.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@id/snipe_touch_area_stage_3"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_snipe_stage_3_horizontal_1"
+        app:layout_constraintEnd_toEndOf="@id/guideline_snipe_stage_3_vertical_2"
+        app:layout_constraintStart_toStartOf="@id/guideline_snipe_stage_3_vertical_1"
+        app:layout_constraintTop_toTopOf="@id/guideline_snipe_stage_3_horizontal_2">
+        <ImageView
+            android:layout_width="12.0dip"
+            android:layout_height="12.0dip"
+            android:layout_marginTop="5.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="5.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@id/snipe_touch_area_stage_2"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_snipe_stage_2_horizontal_2"
+        app:layout_constraintEnd_toEndOf="@id/rifle_image"
+        app:layout_constraintStart_toStartOf="@id/guideline_snipe_stage_1_vertical"
+        app:layout_constraintTop_toTopOf="@id/guideline_snipe_stage_2_horizontal_1">
+        <ImageView
+            android:layout_width="20.0dip"
+            android:layout_height="20.0dip"
+            android:layout_marginTop="5.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="5.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_snipe_stage_1_vertical"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.33" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_snipe_stage_1_horizontal"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.43" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_snipe_stage_2_horizontal_1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.39" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_snipe_stage_2_horizontal_2"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.68" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_snipe_stage_3_horizontal_1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.46" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_snipe_stage_3_horizontal_2"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.36" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_snipe_stage_3_vertical_1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.28" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_snipe_stage_3_vertical_2"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.53" />
+</androidx.constraintlayout.widget.ConstraintLayout>

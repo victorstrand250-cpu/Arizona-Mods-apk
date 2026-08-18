@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="64.0dip"
+    android:width="64.0dip"
+    android:viewportWidth="64.0"
+    android:viewportHeight="64.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <path
+        android:fillColor="@color/battlepass4"
+        android:pathData="M32,58C46.359,58 58,46.359 58,32C58,17.641 46.359,6 32,6C17.641,6 6,17.641 6,32C6,46.359 17.641,58 32,58Z" />
+    <path
+        android:fillColor="@color/battlepass6"
+        android:pathData="M32,37.201C33.104,37.201 34,36.305 34,35.201V21.334C34,20.23 33.104,19.334 32,19.334C30.896,19.334 30,20.23 30,21.334V35.201C30,36.305 30.896,37.201 32,37.201Z" />
+    <path
+        android:fillColor="@color/battlepass6"
+        android:pathData="M32,45.333C33.179,45.333 34.134,44.378 34.134,43.2C34.134,42.021 33.179,41.066 32,41.066C30.822,41.066 29.867,42.021 29.867,43.2C29.867,44.378 30.822,45.333 32,45.333Z" />
+</vector>

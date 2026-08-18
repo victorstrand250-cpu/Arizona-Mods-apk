@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.mrlargha.commonui.utils.ui.CustomCardView
+    android:id="@id/indicator"
+    android:layout_width="@dimen/_8sdp"
+    android:layout_height="@dimen/_7sdp"
+    android:layout_marginLeft="@dimen/_2sdp"
+    android:layout_marginRight="@dimen/_2sdp"
+    android:layout_marginHorizontal="@dimen/_2sdp"
+    app:backgroundMainColor="#33ffffff"
+    app:corners="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" />

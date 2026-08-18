@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/catalog_screen_root_cl"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/catalog_screen_root_ll"
+        android:background="@drawable/bg_catalog"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginHorizontal="10.0dip">
+            <TextView
+                android:textSize="24.0sp"
+                android:textColor="@color/white"
+                android:id="@id/catalog_title_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Горный тест драйв"
+                android:layout_weight="1.0"
+                android:fontFamily="@font/heading_now_64_regular" />
+            <LinearLayout
+                android:gravity="end|center"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0">
+                <ImageView
+                    android:layout_width="24.0dip"
+                    android:layout_height="24.0dip"
+                    android:src="@drawable/ic_catalog_info" />
+                <TextView
+                    android:textSize="12.0sp"
+                    android:textColor="@color/white"
+                    android:id="@id/catalog_desc_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="280.0dip"
+                    android:text="В случае повреждения транспорта, вы должны компенсировать ущерб"
+                    android:fontFamily="@font/gotham_medium"
+                    android:layout_marginStart="10.0dip" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@id/catalog_btn_close"
+                    android:layout_width="24.0dip"
+                    android:layout_height="24.0dip"
+                    android:layout_marginStart="40.0dip"
+                    app:srcCompat="@drawable/rodina_cross"
+                    style="@style/rodina_square_image_button" />
+            </LinearLayout>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="vertical"
+            android:id="@id/catalog_list_rv"
+            android:visibility="visible"
+            android:scrollbars="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginHorizontal="10.0dip"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

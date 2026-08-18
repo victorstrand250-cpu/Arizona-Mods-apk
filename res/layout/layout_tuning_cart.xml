@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:paddingBottom="@dimen/_4sdp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Корзина"
+        android:textAllCaps="false"
+        android:fontFamily="@font/gotham_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textStyle="bold"
+        android:textColor="@color/rodina_btn_icon"
+        android:id="@id/tvSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ваши актуальные покупки"
+        android:textAllCaps="false"
+        android:fontFamily="@font/gotham_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+    <Button
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@id/btnEmptyCart"
+        android:background="@drawable/btn_border_tuning"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:text="Очистить корзину"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_remove_cart_16"
+        android:paddingStart="8.0dip"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@id/rvUserCart"
+        app:layout_constraintTop_toTopOf="@id/tvTitle" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="vertical"
+        android:id="@id/rvUserCart"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/_180sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSubTitle" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:drawablePadding="4.0dip"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_dollar_green_12"
+        android:fontFamily="@font/gotham_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvUserCart" />
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textStyle="bold"
+        android:textColor="@color/rodina_btn_icon"
+        android:id="@id/tvSubPriceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Итого к оплате"
+        android:textAllCaps="false"
+        android:fontFamily="@font/gotham_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalPrice" />
+    <Button
+        android:textSize="@dimen/_9sdp"
+        android:textColor="@color/black"
+        android:id="@id/btnBuyItems"
+        android:background="@drawable/bg_tuning_buy"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:text="Купить"
+        android:textAllCaps="false"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@id/rvUserCart"
+        app:layout_constraintTop_toTopOf="@id/tvTotalPrice" />
+</androidx.constraintlayout.widget.ConstraintLayout>

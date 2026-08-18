@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="232.0dip"
+    android:width="232.0dip"
+    android:viewportWidth="232.0"
+    android:viewportHeight="232.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <group>
+        <clip-path
+            android:pathData="M32,0L200,0A32,32 0,0 1,232 32L232,200A32,32 0,0 1,200 232L32,232A32,32 0,0 1,0 200L0,32A32,32 0,0 1,32 0z" />
+        <path
+            android:fillColor="#ff22272e"
+            android:pathData="M32,0L200,0A32,32 0,0 1,232 32L232,200A32,32 0,0 1,200 232L32,232A32,32 0,0 1,0 200L0,32A32,32 0,0 1,32 0z" />
+        <path
+            android:fillColor="@drawable/$event_prise_item_bg1__0"
+            android:pathData="M-51.05,449.55l317.11,-426.53l32.32,24.03l-317.11,426.53z"
+            android:strokeAlpha="0.4"
+            android:fillAlpha="0.4" />
+        <path
+            android:fillColor="@drawable/$event_prise_item_bg1__1"
+            android:pathData="M-18.73,473.59l317.11,-426.53l31.62,23.51l-317.11,426.53z"
+            android:strokeAlpha="0.4"
+            android:fillAlpha="0.4" />
+        <path
+            android:fillColor="@drawable/$event_prise_item_bg1__2"
+            android:pathData="M-115,402.02l317.11,-426.53l63.94,47.54l-317.11,426.53z"
+            android:strokeAlpha="0.4"
+            android:fillAlpha="0.4" />
+        <path
+            android:fillColor="@drawable/$event_prise_item_bg1__3"
+            android:pathData="M-105.23,268.53l317.11,-426.53l57.62,42.84l-317.11,426.53z"
+            android:strokeAlpha="0.2"
+            android:fillAlpha="0.2" />
+    </group>
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M32,2L200,2A30,30 0,0 1,230 32L230,200A30,30 0,0 1,200 230L32,230A30,30 0,0 1,2 200L2,32A30,30 0,0 1,32 2z"
+        android:strokeColor="#ffffffff"
+        android:strokeWidth="4.0"
+        android:strokeAlpha="0.2" />
+</vector>

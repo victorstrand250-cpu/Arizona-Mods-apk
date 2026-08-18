@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/rodina_metaldetector_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/imageView37"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/locatorView"
+        app:layout_constraintEnd_toEndOf="@id/locatorView"
+        app:layout_constraintStart_toStartOf="@id/locatorView"
+        app:layout_constraintTop_toTopOf="@id/locatorView"
+        app:srcCompat="@drawable/radar_bg" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5" />
+    <ru.mrlargha.commonui.elements.metaldetector.LocatorView
+        android:id="@id/locatorView"
+        android:layout_width="100.0dip"
+        android:layout_height="100.0dip"
+        app:layout_constraintBottom_toTopOf="@id/imageView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/imageView9"
+        android:layout_width="20.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4.0dip"
+        app:layout_constraintBottom_toTopOf="@id/textView11"
+        app:layout_constraintEnd_toEndOf="@id/locatorView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/locatorView"
+        app:layout_constraintTop_toBottomOf="@id/locatorView"
+        app:srcCompat="@drawable/rodina_info_sign" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:gravity="center_horizontal"
+        android:id="@id/textView11"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:text="Частота появления зеленого индикатора обознает близость металлических предметов в земле"
+        android:textAlignment="gravity"
+        android:layout_marginStart="16.0dip"
+        android:layout_marginEnd="16.0dip"
+        app:layout_constraintBottom_toTopOf="@id/dig_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/imageView9" />
+    <com.google.android.material.button.MaterialButton
+        android:textSize="@dimen/_12sdp"
+        android:textColor="#ff363d47"
+        android:id="@id/dig_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16.0dip"
+        android:text="Выкопать предмет"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/textView11"
+        style="@style/rodina_rectangle_green_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:background="@drawable/hud_counter_halloween_coins_bg"
+        android:paddingLeft="@dimen/_6sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingRight="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_4sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_6sdp">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/hud_counter_halloween_coins_item_one_bg"
+            android:paddingLeft="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:paddingHorizontal="@dimen/_5sdp">
+            <TextView
+                android:textSize="@dimen/_4sdp"
+                android:textColor="#ffc59c6d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="осталось"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <TextView
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#ffc59c6d"
+                android:id="@id/tv_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_minus4sdp"
+                android:text="10:00"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </LinearLayout>
+        <View
+            android:layout_width="@dimen/_3sdp"
+            android:layout_height="0.0dip" />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:background="@drawable/hud_counter_halloween_coins_item_two_bg"
+            android:paddingLeft="@dimen/_4sdp"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingRight="@dimen/_4sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:paddingHorizontal="@dimen/_4sdp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_16sdp"
+                android:src="@drawable/hud_counter_halloween_coins_image"
+                android:adjustViewBounds="true" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/_4sdp"
+                    android:textColor="#ff2b2000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="собрано"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+                <TextView
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="#ff2b2000"
+                    android:id="@id/tv_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_minus4sdp"
+                    android:maxWidth="@dimen/_30sdp"
+                    android:text="50"
+                    android:fontFamily="@font/heading_now_66_bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/_10sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include
+        android:id="@id/hud_taximeter_layout_container"
+        android:visibility="gone"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/taximeter_top_line"
+        layout="@layout/hud_taximeter_container" />
+    <include
+        android:id="@id/hud_taximeter_army_second"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/taximeter_top_line"
+        layout="@layout/hud_taximeter_stopwatch" />
+    <include
+        android:id="@id/counter"
+        android:visibility="gone"
+        layout="@layout/hud_counter" />
+    <include
+        android:id="@id/noise_level"
+        android:visibility="gone"
+        layout="@layout/hud_counter_noise_level" />
+    <include
+        android:id="@id/accumulated_energy"
+        android:visibility="gone"
+        layout="@layout/hud_counter_accumulated_energy" />
+    <include
+        android:id="@id/distance_to_home"
+        android:visibility="gone"
+        layout="@layout/hud_counter_distance_to_home" />
+    <include
+        android:id="@id/bus_condition"
+        android:visibility="gone"
+        layout="@layout/hud_counter_bus_condition" />
+    <include
+        android:id="@id/killed_zombies"
+        android:visibility="gone"
+        layout="@layout/hud_counter_killed_zombies" />
+    <include
+        android:id="@id/zombie_mode"
+        android:visibility="gone"
+        layout="@layout/hud_counter_zombie_mode" />
+    <include
+        android:id="@id/halloween_coins"
+        android:visibility="gone"
+        layout="@layout/hud_counter_halloween_coins" />
+    <include
+        android:id="@id/lord_rigns"
+        android:visibility="gone"
+        layout="@layout/hud_counter_lord_rings" />
+    <include
+        android:id="@id/ghosts"
+        android:visibility="gone"
+        layout="@layout/hud_counter_ghosts" />
+    <include
+        android:id="@id/franclin_stein"
+        android:visibility="gone"
+        layout="@layout/hud_counter_franclin_stein" />
+    <include
+        android:id="@id/condition_sled"
+        android:visibility="gone"
+        layout="@layout/hud_counter_condition_sled" />
+    <include
+        android:id="@id/condition_package"
+        android:visibility="gone"
+        layout="@layout/hud_counter_condition_package" />
+    <include
+        android:id="@id/rolling_snowball"
+        android:visibility="gone"
+        layout="@layout/hud_counter_rolling_snowball" />
+    <include
+        android:id="@id/delivery_gifts"
+        android:visibility="gone"
+        layout="@layout/hud_counter_delivery_gifts" />
+    <include
+        android:id="@id/broking_ice"
+        android:visibility="gone"
+        layout="@layout/hud_counter_broking_ice" />
+    <include
+        android:id="@id/new_year_taxi"
+        android:visibility="gone"
+        layout="@layout/hud_counter_new_year" />
+    <include
+        android:id="@id/search_crystal"
+        android:visibility="gone"
+        layout="@layout/hud_counter_search_crystals" />
+    <include
+        android:id="@id/base_jumping"
+        android:visibility="gone"
+        layout="@layout/hud_counter_base_jumping" />
+</FrameLayout>

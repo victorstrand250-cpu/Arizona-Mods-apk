@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/spotify_playlist_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/spotify_playlist_circle"
+        android:background="@drawable/spotify_circle"
+        android:layout_width="24.0dip"
+        android:layout_height="24.0dip"
+        android:backgroundTint="#80ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/spotify_playlist_icon"
+            android:layout_width="12.0dip"
+            android:layout_height="12.0dip"
+            android:src="@drawable/spotify_pop_ic"
+            android:tint="@color/white"
+            android:tintMode="multiply"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:textSize="6.0dip"
+        android:textColor="@color/white"
+        android:id="@id/spotify_playlist_title"
+        android:layout_width="wrap_content"
+        android:layout_height="6.0dip"
+        android:layout_marginLeft="4.0dip"
+        android:layout_marginTop="1.0dip"
+        android:text="Реп и хип-хоп"
+        android:fontFamily="@font/heading_now_64_regular"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/spotify_playlist_circle"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

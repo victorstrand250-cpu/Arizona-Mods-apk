@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/mp_arizonamobil_main_page"
+    android:layout_width="160.0dip"
+    android:layout_height="256.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/mp_arizonamobile_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8.0dip"
+        android:layout_marginTop="16.0dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/mp_arizonamobile_header_back"
+            android:layout_width="16.0dip"
+            android:layout_height="16.0dip"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="10.0dip"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@id/mp_arizonamobile_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12.0dip"
+            android:text="arizona.мобиль"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/mp_arizonamobile_header_back"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/mp_arizonamobile_banner"
+        android:layout_width="120.0dip"
+        android:layout_height="100.0dip"
+        android:layout_marginTop="20.0dip"
+        android:src="@drawable/mp_arizonamobile_banner"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mp_arizonamobile_header" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/mp_arizonamobile_balance"
+        android:layout_width="64.0dip"
+        android:layout_height="32.0dip"
+        android:layout_marginTop="16.0dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mp_arizonamobile_banner">
+        <TextView
+            android:textSize="10.0dip"
+            android:textStyle="normal"
+            android:textColor="#ff8e8e8e"
+            android:id="@id/mp_arizonamobile_balance_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ваш баланс"
+            android:maxLines="1"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="12.0dip"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@id/mp_arizonamobile_balance_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5000$"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mp_arizonamobile_balance_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/mp_arizonamobil_add_balance"
+        android:background="@drawable/border_radius"
+        android:layout_width="86.0dip"
+        android:layout_height="24.0dip"
+        android:layout_marginTop="4.0dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mp_arizonamobile_balance">
+        <TextView
+            android:textSize="7.0dip"
+            android:textColor="@color/white"
+            android:id="@id/mp_arizonamobil_add_balance_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ПОПОЛНИТЬ БАЛАНС"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/mp_arizona_mobile_my_rent"
+        android:background="@drawable/ic_mp_arizonamobile_decorative_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="32.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:textSize="12.0dip"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Моя аренда"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

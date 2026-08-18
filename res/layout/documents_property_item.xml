@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center_vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_24sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@id/documents_property_item_ic"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/documents_ic_icon_house" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textColor="#ff7e7e7e"
+        android:id="@id/documents_property_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_4sdp"
+        android:text="Состояние здоровья:"
+        android:fontFamily="@font/pfdindisplaypro_regular" />
+</LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.mrlargha.commonui.utils.ui.CustomCardView
+    android:layout_width="@dimen/_140sdp"
+    android:layout_height="@dimen/_52sdp"
+    app:backgroundMainColor="#801f2329"
+    app:borderMainColor="#1affffff"
+    app:borderWidth="@dimen/_1sdp"
+    app:corners="@dimen/_8sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/_4sdp"
+        android:layout_marginRight="@dimen/_4sdp"
+        android:layout_marginHorizontal="@dimen/_4sdp">
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:backgroundMainColor="@color/transparent100"
+            app:backgroundSecondColor="#ff879cd2"
+            app:backgroundTransparency="70"
+            app:borderGradientAngle="45"
+            app:borderMainColor="#fff3fcff"
+            app:borderSecondColor="#ffb2c3d7"
+            app:borderTransparency="80"
+            app:borderWidth="@dimen/_1sdp"
+            app:corners="@dimen/_6sdp"
+            app:gradientType="radial"
+            app:radialGradientRadius="@dimen/_20sdp">
+            <ImageView
+                android:id="@id/image"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginVertical="@dimen/_6sdp">
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:id="@id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Улучшение 1"
+                android:layout_weight="1.0"
+                android:textEditSuggestionItemLayout="@dimen/_8sdp"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <ru.mrlargha.commonui.utils.ui.CustomCardView
+                android:id="@id/button"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/_16sdp"
+                app:backgroundMainColor="@color/color5"
+                app:corners="@dimen/_6sdp">
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:id="@id/button_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_marginRight="@dimen/_8sdp"
+                        android:text="100000"
+                        android:textEditSuggestionItemLayout="@dimen/_8sdp"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/heading_now_65" />
+                    <ImageView
+                        android:id="@id/currency"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/event_coin" />
+                </LinearLayout>
+            </ru.mrlargha.commonui.utils.ui.CustomCardView>
+        </LinearLayout>
+    </LinearLayout>
+</ru.mrlargha.commonui.utils.ui.CustomCardView>

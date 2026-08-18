@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="horizontal"
+    android:id="@id/my_business_item"
+    android:background="@drawable/my_biz_item_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/_68sdp"
+    android:layout_marginRight="@dimen/_22sdp"
+    android:layout_marginBottom="@dimen/_7sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/biz_ic_n_status_container"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintLeft_toRightOf="@id/main_left_line"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.0976">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/biz_ic_container"
+            android:background="@drawable/my_biz_type_ic_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            app:layout_constraintHeight_percent="0.7142"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@id/biz_type_ic"
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:src="@drawable/my_biz_gun_shop_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="0.6"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.6" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/biz_status_container"
+            android:background="@drawable/my_biz_status_open_ic"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.2">
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="#ff60ca5d"
+                android:id="@id/biz_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="открыт"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_64_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:id="@id/title_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_7sdp"
+        app:layout_constraintBottom_toTopOf="@id/center_horizontal_line"
+        app:layout_constraintLeft_toRightOf="@id/biz_info_left_line">
+        <ImageView
+            android:id="@id/iv_rank"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/my_business_ic_first"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="@dimen/_4sdp" />
+        <TextView
+            android:textSize="@dimen/_11sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/biz_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Магазин оружия Guns and Skulls"
+            android:fontFamily="@font/heading_now_64_regular" />
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/my_biz_number_container_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginLeft="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="@id/title_container"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintLeft_toRightOf="@id/title_container"
+        app:layout_constraintTop_toTopOf="@id/title_container"
+        app:layout_constraintWidth_percent="0.0976">
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/biz_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="№1975"
+            android:fontFamily="@font/pfdindisplaypro_italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@id/first_ic"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:src="@drawable/my_biz_mafia_ic"
+        app:layout_constraintLeft_toRightOf="@id/biz_info_left_line"
+        app:layout_constraintTop_toBottomOf="@id/center_horizontal_line" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_3sdp"
+        app:layout_constraintBottom_toBottomOf="@id/first_ic"
+        app:layout_constraintLeft_toRightOf="@id/first_ic"
+        app:layout_constraintTop_toTopOf="@id/first_ic">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/first_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Русская мафия"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff999999"
+            android:id="@id/first_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Крышует"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/first_value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@id/second_ic"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:src="@drawable/my_biz_tax_ic"
+        app:layout_constraintLeft_toRightOf="@id/second_value_left_line"
+        app:layout_constraintTop_toBottomOf="@id/center_horizontal_line" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_3sdp"
+        app:layout_constraintBottom_toBottomOf="@id/second_ic"
+        app:layout_constraintLeft_toRightOf="@id/second_ic"
+        app:layout_constraintTop_toTopOf="@id/second_ic">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/second_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 000 $"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff999999"
+            android:id="@id/second_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Налог / час"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/second_value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@id/third_ic"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:src="@drawable/my_biz_box_ic"
+        app:layout_constraintLeft_toRightOf="@id/third_value_left_line"
+        app:layout_constraintTop_toBottomOf="@id/center_horizontal_line" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_3sdp"
+        app:layout_constraintBottom_toBottomOf="@id/third_ic"
+        app:layout_constraintLeft_toRightOf="@id/third_ic"
+        app:layout_constraintTop_toTopOf="@id/third_ic">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/third_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 000 ед."
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff999999"
+            android:id="@id/third_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Провизия"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/third_value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/third_value_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.75" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/second_value_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.4472" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/center_horizontal_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/biz_info_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.1445" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/main_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.0273" />
+</androidx.constraintlayout.widget.ConstraintLayout>

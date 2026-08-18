@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/menu_bar_layout"
+    android:layout_width="200.0dip"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.button.MaterialButton
+        android:textSize="@dimen/_8sdp"
+        android:textStyle="bold"
+        android:textColor="#ffff2323"
+        android:id="@id/escape"
+        android:layout_width="70.0dip"
+        android:layout_height="35.0dip"
+        android:layout_marginLeft="8.0dip"
+        android:text="ESC"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginStart="8.0dip"
+        app:backgroundTint="#be090e23"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+    <com.google.android.material.button.MaterialButton
+        android:textSize="@dimen/_8sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="35.0dip"
+        android:layout_marginRight="8.0dip"
+        android:text="Меню"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginEnd="8.0dip"
+        app:backgroundTint="#be090e23"
+        app:icon="@drawable/menu"
+        app:iconTintMode="add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/escape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

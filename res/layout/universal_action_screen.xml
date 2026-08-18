@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/universal_action"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/rodina_progress_container"
+        android:layout_width="182.0dip"
+        android:layout_height="182.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ProgressBar
+            android:id="@id/rodina_progress_bar"
+            android:background="@drawable/progress_circle_white_background"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:max="100"
+            android:progress="25"
+            android:progressDrawable="@drawable/progress_circle_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="?android:progressBarStyleHorizontal" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/rodina_progress_touch_container"
+            android:background="@drawable/circle_white_50_opacity"
+            android:layout_width="91.0dip"
+            android:layout_height="91.0dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@id/rodina_progress_touch_icon"
+                android:layout_width="36.0dip"
+                android:layout_height="36.0dip"
+                android:src="@drawable/press_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@id/rodina_universal_action_text"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.0dip"
+        android:text="Для взаимодействия, быстро нажимайте на кнопку посередине"
+        android:fontFamily="@font/gotham"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rodina_progress_container" />
+</androidx.constraintlayout.widget.ConstraintLayout>

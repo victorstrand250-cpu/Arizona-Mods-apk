@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="745.0dip"
+    android:width="350.0dip"
+    android:viewportWidth="350.0"
+    android:viewportHeight="745.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$quest_item_background__0"
+        android:pathData="M20,0L330,0A20,20 0,0 1,350 20L350,725A20,20 0,0 1,330 745L20,745A20,20 0,0 1,0 725L0,20A20,20 0,0 1,20 0z"
+        android:fillAlpha="0.85" />
+</vector>

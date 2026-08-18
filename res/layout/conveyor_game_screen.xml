@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:gravity="bottom"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
+    android:id="@id/conveyor_game_container"
+    android:background="@drawable/conveyor_game_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:layout_gravity="center"
+        android:id="@id/item_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="horizontal"
+            android:id="@id/rv_items"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_54sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_gravity="bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_gravity="bottom|center"
+            android:orientation="horizontal"
+            android:id="@id/rv_boxes"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_80sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@id/age_locker"
+        android:background="#d9000000"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:layout_gravity="center"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_120sdp"
+            app:backgroundMainColor="#f5131516"
+            app:borderMainColor="#1affffff"
+            app:borderWidth="@dimen/_1sdp"
+            app:corners="@dimen/_12sdp">
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <ImageView
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:src="@drawable/age_label" />
+                <ru.mrlargha.commonui.utils.ui.GradientText.ArizonaGradientTextView
+                    android:textSize="@dimen/_16sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Внимание"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold"
+                    app:endColor="#ffff1b1b"
+                    app:startColor="#ffff6060" />
+                <TextView
+                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="игра содержит пугающие элементы"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:text="Данная мини-игра содержит контент\nс возрастным ограничением 18+"
+                    android:fontFamily="@font/heading_now_64_regular"
+                    android:layout_marginVertical="@dimen/_4sdp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ru.mrlargha.commonui.utils.ui.CustomCardView
+                        android:id="@id/button_play"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        app:backgroundMainColor="#ffff6060"
+                        app:backgroundSecondColor="#ffff1b1b"
+                        app:borderMainColor="#1affffff"
+                        app:borderWidth="@dimen/_1sdp"
+                        app:corners="@dimen/_6sdp"
+                        app:gradientAngle="300">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="играть"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+                    <ru.mrlargha.commonui.utils.ui.CustomCardView
+                        android:id="@id/button_close"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_marginLeft="@dimen/_6sdp"
+                        app:backgroundMainColor="#ff292929"
+                        app:borderMainColor="#1affffff"
+                        app:borderWidth="@dimen/_1sdp"
+                        app:corners="@dimen/_6sdp">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="закрыть"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+                </LinearLayout>
+            </LinearLayout>
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    </FrameLayout>
+    <FrameLayout
+        android:id="@id/top_elements_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginRight="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_12sdp">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/white"
+                android:id="@id/game_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Сортировка пасхальных яиц"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <ImageView
+                android:id="@id/age_label"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:src="@drawable/age_label" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="end"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_12sdp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_marginRight="@dimen/_2sdp"
+                        android:src="@drawable/conveyor_game_icon_info"
+                        android:adjustViewBounds="true" />
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="@color/white"
+                        android:id="@id/tv_hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Нажимайте на яйца и на нужную коробку по цветам"
+                        android:fontFamily="@font/pfdindisplaypro_regular" />
+                </LinearLayout>
+                <FrameLayout
+                    android:id="@id/btn_close_screen"
+                    android:background="@drawable/conveyor_game_btn_close_bg"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="end"
+                android:id="@id/counter_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp">
+                <TextView
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_6sdp"
+                    android:text="Осталось"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_trial_66_bold" />
+                <ru.mrlargha.commonui.utils.ui.CustomCardView
+                    android:id="@id/left_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:backgroundMainColor="#ff83d1ef"
+                    app:corners="@dimen/_5sdp">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_6sdp"
+                        android:paddingTop="@dimen/_4sdp"
+                        android:paddingRight="@dimen/_6sdp"
+                        android:paddingBottom="@dimen/_4sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/_6sdp"
+                        android:paddingVertical="@dimen/_4sdp">
+                        <ImageView
+                            android:id="@id/iv_default_item"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:src="@drawable/conveyor_game_egg_empty" />
+                        <TextView
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/black"
+                            android:id="@id/left_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 / 0"
+                            android:fontFamily="@font/pfdindisplaypro_black" />
+                    </LinearLayout>
+                </ru.mrlargha.commonui.utils.ui.CustomCardView>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

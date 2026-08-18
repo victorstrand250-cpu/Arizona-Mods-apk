@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/cars_first_screen_car_param_item"
+    android:background="@drawable/cars_first_screen_car_param_item_bg"
+    android:layout_width="@dimen/_57sdp"
+    android:layout_height="@dimen/_12sdp"
+    android:layout_marginEnd="5.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@id/item_ic"
+            android:layout_width="@dimen/_6sdp"
+            android:layout_height="@dimen/_6sdp"
+            android:src="@drawable/cars_icon_carplate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:id="@id/item_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_1sdp"
+            android:text="М504ХН 68"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintBottom_toBottomOf="@id/item_ic"
+            app:layout_constraintLeft_toRightOf="@id/item_ic"
+            app:layout_constraintTop_toTopOf="@id/item_ic" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

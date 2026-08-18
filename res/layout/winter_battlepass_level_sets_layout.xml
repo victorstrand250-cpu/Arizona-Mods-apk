@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:gravity="end"
+            android:layout_gravity="center|right"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_54sdp"
+            android:layout_marginRight="@dimen/_54sdp"
+            android:layout_marginHorizontal="@dimen/_54sdp">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_54sdp"
+                android:layout_marginRight="@dimen/_54sdp"
+                android:layout_marginHorizontal="@dimen/_54sdp">
+                <TextView
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical"
+                    android:id="@id/main_page_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Покупка уровней"
+                    android:fontFamily="@font/pfdindisplaypro_regular"
+                    android:layout_marginStart="@dimen/_8sdp" />
+                <TextView
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Battle Pass"
+                    android:fontFamily="@font/pfdindisplaypro_bolditalic"
+                    android:layout_marginStart="@dimen/_8sdp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:background="@drawable/battlepass_2025_button_buy_levelbackground_battlepass_buy_levels"
+                android:layout_width="@dimen/_276sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_7sdp">
+                <ImageView
+                    android:layout_width="@dimen/_61sdp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:src="@drawable/battlepass_buy_levels_5" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/_92sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp">
+                    <TextView
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Серебрянный набор"
+                        android:fontFamily="@font/heading_now_65"
+                        app:autoSizeStepGranularity="1.0sp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ffd6dce5"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Открытие "
+                            android:fontFamily="@font/heading_now_64_regular" />
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:id="@id/silverLvlText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+5 уровней"
+                            android:fontFamily="@font/pfdindisplaypro_medium" />
+                    </LinearLayout>
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="#ffd6dce5"
+                        android:gravity="center"
+                        android:id="@id/pass_name1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arizona Pass"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0">
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="#ff4b7abf"
+                        android:gravity="center"
+                        android:id="@id/silver_discount_text"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000 AZ"
+                        android:fontFamily="@font/pfdindisplaypro_light" />
+                    <TextView
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="#ffffffff"
+                        android:gravity="center"
+                        android:id="@id/silverPriceText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                </LinearLayout>
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/battlepass_text"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:id="@id/silver_price_button"
+                    android:background="@drawable/battlepass_2025_button_buy_level"
+                    android:layout_width="@dimen/_51sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_marginRight="@dimen/_12sdp"
+                    android:text="КУПИТЬ"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_65" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:background="@drawable/battlepass_2025_button_buy_levelbackground_battlepass_buy_levels"
+                android:layout_width="@dimen/_276sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_7sdp">
+                <ImageView
+                    android:layout_width="@dimen/_61sdp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:src="@drawable/battlepass_buy_levels_10" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/_92sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp">
+                    <TextView
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Золотой набор"
+                        android:fontFamily="@font/heading_now_65"
+                        app:autoSizeStepGranularity="1.0sp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ffd6dce5"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Открытие "
+                            android:fontFamily="@font/heading_now_64_regular" />
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:id="@id/gold_lvl_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+10 уровней"
+                            android:fontFamily="@font/heading_now_64_regular" />
+                    </LinearLayout>
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="#ffd6dce5"
+                        android:gravity="center"
+                        android:id="@id/pass_name2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arizona Pass"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0">
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="#ff4b7abf"
+                        android:gravity="center"
+                        android:id="@id/gold_discount_text"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000 AZ"
+                        android:fontFamily="@font/pfdindisplaypro_light" />
+                    <TextView
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="#ffffffff"
+                        android:gravity="center"
+                        android:id="@id/goldPriceText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                </LinearLayout>
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/battlepass_text"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:id="@id/gold_price_button"
+                    android:background="@drawable/battlepass_2025_button_buy_level"
+                    android:layout_width="@dimen/_51sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_marginRight="@dimen/_12sdp"
+                    android:text="КУПИТЬ"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_65" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:background="@drawable/battlepass_2025_button_buy_levelbackground_battlepass_buy_levels"
+                android:layout_width="@dimen/_276sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_7sdp">
+                <ImageView
+                    android:layout_width="@dimen/_61sdp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:src="@drawable/battlepass_buy_levels_15" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/_92sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp">
+                    <TextView
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Влиятельный набор"
+                        android:fontFamily="@font/heading_now_65"
+                        app:autoSizeStepGranularity="1.0sp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ffd6dce5"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Открытие "
+                            android:fontFamily="@font/heading_now_64_regular" />
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:id="@id/epic_lvl_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+15 уровней"
+                            android:fontFamily="@font/pfdindisplaypro_medium" />
+                    </LinearLayout>
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="#ffd6dce5"
+                        android:gravity="center"
+                        android:id="@id/pass_name3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arizona Pass"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0">
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="#ff4b7abf"
+                        android:gravity="center"
+                        android:id="@id/epic_discount_text"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000 AZ"
+                        android:fontFamily="@font/pfdindisplaypro_light" />
+                    <TextView
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="#ffffffff"
+                        android:gravity="center"
+                        android:id="@id/epicPriceText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                </LinearLayout>
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/battlepass_text"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:id="@id/epic_price_button"
+                    android:background="@drawable/battlepass_2025_button_buy_level"
+                    android:layout_width="@dimen/_51sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_marginRight="@dimen/_12sdp"
+                    android:text="КУПИТЬ"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_65" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:background="@drawable/battlepass_2025_button_buy_levelbackground_battlepass_buy_levels"
+                android:layout_width="@dimen/_276sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_7sdp">
+                <ImageView
+                    android:layout_width="@dimen/_61sdp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:src="@drawable/battlepass_buy_levels_all" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/_92sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp">
+                    <TextView
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Легендарный набор"
+                        android:fontFamily="@font/heading_now_65"
+                        app:autoSizeStepGranularity="1.0sp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#ffd6dce5"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Открытие "
+                            android:fontFamily="@font/heading_now_64_regular" />
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="всех уровней"
+                            android:fontFamily="@font/heading_now_64_regular" />
+                    </LinearLayout>
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="#ffd6dce5"
+                        android:gravity="center"
+                        android:id="@id/pass_name4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arizona Pass"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0">
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="#ff4b7abf"
+                        android:gravity="center"
+                        android:id="@id/legendary_discount_text"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000 AZ"
+                        android:fontFamily="@font/pfdindisplaypro_light" />
+                    <TextView
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="#ffffffff"
+                        android:gravity="center"
+                        android:id="@id/legendaryPriceText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10000 AZ"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                </LinearLayout>
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/battlepass_text"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:id="@id/legendary_price_button"
+                    android:background="@drawable/battlepass_2025_button_buy_level"
+                    android:layout_width="@dimen/_51sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_marginRight="@dimen/_12sdp"
+                    android:text="КУПИТЬ"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_65" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="horizontal"
+    android:id="@id/my_houses_item"
+    android:background="@drawable/my_biz_item_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/_68sdp"
+    android:layout_marginRight="@dimen/_16sdp"
+    android:layout_marginBottom="@dimen/_7sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/house_ic_n_status_container"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintLeft_toRightOf="@id/main_left_line"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.0976">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/house_ic_container"
+            android:background="@drawable/my_biz_type_ic_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            app:layout_constraintHeight_percent="0.7142"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@id/house_type_ic"
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:src="@drawable/my_houses_trailer_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="0.6"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.6" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/house_status_container"
+            android:background="@drawable/my_biz_status_open_ic"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.2">
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="#ff60ca5d"
+                android:id="@id/house_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="открыт"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_64_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:textSize="@dimen/_11sdp"
+        android:textColor="#ffffffff"
+        android:id="@id/house_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:text="Моя лачуга"
+        android:fontFamily="@font/heading_now_64_regular"
+        app:layout_constraintBottom_toTopOf="@id/center_horizontal_line"
+        app:layout_constraintLeft_toRightOf="@id/biz_info_left_line" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@id/distance_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="@id/house_name"
+        app:layout_constraintLeft_toRightOf="@id/house_name"
+        app:layout_constraintTop_toTopOf="@id/house_name">
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:src="@drawable/my_houses_geo_ic" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="@color/white"
+            android:id="@id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_1sdp"
+            android:text="2000 m"
+            android:fontFamily="@font/pfdregular" />
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/my_biz_number_container_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginLeft="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="@id/house_name"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintLeft_toRightOf="@id/distance_container"
+        app:layout_constraintTop_toTopOf="@id/house_name"
+        app:layout_constraintWidth_percent="0.0976">
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/house_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="№1975"
+            android:fontFamily="@font/pfdindisplaypro_italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_3sdp"
+        app:layout_constraintLeft_toRightOf="@id/biz_info_left_line"
+        app:layout_constraintTop_toBottomOf="@id/center_horizontal_line">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/first_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Подселен"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff999999"
+            android:id="@id/first_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Статус"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/first_value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_3sdp"
+        app:layout_constraintLeft_toRightOf="@id/second_value_left_line"
+        app:layout_constraintTop_toBottomOf="@id/center_horizontal_line">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/second_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bone Country"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff999999"
+            android:id="@id/second_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Город"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/second_value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_3sdp"
+        app:layout_constraintLeft_toRightOf="@id/third_value_left_line"
+        app:layout_constraintTop_toBottomOf="@id/center_horizontal_line">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/third_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$ 1 599"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff999999"
+            android:id="@id/third_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Коммуналка"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/third_value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_3sdp"
+        app:layout_constraintLeft_toRightOf="@id/fourth_value_left_line"
+        app:layout_constraintTop_toBottomOf="@id/center_horizontal_line">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/fourth_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$ 25 000"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff999999"
+            android:id="@id/fourth_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Налог"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fourth_value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/fourth_value_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.75" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/third_value_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5481" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/second_value_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.3463" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/center_horizontal_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/biz_info_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.1445" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/main_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.0273" />
+</androidx.constraintlayout.widget.ConstraintLayout>

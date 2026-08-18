@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/ivBgCraftResult"
+        android:background="@drawable/bg_inventory"
+        android:clickable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:id="@id/tvCraftSuccessTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Успешный крафт "
+        android:textAllCaps="true"
+        android:fontFamily="@font/pfdregular"
+        app:layout_constraintBottom_toTopOf="@id/cvSuccessCraft"
+        app:layout_constraintEnd_toEndOf="@id/cvSuccessCraft"
+        app:layout_constraintStart_toStartOf="@id/cvSuccessCraft"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/grey_type2"
+        android:id="@id/tvCraftSuccessSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10.0dip"
+        android:text="Создание предмета прошло успешно"
+        android:textAllCaps="true"
+        android:fontFamily="@font/pfdregular"
+        app:layout_constraintEnd_toEndOf="@id/cvSuccessCraft"
+        app:layout_constraintStart_toStartOf="@id/cvSuccessCraft"
+        app:layout_constraintTop_toBottomOf="@id/tvCraftSuccessTitle" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@id/cvSuccessCraft"
+        android:layout_width="120.0dip"
+        android:layout_height="120.0dip"
+        android:layout_marginTop="4.0dip"
+        android:layout_marginEnd="44.0dip"
+        app:cardCornerRadius="10.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.cardview.widget.CardView
+            android:layout_gravity="start|center|top"
+            android:id="@id/viewTopRight"
+            android:layout_width="12.0dip"
+            android:layout_height="12.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginStart="10.0dip"
+            app:cardBackgroundColor="@color/red_type1"
+            app:cardCornerRadius="4.0dip" />
+        <View
+            android:layout_gravity="center"
+            android:id="@id/viewShiningLight"
+            android:background="@drawable/shining_workshop_color"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@id/ivCraftedItem"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:id="@id/tvCraftItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16.0dip"
+        android:textAllCaps="true"
+        android:fontFamily="@font/pfdregular"
+        app:layout_constraintEnd_toEndOf="@id/cvSuccessCraft"
+        app:layout_constraintStart_toStartOf="@id/cvSuccessCraft"
+        app:layout_constraintTop_toBottomOf="@id/cvSuccessCraft" />
+    <Button
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="italic"
+        android:textColor="@color/black"
+        android:id="@id/btnAcceptCraft"
+        android:background="@drawable/border_radius_5"
+        android:layout_width="110.0dip"
+        android:layout_height="30.0dip"
+        android:text="принять"
+        android:textAllCaps="true"
+        android:fontFamily="@font/pfdbold"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tvCraftItemName"
+        app:layout_constraintStart_toStartOf="@id/tvCraftItemName"
+        app:layout_constraintTop_toBottomOf="@id/tvCraftItemName" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_3sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_2sdp">
+        <ImageView
+            android:id="@id/iv_border"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+        <androidx.cardview.widget.CardView
+            android:id="@id/category_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="@dimen/_1sdp"
+            app:cardCornerRadius="@dimen/_8sdp">
+            <ImageView
+                android:id="@id/iv_category_bg"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY" />
+            <ImageView
+                android:id="@id/iv_select_background"
+                android:layout_width="@dimen/_220sdp"
+                android:layout_height="fill_parent"
+                android:src="@drawable/donate_category_select_item"
+                android:alpha="0.8" />
+            <ImageView
+                android:layout_gravity="end"
+                android:id="@id/iv_item"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_34sdp"
+                android:src="@drawable/default_car_skin"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:id="@id/tv_category_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_65_medium"
+                android:layout_marginStart="@dimen/_16sdp" />
+            <ImageView
+                android:id="@id/animation_thumb"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+                android:alpha="0.8" />
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+    <ImageView
+        android:layout_gravity="end|center|top"
+        android:id="@id/iv_new_ic"
+        android:layout_width="@dimen/_16sdp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/donate_category_new_ic"
+        android:adjustViewBounds="true"
+        android:elevation="@dimen/_2sdp" />
+</FrameLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:background="@drawable/hud_counter_franclin_stein_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_gravity="end|center"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_6sdp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:src="@drawable/hud_counter_franclin_stein_item_bg"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true" />
+            <LinearLayout
+                android:layout_gravity="end|center"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_2sdp"
+                android:paddingRight="@dimen/_2sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:paddingHorizontal="@dimen/_2sdp">
+                <TextView
+                    android:textSize="@dimen/_4sdp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:text="энергия"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold"
+                    android:lineHeight="@dimen/_4sdp" />
+                <TextView
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/tv_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_minus4sdp"
+                    android:text="100%"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+            </LinearLayout>
+        </FrameLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:src="@drawable/hud_counter_franclin_stein_image"
+            android:scaleType="center"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="@dimen/_minus3sdp" />
+    </FrameLayout>
+</LinearLayout>

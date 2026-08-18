@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="135.0dip"
+    android:width="128.0dip"
+    android:viewportWidth="128.0"
+    android:viewportHeight="135.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M0,31.63C0,15.6 12.59,2.41 28.6,1.66L64,0L99.4,1.66C115.41,2.41 128,15.6 128,31.63V102.82C128,118.66 115.68,131.77 99.87,132.76L64,135L28.13,132.76C12.32,131.77 0,118.66 0,102.82V31.63Z" />
+    <path
+        android:fillColor="@drawable/$dice_5_ic__0"
+        android:pathData="M0,31.63C0,15.6 12.59,2.41 28.6,1.66L64,0L99.4,1.66C115.41,2.41 128,15.6 128,31.63V102.82C128,118.66 115.68,131.77 99.87,132.76L64,135L28.13,132.76C12.32,131.77 0,118.66 0,102.82V31.63Z"
+        android:fillAlpha="0.15" />
+    <path
+        android:fillColor="@drawable/$dice_5_ic__1"
+        android:pathData="M64.5,67.5m-57.5,0a57.5,57.5 0,1 1,115 0a57.5,57.5 0,1 1,-115 0" />
+    <path
+        android:fillColor="@drawable/$dice_5_ic__2"
+        android:pathData="M64.5,67.5m-12.5,0a12.5,12.5 0,1 1,25 0a12.5,12.5 0,1 1,-25 0" />
+    <path
+        android:fillColor="@drawable/$dice_5_ic__3"
+        android:pathData="M84.5,47.5m-12.5,0a12.5,12.5 0,1 1,25 0a12.5,12.5 0,1 1,-25 0" />
+    <path
+        android:fillColor="@drawable/$dice_5_ic__4"
+        android:pathData="M44.5,47.5m-12.5,0a12.5,12.5 0,1 1,25 0a12.5,12.5 0,1 1,-25 0" />
+    <path
+        android:fillColor="@drawable/$dice_5_ic__5"
+        android:pathData="M44.5,87.5m-12.5,0a12.5,12.5 0,1 1,25 0a12.5,12.5 0,1 1,-25 0" />
+    <path
+        android:fillColor="@drawable/$dice_5_ic__6"
+        android:pathData="M84.5,87.5m-12.5,0a12.5,12.5 0,1 1,25 0a12.5,12.5 0,1 1,-25 0" />
+</vector>

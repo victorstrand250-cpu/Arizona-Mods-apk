@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_6sdp"
+    android:layout_marginTop="@dimen/_4sdp"
+    android:layout_marginRight="@dimen/_6sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
+    android:layout_marginHorizontal="@dimen/_6sdp"
+    android:layout_marginVertical="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/arizona_cases_can_win_item_default_bg"
+        android:scaleType="fitXY" />
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/arizona_cases_prize_item_bg_pattern"
+        android:scaleType="centerCrop" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingRight="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_8sdp">
+        <ImageView
+            android:id="@id/iv_prize"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:src="@drawable/auth_error_ic"
+            android:adjustViewBounds="true"
+            android:layout_marginHorizontal="@dimen/_12sdp" />
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@id/tv_prize_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="Пазикс отбойником"
+            android:fontFamily="@font/heading_now_64_regular" />
+    </LinearLayout>
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:id="@id/quality_button1"
+        android:visibility="gone"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_margin="@dimen/_8sdp"
+        app:backgroundMainColor="#4dffffff"
+        app:corners="@dimen/_4sdp">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="i"
+            android:fontFamily="@font/heading_now_64_regular" />
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+</FrameLayout>

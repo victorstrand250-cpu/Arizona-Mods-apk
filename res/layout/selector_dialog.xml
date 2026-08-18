@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:clickable="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingEnd="10.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:layout_gravity="center"
+        android:id="@id/dialogLayout"
+        android:background="@drawable/bg_inventory"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="0.0dip"
+        app:corners="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor2"
+        app:layout_constraintEnd_toStartOf="@id/guidelineVer2"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer1"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor1">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <ImageView
+                android:id="@id/ivItemBg"
+                android:layout_width="@dimen/_280sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:src="@drawable/ic_gold_bg_test"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold|italic"
+                android:textColor="@color/white"
+                android:ellipsize="end"
+                android:id="@id/tvItemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="280.0dip"
+                android:maxLines="1"
+                android:layout_marginStart="16.0dip"
+                app:layout_constraintBottom_toBottomOf="@id/ivItemBg"
+                app:layout_constraintStart_toStartOf="@id/ivItemBg"
+                app:layout_constraintTop_toTopOf="@id/ivItemBg" />
+            <TextView
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold|italic"
+                android:textColor="@color/white"
+                android:id="@id/tvItemDescription"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12.0dip"
+                android:maxWidth="@dimen/_220sdp"
+                android:fontFamily="@font/pfdregular"
+                android:layout_marginStart="12.0dip"
+                app:layout_constraintBottom_toTopOf="@id/viewLine"
+                app:layout_constraintStart_toStartOf="@id/ivItemBg"
+                app:layout_constraintTop_toBottomOf="@id/ivItemBg" />
+            <ImageView
+                android:id="@id/viewLine"
+                android:layout_width="fill_parent"
+                android:layout_height="2.0dip"
+                android:layout_marginBottom="24.0dip"
+                android:src="@drawable/straight_line"
+                app:layout_constraintBottom_toTopOf="@id/btnFirstItem"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/ivItemBg"
+                app:layout_constraintTop_toBottomOf="@id/tvItemDescription" />
+            <TextView
+                android:id="@id/btnFirstItem"
+                android:background="@drawable/rectangle_grey_left"
+                android:padding="@dimen/_7sdp"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginBottom="4.0dip"
+                android:maxLines="1"
+                app:layout_constraintBottom_toTopOf="@id/btnThirdItem"
+                app:layout_constraintStart_toStartOf="@id/btnThirdItem"
+                style="@style/selector_dialog_buttons" />
+            <TextView
+                android:id="@id/btnSecondItem"
+                android:background="@drawable/rectangle_grey_right"
+                android:padding="@dimen/_7sdp"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/btnFirstItem"
+                app:layout_constraintStart_toEndOf="@id/btnFirstItem"
+                app:layout_constraintTop_toTopOf="@id/btnFirstItem"
+                style="@style/selector_dialog_buttons" />
+            <TextView
+                android:id="@id/btnThirdItem"
+                android:background="@drawable/rectangle_grey_left"
+                android:padding="@dimen/_7sdp"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginBottom="4.0dip"
+                android:maxLines="1"
+                app:layout_constraintBottom_toTopOf="@id/btnFifthItem"
+                app:layout_constraintStart_toStartOf="@id/btnFifthItem"
+                style="@style/selector_dialog_buttons" />
+            <TextView
+                android:id="@id/btnFourthItem"
+                android:background="@drawable/rectangle_grey_right"
+                android:padding="@dimen/_7sdp"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/btnThirdItem"
+                app:layout_constraintStart_toEndOf="@id/btnThirdItem"
+                app:layout_constraintTop_toTopOf="@id/btnThirdItem"
+                style="@style/selector_dialog_buttons" />
+            <TextView
+                android:id="@id/btnFifthItem"
+                android:background="@drawable/rectangle_grey_left"
+                android:padding="@dimen/_7sdp"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginBottom="4.0dip"
+                android:maxLines="1"
+                app:layout_constraintBottom_toTopOf="@id/btnClose"
+                app:layout_constraintStart_toStartOf="@id/btnClose"
+                style="@style/selector_dialog_buttons" />
+            <TextView
+                android:id="@id/btnSixthItem"
+                android:background="@drawable/rectangle_grey_right"
+                android:padding="@dimen/_7sdp"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/btnFifthItem"
+                app:layout_constraintStart_toEndOf="@id/btnFifthItem"
+                app:layout_constraintTop_toTopOf="@id/btnFifthItem"
+                style="@style/selector_dialog_buttons" />
+            <TextView
+                android:id="@id/btnClose"
+                android:background="@drawable/rectangle_grey"
+                android:padding="@dimen/_7sdp"
+                android:layout_width="0.0dip"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginTop="4.0dip"
+                android:layout_marginBottom="12.0dip"
+                android:text="закрыть"
+                android:maxLines="1"
+                android:drawablePadding="10.0dip"
+                android:textAllCaps="true"
+                android:layout_marginStart="12.0dip"
+                android:layout_marginEnd="12.0dip"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/ivItemBg"
+                app:layout_constraintStart_toStartOf="@id/ivItemBg"
+                style="@style/selector_dialog_buttons" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.25" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.68" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.15" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.82" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/document_transport_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textColor="#ff8681a5"
+        android:gravity="center"
+        android:id="@id/transport_empty"
+        android:background="@drawable/document_transport_empty_list"
+        android:visibility="gone"
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="@dimen/_160sdp"
+        android:layout_marginTop="@dimen/_90sdp"
+        android:text="Список пуст"
+        android:fontFamily="@font/pfdindisplaypro_regular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarThumbVertical="@drawable/document_transport_thumb"
+        android:scrollbarTrackVertical="@drawable/document_transport_track"
+        android:scrollbarStyle="outsideInset"
+        android:orientation="vertical"
+        android:id="@id/transport_recycle_view"
+        android:paddingRight="@dimen/_8sdp"
+        android:visibility="visible"
+        android:scrollbars="vertical"
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="@dimen/_178sdp"
+        android:layout_marginTop="@dimen/_90sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

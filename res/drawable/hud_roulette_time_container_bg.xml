@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="29.0dip"
+    android:width="126.0dip"
+    android:viewportWidth="126.0"
+    android:viewportHeight="29.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M14.5,0L111.5,0A14.5,14.5 0,0 1,126 14.5L126,14.5A14.5,14.5 0,0 1,111.5 29L14.5,29A14.5,14.5 0,0 1,0 14.5L0,14.5A14.5,14.5 0,0 1,14.5 0z" />
+    <path
+        android:fillColor="@drawable/$hud_roulette_time_container_bg__0"
+        android:pathData="M14.5,0L111.5,0A14.5,14.5 0,0 1,126 14.5L126,14.5A14.5,14.5 0,0 1,111.5 29L14.5,29A14.5,14.5 0,0 1,0 14.5L0,14.5A14.5,14.5 0,0 1,14.5 0z" />
+</vector>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="bottom|center"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarSize="1.0dip"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar"
+        android:scrollbarStyle="outsideInset"
+        android:id="@id/rvWalletInventory"
+        android:background="@android:color/transparent"
+        android:visibility="visible"
+        android:scrollbars="vertical"
+        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_176sdp"
+        android:layout_marginBottom="8.0dip"
+        android:fadeScrollbars="false"
+        android:scrollIndicators="end"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/linearButtons"
+        app:layout_constraintEnd_toEndOf="@id/rvSubInventory"
+        app:layout_constraintStart_toStartOf="@id/rvSubInventory"
+        app:spanCount="3" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="horizontal"
+            android:id="@id/rvSubInventory"
+            android:background="@android:color/transparent"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8.0dip"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/layoutAcsUpg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@id/layoutAcsUpg"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0">
+        <androidx.recyclerview.widget.RecyclerView
+            android:scrollbarStyle="insideInset"
+            android:layout_gravity="center"
+            android:id="@id/rvAccessoriesInventory"
+            android:background="@android:color/transparent"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_gravity="center"
+            android:id="@id/rvUpgradesInventory"
+            android:background="@android:color/transparent"
+            android:visibility="gone"
+            android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="3" />
+    </FrameLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:id="@id/linearButtons"
+        android:layout_width="@dimen/_190sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginBottom="4.0dip">
+        <ImageView
+            android:id="@id/btnAccessories"
+            android:background="@drawable/btn_accessories_background"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:layout_weight="1.0"
+            app:layout_constraintBottom_toTopOf="@id/btnWallet"
+            app:layout_constraintStart_toStartOf="@id/btnWallet" />
+        <ImageView
+            android:id="@id/btnUpgrades"
+            android:background="@drawable/ic_btn_upgrades"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_24sdp"
+            android:adjustViewBounds="true"
+            android:layout_weight="1.0"
+            app:layout_constraintBottom_toBottomOf="@id/btnAccessories"
+            app:layout_constraintStart_toEndOf="@id/btnAccessories"
+            app:layout_constraintTop_toTopOf="@id/btnAccessories" />
+    </LinearLayout>
+    <ImageView
+        android:id="@id/btnWallet"
+        android:background="@drawable/btn_wallet_background"
+        android:layout_width="@dimen/_190sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginBottom="4.0dip"
+        android:adjustViewBounds="true" />
+    <LinearLayout
+        android:id="@id/set_container"
+        android:visibility="gone"
+        android:layout_width="@dimen/_190sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginBottom="4.0dip">
+        <ImageView
+            android:id="@id/btn_set_left"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:src="@drawable/inventory_person_left_btn_bg"
+            android:adjustViewBounds="true" />
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@id/tv_set_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set_i"
+            android:layout_weight="1.0"
+            android:fontFamily="@font/din_pro_condensed_black" />
+        <ImageView
+            android:id="@id/btn_set_right"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:src="@drawable/inventory_person_right_btn_bg"
+            android:adjustViewBounds="true" />
+    </LinearLayout>
+</LinearLayout>

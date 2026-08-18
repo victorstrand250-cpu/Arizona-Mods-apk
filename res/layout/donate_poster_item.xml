@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_140sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@id/card_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:layout_marginRight="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:layout_marginHorizontal="@dimen/_2sdp"
+        android:layout_marginVertical="@dimen/_1sdp"
+        app:cardCornerRadius="@dimen/_12sdp">
+        <ImageView
+            android:id="@id/iv_item_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop" />
+        <ImageView
+            android:layout_gravity="end"
+            android:id="@id/iv_item"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true" />
+        <FrameLayout
+            android:padding="@dimen/_6sdp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@id/rv_tags"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_gravity="bottom|center"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="#d9ffffff"
+                    android:id="@id/tv_available"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/available"
+                    android:fontFamily="@font/heading_now_64_regular" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/_18sdp"
+                        android:textColor="@color/white"
+                        android:id="@id/tv_first_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kit"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/heading_now_66_bold"
+                        android:layout_marginEnd="@dimen/_4sdp" />
+                    <ru.mrlargha.commonui.elements.donate.utils.GradientTextView
+                        android:textSize="@dimen/_18sdp"
+                        android:textColor="@color/white"
+                        android:id="@id/tv_second_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/heading_now_66_bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@id/btn_buy"
+                    android:background="@drawable/donate_buttons_bg"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="@dimen/_6sdp">
+                    <ImageView
+                        android:id="@id/iv_money_ic"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
+                        android:src="@drawable/ic_az_coins"
+                        android:layout_marginEnd="@dimen/_4sdp" />
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="#4dffffff"
+                        android:id="@id/tv_old_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="500"
+                        android:fontFamily="@font/heading_now_66_bold"
+                        android:layout_marginEnd="@dimen/_4sdp" />
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="@color/white"
+                        android:id="@id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="300 az coins"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/heading_now_66_bold"
+                        android:layout_marginEnd="@dimen/_4sdp" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@id/block_container"
+            android:background="#80070707"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:src="@drawable/donate_lock_ic" />
+            <TextView
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@id/tv_block_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </LinearLayout>
+        <ImageView
+            android:id="@id/animation_thumb"
+            android:visibility="gone"
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            android:alpha="0.8" />
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

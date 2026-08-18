@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:background="@drawable/border_radius_10"
+    android:paddingBottom="@dimen/_4sdp"
+    android:layout_width="@dimen/_120sdp"
+    android:layout_height="@dimen/_120sdp"
+    android:backgroundTint="@color/purple_type1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:text="Выберите цвет"
+        android:textAllCaps="false"
+        android:fontFamily="@font/gotham_medium"
+        android:layout_marginStart="@dimen/_6sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/linearColors"
+        android:padding="@dimen/_2sdp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+        <Button
+            android:textSize="@dimen/_7sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@id/btnFirstColor"
+            android:layout_width="0.0dip"
+            android:layout_height="@dimen/_24sdp"
+            android:text="Цвет 1"
+            android:layout_weight="1.0"
+            android:textAllCaps="false"
+            android:fontFamily="@font/gotham_medium"
+            android:backgroundTint="@color/grey_type5" />
+        <Button
+            android:textSize="@dimen/_7sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@id/btnSecondColor"
+            android:layout_width="0.0dip"
+            android:layout_height="@dimen/_24sdp"
+            android:text="Цвет 2"
+            android:layout_weight="1.0"
+            android:textAllCaps="false"
+            android:fontFamily="@font/gotham_medium"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:backgroundTint="@color/grey_type5" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarSize="4.0dip"
+        android:scrollbarThumbVertical="@drawable/scrollbar"
+        android:scrollbarTrackVertical="@drawable/scrollbar_container"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarStyle="insideInset"
+        android:orientation="vertical"
+        android:id="@id/rvFirstColors"
+        android:background="@android:color/transparent"
+        android:visibility="visible"
+        android:scrollbars="vertical"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/_72sdp"
+        android:fadeScrollbars="false"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearColors"
+        app:spanCount="4" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="vertical"
+        android:id="@id/rvSecondColors"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/_72sdp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearColors"
+        app:spanCount="4" />
+</androidx.constraintlayout.widget.ConstraintLayout>

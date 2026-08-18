@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/mp_uber_rate_item"
+    android:background="@drawable/ic_star_active"
+    android:layout_width="18.0dip"
+    android:layout_height="18.0dip"
+    android:layout_marginRight="5.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

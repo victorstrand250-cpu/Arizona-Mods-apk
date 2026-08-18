@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="vertical"
+    android:id="@id/parentLayout"
+    android:background="@color/transparent60_grey"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@id/linearLayout"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/ivMainImage"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:src="@drawable/battlepass_logo"
+            android:maxWidth="160.0dip"
+            android:maxHeight="320.0dip" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="italic"
+            android:textColor="@color/battlepass5"
+            android:gravity="center"
+            android:id="@id/tvTitleText"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:maxWidth="@dimen/_140sdp"
+            android:maxLines="2"
+            android:fontFamily="@font/pfdbold" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@id/tvDescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="@dimen/_140sdp"
+            android:fontFamily="@font/pfdregular" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="vertical"
+            android:id="@id/rvRewardsLinear"
+            android:background="@android:color/transparent"
+            android:paddingBottom="@dimen/_6sdp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="vertical"
+            android:id="@id/rvRewardsGrid"
+            android:background="@android:color/transparent"
+            android:paddingBottom="@dimen/_6sdp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2" />
+        <Button
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/black"
+            android:id="@id/btnGetInfo"
+            android:background="@drawable/border_radius_10"
+            android:padding="@dimen/_8sdp"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="Узнать подробнее"
+            android:textAllCaps="false"
+            android:fontFamily="@font/gothampro_bold"
+            android:backgroundTint="@color/white" />
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnClose"
+        android:background="@drawable/ic_x"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp"
+        app:layout_constraintStart_toEndOf="@id/linearLayout"
+        app:layout_constraintTop_toTopOf="@id/linearLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

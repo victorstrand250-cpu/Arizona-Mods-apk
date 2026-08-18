@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/starter_pack"
+    android:background="@drawable/promo_main_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <include
+            android:id="@id/topbar"
+            android:visibility="visible"
+            layout="@layout/topbar" />
+        <include
+            android:id="@id/activate"
+            android:visibility="visible"
+            layout="@layout/activation_page" />
+        <include
+            android:id="@id/management"
+            android:visibility="gone"
+            layout="@layout/management" />
+        <include
+            android:id="@id/promo_details"
+            android:visibility="gone"
+            layout="@layout/promo_details" />
+        <include
+            android:id="@id/referals"
+            android:visibility="gone"
+            layout="@layout/referals" />
+        <include
+            android:id="@id/level_locker"
+            android:visibility="gone"
+            layout="@layout/level_locker" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

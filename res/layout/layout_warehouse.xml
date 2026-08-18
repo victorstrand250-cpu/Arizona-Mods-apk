@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_gravity="center"
+    android:id="@id/parentLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarSize="4.0dip"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar"
+        android:scrollbarStyle="outsideInset"
+        android:id="@id/rvWarehouse"
+        android:background="@android:color/transparent"
+        android:scrollbars="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_marginBottom="12.0dip"
+        android:scrollIndicators="end"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/etStoreMoney"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:spanCount="3" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:gravity="start|center"
+        android:id="@id/etStoreMoney"
+        android:background="@drawable/ic_input_warehouse"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="48.0dip"
+        android:text="0"
+        android:editable="false"
+        android:drawableEnd="@drawable/ic_rubble"
+        android:paddingStart="20.0dip"
+        android:paddingEnd="16.0dip"
+        android:layout_marginStart="4.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/rvWarehouse"
+        app:layout_constraintStart_toStartOf="@id/rvWarehouse" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/document_vip_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@id/tableTop"
+        android:background="@drawable/documents_vip_top_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_70sdp"
+        app:layout_constraintLeft_toLeftOf="@id/table1"
+        app:layout_constraintRight_toRightOf="@id/table2"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="ВАШ ТЕКУЩИЙ СТАТУС:"
+            android:fontFamily="@font/pfdindisplaypro_regular"
+            android:layout_marginVertical="@dimen/_4sdp" />
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_6sdp">
+            <ImageView
+                android:id="@id/documents_vip_status_ic"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:src="@drawable/documents_vip_ic_addvip" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@id/vip_info"
+                android:layout_width="@dimen/_76sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_6sdp">
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="#ffffffff"
+                    android:id="@id/documents_vip_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADD VIP"
+                    android:fontFamily="@font/pfdindisplaypro_bold" />
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="#ffc0c0c0"
+                    android:id="@id/documents_vip_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Истекает через 30 дней"
+                    android:fontFamily="@font/pfdindisplaypro_light" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@id/documents_vip_status_gold"
+                android:background="@drawable/documents_vip_status_bg"
+                android:paddingLeft="@dimen/_8sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingRight="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingVertical="@dimen/_3sdp">
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="#ffffffff"
+                    android:layout_gravity="center_vertical"
+                    android:id="@id/documents_vip_statys_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADD VIP"
+                    android:fontFamily="@font/pfdindisplaypro_regular" />
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="#ffffffff"
+                    android:layout_gravity="center_vertical"
+                    android:id="@id/documents_vip_statys_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30 days"
+                    android:fontFamily="@font/pfdindisplaypro_regular" />
+            </LinearLayout>
+            <TextView
+                android:textSize="@dimen/_9sdp"
+                android:textColor="#ffffffff"
+                android:gravity="center"
+                android:id="@id/documents_vip_empty"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_19sdp"
+                android:text="Отсутствует"
+                android:fontFamily="@font/pfdindisplaypro_bold" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table1"
+        android:layout_width="@dimen/_164sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_44sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tableTop">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Улучшения PREMIUM VIP"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <View
+            android:background="@drawable/documents_vip_divider_bg"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_marginVertical="@dimen/_4sdp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:scrollbarThumbVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_thumb"
+            android:scrollbarTrackVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_track"
+            android:scrollbarStyle="outsideInset"
+            android:orientation="vertical"
+            android:id="@id/level_recycle_view"
+            android:paddingRight="@dimen/_8sdp"
+            android:visibility="visible"
+            android:scrollbars="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_100sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table2"
+        android:layout_width="@dimen/_143sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_14sdp"
+        app:layout_constraintLeft_toRightOf="@id/table1"
+        app:layout_constraintTop_toTopOf="@id/table1">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VIP"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <View
+            android:background="@drawable/documents_vip_divider_bg"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_marginVertical="@dimen/_4sdp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:scrollbarThumbVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_thumb"
+            android:scrollbarTrackVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_track"
+            android:orientation="vertical"
+            android:id="@id/type_recycle_view"
+            android:visibility="visible"
+            android:scrollbars="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_100sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/documents_button1"
+        android:background="@drawable/documents_vip_nav_btn_bg"
+        android:paddingLeft="@dimen/_26sdp"
+        android:paddingTop="@dimen/_4sdp"
+        android:paddingRight="@dimen/_26sdp"
+        android:paddingBottom="@dimen/_4sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_44sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:paddingHorizontal="@dimen/_26sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/table1">
+        <ImageView
+            android:layout_width="@dimen/_9sdp"
+            android:layout_height="@dimen/_9sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:src="@drawable/documents_gps_ic"
+            android:tint="#ff012c68"
+            app:tint="#ff012c68" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/_8sdp"
+                android:textColor="#ff012c68"
+                android:id="@id/documents_button1_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Улучшить PREMIUM VIP"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="#80012c68"
+                android:id="@id/documents_button1_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Доступно в мастерской одежды"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/documents_button2"
+        android:background="@drawable/documents_vip_nav_btn_bg"
+        android:paddingLeft="@dimen/_36sdp"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingRight="@dimen/_36sdp"
+        android:paddingBottom="@dimen/_7sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:paddingHorizontal="@dimen/_36sdp"
+        android:paddingVertical="@dimen/_7sdp"
+        app:layout_constraintLeft_toLeftOf="@id/table2"
+        app:layout_constraintTop_toBottomOf="@id/table2">
+        <ImageView
+            android:layout_width="@dimen/_9sdp"
+            android:layout_height="@dimen/_9sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:src="@drawable/documents_vip_ic_gift"
+            android:tint="#ff012c68"
+            app:tint="#ff012c68" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/_8sdp"
+                android:textColor="#ff012c68"
+                android:id="@id/documents_button2_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Мои бонусы VIP"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

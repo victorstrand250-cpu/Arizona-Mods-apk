@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/rodina_products_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/rodina_pts_bg" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Закрыть меню"
+        android:layout_marginEnd="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/rodina_auth_btn_close2"
+        app:layout_constraintEnd_toStartOf="@id/rodina_auth_btn_close2"
+        app:layout_constraintTop_toTopOf="@id/rodina_auth_btn_close2"
+        style="@style/rodina_regular_text" />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@id/rodina_auth_btn_close2"
+        android:layout_width="@dimen/rodina_square_btn_size"
+        android:layout_height="@dimen/rodina_square_btn_size"
+        android:layout_marginTop="20.0dip"
+        android:layout_marginEnd="28.0dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rodina_cross"
+        style="@style/rodina_square_image_button" />
+    <TextView
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:textColor="@color/rodina_white"
+        android:id="@id/main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Продукты"
+        android:fontFamily="@font/gothampro_bold"
+        android:layout_marginEnd="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/rodina_auth_btn_close2"
+        app:layout_constraintStart_toEndOf="@id/left_title_line"
+        app:layout_constraintTop_toTopOf="@id/rodina_auth_btn_close2" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/left_title_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.56" />
+    <View
+        android:id="@id/view"
+        android:layout_width="130.0dip"
+        android:layout_height="1.0dip"
+        android:layout_marginTop="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/main_title"
+        app:layout_constraintEnd_toStartOf="@id/main_title"
+        app:layout_constraintTop_toTopOf="@id/main_title" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarThumbVertical="@drawable/rodina_vert_scroll_thumb"
+        android:scrollbarTrackVertical="@drawable/rodina_vert_scrollbar_track"
+        android:orientation="vertical"
+        android:id="@id/rodina_products_list_recycler"
+        android:scrollbars="vertical"
+        android:fadingEdge="horizontal|vertical"
+        android:fadingEdgeLength="150.0dip"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="8.0dip"
+        android:layout_marginBottom="8.0dip"
+        android:overScrollMode="ifContentScrolls"
+        android:requiresFadingEdge="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/rodina_auth_btn_close2"
+        app:layout_constraintStart_toStartOf="@id/main_title"
+        app:layout_constraintTop_toBottomOf="@id/rodina_auth_btn_close2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

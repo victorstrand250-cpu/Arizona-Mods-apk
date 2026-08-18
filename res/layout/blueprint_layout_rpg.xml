@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/rpg_image"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/rpg_empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.8" />
+    <RelativeLayout
+        android:id="@id/rpg_touch_area_stage_1"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/rpg_image"
+        app:layout_constraintEnd_toEndOf="@id/guideline_rpg_stage1"
+        app:layout_constraintStart_toStartOf="@id/rpg_image"
+        app:layout_constraintTop_toTopOf="@id/rpg_image">
+        <ImageView
+            android:layout_width="35.0dip"
+            android:layout_height="35.0dip"
+            android:layout_marginTop="10.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@id/rpg_touch_area_stage_2"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/rpg_image"
+        app:layout_constraintEnd_toEndOf="@id/rpg_image"
+        app:layout_constraintStart_toStartOf="@id/guideline_rpg_stage2"
+        app:layout_constraintTop_toTopOf="@id/rpg_image">
+        <ImageView
+            android:layout_width="35.0dip"
+            android:layout_height="35.0dip"
+            android:layout_marginTop="10.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@id/rpg_touch_area_stage_3"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/rpg_image"
+        app:layout_constraintEnd_toEndOf="@id/guideline_rpg_stage2"
+        app:layout_constraintStart_toStartOf="@id/guideline_rpg_stage_3_4"
+        app:layout_constraintTop_toTopOf="@id/rpg_image">
+        <ImageView
+            android:layout_width="35.0dip"
+            android:layout_height="35.0dip"
+            android:layout_marginTop="10.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@id/rpg_touch_area_stage_4"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_rpg_stage4_horizontal"
+        app:layout_constraintEnd_toEndOf="@id/guideline_rpg_stage4_vertical"
+        app:layout_constraintStart_toStartOf="@id/guideline_rpg_stage_3_4"
+        app:layout_constraintTop_toTopOf="@id/rpg_image">
+        <ImageView
+            android:layout_width="35.0dip"
+            android:layout_height="35.0dip"
+            android:layout_marginTop="10.0dip"
+            android:src="@drawable/blueprint_ic_touch"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10.0dip"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_rpg_stage_3_4"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintEnd_toEndOf="@id/rpg_image"
+        app:layout_constraintGuide_percent="0.37"
+        app:layout_constraintStart_toStartOf="@id/rpg_image" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_rpg_stage1"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintEnd_toEndOf="@id/rpg_image"
+        app:layout_constraintGuide_percent="0.389"
+        app:layout_constraintStart_toStartOf="@id/rpg_image" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_rpg_stage2"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintEnd_toEndOf="@id/rpg_image"
+        app:layout_constraintGuide_percent="0.63"
+        app:layout_constraintStart_toStartOf="@id/rpg_image" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline_rpg_stage4_vertical"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintEnd_toEndOf="@id/rpg_image"
+        app:layout_constraintGuide_percent="0.47"
+        app:layout_constraintStart_toStartOf="@id/rpg_image" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guideline_rpg_stage4_horizontal"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintEnd_toEndOf="@id/rpg_image"
+        app:layout_constraintGuide_percent="0.47"
+        app:layout_constraintStart_toStartOf="@id/rpg_image" />
+</androidx.constraintlayout.widget.ConstraintLayout>

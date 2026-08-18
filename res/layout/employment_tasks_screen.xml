@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:background="@drawable/bg_task_history"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@id/ivNoFraction"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/bg_no_fraction"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnMenu"
+        android:background="@drawable/btn_menu_white"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/btnHistory"
+        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnHistory"
+        android:background="@drawable/btn_history_black"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/btnStats"
+        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnStats"
+        android:background="@drawable/btn_note_black"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnClose"
+        android:background="@drawable/btn_close"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer4"
+        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.textview.MaterialTextView
+        android:textSize="@dimen/_24sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvNoFraction"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_in_fraction"
+        android:fontFamily="@font/pfdindisplaypro_light"
+        app:layout_constraintEnd_toEndOf="@id/ivNoFraction"
+        app:layout_constraintStart_toStartOf="@id/ivNoFraction"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHor" />
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvTitleTable"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:text="@string/task_for_upgrade"
+        android:fontFamily="@font/pfdindisplaypro_light"
+        app:layout_constraintStart_toEndOf="@id/guidelineVer3"
+        app:layout_constraintTop_toTopOf="@id/btnClose" />
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvTitleRankName"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pfdindisplaypro_light"
+        android:layout_marginStart="@dimen/_4sdp"
+        app:layout_constraintStart_toEndOf="@id/tvTitleTable"
+        app:layout_constraintTop_toTopOf="@id/btnClose" />
+    <include
+        android:id="@id/itemTopTable"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer5"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer3"
+        app:layout_constraintTop_toBottomOf="@id/btnClose"
+        layout="@layout/item_employment_top_table" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rvEmploymentHistory"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer5"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer3"
+        app:layout_constraintTop_toBottomOf="@id/itemTopTable" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarSize="4.0dip"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar"
+        android:scrollbarStyle="outsideInset"
+        android:id="@id/rvEmploymentTasks"
+        android:paddingBottom="@dimen/_30sdp"
+        android:visibility="visible"
+        android:scrollbars="vertical"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:scrollIndicators="end"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer2"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer3"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleTable" />
+    <include
+        android:id="@id/itemTaskInfo"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer3"
+        app:layout_constraintTop_toBottomOf="@id/btnClose"
+        layout="@layout/layout_employment_info" />
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer1"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer3"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@id/btnUpdate"
+        android:background="@drawable/bg_rounded_10"
+        android:padding="12.0dip"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:text="@string/upgrade_available"
+        android:drawablePadding="@dimen/_4sdp"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_task_upgrade"
+        android:fontFamily="@font/pfdindisplaypro_light"
+        android:backgroundTint="@color/green_type3"
+        app:layout_constraintBottom_toTopOf="@id/linearTaskStatus"
+        app:layout_constraintEnd_toEndOf="@id/linearTaskStatus"
+        app:layout_constraintStart_toStartOf="@id/linearTaskStatus" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@id/linearTaskStatus"
+        android:background="@drawable/bg_rounded_10"
+        android:padding="10.0dip"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer4"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer">
+        <ProgressBar
+            android:layout_gravity="center"
+            android:id="@id/progressBarAllTasks"
+            android:background="@drawable/circle_thick_shape_2"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/circular_pg_bar_2"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:progressTint="@color/green_type3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            style="?android:progressBarStyleHorizontal" />
+        <TextView
+            android:textSize="@dimen/_18sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:id="@id/tvTasksDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:fontFamily="@font/pfdindisplaypro_light"
+            android:layout_marginStart="@dimen/_6sdp" />
+        <TextView
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:id="@id/tvTasksRemain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="/311"
+            android:fontFamily="@font/pfdindisplaypro_light"
+            android:layout_marginStart="@dimen/_2sdp" />
+        <TextView
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:id="@id/tvInfo"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:text="@string/task_info"
+            android:maxLines="2"
+            android:fontFamily="@font/pfdindisplaypro_light"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp" />
+    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/_32sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvTitle"
+        android:visibility="visible"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:text="@string/employment_history"
+        android:fontFamily="@font/pfdindisplaypro_light"
+        app:layout_constraintBottom_toTopOf="@id/guidelineHor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvFractionName"
+        android:background="@drawable/border_radius_10"
+        android:padding="12.0dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textAllCaps="false"
+        android:fontFamily="@font/pfdindisplaypro_light"
+        android:backgroundTint="@color/transparent60_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.7" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.53" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.67" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.09" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.98" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.8" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.8" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/cars_first_screen_car_param_item"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_2sdp"
+    android:layout_marginVertical="@dimen/_2sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:id="@id/bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha="0.1"
+        app:backgroundMainColor="#40000000"
+        app:corners="@dimen/_6sdp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_4sdp"
+        android:layout_marginRight="@dimen/_4sdp"
+        android:layout_marginHorizontal="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@id/item_ic"
+            android:layout_width="@dimen/_8sdp"
+            android:layout_height="@dimen/_8sdp"
+            android:src="@drawable/cars_icon_carplate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/white"
+            android:id="@id/item_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_1sdp"
+            android:text="М504ХН 68"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintBottom_toBottomOf="@id/item_ic"
+            app:layout_constraintLeft_toRightOf="@id/item_ic"
+            app:layout_constraintTop_toTopOf="@id/item_ic" />
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:id="@id/quality_button"
+            android:layout_width="@dimen/_9sdp"
+            android:layout_height="@dimen/_9sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            app:backgroundMainColor="#4dffffff"
+            app:borderMainColor="#1affffff"
+            app:borderWidth="1.0dip"
+            app:corners="@dimen/_2sdp"
+            app:layout_constraintLeft_toRightOf="@id/item_value"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="i"
+                android:textEditSuggestionItemLayout="@dimen/_12sdp"
+                android:fontFamily="@font/heading_now_64_regular" />
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

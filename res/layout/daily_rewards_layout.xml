@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/daily_rewards_layout"
+    android:background="@drawable/daily_reward_bg"
+    android:clickable="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/exit_button"
+        android:layout_width="@dimen/_33sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:src="@drawable/shooting_gallery_exit_button"
+        app:layout_constraintRight_toRightOf="@id/right_line"
+        app:layout_constraintTop_toTopOf="@id/top_line" />
+    <ImageView
+        android:id="@id/prize_ic"
+        android:layout_width="@dimen/_33sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:src="@drawable/daily_rewards_prize_ic"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintTop_toTopOf="@id/top_prize_ic_line"
+        app:tint="@color/white" />
+    <TextView
+        android:textSize="@dimen/_26sdp"
+        android:textColor="@color/white"
+        android:id="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_14sdp"
+        android:text="Ежедневная награда"
+        android:lineSpacingMultiplier="0.9"
+        android:fontFamily="@font/pfdbold"
+        app:layout_constraintBottom_toBottomOf="@id/prize_ic"
+        app:layout_constraintLeft_toRightOf="@id/prize_ic"
+        app:layout_constraintTop_toTopOf="@id/prize_ic" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textColor="@color/white"
+        android:id="@id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40.0dip"
+        android:text="Играй каждый день и получай награду каждый раз после выполнения всех условий"
+        android:fontFamily="@font/heading_now_64_regular"
+        app:layout_constraintBottom_toTopOf="@id/rc_top_line"
+        app:layout_constraintLeft_toLeftOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+    <ImageView
+        android:id="@id/info_ic"
+        android:layout_width="@dimen/_11sdp"
+        android:layout_height="@dimen/_11sdp"
+        android:src="@drawable/daily_rewards_info_ic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@id/rc_bottom_line"
+        app:tint="@color/white" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textColor="@color/white"
+        android:id="@id/tv_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:text="Отыгрывай указанное количество часов, чтобы получить ежедневную награду"
+        android:fontFamily="@font/heading_now_64_regular"
+        app:layout_constraintBottom_toBottomOf="@id/info_ic"
+        app:layout_constraintLeft_toRightOf="@id/info_ic"
+        app:layout_constraintTop_toTopOf="@id/info_ic" />
+    <LinearLayout
+        android:gravity="center"
+        android:id="@id/tip_container"
+        android:background="@drawable/daily_rewards_tip_container_bg"
+        android:paddingLeft="@dimen/_6sdp"
+        android:paddingRight="@dimen/_6sdp"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:layout_marginStart="150.0dip"
+        android:paddingHorizontal="@dimen/_6sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/left_line"
+        app:layout_constraintTop_toTopOf="@id/rc_bottom_line">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_18sdp"
+            android:src="@drawable/daily_rewards_may_info_icon"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="@dimen/_6sdp" />
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="@dimen/_150sdp"
+            android:text="Играй каждый день и получай награду каждый раз после выполнения всех условий"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@id/rewards_rc"
+        android:scrollbars="horizontal"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/rc_bottom_line"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rc_top_line" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/rc_top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.3342" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/rc_bottom_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.8703" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/top_prize_ic_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.0824" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.0312" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/right_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.9713" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.0407" />
+</androidx.constraintlayout.widget.ConstraintLayout>

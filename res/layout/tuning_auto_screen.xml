@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:background="@color/transparent100"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:background="@drawable/bg_gradient_top"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <View
+        android:background="@drawable/bg_gradient_bot"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/btnBack"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/car_svgrepo_com_1"
+        app:layout_constraintBottom_toTopOf="@id/guidelineHor1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer4"
+        app:layout_constraintHeight_percent="0.0744"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.0423" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:id="@id/tvTitle"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:layout_marginStart="16.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintEnd_toStartOf="@id/guidelineVer2"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@id/rvMenu"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20.0dip"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/guidelineHor1"
+        app:layout_constraintStart_toEndOf="@id/guidelineVer2"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@id/viewLineMenu"
+        android:background="@color/gray"
+        android:visibility="visible"
+        android:layout_width="0.0dip"
+        android:layout_height="1.0dip"
+        android:layout_marginStart="12.0dip"
+        app:layout_constraintEnd_toEndOf="@id/rvMenu"
+        app:layout_constraintStart_toStartOf="@id/rvMenu"
+        app:layout_constraintTop_toBottomOf="@id/rvMenu" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/btnExit"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/animation_exit_button"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.03" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvClose"
+        android:padding="8.0dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/close"
+        android:fontFamily="@font/gotham"
+        android:layout_marginEnd="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/btnExit"
+        app:layout_constraintRight_toLeftOf="@id/btnExit"
+        app:layout_constraintTop_toTopOf="@id/btnExit" />
+    <ImageView
+        android:id="@id/viewLine"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="2.0dip"
+        android:src="@drawable/straight_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@id/rvSubMenu"
+        android:background="@android:color/transparent"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer5"
+        app:layout_constraintStart_toEndOf="@id/guidelineVer2"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHor1" />
+    <include
+        android:id="@id/carCharacteristicLayout"
+        android:visibility="gone"
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintBottom_toTopOf="@id/rvCategoryComponents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewLine"
+        layout="@layout/layout_car_characteristic" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@id/linearCart"
+        android:background="@drawable/border_radius_5"
+        android:padding="8.0dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green_type_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/rvSubMenu"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintTop_toTopOf="@id/rvSubMenu">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textStyle="bold"
+            android:textColor="@color/green_type3"
+            android:layout_gravity="center"
+            android:id="@id/tvCartTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham"
+            android:layout_marginEnd="8.0dip" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_gravity="center"
+            android:id="@id/ivCart"
+            android:layout_width="12.0dip"
+            android:layout_height="12.0dip"
+            android:src="@drawable/ic_tuning_cart"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintWidth_percent="0.02" />
+    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/_5sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@id/tvCartCount"
+        android:background="@drawable/border_radius_20"
+        android:layout_width="@dimen/_8sdp"
+        android:layout_height="@dimen/_8sdp"
+        android:backgroundTint="@color/red"
+        app:layout_constraintEnd_toEndOf="@id/linearCart"
+        app:layout_constraintTop_toTopOf="@id/linearCart" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:id="@id/tvUserMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:drawablePadding="2.0dip"
+        android:drawableStart="@drawable/ic_dollar_green"
+        android:fontFamily="@font/gotham"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintTop_toBottomOf="@id/linearCart" />
+    <include
+        android:id="@id/selectColorLayout"
+        android:visibility="gone"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintTop_toBottomOf="@id/tvUserMoney"
+        layout="@layout/layout_select_color" />
+    <include
+        android:id="@id/wheelSettingsLayout"
+        android:visibility="gone"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintTop_toBottomOf="@id/tvUserMoney"
+        layout="@layout/layout_wheel_settings" />
+    <include
+        android:id="@id/tintSettingsLayout"
+        android:visibility="gone"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintTop_toBottomOf="@id/tvUserMoney"
+        layout="@layout/layout_tint_settings" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@id/rvCategoryComponents"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHor3" />
+    <Button
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@id/btnAddCart"
+        android:background="@drawable/btn_border_tuning"
+        android:visibility="gone"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:text="Добавить в корзину"
+        android:textAllCaps="false"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <View
+        android:id="@id/bgUserCart"
+        android:background="@drawable/bg_tuning_cart"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvBack"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Назад"
+        android:fontFamily="@font/gotham"
+        android:layout_marginEnd="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@id/userCartLayout"
+        android:visibility="gone"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor2"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor1"
+        layout="@layout/layout_tuning_cart" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.015" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.24" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.99" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.06" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.815" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.085" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.955" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.64" />
+</androidx.constraintlayout.widget.ConstraintLayout>

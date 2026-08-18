@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="65.0dip"
+    android:width="380.0dip"
+    android:viewportWidth="380.0"
+    android:viewportHeight="65.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@color/battlepass5"
+        android:pathData="M12,0L368,0A12,12 0,0 1,380 12L380,53A12,12 0,0 1,368 65L12,65A12,12 0,0 1,0 53L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem__0"
+        android:pathData="M12,0L368,0A12,12 0,0 1,380 12L380,53A12,12 0,0 1,368 65L12,65A12,12 0,0 1,0 53L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem__1"
+        android:pathData="M12,0L368,0A12,12 0,0 1,380 12L380,53A12,12 0,0 1,368 65L12,65A12,12 0,0 1,0 53L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem__2"
+        android:pathData="M12,0L368,0A12,12 0,0 1,380 12L380,53A12,12 0,0 1,368 65L12,65A12,12 0,0 1,0 53L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem__3"
+        android:pathData="M12,0L368,0A12,12 0,0 1,380 12L380,53A12,12 0,0 1,368 65L12,65A12,12 0,0 1,0 53L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem__4"
+        android:pathData="M12,0L368,0A12,12 0,0 1,380 12L380,53A12,12 0,0 1,368 65L12,65A12,12 0,0 1,0 53L0,12A12,12 0,0 1,12 0z" />
+</vector>

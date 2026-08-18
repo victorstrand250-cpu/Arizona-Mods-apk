@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/_6sdp"
+    android:paddingTop="@dimen/_4sdp"
+    android:paddingRight="@dimen/_6sdp"
+    android:paddingBottom="@dimen/_4sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/_6sdp"
+    android:paddingVertical="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0">
+        <TextView
+            android:id="@id/tv_numbering"
+            android:text="@string/numbering"
+            android:layout_marginEnd="@dimen/_4sdp"
+            style="@style/hud_capt_text_style" />
+        <TextView
+            android:id="@id/tv_name"
+            android:text="Grove"
+            style="@style/hud_capt_text_style" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@id/tv_kills_count"
+                android:text="0"
+                style="@style/hud_capt_text_style" />
+            <ImageView
+                android:id="@id/iv_score"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hud_capt_scull_ic"
+                android:adjustViewBounds="true"
+                android:layout_marginStart="@dimen/_2sdp" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp">
+            <TextView
+                android:id="@id/tv_people_count"
+                android:text="0"
+                style="@style/hud_capt_text_style" />
+            <ImageView
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hud_capt_people_ic"
+                android:adjustViewBounds="true"
+                android:layout_marginStart="@dimen/_2sdp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

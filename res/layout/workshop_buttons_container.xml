@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include
+        android:id="@id/paint_buttons"
+        layout="@layout/workshop_cost_buttons" />
+    <Button
+        android:enabled="false"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:id="@id/btnSharpenItem"
+        android:background="@drawable/bg_success_chance_test"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_24sdp"
+        android:text="Заточить предмет"
+        android:fontFamily="@font/pfdregular" />
+</FrameLayout>

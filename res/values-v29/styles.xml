@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="@style/Theme.MaterialComponents.NoActionBar">
+        <item name="android:textViewStyle">@style/Widget.App.TextView</item>
+        <item name="android:navigationBarColor">@color/dark_blue</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowSplashScreenBackground">?colorPrimaryDark</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+    </style>
+    <style name="AppTheme.NoActionBar" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:navigationBarColor">@color/dark_blue</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Base.Theme.SplashScreen" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+        <item name="isLightTheme">?android:isLightTheme</item>
+    </style>
+    <style name="Base.Theme.SplashScreen.Light" parent="@style/Base.Theme.SplashScreen" />
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textViewStyle">@style/Widget.App.TextView</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:colorEdgeEffect">@color/arizona_accent</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="colorAccent">@color/arizona_accent</item>
+    </style>
+    <style name="Theme.AppCompat.Translucent" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:navigationBarColor">@color/dark_blue</item>
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+</resources>

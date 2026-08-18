@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="157.0dip"
+    android:width="76.0dip"
+    android:viewportWidth="76.0"
+    android:viewportHeight="157.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <group>
+        <clip-path
+            android:pathData="M10 0H66C71.5228 0 76 4.47715 76 10V147C76 152.523 71.5228 157 66 157H10C4.47715 157 0 152.523 0 147V10C0 4.47715 4.47715 0 10 0Z" />
+        <path
+            android:fillColor="#ff356363"
+            android:pathData="M0 0V157H76V0" />
+        <group
+            android:pivotX="38.0"
+            android:pivotY="78.5"
+            android:scaleX="2.826"
+            android:scaleY="3.391"
+            android:rotation="90.0"
+            android:translateX="1.311"
+            android:translateY="-0.793">
+            <path
+                android:fillColor="@drawable/$bg_rounded_green__0"
+                android:pathData="M0 0V157H76V0" />
+        </group>
+        <group
+            android:pivotX="38.0"
+            android:pivotY="78.5"
+            android:scaleX="1.457"
+            android:scaleY="1.748"
+            android:rotation="90.0"
+            android:translateX="0.9"
+            android:translateY="-0.538">
+            <path
+                android:fillColor="@drawable/$bg_rounded_green__1"
+                android:pathData="M0 0V157H76V0" />
+        </group>
+        <group
+            android:pivotX="38.0"
+            android:pivotY="78.5"
+            android:scaleX="3.13"
+            android:scaleY="3.756"
+            android:rotation="90.0"
+            android:translateX="1.403"
+            android:translateY="-1.5">
+            <path
+                android:fillColor="@drawable/$bg_rounded_green__2"
+                android:pathData="M0 0V157H76V0" />
+        </group>
+        <group
+            android:pivotX="38.0"
+            android:pivotY="78.5"
+            android:scaleX="0.978"
+            android:scaleY="2.509"
+            android:rotation="-90.0"
+            android:translateX="-0.164"
+            android:translateY="1.326">
+            <path
+                android:fillColor="@drawable/$bg_rounded_green__3"
+                android:pathData="M0 0V157H76V0" />
+        </group>
+        <group
+            android:pivotX="38.0"
+            android:pivotY="78.5"
+            android:scaleX="4.642"
+            android:scaleY="3.184"
+            android:rotation="90.0"
+            android:translateX="1.296"
+            android:translateY="-0.6">
+            <path
+                android:fillColor="@drawable/$bg_rounded_green__4"
+                android:pathData="M0 0V157H76V0" />
+        </group>
+        <path
+            android:pathData="M10 0H66C71.5228 0 76 4.47715 76 10V147C76 152.523 71.5228 157 66 157H10C4.47715 157 0 152.523 0 147V10C0 4.47715 4.47715 0 10 0Z"
+            android:strokeColor="#ff313131"
+            android:strokeWidth="2.0" />
+    </group>
+</vector>

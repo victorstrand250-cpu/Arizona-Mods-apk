@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:background="@color/transparent80_grey"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/btnBack"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/ic_arrow_back_8"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintHeight_percent="0.0944"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.0623" />
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:id="@id/tvScreenTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="true"
+        android:layout_marginStart="16.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
+    <ImageButton
+        android:id="@id/btnBuy"
+        android:background="@drawable/ic_btn_buy_green"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_18sdp"
+        app:layout_constraintBottom_toBottomOf="@id/btnSell"
+        app:layout_constraintEnd_toStartOf="@id/btnSell"
+        app:layout_constraintTop_toTopOf="@id/btnSell" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:id="@id/tvBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buy"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toBottomOf="@id/btnBuy"
+        app:layout_constraintEnd_toEndOf="@id/btnBuy"
+        app:layout_constraintStart_toStartOf="@id/btnBuy"
+        app:layout_constraintTop_toTopOf="@id/btnBuy" />
+    <ImageButton
+        android:id="@id/btnSell"
+        android:background="@drawable/ic_btn_sell_red"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginEnd="80.0dip"
+        app:layout_constraintBottom_toTopOf="@id/viewLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:id="@id/tvSell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sell"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toBottomOf="@id/btnSell"
+        app:layout_constraintEnd_toEndOf="@id/btnSell"
+        app:layout_constraintStart_toStartOf="@id/btnSell"
+        app:layout_constraintTop_toTopOf="@id/btnSell" />
+    <ImageView
+        android:id="@id/viewLine"
+        android:layout_width="fill_parent"
+        android:layout_height="2.0dip"
+        android:src="@drawable/straight_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+    <ImageView
+        android:id="@id/ivBackgroundStatus"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarSize="4.0dip"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar"
+        android:scrollbarStyle="outsideInset"
+        android:id="@id/rvInventory"
+        android:scrollbars="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:scrollIndicators="end"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor2"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor1"
+        app:spanCount="5" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarSize="4.0dip"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar"
+        android:scrollbarStyle="outsideInset"
+        android:id="@id/rvShopInventory"
+        android:scrollbars="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:scrollIndicators="end"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer1"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor1"
+        app:spanCount="5" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.16" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.94" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.06" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5" />
+</androidx.constraintlayout.widget.ConstraintLayout>

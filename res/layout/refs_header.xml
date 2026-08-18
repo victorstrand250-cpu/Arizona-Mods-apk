@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/_24sdp"
+    android:paddingRight="@dimen/_24sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/_24sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginRight="@dimen/_8sdp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            app:cardBackgroundColor="@color/transparent100"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="0.0dip">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:background="@drawable/referrals_count_bg"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingHorizontal="@dimen/_15sdp">
+                <TextView
+                    android:textSize="@dimen/_30sdp"
+                    android:textColor="#e5000000"
+                    android:id="@id/count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15"
+                    android:fontFamily="@font/heading_now_66_bold" />
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="#e5000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-6.0dip"
+                    android:text="Кол-во рефералов"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+            </LinearLayout>
+            <ImageView
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:src="@drawable/referrals_count_image"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true" />
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="0.0dip">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:background="@drawable/referrals_return_bg"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingHorizontal="@dimen/_15sdp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/_30sdp"
+                        android:textColor="@color/white"
+                        android:id="@id/cash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:fontFamily="@font/heading_now_66_bold" />
+                    <TextView
+                        android:textSize="@dimen/_16sdp"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:id="@id/currency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="$"
+                        android:fontFamily="@font/heading_now_66_bold"
+                        android:layout_marginStart="@dimen/_2sdp" />
+                </LinearLayout>
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-6.0dip"
+                    android:text="Возврат рефералам"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_66_bold" />
+            </LinearLayout>
+            <ImageView
+                android:layout_gravity="end"
+                android:id="@id/project_img"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:src="@drawable/referrals_return_image"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:text="Награды за рефералов"
+        android:fontFamily="@font/heading_64" />
+</LinearLayout>

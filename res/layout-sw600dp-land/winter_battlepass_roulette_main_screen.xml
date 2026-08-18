@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:paddingLeft="@dimen/_8sdp"
+    android:paddingTop="@dimen/_6sdp"
+    android:paddingRight="@dimen/_8sdp"
+    android:paddingBottom="@dimen/_3sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingHorizontal="@dimen/_8sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="5.0"
+        app:layout_constraintBottom_toTopOf="@id/old_prise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@id/btn_back"
+            android:background="@drawable/winter_battlepass_roulette_bg_white"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_16sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_6sdp"
+                android:layout_height="@dimen/_6sdp"
+                android:src="@drawable/battlepass_alert_ic_3"
+                android:layout_marginEnd="@dimen/_4sdp" />
+            <TextView
+                android:textSize="@dimen/_4sdp"
+                android:textColor="@color/battlepass_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выбор \nрулетки"
+                android:fontFamily="@font/pfdindisplaypro_medium" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            app:layout_constraintEnd_toStartOf="@id/dop_info"
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="parent">
+            <FrameLayout
+                android:id="@id/roulette"
+                android:layout_width="wrap_content"
+                android:layout_height="0.0dip"
+                android:layout_weight="7.0">
+                <ru.mrlargha.feature.battlepassWinter2025.roulette.RouletteView
+                    android:layout_gravity="center"
+                    android:id="@id/roulette_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent" />
+                <ImageView
+                    android:layout_gravity="start|center"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/winter_battlepass_roulette_arrow_right"
+                    android:scaleType="centerCrop" />
+                <ImageView
+                    android:layout_gravity="end|center"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/winter_battlepass_roulette_arrow_left"
+                    android:scaleType="fitCenter" />
+            </FrameLayout>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp">
+                <FrameLayout
+                    android:layout_gravity="center"
+                    android:id="@id/btn_sprint"
+                    android:background="@drawable/winter_battlepass_roulette_bg_white"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_24sdp">
+                    <TextView
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="@color/battlepass_text"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Крутить рулетку"
+                        android:fontFamily="@font/pfdindisplaypro_medium" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_14sdp"
+                    android:layout_marginRight="@dimen/_14sdp"
+                    android:layout_marginHorizontal="@dimen/_14sdp">
+                    <TextView
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Доступно попыток: "
+                        android:fontFamily="@font/pfdindisplaypro_medium"
+                        android:textAlignment="center" />
+                    <TextView
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:id="@id/attempsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:fontFamily="@font/pfdindisplaypro_medium"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@id/dop_info"
+            android:layout_width="@dimen/_124sdp"
+            android:layout_height="fill_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:scrollbarThumbVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_thumb"
+                android:scrollbarTrackVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_track"
+                android:scrollbarStyle="outsideInset"
+                android:id="@id/prise_list_rv"
+                android:paddingRight="@dimen/_4sdp"
+                android:scrollbars="vertical"
+                android:clipToPadding="false"
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_weight="1.0"
+                android:fadeScrollbars="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="5" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@drawable/winter_battlepass_roulette_bg_gradient_transparent"
+                android:paddingLeft="@dimen/_8sdp"
+                android:paddingRight="@dimen/_8sdp"
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.5"
+                android:paddingHorizontal="@dimen/_8sdp">
+                <View
+                    android:layout_width="1.0dip"
+                    android:layout_height="1.0dip"
+                    android:layout_weight="1.0" />
+                <TextView
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Купить попытки"
+                    android:layout_weight="1.0"
+                    android:fontFamily="@font/pfdindisplaypro_medium" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0">
+                    <TextView
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1 попытка -"
+                        android:fontFamily="@font/pfdindisplaypro_light"
+                        android:layout_marginEnd="@dimen/_12sdp" />
+                    <TextView
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:id="@id/textPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="999"
+                        android:fontFamily="@font/pfdindisplaypro_bold" />
+                    <ImageView
+                        android:id="@id/buttonPriceIconTop"
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:src="@drawable/battlepass_2025_ic_battlepoints"
+                        android:layout_marginStart="@dimen/_5sdp" />
+                    <TextView
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold"
+                        android:textColor="#ffffffff"
+                        android:id="@id/buttonPriceRubTop"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" RUB"
+                        android:drawablePadding="@dimen/_4sdp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0">
+                    <FrameLayout
+                        android:gravity="center"
+                        android:id="@id/btn_1"
+                        android:background="@drawable/winter_battlepass_roulette_bg_transparent_white"
+                        android:layout_width="@dimen/_26sdp"
+                        android:layout_height="@dimen/_26sdp">
+                        <TextView
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:id="@id/btn_1_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="x1" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:gravity="center"
+                        android:id="@id/btn_2"
+                        android:background="@drawable/winter_battlepass_roulette_bg_transparent_white"
+                        android:layout_width="@dimen/_26sdp"
+                        android:layout_height="@dimen/_26sdp"
+                        android:layout_marginLeft="@dimen/_9sdp"
+                        android:layout_marginRight="@dimen/_9sdp"
+                        android:layout_marginHorizontal="@dimen/_9sdp">
+                        <TextView
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:id="@id/btn_2_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5x" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:gravity="center"
+                        android:id="@id/btn_3"
+                        android:background="@drawable/winter_battlepass_roulette_bg_transparent_white"
+                        android:layout_width="@dimen/_26sdp"
+                        android:layout_height="@dimen/_26sdp">
+                        <TextView
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:id="@id/btn_3_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="x10" />
+                    </FrameLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:id="@id/btn_buy"
+                    android:background="@drawable/winter_battlepass_roulette_bg_white"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_weight="1.0">
+                    <TextView
+                        android:textSize="@dimen/_13sdp"
+                        android:textColor="@color/battlepass_text"
+                        android:id="@id/tv_buy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Купить"
+                        android:fontFamily="@font/pfdindisplaypro_regular"
+                        android:layout_marginEnd="@dimen/_8sdp" />
+                    <TextView
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold"
+                        android:textColor="@color/battlepass_text"
+                        android:id="@id/buttonPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="999"
+                        android:drawablePadding="@dimen/_4sdp" />
+                    <ImageView
+                        android:id="@id/buttonPriceIcon"
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:src="@drawable/battlepass_2025_ic_battlepoints"
+                        android:layout_marginStart="@dimen/_5sdp" />
+                    <TextView
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="bold"
+                        android:textColor="#ffffffff"
+                        android:id="@id/buttonPriceRub"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:text="RUB"
+                        android:drawablePadding="@dimen/_4sdp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/old_prise"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ПОСЛЕДНИЕ ВЫИГРЫШИ:"
+            android:fontFamily="@font/pfdindisplaypro_bolditalic" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:orientation="horizontal"
+            android:id="@id/old_prise_rv"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_50sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@id/old_prise_empty"
+            android:background="@drawable/winter_battlepass_roulette_empty_list_bg"
+            android:visibility="visible"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:text="Список призов пуст"
+            android:fontFamily="@font/pfdindisplaypro_medium"
+            android:textAlignment="center" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/starter_pack"
+    android:background="@drawable/starter_pack_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/_24sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginHorizontal="@dimen/_24sdp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginVertical="@dimen/_8sdp">
+            <TextView
+                android:textSize="@dimen/_18sdp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:id="@id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="СТАРТОВЫЕ НАБОРЫ"
+                android:layout_weight="1.0"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foreground="@drawable/starter_pack_close_stroke"
+                app:cardBackgroundColor="#33ffffff"
+                app:cardCornerRadius="@dimen/_6sdp"
+                app:cardElevation="0.0dip">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:id="@id/button_close"
+                    android:paddingLeft="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingRight="@dimen/_12sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingHorizontal="@dimen/_12sdp"
+                    android:paddingVertical="@dimen/_6sdp">
+                    <ImageView
+                        android:layout_width="@dimen/_13sdp"
+                        android:layout_height="@dimen/_13sdp"
+                        android:src="@drawable/starter_pack_close_ic" />
+                    <TextView
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:text="ЗАКРЫТЬ"
+                        android:fontFamily="@font/heading_now_66_bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="@dimen/_8sdp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="17.0"
+                app:cardBackgroundColor="#33ffffff"
+                app:cardCornerRadius="@dimen/_16sdp"
+                app:cardElevation="0.0dip">
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/starter_pack_bg_gradient" />
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/starter_pack_newbie_bg"
+                    android:scaleType="centerCrop" />
+                <ImageView
+                    android:layout_gravity="center"
+                    android:id="@id/bg1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/starter_pack_image1"
+                    android:scaleType="fitCenter" />
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/starter_pack_bg_gradient_overlay" />
+                <LinearLayout
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_4sdp">
+                    <TextView
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:id="@id/newbie_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Доступно до 3 уровня"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                    <TextView
+                        android:textSize="@dimen/_16sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:id="@id/tv_newbie_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="НАБОР НОВИЧКА"
+                        android:fontFamily="@font/heading_now_66_bold" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:orientation="horizontal"
+                        android:id="@id/rv_newbie"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:id="@id/button_1"
+                        android:background="@drawable/starter_pack_gradient_button1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/_28sdp">
+                        <TextView
+                            android:textSize="@dimen/_9sdp"
+                            android:textColor="#ff292929"
+                            android:gravity="center_vertical"
+                            android:id="@id/price1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="250 РУБЛЕЙ"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_weight="25.0"
+                app:cardBackgroundColor="#33ffffff"
+                app:cardCornerRadius="@dimen/_16sdp"
+                app:cardElevation="0.0dip">
+                <ImageView
+                    android:id="@id/iv_second_container_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/starter_pack_bg_gradient1" />
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/starter_pack_rich_bg"
+                    android:scaleType="centerCrop" />
+                <ImageView
+                    android:layout_gravity="center"
+                    android:id="@id/bg2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/starter_pack_image2"
+                    android:scaleType="fitCenter" />
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/starter_pack_bg_gradient_overlay" />
+                <LinearLayout
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_4sdp">
+                    <TextView
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:id="@id/rich_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Доступно до 3 уровня"
+                        android:fontFamily="@font/heading_now_64_regular" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_16sdp"
+                            android:textColor="@color/white"
+                            android:gravity="center_vertical"
+                            android:id="@id/tv_rich_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="НАБОР "
+                            android:fontFamily="@font/heading_now_66_bold" />
+                        <TextView
+                            android:textSize="@dimen/_16sdp"
+                            android:textColor="#fffea911"
+                            android:gravity="center_vertical"
+                            android:id="@id/tv_rich_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ОЛИГАРХА"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:orientation="horizontal"
+                        android:id="@id/rv_rich"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:id="@id/button_2"
+                        android:background="@drawable/starter_pack_gradient_button2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/_28sdp">
+                        <TextView
+                            android:textSize="@dimen/_9sdp"
+                            android:textColor="#80ffffff"
+                            android:gravity="center_vertical"
+                            android:id="@id/price2_old"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:text="500"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                        <TextView
+                            android:textSize="@dimen/_9sdp"
+                            android:textColor="#d9ffffff"
+                            android:gravity="center_vertical"
+                            android:id="@id/price2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="250 РУБЛЕЙ"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp">
+                    <FrameLayout
+                        android:id="@id/discount_container"
+                        android:background="@drawable/starter_pack_gradient_button2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_9sdp"
+                            android:textColor="#ffffffff"
+                            android:gravity="center_vertical"
+                            android:id="@id/discount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:text="ВЫГОДА 60%"
+                            android:fontFamily="@font/heading_now_66_bold"
+                            android:layout_marginHorizontal="@dimen/_10sdp"
+                            android:layout_marginVertical="@dimen/_4sdp" />
+                    </FrameLayout>
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:id="@id/time_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp">
+                        <ImageView
+                            android:layout_width="@dimen/_8sdp"
+                            android:layout_height="@dimen/_8sdp"
+                            android:src="@drawable/starter_pack_ic_timer" />
+                        <TextView
+                            android:textSize="@dimen/_7sdp"
+                            android:textColor="#d9ffffff"
+                            android:gravity="center_vertical"
+                            android:id="@id/time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:text="250 РУБЛЕЙ"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

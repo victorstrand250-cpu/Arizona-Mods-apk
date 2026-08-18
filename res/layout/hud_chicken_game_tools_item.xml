@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:id="@id/hud_imposter_game_item1"
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginRight="@dimen/_4sdp"
+        app:backgroundMainColor="#ff3c83d7"
+        app:backgroundSecondColor="#ff00234d"
+        app:borderGradientAngle="90"
+        app:borderMainColor="#1affffff"
+        app:borderSecondColor="@color/transparent100"
+        app:borderWidth="@dimen/_2sdp"
+        app:corners="@dimen/_4sdp"
+        app:gradientType="radial"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/hud_menu_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:radialGradientRadius="@dimen/_14sdp">
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@id/iv_item"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/hud_imposter_game_tasks" />
+        <ImageView
+            android:layout_gravity="right"
+            android:id="@id/iv_ic"
+            android:visibility="gone"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:layout_margin="@dimen/_2sdp"
+            android:src="@drawable/rodina_quest_done_icon" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="start|bottom|center"
+            android:id="@id/tv_count"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_2sdp"
+            android:text="0"
+            android:fontFamily="@font/heading_64" />
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+</FrameLayout>

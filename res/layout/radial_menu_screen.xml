@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/radial_menu"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include
+        android:id="@id/center_element"
+        android:layout_width="@dimen/_105sdp"
+        android:layout_height="@dimen/_105sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/radial_menu_center_element" />
+    <include
+        android:id="@id/top_item"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintBottom_toTopOf="@id/center_element"
+        app:layout_constraintEnd_toEndOf="@id/center_element"
+        app:layout_constraintStart_toStartOf="@id/center_element"
+        layout="@layout/radial_menu_item" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/left_items_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/center_element"
+        app:layout_constraintEnd_toStartOf="@id/center_element"
+        app:layout_constraintTop_toTopOf="@id/center_element">
+        <include
+            android:layout_gravity="end"
+            android:id="@id/left_first_item"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            layout="@layout/radial_menu_item" />
+        <include
+            android:id="@id/left_second_item"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            layout="@layout/radial_menu_item" />
+        <include
+            android:layout_gravity="end"
+            android:id="@id/left_third_item"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            layout="@layout/radial_menu_item" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/right_items_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/center_element"
+        app:layout_constraintStart_toEndOf="@id/center_element"
+        app:layout_constraintTop_toTopOf="@id/center_element">
+        <include
+            android:layout_gravity="start"
+            android:id="@id/right_first_item"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            layout="@layout/radial_menu_item" />
+        <include
+            android:id="@id/right_second_item"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            layout="@layout/radial_menu_item" />
+        <include
+            android:layout_gravity="start"
+            android:id="@id/right_third_item"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            layout="@layout/radial_menu_item" />
+    </LinearLayout>
+    <include
+        android:id="@id/bottom_item"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="30.0dip"
+        android:layout_marginTop="16.0dip"
+        app:layout_constraintEnd_toEndOf="@id/center_element"
+        app:layout_constraintStart_toStartOf="@id/center_element"
+        app:layout_constraintTop_toBottomOf="@id/center_element"
+        layout="@layout/radial_menu_bottom_items" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@id/ivReward"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:src="@drawable/ic_task_reward_test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.textview.MaterialTextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold"
+        android:textColor="@color/grey_type7"
+        android:gravity="center"
+        android:id="@id/tvRewardDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:maxWidth="@dimen/_60sdp"
+        android:fontFamily="@font/pfdindisplaypro_light"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="@id/ivReward"
+        app:layout_constraintStart_toStartOf="@id/ivReward"
+        app:layout_constraintTop_toBottomOf="@id/ivReward" />
+</androidx.constraintlayout.widget.ConstraintLayout>

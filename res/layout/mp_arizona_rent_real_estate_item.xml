@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:paddingLeft="@dimen/_6sdp"
+    android:paddingTop="@dimen/_6sdp"
+    android:paddingRight="@dimen/_6sdp"
+    android:paddingBottom="@dimen/_6sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/_6sdp"
+    android:paddingVertical="@dimen/_6sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:textSize="@dimen/_5sdp"
+        android:textColor="#99ffffff"
+        android:id="@id/tv_real_estate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="true"
+        android:fontFamily="@font/heading_now_66_bold" />
+    <TextView
+        android:textSize="@dimen/_4sdp"
+        android:textColor="@color/red"
+        android:id="@id/tv_published"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/published"
+        android:textAllCaps="true"
+        android:fontFamily="@font/heading_now_66_bold"
+        android:layout_marginStart="@dimen/_2sdp" />
+</LinearLayout>

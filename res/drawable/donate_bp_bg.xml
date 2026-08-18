@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="32.0dip"
+    android:width="100.0dip"
+    android:alpha="0.9"
+    android:viewportWidth="148.0"
+    android:viewportHeight="32.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$donate_bp_bg__0"
+        android:pathData="M0,10C0,4.48 4.48,0 10,0H138C143.52,0 148,4.48 148,10V22C148,27.52 143.52,32 138,32H10C4.48,32 0,27.52 0,22V10Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M10,0.5H138C143.25,0.5 147.5,4.75 147.5,10V22C147.5,27.25 143.25,31.5 138,31.5H10C4.75,31.5 0.5,27.25 0.5,22V10C0.5,4.75 4.75,0.5 10,0.5Z"
+        android:strokeColor="#ffffffff"
+        android:strokeWidth="1.0"
+        android:strokeAlpha="0.3" />
+</vector>

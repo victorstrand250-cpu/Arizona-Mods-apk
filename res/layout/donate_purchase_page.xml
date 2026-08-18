@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
+        android:id="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:text="@string/purchase_title"
+        android:textAllCaps="true"
+        android:fontFamily="@font/heading_now_66_bold" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarThumbHorizontal="@drawable/donate_scrollbar_thumb"
+        android:scrollbarTrackHorizontal="@drawable/donate_scrollbar_track"
+        android:scrollbarStyle="outsideInset"
+        android:orientation="horizontal"
+        android:id="@id/rv_purchase_items"
+        android:paddingBottom="@dimen/_16sdp"
+        android:scrollbars="horizontal"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:verticalScrollbarPosition="left"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+</LinearLayout>

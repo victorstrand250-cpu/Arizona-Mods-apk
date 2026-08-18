@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center|right"
+    android:orientation="horizontal"
+    android:background="#00000000"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:padding="@dimen/_12sdp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_24sdp"
+        app:backgroundMainColor="@color/white"
+        app:corners="@dimen/_8sdp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:textSize="@dimen/_8sdp"
+                android:textColor="#ff223144"
+                android:id="@id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Обычный доход в час"
+                android:fontFamily="@font/heading_now_64_regular" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:src="@drawable/dollar_universal"
+                    android:tint="#ff223144" />
+                <TextView
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="#ff223144"
+                    android:id="@id/money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:text="10000"
+                    android:fontFamily="@font/heading_now_65_medium" />
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:scrollbarThumbVertical="@drawable/rodina_vert_scroll_thumb"
+                android:scrollbarTrackVertical="@drawable/rodina_vert_scrollbar_track"
+                android:id="@id/rv_info"
+                android:scrollbars="vertical"
+                android:clipToPadding="false"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:layout_weight="1.0"
+                android:fadeScrollbars="false"
+                android:verticalScrollbarPosition="right"
+                android:layout_marginVertical="@dimen/_4sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="#ff223144"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Итого в час ~ "
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/heading_now_65_medium" />
+                <ImageView
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:src="@drawable/dollar_universal"
+                    android:tint="#ff223144" />
+                <TextView
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="#ff223144"
+                    android:id="@id/total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:text=" 80000000000"
+                    android:layout_weight="1.0"
+                    android:fontFamily="@font/heading_now_65_medium" />
+                <ru.mrlargha.commonui.utils.ui.CustomCardView
+                    android:paddingLeft="@dimen/_4sdp"
+                    android:paddingRight="@dimen/_4sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    app:backgroundMainColor="#ff8dff8d"
+                    app:corners="@dimen/_4sdp">
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="#ff3a693a"
+                        android:layout_gravity="center"
+                        android:id="@id/total_bonus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+4%"
+                        android:fontFamily="@font/heading_now_66_bold" />
+                </ru.mrlargha.commonui.utils.ui.CustomCardView>
+            </LinearLayout>
+        </LinearLayout>
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+</LinearLayout>

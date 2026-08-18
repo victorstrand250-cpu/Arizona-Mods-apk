@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="vertical"
+    android:id="@id/phone_application_container"
+    android:layout_width="52.0dip"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/mobile_phone_icon"
+        android:layout_width="32.0dip"
+        android:layout_height="32.0dip"
+        android:src="@drawable/mp_report_ic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="8.0dip"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@id/mobile_phone_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="8.0dip"
+        android:layout_marginTop="1.0dip"
+        android:text="Мой Транспорт"
+        android:fontFamily="@font/gotham"
+        android:textAlignment="center"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="3.0sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mobile_phone_icon" />
+    <FrameLayout
+        android:id="@id/unread_meassage_container"
+        android:background="@drawable/hud_message_bg"
+        android:paddingLeft="@dimen/_4sdp"
+        android:paddingRight="@dimen/_4sdp"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:textSize="6.0sp"
+            android:textColor="@color/white"
+            android:id="@id/tv_message_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/rewards_layout"
+    android:focusable="true"
+    android:clickable="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/layout_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/linking_bg"
+        android:scaleType="fitXY" />
+    <ImageView
+        android:id="@id/exit_button"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:src="@drawable/linking_exit_ic"
+        android:adjustViewBounds="true"
+        app:layout_constraintRight_toRightOf="@id/right_line"
+        app:layout_constraintTop_toTopOf="@id/top_line"
+        app:layout_constraintWidth_percent="0.0625" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/title_container"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintRight_toLeftOf="@id/exit_button"
+        app:layout_constraintTop_toTopOf="@id/top_line">
+        <TextView
+            android:textSize="@dimen/_26sdp"
+            android:textColor="@color/white"
+            android:gravity="left"
+            android:id="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="НАГРАДА ЗА ВОЗВРАЩЕНИЕ"
+            android:fontFamily="@font/pfdbold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/prizes_top_line"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@id/title_container"
+        app:layout_constraintWidth_percent="0.5327">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="@color/white"
+            android:id="@id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Привяжите свой игровой аккаунт к VK или Telegram, чтобы\nего не смогли взломать злоумышленники. В качестве\nнаграды за привязку соц. сетей вы сможете получить:\n\n\n\n\n bla bla"
+            android:fontFamily="@font/pfdbold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/prizes_top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.47" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/prizes_second_top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.63" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintHeight_percent="0.1432"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@id/prizes_top_line"
+        app:layout_constraintWidth_percent="0.2045">
+        <include
+            android:id="@id/first_item"
+            layout="@layout/rewards_layout_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/second_column_prizes_left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.617" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/linking_offer_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintHeight_percent="0.1432"
+        app:layout_constraintLeft_toLeftOf="@id/second_column_prizes_left_line"
+        app:layout_constraintTop_toBottomOf="@id/prizes_top_line"
+        app:layout_constraintWidth_percent="0.3127">
+        <include
+            android:id="@id/first_long_item"
+            layout="@layout/rewards_layout_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/linking_offer_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintHeight_percent="0.1432"
+        app:layout_constraintLeft_toLeftOf="@id/second_column_prizes_left_line"
+        app:layout_constraintTop_toBottomOf="@id/prizes_second_top_line"
+        app:layout_constraintWidth_percent="0.3127">
+        <include
+            android:id="@id/second_long_item"
+            layout="@layout/rewards_layout_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintHeight_percent="0.1432"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@id/prizes_second_top_line"
+        app:layout_constraintWidth_percent="0.2045">
+        <include
+            android:id="@id/second_item"
+            layout="@layout/rewards_layout_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@id/action_button"
+        android:background="@drawable/rewards_action_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintHeight_percent="0.112"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintTop_toTopOf="@id/action_button_top_line"
+        app:layout_constraintWidth_percent="0.5291">
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:textColor="#ff000000"
+            android:id="@id/action_button_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Получить"
+            android:fontFamily="@font/pfdbold" />
+    </LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/action_button_top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.8" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.4014" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/right_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.9791" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.037" />
+</androidx.constraintlayout.widget.ConstraintLayout>

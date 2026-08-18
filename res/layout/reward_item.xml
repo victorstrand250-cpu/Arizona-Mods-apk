@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="@dimen/_60sdp"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/_34sdp"
+        android:layout_height="@dimen/_34sdp"
+        app:cardBackgroundColor="#ff0d1011"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:cardElevation="0.0dip"
+        app:strokeColor="#1affffff"
+        app:strokeWidth="@dimen/_1sdp">
+        <ImageView
+            android:id="@id/image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="@dimen/_1sdp" />
+        <View
+            android:layout_gravity="bottom"
+            android:id="@id/color_bottom"
+            android:background="@color/yellow"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginHorizontal="@dimen/_8sdp" />
+        <FrameLayout
+            android:gravity="center"
+            android:id="@id/recieved"
+            android:background="#00000000"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:src="@drawable/recieved_ic_promo" />
+        </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <TextView
+        android:textSize="@dimen/_5sdp"
+        android:textColor="#d9ffffff"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@id/text"
+        android:layout_width="@dimen/_56sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:maxLines="2"
+        android:fontFamily="@font/heading_now_64_regular" />
+</LinearLayout>

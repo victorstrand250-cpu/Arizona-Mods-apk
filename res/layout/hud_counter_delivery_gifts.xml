@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_40sdp"
+        android:src="@drawable/hud_counter_delivery_gifts_bg"
+        android:adjustViewBounds="true" />
+    <LinearLayout
+        android:layout_gravity="end|bottom|center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_3sdp">
+        <LinearLayout
+            android:gravity="center"
+            android:background="@drawable/hud_counter_delivery_gifts_item_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp">
+            <TextView
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:id="@id/tv_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/hud_counter_delivery_gifts_item_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:paddingStart="@dimen/_3sdp">
+            <TextView
+                android:textSize="@dimen/_4sdp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="прогресс"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <TextView
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:id="@id/tv_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_minus5sdp"
+                android:text="0/10"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

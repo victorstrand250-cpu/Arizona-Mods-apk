@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="200.0dip"
+    android:width="200.0dip"
+    android:viewportWidth="650.0"
+    android:viewportHeight="850.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$task_bg__0"
+        android:pathData="M0,25C0,11.19 11.19,0 25,0H625C638.81,0 650,11.19 650,25V850H0V25Z"
+        android:fillAlpha="0.15" />
+</vector>

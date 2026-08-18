@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:orientation="vertical"
+    android:padding="@dimen/_2sdp"
+    android:layout_width="@dimen/_180sdp"
+    android:layout_height="@dimen/_180sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/bg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/event_shop_item_bg"
+        android:adjustViewBounds="true" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:padding="@dimen/_12sdp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Пасхальный рюкзак кролика"
+            android:fontFamily="@font/heading_now_66_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@id/iv_name"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:src="@drawable/baseline_warning_24"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toTopOf="@id/btn_unselect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        <LinearLayout
+            android:gravity="center"
+            android:id="@id/btn_unselect"
+            android:background="@drawable/event_tab_unselect_bg"
+            android:visibility="invisible"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:layout_width="@dimen/_6sdp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_mark"
+                android:layout_marginEnd="@dimen/_3sdp" />
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Получено" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@id/btn_select"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <LinearLayout
+                android:gravity="center"
+                android:background="@drawable/event_shop_unselect_button_bg"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="3.0"
+                android:layout_marginEnd="@dimen/_2sdp">
+                <TextView
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2500" />
+                <ImageView
+                    android:id="@id/iv_currency"
+                    android:layout_width="@dimen/_11sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:src="@drawable/event_coin" />
+            </LinearLayout>
+            <TextView
+                android:textSize="@dimen/_8sdp"
+                android:textColor="#ff16191d"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@id/buy_button"
+                android:background="@drawable/event_shop_select_button_bg"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:text="Купить"
+                android:layout_weight="4.0" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

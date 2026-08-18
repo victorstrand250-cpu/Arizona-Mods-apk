@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/border_radius_5"
+    android:padding="@dimen/_4sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_6sdp"
+    android:backgroundTint="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/grey_type7"
+        android:gravity="center"
+        android:id="@id/tvStage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gotham_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/grey_type7"
+        android:gravity="start"
+        android:id="@id/tvStageDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4.0dip"
+        android:fontFamily="@font/gotham_medium"
+        app:layout_constraintStart_toStartOf="@id/tvStage"
+        app:layout_constraintTop_toBottomOf="@id/tvStage" />
+    <TextView
+        android:textSize="@dimen/_16sdp"
+        android:textColor="@color/grey_type7"
+        android:gravity="center"
+        android:id="@id/tvStageCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gotham_medium"
+        android:textFontWeight="700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/grey_type7"
+        android:id="@id/tvProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4.0dip"
+        android:text="Прогресс"
+        android:fontFamily="@font/gotham"
+        app:layout_constraintEnd_toEndOf="@id/tvStageCount"
+        app:layout_constraintTop_toBottomOf="@id/tvStageCount" />
+    <TextView
+        android:textSize="@dimen/_7sdp"
+        android:textColor="@color/white"
+        android:id="@id/tvDone"
+        android:background="@drawable/border_radius_20"
+        android:padding="8.0dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Завершено"
+        android:fontFamily="@font/gotham"
+        android:backgroundTint="@color/green_type6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

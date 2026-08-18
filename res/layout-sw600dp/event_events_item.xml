@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginLeft="@dimen/_4sdp"
+    android:layout_marginRight="@dimen/_4sdp"
+    android:layout_marginHorizontal="@dimen/_4sdp"
+    app:cardCornerRadius="@dimen/_20sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/iv_event_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:foreground="@drawable/event_event_item_bg"
+        android:src="@drawable/event_event_item_bg_test"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true" />
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="@dimen/_12sdp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/white"
+            android:id="@id/tv_event_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="КУРИНЫЙ БУМ!"
+            android:fontFamily="@font/heading_now_66_bold" />
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="@color/white"
+            android:id="@id/tv_event_description"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:text="Описание мероприятия, описание мероприятия, описание мероприятия, описание мероприятия, описание мероприятия, описание мероприятия, описание мероприятия"
+            android:maxLines="4"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginVertical="@dimen/_6sdp">
+            <include
+                android:id="@id/item1"
+                layout="@layout/event_prise_item_event" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/item2"
+                layout="@layout/event_prise_item_event" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/item3"
+                layout="@layout/event_prise_item_event" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="left"
+                android:layout_gravity="start"
+                android:id="@id/players_container"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0">
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Участников"
+                    android:fontFamily="@font/pfdindisplaypro_regular"
+                    android:layout_marginEnd="@dimen/_4sdp" />
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/tv_participants"
+                    android:background="@drawable/event_event_item_transparent_gray_bg"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="100 / 100" />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="right"
+                android:layout_gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0">
+                <TextView
+                    android:textSize="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Попыток"
+                    android:fontFamily="@font/pfdindisplaypro_regular"
+                    android:layout_marginEnd="@dimen/_4sdp" />
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/tv_attempts_available"
+                    android:background="@drawable/event_event_item_transparent_gray_bg"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1/5" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff3d3d3d"
+            android:gravity="center"
+            android:id="@id/btn_join"
+            android:background="@drawable/event_event_btn_bg"
+            android:paddingTop="@dimen/_9sdp"
+            android:paddingBottom="@dimen/_9sdp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:text="Присоединиться"
+            android:fontFamily="@font/pfdindisplaypro_medium"
+            android:paddingVertical="@dimen/_9sdp" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@id/error_overlay"
+        android:background="#cb191d22"
+        android:padding="@dimen/_20sdp"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:src="@drawable/event_task_ic_lock"
+            android:adjustViewBounds="true" />
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:textColor="#ffffe419"
+            android:gravity="center"
+            android:id="@id/tv_error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:text="Будет доступно через"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

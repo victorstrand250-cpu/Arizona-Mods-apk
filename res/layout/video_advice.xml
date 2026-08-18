@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@id/video_advice"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.media3.ui.PlayerView
+        android:layout_gravity="center"
+        android:id="@id/video_advice_bg"
+        android:focusable="false"
+        android:clickable="false"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:resize_mode="zoom"
+        app:use_controller="false" />
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_gravity="end|bottom|center"
+        android:id="@id/skip_quest"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_40sdp">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:text="Пропустить ролик?"
+            android:fontFamily="@font/heading_now_trial_66_bold"
+            android:layout_marginEnd="@dimen/_4sdp" />
+        <FrameLayout
+            android:id="@id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:src="@drawable/hud_skip_button_bg"
+                android:adjustViewBounds="true" />
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:src="@drawable/hud_skip_button_arrow"
+                android:adjustViewBounds="true"
+                android:layout_marginStart="@dimen/_8sdp" />
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="78.0dip"
+    android:width="233.0dip"
+    android:viewportWidth="233.0"
+    android:viewportHeight="78.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$hud_counter_search_crystals_item_bg__0"
+        android:pathData="M0,68.75C0,73.86 4.14,78 9.25,78H223.25C228.36,78 232.5,73.86 232.5,68.75V9.25C232.5,4.14 228.36,-0 223.25,-0H9.25C4.14,-0 0,4.14 0,9.25V68.75Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M9.25,77H223.25C227.81,77 231.5,73.31 231.5,68.75V9.25C231.5,4.69 227.81,1 223.25,1H9.25C4.69,1 1,4.69 1,9.25V68.75C1,73.31 4.69,77 9.25,77Z"
+        android:strokeColor="#ff7ed1f4"
+        android:strokeWidth="2.0" />
+</vector>

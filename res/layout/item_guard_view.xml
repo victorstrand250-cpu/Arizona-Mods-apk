@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/layout_guard_info"
+    android:background="@color/blue_green"
+    android:layout_width="76.0dip"
+    android:layout_height="160.0dip"
+    android:layout_marginTop="20.0dip"
+    android:layout_marginStart="40.0dip"
+    app:layout_constraintStart_toEndOf="@id/rvMainInventory"
+    app:layout_constraintTop_toBottomOf="@id/tvGuardName"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvGuardType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:text="Rare"
+        android:layout_marginEnd="8.0dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@id/ivGuardSkin"
+        android:layout_width="52.0dip"
+        android:layout_height="118.0dip"
+        android:src="@drawable/ic_guard_test_skin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/tvGuardLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4.0dip"
+        android:text="30 уровень"
+        android:layout_marginEnd="4.0dip"
+        app:layout_constraintBottom_toTopOf="@id/tvGuardHealth"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/white"
+        android:id="@id/tvGuardHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8.0dip"
+        android:text="2000/8000"
+        android:layout_marginEnd="4.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

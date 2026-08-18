@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="horizontal"
+    android:id="@id/auction_item_layout"
+    android:layout_width="75.0dip"
+    android:layout_height="75.0dip"
+    android:layout_marginRight="10.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:orientation="horizontal"
+        android:id="@id/auction_item_card"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:cardBackgroundColor="#00ffffff"
+        app:cardElevation="0.0dip"
+        app:cardMaxElevation="0.0dip"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:background="@drawable/auction_item_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_gravity="right"
+            android:id="@id/ac_hot"
+            android:visibility="invisible"
+            android:layout_width="6.0dip"
+            android:layout_height="6.0dip"
+            android:layout_marginTop="6.0dip"
+            android:layout_marginRight="6.0dip"
+            android:src="@drawable/ic_auction_fire" />
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:id="@id/ac_multiplayer"
+            android:background="@drawable/container_multiplayer_bg"
+            android:visibility="invisible"
+            android:layout_width="10.0dip"
+            android:layout_height="10.0dip"
+            android:layout_marginTop="4.0dip"
+            android:layout_marginRight="4.0dip">
+            <TextView
+                android:textSize="@dimen/_3sdp"
+                android:textColor="#ffffffff"
+                android:id="@id/ac_multiplayer_tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="x10"
+                android:alpha="0.5"
+                android:fontFamily="@font/gotham" />
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_gravity="center"
+            android:id="@id/container_item_image"
+            android:layout_width="55.0dip"
+            android:layout_height="55.0dip"
+            android:src="@drawable/container_item" />
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="#ffffffff"
+            android:layout_gravity="bottom"
+            android:id="@id/container_item_tittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4.0dip"
+            android:layout_marginBottom="8.0dip"
+            android:text="Обычный контейнер"
+            android:fontFamily="@font/gotham" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

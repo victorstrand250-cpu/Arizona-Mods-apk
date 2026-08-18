@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="185.0dip"
+    android:width="1080.0dip"
+    android:viewportWidth="1080.0"
+    android:viewportHeight="185.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$battlepass_2025_button_buy_levelbackground_battlepass_buy_levels__0"
+        android:pathData="M32,0L1048,0A32,32 0,0 1,1080 32L1080,153A32,32 0,0 1,1048 185L32,185A32,32 0,0 1,0 153L0,32A32,32 0,0 1,32 0z"
+        android:fillAlpha="0.6" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M32,1L1048,1A31,31 0,0 1,1079 32L1079,153A31,31 0,0 1,1048 184L32,184A31,31 0,0 1,1 153L1,32A31,31 0,0 1,32 1z"
+        android:strokeColor="#cbffffff"
+        android:strokeWidth="2.0"
+        android:strokeAlpha="0.8" />
+</vector>

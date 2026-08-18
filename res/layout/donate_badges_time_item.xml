@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="@dimen/_8sdp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hud_timer_time_icon"
+        android:adjustViewBounds="true"
+        android:scaleX="-1.0" />
+    <TextView
+        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/white"
+        android:id="@id/tv_left_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_hour_minute"
+        android:fontFamily="@font/heading_now_65_medium"
+        android:layout_marginStart="@dimen/_4sdp" />
+</LinearLayout>

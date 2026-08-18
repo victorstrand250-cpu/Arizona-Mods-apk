@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="@dimen/_90sdp"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@id/iv_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hud_counter_space_race_1_bg"
+        android:adjustViewBounds="true" />
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_gravity="bottom"
+        android:paddingLeft="@dimen/_4sdp"
+        android:paddingRight="@dimen/_4sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_4sdp">
+        <include
+            android:layout_gravity="start"
+            android:id="@id/first_item"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_weight="1.0"
+            layout="@layout/hud_counter_item" />
+        <FrameLayout
+            android:layout_width="@dimen/_2sdp"
+            android:layout_height="fill_parent" />
+        <include
+            android:layout_gravity="start"
+            android:id="@id/second_item"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_weight="1.0"
+            layout="@layout/hud_counter_item" />
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="128.0dip"
+    android:width="200.0dip"
+    android:viewportWidth="200.0"
+    android:viewportHeight="128.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$ic_btn_doors__0"
+        android:pathData="M64,0L136,0A64,64 0,0 1,200 64L200,64A64,64 0,0 1,136 128L64,128A64,64 0,0 1,0 64L0,64A64,64 0,0 1,64 0z" />
+    <path
+        android:fillColor="@drawable/$ic_btn_doors__1"
+        android:pathData="M67,6L133,6A58,58 0,0 1,191 64L191,64A58,58 0,0 1,133 122L67,122A58,58 0,0 1,9 64L9,64A58,58 0,0 1,67 6z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M67,7L133,7A57,57 0,0 1,190 64L190,64A57,57 0,0 1,133 121L67,121A57,57 0,0 1,10 64L10,64A57,57 0,0 1,67 7z"
+        android:strokeColor="@drawable/$ic_btn_doors__2"
+        android:strokeWidth="2.0"
+        android:strokeAlpha="0.5" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M67,7L133,7A57,57 0,0 1,190 64L190,64A57,57 0,0 1,133 121L67,121A57,57 0,0 1,10 64L10,64A57,57 0,0 1,67 7z"
+        android:strokeColor="@drawable/$ic_btn_doors__3"
+        android:strokeWidth="2.0"
+        android:strokeAlpha="0.5" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M67,7L133,7A57,57 0,0 1,190 64L190,64A57,57 0,0 1,133 121L67,121A57,57 0,0 1,10 64L10,64A57,57 0,0 1,67 7z"
+        android:strokeColor="@drawable/$ic_btn_doors__4"
+        android:strokeWidth="2.0"
+        android:strokeAlpha="0.5" />
+    <path
+        android:fillColor="@drawable/$ic_btn_doors__5"
+        android:pathData="M74,45C68.48,45 64,49.48 64,55V89C64,94.52 68.48,99 74,99H87C92.52,99 97,94.52 97,89V55C97,49.48 92.52,45 87,45H74ZM89,70.5V58.5C89,53.81 85.19,50 80.5,50C75.81,50 72,53.81 72,58.5V70.5C72,75.19 75.81,79 80.5,79C85.19,79 89,75.19 89,70.5Z"
+        android:fillType="evenOdd" />
+    <path
+        android:fillColor="@drawable/$ic_btn_doors__6"
+        android:pathData="M112,45C106.48,45 102,49.48 102,55V89C102,94.52 106.48,99 112,99H125C130.52,99 135,94.52 135,89V55C135,49.48 130.52,45 125,45H112ZM127,70.5V58.5C127,53.81 123.19,50 118.5,50C113.81,50 110,53.81 110,58.5V70.5C110,75.19 113.81,79 118.5,79C123.19,79 127,75.19 127,70.5Z"
+        android:fillType="evenOdd" />
+    <path
+        android:fillColor="@drawable/$ic_btn_doors__7"
+        android:pathData="M87.63,36.44V33.87H111.38V36.44C111.45,36.82 111.61,37.17 111.85,37.47C112.08,37.77 112.39,38.01 112.74,38.17C113.09,38.32 113.47,38.39 113.86,38.37C114.24,38.35 114.61,38.23 114.94,38.03L122.35,33.09C122.62,32.92 122.84,32.69 122.99,32.41C123.15,32.13 123.23,31.82 123.23,31.5C123.23,31.18 123.15,30.87 122.99,30.59C122.84,30.31 122.62,30.08 122.35,29.91L114.94,24.97C114.61,24.77 114.24,24.65 113.86,24.63C113.47,24.61 113.09,24.68 112.74,24.83C112.39,24.99 112.08,25.23 111.85,25.53C111.61,25.83 111.45,26.18 111.38,26.56V29.12H87.63V26.56C87.55,26.18 87.39,25.83 87.15,25.53C86.92,25.23 86.61,24.99 86.26,24.83C85.91,24.68 85.53,24.61 85.14,24.63C84.76,24.65 84.39,24.77 84.06,24.97L76.65,29.91C76.38,30.08 76.16,30.31 76.01,30.59C75.85,30.87 75.77,31.18 75.77,31.5C75.77,31.82 75.85,32.13 76.01,32.41C76.16,32.69 76.38,32.92 76.65,33.09L84.06,38.03C84.39,38.23 84.76,38.35 85.14,38.37C85.53,38.39 85.91,38.32 86.26,38.17C86.61,38.01 86.92,37.77 87.15,37.47C87.39,37.17 87.55,36.82 87.63,36.44Z" />
+</vector>

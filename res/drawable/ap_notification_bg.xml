@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="145.0dip"
+    android:width="500.0dip"
+    android:viewportWidth="500.0"
+    android:viewportHeight="145.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$ap_notification_bg__0"
+        android:pathData="M0,0h500v145h-500z"
+        android:fillAlpha="0.5" />
+</vector>

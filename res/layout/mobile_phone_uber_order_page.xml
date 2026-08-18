@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/mp_uber_order_page"
+    android:layout_width="160.0dip"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/mp_uber_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8.0dip"
+        android:layout_marginTop="16.0dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/mp_uber_header_back"
+            android:layout_width="16.0dip"
+            android:layout_height="16.0dip"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="10.0dip"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@id/mp_uber_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arizona Uber"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:textSize="12.0dip"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:id="@id/mp_uber_order_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32.0dip"
+        android:text="Водитель уже в пути!"
+        android:fontFamily="@font/gotham"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mp_uber_header" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/mp_uber_driver_container"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15.0dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mp_uber_order_title">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/mp_uber_driver_image"
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:src="@drawable/uber_driver"
+            android:elevation="5.0dip"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="8.0dip"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@id/mp_uber_driver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="John Brown"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mp_uber_driver_image" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/mp_uber_driver_review_image"
+            android:layout_width="12.0dip"
+            android:layout_height="12.0dip"
+            android:layout_marginLeft="8.0dip"
+            android:layout_marginTop="4.0dip"
+            android:src="@drawable/ic_star_active"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mp_uber_driver_name" />
+        <TextView
+            android:textSize="10.0dip"
+            android:textStyle="bold"
+            android:textColor="#fffdb936"
+            android:id="@id/mp_uber_driver_review_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2.0dip"
+            android:text="5.0"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintBottom_toBottomOf="@id/mp_uber_driver_review_image"
+            app:layout_constraintLeft_toRightOf="@id/mp_uber_driver_review_image"
+            app:layout_constraintTop_toTopOf="@id/mp_uber_driver_review_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/mp_uber_priority"
+        android:background="@drawable/ic_mobile_phone_uber_taxi_shield"
+        android:layout_width="72.0dip"
+        android:layout_height="40.0dip"
+        android:layout_marginTop="16.0dip"
+        app:layout_constraintLeft_toLeftOf="@id/mp_uber_driver_container"
+        app:layout_constraintRight_toRightOf="@id/mp_uber_driver_container"
+        app:layout_constraintTop_toBottomOf="@id/mp_uber_driver_container">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/mp_uber_priority_image"
+            android:layout_width="28.0dip"
+            android:layout_height="24.0dip"
+            android:layout_marginLeft="4.0dip"
+            android:src="@drawable/ic_uber_econom_car"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="8.0dip"
+            android:textStyle="normal"
+            android:textColor="@color/black"
+            android:id="@id/mp_uber_priority_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4.0dip"
+            android:layout_marginTop="2.0dip"
+            android:text="Эконом"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintBottom_toBottomOf="@id/mp_uber_priority_description"
+            app:layout_constraintLeft_toRightOf="@id/mp_uber_priority_image"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="6.0dip"
+            android:textStyle="normal"
+            android:textColor="@color/black"
+            android:id="@id/mp_uber_priority_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4.0dip"
+            android:layout_marginTop="2.0dip"
+            android:text="от 1000$"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintLeft_toRightOf="@id/mp_uber_priority_image"
+            app:layout_constraintTop_toBottomOf="@id/mp_uber_priority_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/mp_uber_action_button"
+        android:background="@drawable/border_radius"
+        android:layout_width="144.0dip"
+        android:layout_height="28.0dip"
+        android:layout_marginTop="32.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mp_uber_priority">
+        <TextView
+            android:textSize="10.0dip"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@id/mp_uber_action_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Отменить заказ"
+            android:fontFamily="@font/gotham"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:id="@id/aci_background"
+    android:background="@drawable/ic_category_button_disabled"
+    android:layout_width="68.0dip"
+    android:layout_height="20.0dip"
+    android:layout_marginLeft="2.0dip"
+    android:layout_marginTop="4.0dip"
+    android:layout_marginRight="2.0dip"
+    android:layout_marginBottom="4.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:textSize="@dimen/_5sdp"
+        android:textStyle="normal"
+        android:textColor="#ffffffff"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@id/aci_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2.0dip"
+        android:layout_marginRight="2.0dip"
+        android:text="Уникальные анимации [NEW]"
+        android:fontFamily="@font/heading_now_64_regular"
+        android:autoSizeMinTextSize="5.0sp" />
+</LinearLayout>

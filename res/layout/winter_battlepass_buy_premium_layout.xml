@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:id="@id/item_level_background_usual"
+        android:layout_width="@dimen/_134sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_160sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginVertical="@dimen/_8sdp">
+        <TextView
+            android:textSize="@dimen/_13sdp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ПОКУПКА "
+            android:fontFamily="@font/heading_now_65" />
+        <ru.mrlargha.commonui.utils.ui.GradientText.ArizonaGradientTextView
+            android:textSize="@dimen/_13sdp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PREMIUM"
+            android:fontFamily="@font/heading_now_65"
+            app:endColor="@color/battlepass5"
+            app:startColor="@color/battlepass4" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="end"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_31sdp">
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:layout_gravity="end"
+            android:paddingLeft="@dimen/_4sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingRight="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_4sdp"
+            android:paddingVertical="@dimen/_6sdp"
+            app:backgroundMainColor="#33ffffff"
+            app:corners="@dimen/_6sdp">
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bp_info_ic"
+                    android:adjustViewBounds="true" />
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="@dimen/_340sdp"
+                    android:text="ВНИМАНИЕ! После прохождения каждых 100 уровней BATTLEPASS - прогресс будет сброшен. PREMIUM-Статус обнулится."
+                    android:fontFamily="@font/heading_now_65"
+                    android:layout_marginStart="@dimen/_2sdp" />
+            </LinearLayout>
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+        <LinearLayout
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_16sdp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@id/premuim_info_container"
+                        android:background="@drawable/background_battlepass_buy_premium"
+                        android:paddingLeft="@dimen/_16sdp"
+                        android:paddingTop="@dimen/_4sdp"
+                        android:paddingRight="@dimen/_16sdp"
+                        android:paddingBottom="@dimen/_8sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/_16sdp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp">
+                            <ru.mrlargha.commonui.utils.ui.GradientText.ArizonaGradientTextView
+                                android:textSize="@dimen/_9sdp"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="PREMIUM"
+                                android:fontFamily="@font/heading_now_65"
+                                app:endColor="#ffc5b8ff"
+                                app:startColor="@color/battlepass4" />
+                            <View
+                                android:layout_width="0.0dip"
+                                android:layout_height="0.0dip"
+                                android:layout_weight="1.0" />
+                            <RelativeLayout
+                                android:gravity="right"
+                                android:id="@id/premium_discount_percent_box"
+                                android:background="@drawable/background_battlepass_buy_premium_plus_sale"
+                                android:paddingLeft="@dimen/_7sdp"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_7sdp"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:visibility="visible"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_16sdp"
+                                android:paddingHorizontal="@dimen/_7sdp"
+                                android:paddingVertical="@dimen/_2sdp">
+                                <TextView
+                                    android:textSize="@dimen/_7sdp"
+                                    android:textColor="@color/black"
+                                    android:gravity="start"
+                                    android:id="@id/premium_discount_percent_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-75%"
+                                    android:layout_centerInParent="true"
+                                    android:fontFamily="@font/heading_now_65" />
+                            </RelativeLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:background="@drawable/battlepass_price_bg"
+                            android:paddingTop="@dimen/_6sdp"
+                            android:paddingBottom="@dimen/_6sdp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:paddingVertical="@dimen/_6sdp">
+                            <TextView
+                                android:textSize="@dimen/_6sdp"
+                                android:textColor="#ffffd7f6"
+                                android:gravity="center"
+                                android:id="@id/premium_discount_text"
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2799 AZ"
+                                android:fontFamily="@font/pfdindisplaypro_medium" />
+                            <TextView
+                                android:textSize="@dimen/_9sdp"
+                                android:textColor="#ffffffff"
+                                android:gravity="center"
+                                android:id="@id/premium_price_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1799 AZ"
+                                android:layout_centerInParent="true"
+                                android:fontFamily="@font/heading_now_65" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp">
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:src="@drawable/ic_battlepass_check"
+                                android:tint="#ffffffff" />
+                            <TextView
+                                android:textSize="@dimen/_6sdp"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="НАГРАДЫ ИЗ PREMIUM-ВЕТКИ                    "
+                                android:fontFamily="@font/heading_now_65"
+                                android:layout_marginStart="@dimen/_7sdp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp">
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:src="@drawable/ic_battlepass_check"
+                                android:tint="#ffffffff" />
+                            <TextView
+                                android:textSize="@dimen/_6sdp"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="УСКОРЕННАЯ ПРОКАЧКА"
+                                android:fontFamily="@font/heading_now_65"
+                                android:layout_marginStart="@dimen/_7sdp" />
+                        </LinearLayout>
+                        <RelativeLayout
+                            android:gravity="center"
+                            android:id="@id/premium_price_button"
+                            android:background="@drawable/button_background_buyprem"
+                            android:paddingLeft="35.0dip"
+                            android:paddingRight="35.0dip"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:paddingHorizontal="35.0dip">
+                            <TextView
+                                android:textSize="@dimen/_7sdp"
+                                android:textColor="@color/battlepass_text2"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:id="@id/premium_price_button_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="КУПИТЬ"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:fontFamily="@font/heading_now_65" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:background="@drawable/background_battlepass_buy_premium_plus_inner"
+                    android:padding="@dimen/_6sdp"
+                    android:layout_width="@dimen/_180sdp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="#ffffffff"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:text="Лучшее предложение"
+                        android:fontFamily="@font/pfdindisplaypro_bold" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@drawable/background_battlepass_buy_premium"
+                        android:paddingLeft="20.0dip"
+                        android:paddingTop="6.0dip"
+                        android:paddingRight="20.0dip"
+                        android:paddingBottom="12.0dip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="20.0dip">
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ru.mrlargha.commonui.utils.ui.GradientText.ArizonaGradientTextView
+                                android:textSize="@dimen/_9sdp"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PREMIUM PLUS"
+                                android:fontFamily="@font/heading_now_65"
+                                app:endColor="#ffc5b8ff"
+                                app:startColor="@color/battlepass4" />
+                            <RelativeLayout
+                                android:id="@id/premium_plus_discount_percent_box"
+                                android:background="@drawable/background_battlepass_buy_premium_plus_sale"
+                                android:paddingLeft="10.0dip"
+                                android:paddingTop="4.0dip"
+                                android:paddingRight="10.0dip"
+                                android:paddingBottom="4.0dip"
+                                android:visibility="invisible"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_16sdp"
+                                android:paddingHorizontal="10.0dip"
+                                android:paddingVertical="4.0dip">
+                                <TextView
+                                    android:textSize="@dimen/_7sdp"
+                                    android:textColor="@color/black"
+                                    android:gravity="start"
+                                    android:id="@id/premium_plus_discount_percent_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-75%"
+                                    android:layout_centerInParent="true"
+                                    android:fontFamily="@font/heading_now_65" />
+                            </RelativeLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:background="@drawable/battlepass_price_bg"
+                            android:paddingTop="@dimen/_3sdp"
+                            android:paddingBottom="@dimen/_3sdp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:paddingVertical="@dimen/_3sdp">
+                            <TextView
+                                android:textSize="9.0dip"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:id="@id/premium_plus_discount_text"
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2799 AZ"
+                                android:fontFamily="@font/pfdindisplaypro_medium" />
+                            <TextView
+                                android:textSize="@dimen/_9sdp"
+                                android:textColor="#ffffffff"
+                                android:gravity="center"
+                                android:id="@id/premium_plus_price_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1799 AZ"
+                                android:layout_centerInParent="true"
+                                android:fontFamily="@font/heading_now_65" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.0dip">
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:src="@drawable/ic_battlepass_check"
+                                android:tint="@color/battlepass4" />
+                            <TextView
+                                android:textSize="@dimen/_5sdp"
+                                android:textColor="@color/battlepass4"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ВСЕ ПРЕИМУЩЕСТВА PREMIUM"
+                                android:fontFamily="@font/heading_now_65"
+                                android:layout_marginStart="@dimen/_7sdp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.0dip">
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:src="@drawable/ic_battlepass_check"
+                                android:tint="@color/battlepass4" />
+                            <TextView
+                                android:textSize="@dimen/_5sdp"
+                                android:textColor="@color/battlepass4"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="МОМЕНТАЛЬНОЕ ОТКРЫТИЕ +10 УРОВНЕЙ"
+                                android:fontFamily="@font/heading_now_65"
+                                android:layout_marginStart="@dimen/_7sdp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:id="@id/arizona_block_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.0dip">
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:src="@drawable/ic_battlepass_check"
+                                android:tint="@color/battlepass4" />
+                            <TextView
+                                android:textSize="@dimen/_5sdp"
+                                android:textColor="@color/battlepass4"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:id="@id/vip_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="Кейс 'Нового сезона' (5 шт.)"
+                                android:fontFamily="@font/heading_now_65"
+                                android:layout_marginStart="@dimen/_7sdp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.0dip">
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:src="@drawable/bp_info_ic" />
+                            <TextView
+                                android:textSize="@dimen/_5sdp"
+                                android:textColor="@color/battlepass4"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Покупка PREMIUM PLUS доступна только при первом прохождении и до 90-го уровня"
+                                android:fontFamily="@font/heading_now_65"
+                                android:layout_marginStart="@dimen/_7sdp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.0dip">
+                            <ImageView
+                                android:id="@id/premium_image1"
+                                android:layout_width="@dimen/_31sdp"
+                                android:layout_height="@dimen/_31sdp"
+                                android:src="@drawable/battlepass_plus_item1" />
+                            <View
+                                android:layout_width="0.0dip"
+                                android:layout_height="0.0dip"
+                                android:layout_weight="1.0" />
+                            <ImageView
+                                android:id="@id/premium_image2"
+                                android:layout_width="@dimen/_31sdp"
+                                android:layout_height="@dimen/_31sdp"
+                                android:src="@drawable/battlepass_plus_item2" />
+                            <View
+                                android:layout_width="0.0dip"
+                                android:layout_height="0.0dip"
+                                android:layout_weight="1.0" />
+                            <ImageView
+                                android:id="@id/premium_image3"
+                                android:layout_width="@dimen/_31sdp"
+                                android:layout_height="@dimen/_31sdp"
+                                android:src="@drawable/battlepass_plus_item3" />
+                        </LinearLayout>
+                        <RelativeLayout
+                            android:layout_gravity="center"
+                            android:id="@id/premium_plus_price_button"
+                            android:background="@drawable/button_background_buyprem"
+                            android:paddingLeft="@dimen/_7sdp"
+                            android:paddingRight="@dimen/_7sdp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:paddingHorizontal="@dimen/_7sdp">
+                            <TextView
+                                android:textSize="@dimen/_7sdp"
+                                android:textColor="@color/battlepass_text2"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:id="@id/premium_plus_price_button_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="КУПИТЬ"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:fontFamily="@font/heading_now_65"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentEnd="true" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

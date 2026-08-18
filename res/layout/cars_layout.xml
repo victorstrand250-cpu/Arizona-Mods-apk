@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/cars_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/cars_bg"
+        android:clickable="true"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.4531">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/second_page"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <ru.mrlargha.commonui.utils.ui.CustomCardView
+                android:id="@id/rating_bnt"
+                android:layout_width="@dimen/_64sdp"
+                android:layout_height="@dimen/_21sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                app:backgroundMainColor="#ff855edf"
+                app:backgroundSecondColor="#ffe254a2"
+                app:corners="@dimen/_4sdp"
+                app:layout_constraintRight_toLeftOf="@id/second_page_exit_button"
+                app:layout_constraintTop_toTopOf="@id/second_page_exit_button">
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
+                        android:layout_marginRight="@dimen/_4sdp"
+                        android:src="@drawable/cars_rating_ic" />
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Рейтинг"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/heading_now_66_bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+            </ru.mrlargha.commonui.utils.ui.CustomCardView>
+            <ImageView
+                android:id="@id/second_page_exit_button"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
+                android:src="@drawable/cars_exit_button"
+                app:layout_constraintRight_toRightOf="@id/second_page_right_line"
+                app:layout_constraintTop_toTopOf="@id/second_page_top_line" />
+            <ImageView
+                android:id="@id/second_page_car_ic"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:src="@drawable/cars_main_page_car_ic"
+                app:layout_constraintLeft_toRightOf="@id/second_page_back_button"
+                app:layout_constraintTop_toTopOf="@id/second_page_top_line" />
+            <ImageView
+                android:id="@id/second_page_back_button"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
+                android:src="@drawable/cars_back_button"
+                app:layout_constraintLeft_toLeftOf="@id/second_page_left_line"
+                app:layout_constraintTop_toTopOf="@id/second_page_top_line" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_3sdp"
+                app:layout_constraintBottom_toBottomOf="@id/second_page_car_ic"
+                app:layout_constraintLeft_toRightOf="@id/second_page_car_ic"
+                app:layout_constraintTop_toTopOf="@id/second_page_car_ic">
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Мои Т/С"
+                    android:fontFamily="@font/heading_now_64_regular" />
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="#ffffffff"
+                    android:id="@id/slots_occupied1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_1sdp"
+                    android:text="10/21"
+                    android:fontFamily="@font/pfdbold"
+                    app:layout_constraintBottom_toBottomOf="@id/main_page_exit_button"
+                    app:layout_constraintRight_toLeftOf="@id/slots_occupied_title"
+                    app:layout_constraintTop_toTopOf="@id/main_page_exit_button" />
+            </LinearLayout>
+            <androidx.core.widget.NestedScrollView
+                android:scrollbarThumbVertical="@drawable/cars_thumb"
+                android:scrollbarTrackVertical="@drawable/cars_track"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbars="vertical"
+                android:fadingEdge="vertical"
+                android:fadingEdgeLength="@dimen/_10sdp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:requiresFadingEdge="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/second_page_back_button"
+                app:layout_constraintTop_toBottomOf="@id/second_page_back_button"
+                app:layout_constraintWidth_percent="0.839">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@id/edit_btn"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:src="@drawable/buttons"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:textSize="@dimen/_13sdp"
+                        android:textColor="@color/white"
+                        android:id="@id/car_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:text="Mercedes-Benz W210 E63"
+                        android:fontFamily="@font/pfdbold"
+                        app:layout_constraintLeft_toRightOf="@id/edit_btn"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:orientation="vertical"
+                        android:id="@id/second_page_car_params_rc"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/car_name"
+                        app:layout_constraintWidth_percent="0.9397"
+                        app:spanCount="3" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:orientation="vertical"
+                        android:id="@id/second_page_car_actions_rc"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_14sdp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/second_page_car_params_rc"
+                        app:layout_constraintWidth_percent="0.952"
+                        app:spanCount="4" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:orientation="vertical"
+                        android:id="@id/second_page_car_switch_rc"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/second_page_car_actions_rc"
+                        app:layout_constraintWidth_percent="0.952"
+                        app:spanCount="3" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:orientation="vertical"
+                        android:id="@id/second_page_car_circle_info_rc"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/second_page_car_switch_rc"
+                        app:layout_constraintWidth_percent="0.952"
+                        app:spanCount="4" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:orientation="vertical"
+                        android:id="@id/second_page_car_text_info_rc"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/second_page_car_circle_info_rc"
+                        app:layout_constraintWidth_percent="0.952"
+                        app:spanCount="3" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+            <androidx.constraintlayout.widget.Guideline
+                android:orientation="horizontal"
+                android:id="@id/second_page_top_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.0462" />
+            <androidx.constraintlayout.widget.Guideline
+                android:orientation="vertical"
+                android:id="@id/second_page_left_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.1379" />
+            <androidx.constraintlayout.widget.Guideline
+                android:orientation="vertical"
+                android:id="@id/second_page_right_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.9425" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/main_page"
+            android:visibility="visible"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <ru.mrlargha.commonui.utils.ui.CustomCardView
+                android:id="@id/rating_bnt1"
+                android:layout_width="@dimen/_64sdp"
+                android:layout_height="@dimen/_21sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                app:backgroundMainColor="#ff855edf"
+                app:backgroundSecondColor="#ffe254a2"
+                app:corners="@dimen/_4sdp"
+                app:layout_constraintRight_toLeftOf="@id/main_page_exit_button"
+                app:layout_constraintTop_toTopOf="@id/main_page_exit_button">
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
+                        android:layout_marginRight="@dimen/_4sdp"
+                        android:src="@drawable/cars_rating_ic" />
+                    <TextView
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Рейтинг"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/heading_now_66_bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+            </ru.mrlargha.commonui.utils.ui.CustomCardView>
+            <ImageView
+                android:id="@id/main_page_exit_button"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
+                android:src="@drawable/cars_exit_button"
+                app:layout_constraintRight_toRightOf="@id/main_page_right_line"
+                app:layout_constraintTop_toTopOf="@id/main_page_top_line" />
+            <ImageView
+                android:id="@id/main_page_car_ic"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
+                android:src="@drawable/cars_main_page_car_ic"
+                app:layout_constraintLeft_toLeftOf="@id/main_page_left_line"
+                app:layout_constraintTop_toTopOf="@id/main_page_top_line" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/main_page_car_ic"
+                app:layout_constraintLeft_toRightOf="@id/main_page_car_ic"
+                app:layout_constraintTop_toTopOf="@id/main_page_car_ic">
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:text="Мои Т/С"
+                    android:fontFamily="@font/heading_now_64_regular" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="#ff8f8f8f"
+                        android:id="@id/slots_occupied_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_marginRight="@dimen/_3sdp"
+                        android:text="Занято слотов"
+                        android:fontFamily="@font/pfdregular"
+                        app:layout_constraintBottom_toBottomOf="@id/main_page_exit_button"
+                        app:layout_constraintRight_toLeftOf="@id/main_page_exit_button"
+                        app:layout_constraintTop_toTopOf="@id/main_page_exit_button" />
+                    <TextView
+                        android:textSize="@dimen/_6sdp"
+                        android:textColor="#ffffffff"
+                        android:id="@id/slots_occupied"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_1sdp"
+                        android:text="10/21"
+                        android:fontFamily="@font/pfdbold"
+                        app:layout_constraintBottom_toBottomOf="@id/main_page_exit_button"
+                        app:layout_constraintRight_toLeftOf="@id/slots_occupied_title"
+                        app:layout_constraintTop_toTopOf="@id/main_page_exit_button" />
+                </LinearLayout>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:orientation="vertical"
+                android:id="@id/main_page_cars_rc"
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_marginTop="@dimen/_7sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/main_page_left_line"
+                app:layout_constraintRight_toRightOf="@id/main_page_right_line"
+                app:layout_constraintTop_toBottomOf="@id/main_page_exit_button" />
+            <androidx.constraintlayout.widget.Guideline
+                android:orientation="horizontal"
+                android:id="@id/main_page_top_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.0462" />
+            <androidx.constraintlayout.widget.Guideline
+                android:orientation="vertical"
+                android:id="@id/main_page_left_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.1379" />
+            <androidx.constraintlayout.widget.Guideline
+                android:orientation="vertical"
+                android:id="@id/main_page_right_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.9425" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@id/overlay"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:id="@id/card_info"
+        android:padding="@dimen/_6sdp"
+        android:visibility="gone"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        app:backgroundMainColor="@color/white"
+        app:corners="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#ff223144"
+                android:id="@id/bonus_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Бонусы:"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_65_medium" />
+            <TextView
+                android:textSize="@dimen/_9sdp"
+                android:textColor="#ff223144"
+                android:id="@id/text_bonus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Бонусы:"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_64_regular" />
+        </LinearLayout>
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

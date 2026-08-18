@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="400.0dip"
+    android:width="350.0dip"
+    android:viewportWidth="350.0"
+    android:viewportHeight="400.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ff201e3d"
+        android:pathData="M0,0h350v400h-350z" />
+    <path
+        android:fillColor="@drawable/$daily_reward_welcom_item_bg__0"
+        android:pathData="M0,0h350v400h-350z"
+        android:fillAlpha="0.75" />
+</vector>

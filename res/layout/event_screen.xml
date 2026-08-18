@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/easter_battlepass_choose"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <include
+            android:id="@id/top_elements"
+            layout="@layout/event_topbar" />
+        <include
+            android:id="@id/main"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/event_main_screen" />
+        <include
+            android:id="@id/task"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/event_task_screen" />
+        <include
+            android:id="@id/events"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/event_events_screen" />
+        <include
+            android:id="@id/shop"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/event_shop_sceen" />
+        <include
+            android:id="@id/rating"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/pirates_rating_screen" />
+        <include
+            android:id="@id/video"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/event_video_screen" />
+    </LinearLayout>
+    <include
+        android:id="@id/ship"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/pirates_ship_screen" />
+    <include
+        android:id="@id/result_main"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/event_main_result_screen" />
+    <FrameLayout
+        android:id="@id/info_text_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="#ffbfc6d2"
+            android:id="@id/info_text"
+            android:background="@drawable/event_info_prise"
+            android:paddingLeft="@dimen/_8sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingRight="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="название предмета"
+            android:fontFamily="@font/pfdindisplaypro_regular"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:paddingVertical="@dimen/_4sdp" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

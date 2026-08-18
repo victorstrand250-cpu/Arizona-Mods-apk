@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.mrlargha.commonui.utils.ui.CustomCardView
+    android:id="@id/card"
+    android:background="@drawable/dotted_card_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/_162sdp"
+    android:layout_margin="@dimen/_4sdp"
+    app:borderMainColor="#1affffff"
+    app:borderWidth="@dimen/_1sdp"
+    app:corners="@dimen/_10sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:layout_gravity="left"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20sdp"
+        app:backgroundMainColor="@color/black"
+        app:cornerBottomRight="@dimen/_8sdp">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:id="@id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_6sdp"
+            android:layout_marginRight="@dimen/_6sdp"
+            android:text="1"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:layout_marginHorizontal="@dimen/_6sdp" />
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:layout_gravity="left"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:borderMainColor="#33ffffff"
+        app:borderWidth="@dimen/_1sdp"
+        app:corners="@dimen/_10sdp" />
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:layout_gravity="center_horizontal"
+        android:id="@id/bottom_bg"
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="@dimen/_160sdp"
+        android:layout_marginTop="@dimen/_110sdp"
+        app:backgroundMainColor="@color/transparent100"
+        app:backgroundSecondColor="@color/transparent100"
+        app:gradientType="radial"
+        app:radialGradientRadius="@dimen/_72sdp" />
+    <ru.mrlargha.commonui.utils.ui.CustomCardView
+        android:layout_gravity="center_horizontal"
+        android:id="@id/card_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_margin="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        app:backgroundMainColor="#ff4f957e"
+        app:backgroundSecondColor="@color/transparent100"
+        app:gradientType="radial"
+        app:radialGradientRadius="@dimen/_40sdp">
+        <ImageView
+            android:id="@id/image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="@dimen/_2sdp" />
+    </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="#80ffffff"
+            android:id="@id/nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:text="1"
+            android:fontFamily="@font/heading_now_64_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ffffffff"
+            android:gravity="center"
+            android:id="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="1"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_65_medium"
+            android:layout_marginHorizontal="@dimen/_8sdp" />
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:id="@id/label_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            app:backgroundMainColor="#ffffcc00"
+            app:backgroundSecondColor="@color/black"
+            app:corners="@dimen/_4sdp"
+            app:gradientAngle="180">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:id="@id/label_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_6sdp"
+                android:layout_marginRight="@dimen/_6sdp"
+                android:text="Идеальное (45)"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_65"
+                android:layout_marginHorizontal="@dimen/_6sdp" />
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    </LinearLayout>
+</ru.mrlargha.commonui.utils.ui.CustomCardView>

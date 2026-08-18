@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:padding="@dimen/_10sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/iv_drawing"
+        android:background="@drawable/blueprint_pipe_four_stage_full"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/blueprint_pipe_four_empty"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_percent="0.87" />
+    <FrameLayout
+        android:id="@id/touch_one"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/stage_one_bottom"
+        app:layout_constraintEnd_toEndOf="@id/stage_one_end"
+        app:layout_constraintStart_toStartOf="@id/stage_one_start"
+        app:layout_constraintTop_toTopOf="@id/stage_one_top">
+        <ImageView
+            android:layout_gravity="end"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_margin="@dimen/_4sdp"
+            android:src="@drawable/blueprint_ic_touch" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@id/touch_two"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/stage_two_bottom"
+        app:layout_constraintEnd_toEndOf="@id/stage_two_end"
+        app:layout_constraintStart_toStartOf="@id/stage_two_start"
+        app:layout_constraintTop_toTopOf="@id/stage_two_top">
+        <ImageView
+            android:layout_gravity="end"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_margin="@dimen/_4sdp"
+            android:src="@drawable/blueprint_ic_touch" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@id/touch_three"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/stage_three_bottom"
+        app:layout_constraintEnd_toEndOf="@id/stage_three_end"
+        app:layout_constraintStart_toStartOf="@id/stage_three_start"
+        app:layout_constraintTop_toTopOf="@id/stage_three_top">
+        <ImageView
+            android:layout_gravity="end"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_margin="@dimen/_4sdp"
+            android:src="@drawable/blueprint_ic_touch" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@id/touch_four"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/stage_four_bottom"
+        app:layout_constraintEnd_toEndOf="@id/stage_four_end"
+        app:layout_constraintStart_toStartOf="@id/stage_four_start"
+        app:layout_constraintTop_toTopOf="@id/stage_four_top">
+        <ImageView
+            android:layout_gravity="end"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_margin="@dimen/_4sdp"
+            android:src="@drawable/blueprint_ic_touch" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@id/touch_five"
+        android:background="@drawable/blueprint_dotted_border_yellow"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/stage_three_bottom"
+        app:layout_constraintEnd_toEndOf="@id/stage_five_end"
+        app:layout_constraintStart_toStartOf="@id/stage_two_end"
+        app:layout_constraintTop_toTopOf="@id/stage_three_top">
+        <ImageView
+            android:layout_gravity="end"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_margin="@dimen/_4sdp"
+            android:src="@drawable/blueprint_ic_touch" />
+    </FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/stage_one_top"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.27" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/stage_one_bottom"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.75" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/stage_one_start"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.11" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/stage_one_end"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.22" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/stage_two_top"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.33" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/stage_two_bottom"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.68" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/stage_two_start"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.26" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/stage_two_end"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.71" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/stage_three_top"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.13" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/stage_three_bottom"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.47" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/stage_three_start"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.52" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/stage_three_end"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.79" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/stage_four_top"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.55" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/stage_four_bottom"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.82" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/stage_four_start"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.6" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/stage_four_end"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.75" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/stage_five_end"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintGuide_percent="0.86" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <View
+        android:id="@id/back_progress"
+        android:background="@color/progress_secondary"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/progress_bar_height" />
+    <View
+        android:id="@id/front_progress"
+        android:background="@color/progress_primary"
+        android:visibility="invisible"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/progress_bar_height" />
+    <View
+        android:id="@id/max_progress"
+        android:background="#ffffffff"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/progress_bar_height" />
+</FrameLayout>

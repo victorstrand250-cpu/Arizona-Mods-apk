@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:id="@id/neighbor_game_task_screen"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/_24sdp"
+    android:layout_marginTop="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_2sdp"
+    android:layout_marginVertical="@dimen/_2sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="@dimen/_116sdp"
+        android:layout_height="fill_parent">
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="@color/white"
+            android:id="@id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAMETOP CLAN"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            app:cardBackgroundColor="#1aababab"
+            app:cardCornerRadius="@dimen/_2sdp"
+            app:cardElevation="0.0dip">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ffababab"
+                android:id="@id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginRight="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:text="00"
+                android:layout_weight="1.0"
+                android:fontFamily="@font/pfdindisplaypro_regular"
+                android:layout_marginHorizontal="@dimen/_6sdp"
+                android:layout_marginVertical="@dimen/_3sdp" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:src="@drawable/family_rv_ic_business" />
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:id="@id/territory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:text="NAMETOP CLAN"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/white"
+                android:id="@id/attack1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:text="Инфор12фывмация"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+            <TextView
+                android:textSize="@dimen/_5sdp"
+                android:textColor="#fffe5b3b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:text="Атака"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:src="@drawable/family_war_ic_vs"
+            android:scaleType="fitEnd" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/white"
+                android:id="@id/deffence1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:text="Информация"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+            <TextView
+                android:textSize="@dimen/_5sdp"
+                android:textColor="#ffc1ff3d"
+                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:text="Защита"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

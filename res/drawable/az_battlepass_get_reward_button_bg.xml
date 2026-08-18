@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="65.0dip"
+    android:width="225.0dip"
+    android:viewportWidth="225.0"
+    android:viewportHeight="65.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ffe8b134"
+        android:pathData="M10,0L215,0A10,10 0,0 1,225 10L225,55A10,10 0,0 1,215 65L10,65A10,10 0,0 1,0 55L0,10A10,10 0,0 1,10 0z" />
+    <path
+        android:fillColor="@drawable/$az_battlepass_get_reward_button_bg__0"
+        android:pathData="M10,0L215,0A10,10 0,0 1,225 10L225,55A10,10 0,0 1,215 65L10,65A10,10 0,0 1,0 55L0,10A10,10 0,0 1,10 0z" />
+    <path
+        android:fillColor="@drawable/$az_battlepass_get_reward_button_bg__1"
+        android:pathData="M10,0L215,0A10,10 0,0 1,225 10L225,55A10,10 0,0 1,215 65L10,65A10,10 0,0 1,0 55L0,10A10,10 0,0 1,10 0z" />
+    <path
+        android:fillColor="@drawable/$az_battlepass_get_reward_button_bg__2"
+        android:pathData="M10,0L215,0A10,10 0,0 1,225 10L225,55A10,10 0,0 1,215 65L10,65A10,10 0,0 1,0 55L0,10A10,10 0,0 1,10 0z" />
+    <path
+        android:fillColor="@drawable/$az_battlepass_get_reward_button_bg__3"
+        android:pathData="M10,0L215,0A10,10 0,0 1,225 10L225,55A10,10 0,0 1,215 65L10,65A10,10 0,0 1,0 55L0,10A10,10 0,0 1,10 0z" />
+    <path
+        android:fillColor="@drawable/$az_battlepass_get_reward_button_bg__4"
+        android:pathData="M10,0L215,0A10,10 0,0 1,225 10L225,55A10,10 0,0 1,215 65L10,65A10,10 0,0 1,0 55L0,10A10,10 0,0 1,10 0z" />
+</vector>

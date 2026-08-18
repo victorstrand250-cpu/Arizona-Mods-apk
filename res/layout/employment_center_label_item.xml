@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.mrlargha.commonui.utils.ui.CustomCardView
+    android:id="@id/item"
+    android:paddingLeft="@dimen/_8sdp"
+    android:paddingRight="@dimen/_8sdp"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_16sdp"
+    android:paddingHorizontal="@dimen/_8sdp"
+    app:backgroundMainColor="@color/blue"
+    app:corners="@dimen/_12sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textColor="#d9ffffff"
+        android:layout_gravity="center"
+        android:id="@id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Механик"
+        android:textAllCaps="true"
+        android:fontFamily="@font/heading_now_66_bold" />
+</ru.mrlargha.commonui.utils.ui.CustomCardView>

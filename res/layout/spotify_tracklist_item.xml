@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/spotify_tracklist_item"
+    android:background="@drawable/spotify_track_bg"
+    android:layout_width="144.0dip"
+    android:layout_height="36.0dip"
+    android:layout_marginBottom="4.0dip"
+    android:backgroundTint="#ff000000"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/spotify_track_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:textSize="8.0dip"
+            android:textColor="@color/white"
+            android:id="@id/spotify_song_name"
+            android:layout_width="60.0dip"
+            android:layout_height="wrap_content"
+            android:text="Floor Burn"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textSize="6.0dip"
+            android:textColor="#80ffffff"
+            android:id="@id/spotify_singer_name"
+            android:layout_width="60.0dip"
+            android:layout_height="8.0dip"
+            android:text="Haus of Panda, ZOOTAH"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spotify_song_name" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/spotify_action_container"
+        android:layout_width="60.0dip"
+        android:layout_height="20.0dip"
+        android:layout_marginRight="4.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:textSize="8.0dip"
+            android:textColor="@color/white"
+            android:id="@id/spotify_song_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2:30"
+            android:fontFamily="@font/pfdregular"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/spotify_select_track_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@id/spotify_favourite"
+                android:layout_width="14.0dip"
+                android:layout_height="14.0dip"
+                android:layout_marginRight="2.0dip"
+                android:src="@drawable/ic_favorites_disabled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/spotify_play"
+                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@id/spotify_play"
+                android:layout_width="14.0dip"
+                android:layout_height="14.0dip"
+                android:layout_marginRight="2.0dip"
+                android:src="@drawable/spotify_play_on"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

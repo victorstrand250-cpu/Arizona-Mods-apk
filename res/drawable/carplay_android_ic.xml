@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="12.0dip"
+    android:width="12.0dip"
+    android:viewportWidth="12.0"
+    android:viewportHeight="12.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M5,0L7,0A5,5 0,0 1,12 5L12,7A5,5 0,0 1,7 12L5,12A5,5 0,0 1,0 7L0,5A5,5 0,0 1,5 0z" />
+    <group>
+        <clip-path
+            android:pathData="M1.92,1.44h8.64v8.64h-8.64z" />
+        <path
+            android:fillColor="#ff55745e"
+            android:pathData="M2.473,8.928C2.168,8.928 1.922,8.67 1.922,8.352C1.922,8.247 1.949,8.149 1.995,8.064L5.486,1.728C5.581,1.556 5.759,1.44 5.963,1.44C6.168,1.44 6.346,1.556 6.441,1.728L9.931,8.064C9.978,8.149 10.005,8.247 10.005,8.352C10.005,8.67 9.758,8.928 9.454,8.928H2.473Z"
+            android:fillType="evenOdd" />
+        <path
+            android:fillColor="@drawable/$carplay_android_ic__0"
+            android:pathData="M5.963,4.128V8.928H10.556L5.963,4.128Z"
+            android:fillType="evenOdd" />
+        <path
+            android:fillColor="#ff28342c"
+            android:pathData="M5.486,1.728L1.995,8.064C1.949,8.149 1.922,8.247 1.922,8.352C1.922,8.67 2.168,8.928 2.473,8.928H5.963V1.44C5.759,1.44 5.581,1.556 5.486,1.728Z"
+            android:fillType="evenOdd" />
+        <path
+            android:fillColor="#fff1f1f1"
+            android:pathData="M5.963,4.128L9.086,9.888L8.902,10.08L5.963,8.928L3.024,10.08L2.84,9.888L5.963,4.128Z"
+            android:fillType="evenOdd" />
+        <path
+            android:fillColor="#ffe1e1e1"
+            android:pathData="M5.963,4.128L9.086,9.888L8.902,10.08L5.963,8.928"
+            android:fillType="evenOdd" />
+    </group>
+</vector>

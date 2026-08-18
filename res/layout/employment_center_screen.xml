@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/easter_battlepass_choose"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/bg"
+        android:background="@drawable/employment_center_main_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <include
+            android:id="@id/topbar"
+            layout="@layout/employment_center_topbar" />
+        <include
+            android:id="@id/main"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/employment_center_main" />
+    </LinearLayout>
+    <include
+        android:id="@id/salary_table"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/employment_center_salary_table" />
+    <include
+        android:id="@id/bonuses_table"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/employment_center_items_table" />
+    <include
+        android:id="@id/text_table"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/employment_center_text_table" />
+    <include
+        android:id="@id/bonus_desc"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/employment_center_bonus_desc" />
+</androidx.constraintlayout.widget.ConstraintLayout>

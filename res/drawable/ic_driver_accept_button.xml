@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="50.0dip"
+    android:width="130.0dip"
+    android:viewportWidth="130.0"
+    android:viewportHeight="50.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$ic_driver_accept_button__0"
+        android:pathData="M10,0L120,0A10,10 0,0 1,130 10L130,40A10,10 0,0 1,120 50L10,50A10,10 0,0 1,0 40L0,10A10,10 0,0 1,10 0z" />
+</vector>

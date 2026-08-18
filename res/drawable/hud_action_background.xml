@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="250.0dip"
+    android:width="575.0dip"
+    android:viewportWidth="575.0"
+    android:viewportHeight="250.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$hud_action_background__0"
+        android:pathData="M0,0h575v250h-575z"
+        android:fillAlpha="0.85" />
+</vector>

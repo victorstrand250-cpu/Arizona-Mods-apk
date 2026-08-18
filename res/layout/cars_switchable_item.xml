@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/cars_switchable_item"
+    android:background="@drawable/cars_action_button_enabled_bg"
+    android:layout_width="@dimen/_62sdp"
+    android:layout_height="@dimen/_20sdp"
+    android:layout_marginRight="@dimen/_1sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:id="@id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:text="Сигнализация"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintBottom_toBottomOf="@id/car_switch"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/car_switch" />
+        <Switch
+            android:gravity="center"
+            android:id="@id/car_switch"
+            android:padding="0.0dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:foregroundGravity="center|right|top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/item_name"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/car_switch" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

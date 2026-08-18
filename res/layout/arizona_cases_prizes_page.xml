@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@drawable/cases_prizes_page_bg"
+    android:padding="@dimen/_8sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_16sdp">
+        <ImageView
+            android:layout_gravity="start|center"
+            android:id="@id/btn_show_prizes"
+            android:background="@drawable/cases_btn_close_bg"
+            android:padding="@dimen/_10sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:src="@drawable/cases_prizes_arrow_down_up_icon" />
+        <TextView
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Что можно выиграть?"
+            android:fontFamily="@font/heading_now_66_bold" />
+    </FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarThumbVertical="@drawable/cases_custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/cases_custom_scrollbar_track"
+        android:scrollbarStyle="insideInset"
+        android:id="@id/rv_prizes"
+        android:scrollbars="vertical"
+        android:clipToPadding="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:layoutDirection="ltr"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="5" />
+</LinearLayout>

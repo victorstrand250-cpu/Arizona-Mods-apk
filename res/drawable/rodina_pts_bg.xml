@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="200.0dip"
+    android:width="200.0dip"
+    android:viewportWidth="1920.0"
+    android:viewportHeight="1080.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <group
+        android:pivotX="860.0"
+        android:pivotY="540.0"
+        android:scaleX="2.0"
+        android:scaleY="6.321"
+        android:rotation="180.0"
+        android:translateX="1.0"
+        android:translateY="2.08">
+        <path
+            android:fillColor="@drawable/$rodina_pts_bg__0"
+            android:pathData="M0 0V1080H102000" />
+    </group>
+</vector>

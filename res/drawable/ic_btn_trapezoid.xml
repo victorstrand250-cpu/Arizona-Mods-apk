@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="50.0dip"
+    android:width="136.0dip"
+    android:viewportWidth="136.0"
+    android:viewportHeight="50.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M0,44C0,47.31 2.69,50 6,50H118.88C121.59,50 123.97,48.18 124.68,45.57L134.95,7.57C135.99,3.75 133.11,0 129.16,0H6C2.69,0 0,2.69 0,6V44Z"
+        android:fillAlpha="0.1" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0.5,44C0.5,47.04 2.96,49.5 6,49.5H118.88C121.37,49.5 123.54,47.83 124.19,45.44L134.47,7.44C135.42,3.94 132.78,0.5 129.16,0.5H6C2.96,0.5 0.5,2.96 0.5,6V44Z"
+        android:strokeColor="@drawable/$ic_btn_trapezoid__0"
+        android:strokeWidth="1.0"
+        android:strokeAlpha="0.65" />
+</vector>

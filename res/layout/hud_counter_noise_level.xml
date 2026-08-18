@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:background="@drawable/hud_counter_noise_level_bg"
+        android:paddingLeft="@dimen/_6sdp"
+        android:paddingTop="@dimen/_6sdp"
+        android:paddingRight="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_6sdp">
+        <LinearLayout
+            android:gravity="center"
+            android:background="@drawable/hud_counter_noise_level_item_bg"
+            android:paddingLeft="@dimen/_2sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:paddingHorizontal="@dimen/_2sdp">
+            <ImageView
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hud_counter_microphone_ic"
+                android:adjustViewBounds="true" />
+            <TextView
+                android:textSize="@dimen/_5sdp"
+                android:textColor="#ff001901"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="@dimen/_24sdp"
+                android:text="Уровень шума"
+                android:fontFamily="@font/lcddisplaycapssskcyrillic"
+                android:layout_marginStart="@dimen/_4sdp" />
+        </LinearLayout>
+        <View
+            android:layout_width="@dimen/_3sdp"
+            android:layout_height="0.0dip" />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/hud_counter_noise_level_item_bg"
+            android:paddingLeft="@dimen/_4sdp"
+            android:paddingRight="@dimen/_4sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:paddingHorizontal="@dimen/_4sdp">
+            <TextView
+                android:textSize="@dimen/_3sdp"
+                android:textColor="#ff001901"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="db"
+                android:textAllCaps="true"
+                android:fontFamily="@font/moscow_2024" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#ff001901"
+                android:id="@id/tv_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="@dimen/_30sdp"
+                android:text="100%"
+                android:fontFamily="@font/moscow_2024" />
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="20.0dip"
+        android:layout_height="fill_parent"
+        android:src="@drawable/hud_counter_noise_level_bg_two"
+        android:scaleType="fitEnd"
+        android:adjustViewBounds="true" />
+</LinearLayout>

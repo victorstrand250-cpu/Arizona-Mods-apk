@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/account_recovery"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/auth_background"
+        android:background="@drawable/authorization_bg"
+        android:layout_width="350.0dip"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:id="@id/account_recovery_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35.0dip"
+            android:text="Сброс пароля"
+            android:fontFamily="@font/pfdregular"
+            android:textFontWeight="500"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/account_recovery_info_container"
+            android:background="@drawable/authorization_server_border"
+            android:layout_width="300.0dip"
+            android:layout_height="50.0dip"
+            android:layout_marginTop="20.0dip"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_recovery_title">
+            <TextView
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@id/account_recovery_description"
+                android:layout_width="220.0dip"
+                android:layout_height="wrap_content"
+                android:text="Выберите способ получения нового пароля для вашего аккаунта"
+                android:fontFamily="@font/pfdregular"
+                android:textFontWeight="500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/account_recovery_selector_container"
+            android:background="@drawable/authorization_border"
+            android:layout_width="300.0dip"
+            android:layout_height="50.0dip"
+            android:layout_marginTop="15.0dip"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_recovery_info_container">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@id/account_recovery_icon"
+                android:layout_width="20.0dip"
+                android:layout_height="20.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:src="@drawable/account_recovery_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="@dimen/_14sdp"
+                android:textColor="#ff979797"
+                android:id="@id/account_recovery_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6.0dip"
+                android:text="Способ восстановления"
+                android:fontFamily="@font/heading_now_64_regular"
+                android:textFontWeight="400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/account_recovery_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@id/account_recovery_arrow"
+                android:layout_width="15.0dip"
+                android:layout_height="15.0dip"
+                android:layout_marginRight="10.0dip"
+                android:src="@drawable/arrow_right_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/account_recovery_button"
+            android:background="@drawable/authorization_border"
+            android:layout_width="300.0dip"
+            android:layout_height="40.0dip"
+            android:layout_marginTop="25.0dip"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_recovery_selector_container">
+            <TextView
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:id="@id/account_recovery_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6.0dip"
+                android:text="Обновить пароль"
+                android:fontFamily="@font/heading_now_64_regular"
+                android:textFontWeight="400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/account_recovery_exist_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15.0dip"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_recovery_button">
+            <TextView
+                android:textSize="@dimen/_14sdp"
+                android:textColor="#ff979797"
+                android:id="@id/account_recovery_is_exist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2.0dip"
+                android:text="У вас нет аккаунта?"
+                android:fontFamily="@font/heading_now_64_regular"
+                android:textFontWeight="400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/account_recovery_exist_button"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="@dimen/_14sdp"
+                android:textColor="#ffff2323"
+                android:id="@id/account_recovery_exist_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2.0dip"
+                android:text="Регистрация"
+                android:fontFamily="@font/heading_now_64_regular"
+                android:textFontWeight="400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/account_recovery_is_exist"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

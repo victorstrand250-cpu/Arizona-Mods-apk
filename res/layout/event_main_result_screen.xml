@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="#a7000000"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:visibility="visible"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:layout_marginVertical="@dimen/_40sdp">
+        <View
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/event_radial_gold_gradient"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_200sdp" />
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <ImageView
+                android:id="@id/iv_award"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:src="@drawable/baseline_warning_24"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toTopOf="@id/btn_unselect"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:id="@id/award_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="НАЗВАНИЕ ПРЕДМЕТА"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/white"
+                android:id="@id/count"
+                android:background="@drawable/event_shop_unselect_button_bg"
+                android:paddingLeft="@dimen/_8sdp"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingRight="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="2500"
+                android:layout_marginVertical="@dimen/_4sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingVertical="@dimen/_4sdp" />
+            <TextView
+                android:textSize="@dimen/_8sdp"
+                android:textColor="#ffffffff"
+                android:id="@id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="Предмет уже добавлен в твой инвентарь."
+                android:maxLines="3"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+            <View
+                android:layout_width="1.0dip"
+                android:layout_height="1.0dip"
+                android:layout_weight="1.0" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@id/result_back"
+                android:background="@drawable/event_main_tab_select_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:src="@drawable/event_tab_video_back_ic"
+                    android:tint="#ff16191d"
+                    app:tint="#ff16191d" />
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="#ff1f2329"
+                    android:paddingTop="@dimen/_3sdp"
+                    android:paddingRight="@dimen/_12sdp"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ВЕРНУТЬСЯ НАЗАД"
+                    android:fontFamily="@font/heading_now_66_bold"
+                    android:paddingVertical="@dimen/_3sdp" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

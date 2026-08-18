@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@id/avatar_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="0.0dip"
+        app:cardBackgroundColor="#ff000000"
+        app:cardCornerRadius="50.0dip"
+        app:cardElevation="0.0dip">
+        <ProgressBar
+            android:layout_gravity="center"
+            android:id="@id/avatar_loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5.0dip"
+            android:elevation="2.0dip"
+            android:indeterminateTint="@color/white"
+            style="@style/Widget.AppCompat.ProgressBar" />
+        <com.arizona.common.ui.TopScaleImageView
+            android:id="@id/avatar_image"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/sample_skin_avatar_view"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@id/avatar_status"
+        android:visibility="visible"
+        android:layout_width="10.0dip"
+        android:layout_height="10.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="0.0dip"
+        app:cardBackgroundColor="#ff000000"
+        app:cardCornerRadius="50.0dip"
+        app:cardElevation="0.0dip" />
+</RelativeLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/spawn_item"
+    android:background="@drawable/spawner_border"
+    android:layout_width="300.0dip"
+    android:layout_height="50.0dip"
+    android:layout_marginBottom="15.0dip"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/spawn_item_icon"
+        android:layout_width="20.0dip"
+        android:layout_height="20.0dip"
+        android:layout_marginLeft="15.0dip"
+        android:src="@drawable/location_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="17.0dip"
+        android:textColor="@color/white"
+        android:id="@id/spawn_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip"
+        android:text="@string/last_location"
+        android:fontFamily="@font/heading_now_64_regular"
+        android:textFontWeight="400"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/spawn_item_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/spawn_item_arrow"
+        android:visibility="visible"
+        android:layout_width="18.0dip"
+        android:layout_height="16.0dip"
+        android:layout_marginRight="15.0dip"
+        android:src="@drawable/arrow_right_ic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

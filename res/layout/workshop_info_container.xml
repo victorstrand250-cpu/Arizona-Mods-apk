@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@id/rvColors"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    <include
+        android:id="@id/sharping_info_container"
+        android:visibility="gone"
+        layout="@layout/workshop_chance_cost_info" />
+    <include
+        android:id="@id/info"
+        layout="@layout/workshop_info" />
+</FrameLayout>

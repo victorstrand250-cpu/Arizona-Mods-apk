@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/document_property_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table1"
+        android:layout_width="@dimen/_142sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_44sdp"
+        android:layout_marginTop="@dimen/_90sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffb08762"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Жилая недвижимость"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <View
+            android:background="@drawable/documents_property_divider_bg"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_marginVertical="@dimen/_4sdp" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff7e7e7e"
+            android:gravity="center"
+            android:id="@id/residental_empty"
+            android:background="@drawable/document_property_empty_list"
+            android:visibility="visible"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="Список пуст"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:scrollbarThumbVertical="@drawable/document_property_thumb"
+            android:scrollbarTrackVertical="@drawable/document_property_track"
+            android:scrollbarStyle="outsideInset"
+            android:orientation="vertical"
+            android:id="@id/residental_recycle_view"
+            android:paddingRight="@dimen/_8sdp"
+            android:visibility="gone"
+            android:scrollbars="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_161sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table2"
+        android:layout_width="@dimen/_142sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_34sdp"
+        app:layout_constraintLeft_toRightOf="@id/table1"
+        app:layout_constraintTop_toTopOf="@id/table1">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffb08762"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Коммерческая недвижимость"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <View
+            android:background="@drawable/documents_property_divider_bg"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_marginVertical="@dimen/_4sdp" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff7e7e7e"
+            android:gravity="center"
+            android:id="@id/comercial_empty"
+            android:background="@drawable/document_property_empty_list"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="Список пуст"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:scrollbarThumbVertical="@drawable/document_property_thumb"
+            android:scrollbarTrackVertical="@drawable/document_property_track"
+            android:scrollbarStyle="outsideInset"
+            android:orientation="vertical"
+            android:id="@id/comercial_recycle_view"
+            android:paddingRight="@dimen/_8sdp"
+            android:visibility="gone"
+            android:scrollbars="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_161sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

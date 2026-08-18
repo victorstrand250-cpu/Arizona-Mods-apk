@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/linking_layout"
+    android:background="@drawable/linking_bg"
+    android:clickable="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/exit_button"
+        android:layout_width="@dimen/_33sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:src="@drawable/linking_exit_ic"
+        app:layout_constraintRight_toRightOf="@id/right_line"
+        app:layout_constraintTop_toTopOf="@id/top_line" />
+    <TextView
+        android:textSize="@dimen/_35sdp"
+        android:textColor="@color/white"
+        android:id="@id/defence_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Защита"
+        android:fontFamily="@font/heading_now_64_regular"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintTop_toTopOf="@id/exit_button" />
+    <TextView
+        android:textSize="@dimen/_35sdp"
+        android:textColor="@color/white"
+        android:id="@id/defence_account_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="аккаунта"
+        android:fontFamily="@font/pfdbold"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintTop_toTopOf="@id/defence_title" />
+    <TextView
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:id="@id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="Привяжите свой игровой аккаунт к VK или Telegram, чтобы\nего не смогли взломать злоумышленники. В качестве\nнаграды за привязку соц. сетей вы сможете получить:"
+        android:lineSpacingMultiplier="1.6"
+        android:fontFamily="@font/pfdbold"
+        app:layout_constraintLeft_toLeftOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@id/defence_account_title" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/vip_status_button"
+        android:background="@drawable/linking_offer_bg_easter"
+        android:layout_width="@dimen/_107sdp"
+        android:layout_height="@dimen/_42sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintLeft_toLeftOf="@id/description"
+        app:layout_constraintTop_toBottomOf="@id/description">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/vip_status_button_ic_container"
+            android:background="@drawable/linking_offer_ic_bg"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="fill_parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/linking_vip_ic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:text="ADD VIP\nна 4 дня"
+            android:fontFamily="@font/pfdbold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/vip_status_button_ic_container"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/pay_day_button"
+        android:background="@drawable/linking_offer_bg_easter"
+        android:layout_width="@dimen/_107sdp"
+        android:layout_height="@dimen/_42sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintLeft_toRightOf="@id/vip_status_button"
+        app:layout_constraintTop_toBottomOf="@id/description">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/pay_day_button_ic_container"
+            android:background="@drawable/linking_offer_ic_bg"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="fill_parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/linking_payday_ic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:text="PAYDAY x3\nна 18 часов"
+            android:fontFamily="@font/pfdbold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/pay_day_button_ic_container"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/tg_button"
+        android:background="@drawable/linking_tg_button_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginRight="@dimen/_7sdp"
+        app:layout_constraintRight_toLeftOf="@id/center_line"
+        app:layout_constraintTop_toTopOf="@id/tg_button_top_line"
+        app:layout_constraintWidth_percent="0.2755">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@id/tg_ic"
+                android:layout_width="@dimen/_23sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:src="@drawable/linking_tg_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:text="Привязать Telegram"
+                android:fontFamily="@font/pfdbold"
+                app:layout_constraintBottom_toBottomOf="@id/tg_ic"
+                app:layout_constraintLeft_toRightOf="@id/tg_ic"
+                app:layout_constraintTop_toTopOf="@id/tg_ic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/vk_button"
+        android:background="@drawable/linking_vk_button_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginLeft="@dimen/_7sdp"
+        app:layout_constraintLeft_toRightOf="@id/center_line"
+        app:layout_constraintTop_toTopOf="@id/tg_button_top_line"
+        app:layout_constraintWidth_percent="0.2755">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@id/vk_ic"
+                android:layout_width="@dimen/_23sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:src="@drawable/linking_vk_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:text="Привязать ВКонтакте"
+                android:fontFamily="@font/pfdbold"
+                app:layout_constraintBottom_toBottomOf="@id/vk_ic"
+                app:layout_constraintLeft_toRightOf="@id/vk_ic"
+                app:layout_constraintTop_toTopOf="@id/vk_ic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/tg_button_top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.8157" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/center_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.0505" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/right_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.9739" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.0453" />
+</androidx.constraintlayout.widget.ConstraintLayout>

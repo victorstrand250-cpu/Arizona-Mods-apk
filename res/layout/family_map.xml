@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/neighbor_game_task_screen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        android:id="@id/mapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <com.arizonagames.feature.arizona.family.GridOverlayView
+        android:id="@id/overlayView"
+        android:background="@android:color/transparent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

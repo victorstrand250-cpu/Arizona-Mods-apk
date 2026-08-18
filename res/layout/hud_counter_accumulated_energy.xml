@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:background="@drawable/hud_counter_accumulated_energy_bg"
+        android:paddingLeft="@dimen/_6sdp"
+        android:paddingTop="@dimen/_6sdp"
+        android:paddingRight="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_6sdp">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/hud_counter_accumulated_energy_item_one_bg"
+            android:paddingLeft="@dimen/_2sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:paddingHorizontal="@dimen/_2sdp">
+            <ImageView
+                android:layout_width="@dimen/_6sdp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hud_counter_electro_ic"
+                android:adjustViewBounds="true" />
+            <TextView
+                android:textSize="@dimen/_4sdp"
+                android:textColor="#ff0d2b25"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Накопленная \nэнергия"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold"
+                android:lineHeight="@dimen/_4sdp" />
+        </LinearLayout>
+        <View
+            android:layout_width="@dimen/_3sdp"
+            android:layout_height="0.0dip" />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/hud_counter_accumulated_energy_item_two_bg"
+            android:paddingLeft="@dimen/_4sdp"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingRight="@dimen/_4sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:paddingHorizontal="@dimen/_4sdp">
+            <TextView
+                android:textSize="@dimen/_5sdp"
+                android:textColor="#ff2b2000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="energy"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#ff2b2000"
+                android:id="@id/tv_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_minus4sdp"
+                android:maxWidth="@dimen/_30sdp"
+                android:text="100%"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="24.0dip"
+        android:layout_height="fill_parent"
+        android:src="@drawable/hud_counter_accumulated_energy_bg_two"
+        android:scaleType="fitEnd"
+        android:adjustViewBounds="true" />
+</LinearLayout>

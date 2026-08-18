@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="75.0dip"
+    android:width="250.0dip"
+    android:viewportWidth="250.0"
+    android:viewportHeight="75.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ff0e1422"
+        android:pathData="M15,0L235,0A15,15 0,0 1,250 15L250,60A15,15 0,0 1,235 75L15,75A15,15 0,0 1,0 60L0,15A15,15 0,0 1,15 0z"
+        android:fillAlpha="0.8" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M15,2.5L235,2.5A12.5,12.5 0,0 1,247.5 15L247.5,60A12.5,12.5 0,0 1,235 72.5L15,72.5A12.5,12.5 0,0 1,2.5 60L2.5,15A12.5,12.5 0,0 1,15 2.5z"
+        android:strokeColor="@drawable/$hud_logo_background__0"
+        android:strokeWidth="5.0"
+        android:strokeAlpha="0.1" />
+</vector>

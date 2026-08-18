@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="30.0dip"
+    android:width="130.0dip"
+    android:viewportWidth="130.0"
+    android:viewportHeight="30.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="#ffffffff"
+        android:pathData="M0,0h900v420h-900z"
+        android:fillAlpha="0.1" />
+    <path
+        android:fillColor="@drawable/$bg_craft_amount__0"
+        android:pathData="M0,0h900v420h-900z"
+        android:fillAlpha="0.25" />
+</vector>

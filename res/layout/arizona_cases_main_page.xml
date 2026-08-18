@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@id/main_page_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="@dimen/_50sdp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="fill_parent">
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Похожие кейсы"
+                android:fontFamily="@font/heading_now_64_regular" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@id/rv_same_cases"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/_18sdp"
+            android:layout_marginRight="@dimen/_18sdp"
+            android:layout_weight="4.0"
+            android:layout_marginHorizontal="@dimen/_18sdp">
+            <FrameLayout
+                android:id="@id/animate_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_gravity="start|center"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Вы открываете кейс"
+                        android:fontFamily="@font/heading_now_56_bold" />
+                    <ImageView
+                        android:id="@id/iv_case_logo"
+                        android:layout_width="@dimen/_96sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginVertical="@dimen/_6sdp" />
+                    <LinearLayout
+                        android:gravity="center"
+                        android:id="@id/available_until_conateiner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="@dimen/_8sdp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/banners_ic_time2"
+                            android:adjustViewBounds="true"
+                            android:tint="#80ffffff" />
+                        <TextView
+                            android:textSize="@dimen/_6sdp"
+                            android:textColor="#80ffffff"
+                            android:id="@id/tv_available_until"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Доступен до 12:00 21.03.2025"
+                            android:fontFamily="@font/heading_now_64_regular"
+                            android:layout_marginStart="@dimen/_5sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <ImageView
+                    android:layout_gravity="end"
+                    android:id="@id/iv_case"
+                    android:layout_width="@dimen/_112sdp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+            </FrameLayout>
+            <LinearLayout
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:clipToOutline="false">
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:id="@id/tv_one_x"
+                    android:background="@drawable/cases_select_x"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:text="x1" />
+                <FrameLayout
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:clipToOutline="false">
+                    <androidx.cardview.widget.CardView
+                        android:layout_gravity="end"
+                        android:id="@id/discount_container"
+                        android:visibility="gone"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-6.0dip"
+                        android:clipToOutline="false"
+                        app:cardBackgroundColor="@color/red"
+                        app:cardCornerRadius="@dimen/_8sdp">
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="@color/white"
+                            android:id="@id/tv_discount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_3sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:layout_marginRight="@dimen/_3sdp"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:text="-10%"
+                            android:fontFamily="@font/heading_now_64_regular"
+                            android:layout_marginHorizontal="@dimen/_3sdp"
+                            android:layout_marginVertical="@dimen/_2sdp" />
+                    </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:id="@id/btn_open"
+                        android:background="@drawable/cases_top_bar_gold_box_bg"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="@dimen/_6sdp"
+                        android:layout_marginRight="@dimen/_6sdp"
+                        android:layout_marginHorizontal="@dimen/_6sdp">
+                        <TextView
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:id="@id/tv_open_case"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Открыть"
+                            android:fontFamily="@font/heading_now_66_bold" />
+                        <ImageView
+                            android:id="@id/iv_money_ic"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/blueprint_ic_rub"
+                            android:adjustViewBounds="true"
+                            android:tint="@color/black"
+                            android:layout_marginStart="@dimen/_10sdp" />
+                    </LinearLayout>
+                </FrameLayout>
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:id="@id/tv_ten_x"
+                    android:background="@drawable/cases_unselect_x"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:text="x10" />
+            </LinearLayout>
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#99ffffff"
+                android:layout_gravity="center"
+                android:id="@id/tv_count_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="Осталось 10 шт."
+                android:fontFamily="@font/heading_now_56_bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="fill_parent">
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cases_info_icon"
+                    android:tint="@color/white"
+                    android:layout_marginEnd="@dimen/_6sdp" />
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Гарантированные призы"
+                    android:fontFamily="@font/heading_now_64_regular" />
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@id/rv_guaranteed"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                <View
+                    android:id="@id/guaranteed_block"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <include
+        android:id="@id/prize_page"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/_4sdp"
+        layout="@layout/arizona_cases_prizes_page" />
+</FrameLayout>

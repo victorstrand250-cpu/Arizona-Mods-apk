@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/license_plates"
+    android:background="@drawable/plate_number_main_bg"
+    android:clickable="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include
+        android:id="@id/usa_plates_screen"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/az_american_plate_number_screen" />
+    <include
+        android:id="@id/choose_region_screen"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/az_choose_region_screen" />
+    <include
+        android:id="@id/rus_plate_screen"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/az_rus_plate_screen" />
+    <include
+        android:id="@id/ua_plate_screen"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/az_ua_plate_screen" />
+    <include
+        android:id="@id/by_plate_screen"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/az_by_plate_screen" />
+    <include
+        android:id="@id/kz_plate_screen"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/az_kz_plate_screen" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/main_plates_screen"
+        android:visibility="visible"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/back_button"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:src="@drawable/az_licence_plates_back_button"
+            app:layout_constraintBottom_toBottomOf="@id/top_line"
+            app:layout_constraintHeight_percent="0.0944"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.0623" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/logo"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:src="@drawable/licence_plates_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.2244"
+            app:layout_constraintLeft_toLeftOf="@id/left_line"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.499"
+            app:layout_constraintWidth_percent="0.1223" />
+        <TextView
+            android:textSize="@dimen/_11sdp"
+            android:textColor="#ff909090"
+            android:id="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="регистрация"
+            android:textAllCaps="true"
+            android:fontFamily="@font/pfdregular"
+            android:layout_marginStart="10.0dip"
+            app:layout_constraintLeft_toRightOf="@id/logo"
+            app:layout_constraintTop_toTopOf="@id/logo" />
+        <TextView
+            android:textSize="@dimen/_21sdp"
+            android:textColor="@color/white"
+            android:id="@id/title_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.0dip"
+            android:text="автомобильных\nномеров"
+            android:textAllCaps="true"
+            android:fontFamily="@font/pfdbold"
+            app:layout_constraintLeft_toLeftOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@id/advice_ic"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:src="@drawable/license_plates_info_ic"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_line"
+            app:layout_constraintHeight_percent="0.0544"
+            app:layout_constraintLeft_toLeftOf="@id/left_line"
+            app:layout_constraintWidth_percent="0.03" />
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="#ffa1a1a1"
+            android:id="@id/advice_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Подсказка:"
+            android:fontFamily="@font/pfdregular"
+            android:layout_marginStart="6.0dip"
+            app:layout_constraintBottom_toBottomOf="@id/advice_ic"
+            app:layout_constraintLeft_toRightOf="@id/advice_ic"
+            app:layout_constraintTop_toTopOf="@id/advice_ic" />
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:id="@id/advice_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="От выбранного региона будет зависеть дизайн номеров"
+            android:fontFamily="@font/pfdregular"
+            android:layout_marginStart="3.0dip"
+            app:layout_constraintBottom_toBottomOf="@id/advice_ic"
+            app:layout_constraintLeft_toRightOf="@id/advice_title"
+            app:layout_constraintTop_toTopOf="@id/advice_ic" />
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9.0dip"
+            android:text="Выберите страну получаемых номеров"
+            android:fontFamily="@font/pfdregular"
+            app:layout_constraintBottom_toTopOf="@id/choose_plate_container"
+            app:layout_constraintEnd_toEndOf="@id/choose_plate_container"
+            app:layout_constraintStart_toStartOf="@id/choose_plate_container" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/choose_plate_container"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_line"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintRight_toRightOf="@id/right_line"
+            app:layout_constraintWidth_percent="0.4296">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@id/usa_plate_main_button"
+                android:background="@drawable/american_plate_main_bg"
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:elevation="1.0dip"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.5454">
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="#ff60ca5d"
+                    android:id="@id/usa_price_text"
+                    android:layout_width="0.0dip"
+                    android:layout_height="0.0dip"
+                    android:layout_marginLeft="9.0dip"
+                    android:layout_marginBottom="9.0dip"
+                    android:text="от 10,000 $"
+                    android:fontFamily="@font/heading_now_64_regular"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHeight_percent="0.0716"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintWidth_percent="0.4096" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@id/sng_plate_main_button"
+                android:background="@drawable/sng_plate_main_bg"
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:alpha="0.4"
+                android:elevation="1.0dip"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="1.0"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.5454">
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="#ffffcb5a"
+                    android:id="@id/cis_price_text"
+                    android:layout_width="0.0dip"
+                    android:layout_height="0.0dip"
+                    android:layout_marginLeft="30.0dip"
+                    android:layout_marginBottom="9.0dip"
+                    android:text="от 1,000 AZ-coin"
+                    android:alpha="0.4"
+                    android:fontFamily="@font/heading_now_64_regular"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHeight_percent="0.0716"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintWidth_percent="0.678" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:orientation="horizontal"
+            android:id="@id/top_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.0894" />
+        <androidx.constraintlayout.widget.Guideline
+            android:orientation="horizontal"
+            android:id="@id/bottom_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.9194" />
+        <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:id="@id/right_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.97" />
+        <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:id="@id/left_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.03" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/main_top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.0894" />
+</androidx.constraintlayout.widget.ConstraintLayout>

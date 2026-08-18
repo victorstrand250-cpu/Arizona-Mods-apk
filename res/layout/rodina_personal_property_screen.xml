@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/rodina_personal_property_screen_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/imageView4"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/guideline29"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/rodina_pts_bg" />
+    <TextView
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold"
+        android:textColor="@color/rodina_white"
+        android:id="@id/rodina_personal_property_title"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8.0dip"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="42.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/rodina_personal_property_btn_close"
+        app:layout_constraintEnd_toStartOf="@id/rodina_personal_property_btn_close"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/rodina_personal_property_btn_close"
+        style="@style/rodina_title_text" />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@id/rodina_personal_property_btn_close"
+        android:layout_width="@dimen/rodina_square_btn_size"
+        android:layout_height="@dimen/rodina_square_btn_size"
+        android:layout_marginTop="16.0dip"
+        android:layout_marginEnd="20.0dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rodina_cross"
+        style="@style/rodina_square_image_button" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintGuide_end="490.0dip" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.68" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:gravity="start"
+        android:id="@id/rodina_personal_property_description"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:layout_marginBottom="8.0dip"
+        android:lineSpacingMultiplier="1.1"
+        app:layout_constraintEnd_toEndOf="@id/rodina_personal_property_btn_close"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/rodina_personal_property_title"
+        app:layout_constraintTop_toBottomOf="@id/rodina_personal_property_title"
+        style="@style/rodina_regular_white_text" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/rodina_personal_property_image"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginBottom="8.0dip"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@id/rodina_personal_property_recycler"
+        app:layout_constraintDimensionRatio="37:20"
+        app:layout_constraintEnd_toEndOf="@id/rodina_personal_property_btn_close"
+        app:layout_constraintStart_toStartOf="@id/rodina_personal_property_title"
+        app:layout_constraintTop_toBottomOf="@id/rodina_personal_property_description" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@id/rodina_personal_property_btn_buy"
+        android:padding="8.0dip"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4.0dip"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rodina_personal_property_btn_enter"
+        app:layout_constraintStart_toStartOf="@id/rodina_personal_property_title"
+        style="@style/rodina_rectangle_green_button" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="vertical"
+        android:id="@id/rodina_personal_property_recycler"
+        android:visibility="invisible"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8.0dip"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/barrier2"
+        app:layout_constraintEnd_toEndOf="@id/rodina_personal_property_btn_close"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/rodina_personal_property_title"
+        app:layout_constraintTop_toBottomOf="@id/rodina_personal_property_image" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@id/rodina_personal_property_btn_enter"
+        android:padding="8.0dip"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_marginStart="8.0dip"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/rodina_personal_property_btn_buy"
+        app:layout_constraintEnd_toEndOf="@id/rodina_personal_property_btn_close"
+        app:layout_constraintStart_toEndOf="@id/rodina_personal_property_btn_buy"
+        app:layout_constraintTop_toTopOf="@id/rodina_personal_property_btn_buy"
+        style="@style/rodina_rectangle_button" />
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="rodina_personal_property_btn_buy, rodina_personal_property_btn_enter" />
+</androidx.constraintlayout.widget.ConstraintLayout>

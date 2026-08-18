@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_46sdp"
+        android:src="@drawable/hud_counter_lord_rings_bg"
+        android:adjustViewBounds="true" />
+    <LinearLayout
+        android:layout_gravity="start|center"
+        android:orientation="vertical"
+        android:background="@drawable/hud_counter_lord_rings_item_bg"
+        android:padding="@dimen/_6sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp">
+        <TextView
+            android:textSize="@dimen/_3sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="выживших ираков"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+        <TextView
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:id="@id/tv_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_minus4sdp"
+            android:text="25"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="end|center"
+        android:orientation="vertical"
+        android:padding="@dimen/_6sdp"
+        android:layout_width="@dimen/_44sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_16sdp">
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="осталось"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+        <TextView
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:id="@id/tv_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_minus4sdp"
+            android:text="10:23"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold" />
+    </LinearLayout>
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_56sdp"
+        android:src="@drawable/hud_counter_lord_rings_image"
+        android:adjustViewBounds="true" />
+</FrameLayout>

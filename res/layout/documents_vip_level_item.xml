@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@id/documents_transport_item_ic"
+        android:layout_width="@dimen/_8sdp"
+        android:layout_height="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:src="@drawable/documents_vip_ic_checkmark" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="@dimen/_76sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_12sdp">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ffffffff"
+            android:id="@id/documents_vip_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Уровень 1"
+            android:fontFamily="@font/pfdindisplaypro_bold" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffbababa"
+            android:id="@id/documents_vip_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Телепорт личного транспорта"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/_5sdp"
+        android:textColor="#ffffffff"
+        android:layout_gravity="center_vertical"
+        android:id="@id/documents_vip_level_button"
+        android:background="@drawable/documents_vip_button_bg"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingTop="@dimen/_3sdp"
+        android:paddingRight="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_4sdp"
+        android:text="Подробнее"
+        android:fontFamily="@font/pfdindisplaypro_regular"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_3sdp" />
+</LinearLayout>

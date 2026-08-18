@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:background="@drawable/winter_battlepass_roulette_bg_transparent_white"
+    android:layout_width="@dimen/_32sdp"
+    android:layout_height="@dimen/_32sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:layout_gravity="bottom"
+        android:id="@id/bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <View
+        android:layout_gravity="bottom|center"
+        android:id="@id/rarity"
+        android:background="@color/yellow"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_1sdp" />
+    <ImageView
+        android:id="@id/imagePrise"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="4.0dip"
+        android:src="@drawable/winter_battlepass_roulette_img_prise_just_dog" />
+</FrameLayout>

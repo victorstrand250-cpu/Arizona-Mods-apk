@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:background="@drawable/bg_btn_guard_inventory"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@id/btnGuardInventory"
+        android:background="@drawable/mask_group_guard_menu"
+        android:padding="@dimen/_6sdp"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_24sdp"
+        android:text="инвентарь"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/selector_dialog_buttons" />
+</androidx.constraintlayout.widget.ConstraintLayout>

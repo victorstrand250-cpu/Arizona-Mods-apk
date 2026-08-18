@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:background="@drawable/bg_quest_test"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/btnBack"
+        android:layout_width="@dimen/_33sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:src="@drawable/ic_btn_back"
+        app:layout_constraintStart_toStartOf="@id/left_line"
+        app:layout_constraintTop_toTopOf="@id/top_line" />
+    <ImageView
+        android:id="@id/btnExit"
+        android:layout_width="@dimen/_33sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:src="@drawable/train_driver_exit_button"
+        app:layout_constraintEnd_toEndOf="@id/right_line"
+        app:layout_constraintTop_toTopOf="@id/top_line" />
+    <TextView
+        android:textSize="@dimen/_16sdp"
+        android:textColor="@color/white"
+        android:gravity="start"
+        android:id="@id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Активность \nна мероприятии"
+        android:maxLines="2"
+        android:fontFamily="@font/gotham_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/top_line" />
+    <LinearLayout
+        android:id="@id/cvUserName"
+        android:background="@drawable/bg_rounded_32"
+        android:padding="12.0dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+        <ImageView
+            android:layout_gravity="start|center"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:src="@drawable/ic_user_quest" />
+        <TextView
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:id="@id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_medium"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/top_line" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rvQuestActivity"
+        android:background="@drawable/bg_rounded_32"
+        android:padding="12.0dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvUserName"
+        app:spanCount="2" />
+    <TextView
+        android:textSize="@dimen/_20sdp"
+        android:textColor="@color/white"
+        android:gravity="start"
+        android:id="@id/tvGetQuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Взять \nзадание"
+        android:fontFamily="@font/gotham_medium"
+        android:layout_marginEnd="8.0dip"
+        android:textFontWeight="700"
+        app:layout_constraintBottom_toBottomOf="@id/ivGetQuest"
+        app:layout_constraintEnd_toStartOf="@id/ivGetQuest"
+        app:layout_constraintTop_toTopOf="@id/ivGetQuest" />
+    <ImageView
+        android:id="@id/ivGetQuest"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:src="@drawable/ic_go_next_quest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
+        android:gravity="start"
+        android:id="@id/tvTitleQuestStages"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Этапы"
+        android:fontFamily="@font/gotham_medium"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toStartOf="@id/rvQuestStages"
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rvQuestStages"
+        android:paddingBottom="8.0dip"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/center_line"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleQuestStages" />
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
+        android:gravity="start"
+        android:id="@id/tvTitleQuestTasks"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Задания"
+        android:fontFamily="@font/gotham_medium"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toStartOf="@id/rvQuestTasks"
+        app:layout_constraintTop_toBottomOf="@id/btnExit" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rvQuestTasks"
+        android:paddingBottom="8.0dip"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnExit"
+        app:layout_constraintStart_toStartOf="@id/center_line"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleQuestTasks" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/bottom_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.9444" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.044" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.03125" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/right_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.9687" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/center_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5" />
+</androidx.constraintlayout.widget.ConstraintLayout>

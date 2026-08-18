@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/cgp"
+    android:background="#ff20232f"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@id/cgp_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19.0dip"
+        android:text="Заберите содержимое контейнера"
+        android:textAllCaps="true"
+        android:fontFamily="@font/gotham"
+        android:textAlignment="center"
+        android:textFontWeight="700"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@id/cgp_description_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="71.0dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cgp_title">
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textStyle="normal"
+            android:textColor="@color/white"
+            android:id="@id/cgp_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Заберите ваши призы: "
+            android:fontFamily="@font/gotham"
+            android:textAlignment="center" />
+        <TextView
+            android:textSize="@dimen/_5sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@id/cgp_bold_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 6 предметов"
+            android:fontFamily="@font/gotham"
+            android:textAlignment="center" />
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/cgp_exit_button"
+        android:layout_width="58.0dip"
+        android:layout_height="18.0dip"
+        android:layout_marginTop="19.0dip"
+        android:layout_marginRight="26.0dip"
+        android:src="@drawable/auction_button_exit"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@id/cc_rc_view"
+        android:paddingLeft="10.0dip"
+        android:paddingRight="10.0dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13.0dip"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cgp_description_container"
+        app:spanCount="2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

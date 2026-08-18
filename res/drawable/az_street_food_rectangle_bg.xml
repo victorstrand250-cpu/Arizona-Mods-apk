@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="255.0dip"
+    android:width="255.0dip"
+    android:viewportWidth="255.0"
+    android:viewportHeight="255.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$az_street_food_rectangle_bg__0"
+        android:pathData="M20.21,0.85L234.71,0.85A19.5,19.5 0,0 1,254.21 20.35L254.21,234.85A19.5,19.5 0,0 1,234.71 254.35L20.21,254.35A19.5,19.5 0,0 1,0.71 234.85L0.71,20.35A19.5,19.5 0,0 1,20.21 0.85z"
+        android:fillAlpha="0.2" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M20.21,0.85L234.71,0.85A19.5,19.5 0,0 1,254.21 20.35L254.21,234.85A19.5,19.5 0,0 1,234.71 254.35L20.21,254.35A19.5,19.5 0,0 1,0.71 234.85L0.71,20.35A19.5,19.5 0,0 1,20.21 0.85z"
+        android:strokeColor="@drawable/$az_street_food_rectangle_bg__1"
+        android:strokeWidth="0.780007" />
+</vector>

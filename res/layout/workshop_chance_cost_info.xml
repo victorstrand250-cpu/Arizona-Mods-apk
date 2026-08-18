@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textStyle="italic"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@id/tvStartCount"
+            android:background="@drawable/border_radius_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pfdregular"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp"
+            android:layout_marginEnd="4.0dip"
+            android:backgroundTint="@color/black_type1" />
+        <ProgressBar
+            android:id="@id/progressBar"
+            android:background="@drawable/rectangle_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:max="100"
+            android:progress="0"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/yellow_progressbar"
+            android:layout_weight="1.0"
+            android:progressTint="@color/yellow_type1"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            style="?android:progressBarStyleHorizontal" />
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textStyle="italic"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@id/tvEndCount"
+            android:background="@drawable/border_radius_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pfdregular"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp"
+            android:layout_marginStart="4.0dip"
+            android:backgroundTint="@color/black_type1" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@id/layoutFields"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:id="@id/successChanceField"
+            android:layout_width="0.0dip"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_weight="1.0"
+            layout="@layout/item_info_cost" />
+        <include
+            android:id="@id/costField"
+            android:layout_width="0.0dip"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_weight="1.0"
+            android:layout_marginStart="4.0dip"
+            layout="@layout/item_info_cost" />
+    </LinearLayout>
+</LinearLayout>

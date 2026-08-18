@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/linking_layout"
+    android:clickable="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/control_container"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_110sdp"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <ImageView
+            android:id="@id/up_button"
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            android:src="@drawable/casino_control_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@id/bottom_button"
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            android:src="@drawable/casino_control_button"
+            android:rotation="180.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+        <ImageView
+            android:id="@id/left_button"
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            android:src="@drawable/casino_control_button"
+            android:rotation="270.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@id/right_button"
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            android:src="@drawable/casino_control_button"
+            android:rotation="90.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_9sdp"
+        android:layout_marginRight="@dimen/_16sdp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="@color/white"
+            android:id="@id/balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="690 000"
+            android:textAllCaps="true"
+            android:fontFamily="@font/pfdindisplaypro_bolditalic" />
+        <ImageView
+            android:layout_width="@dimen/_6sdp"
+            android:layout_height="@dimen/_6sdp"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:src="@drawable/casino_chip_ic" />
+    </LinearLayout>
+    <ImageView
+        android:id="@id/exit_button"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/back_button"
+        android:scaleType="fitXY"
+        app:layout_constraintHeight_percent="0.0833"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.0578" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textColor="@color/white"
+        android:id="@id/game_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_9sdp"
+        android:text="Однорукий бандит"
+        android:textAllCaps="true"
+        android:fontFamily="@font/pfdindisplaypro_bolditalic"
+        app:layout_constraintBottom_toBottomOf="@id/exit_button"
+        app:layout_constraintLeft_toRightOf="@id/exit_button"
+        app:layout_constraintTop_toTopOf="@id/exit_button" />
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_13sdp"
+        app:layout_constraintBottom_toTopOf="@id/action_button"
+        app:layout_constraintLeft_toLeftOf="@id/action_button"
+        app:layout_constraintRight_toRightOf="@id/action_button">
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="@color/white"
+            android:id="@id/bet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ставка 2000"
+            android:textAllCaps="true"
+            android:fontFamily="@font/pfdindisplaypro_bolditalic" />
+        <ImageView
+            android:layout_width="@dimen/_6sdp"
+            android:layout_height="@dimen/_6sdp"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:src="@drawable/casino_chip_ic" />
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/action_button"
+        android:background="@drawable/casino_action_button_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintHeight_percent="0.1185"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/action_button_top_line"
+        app:layout_constraintWidth_percent="0.2911">
+        <TextView
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:id="@id/action_button_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Крутить"
+            android:textAllCaps="true"
+            android:fontFamily="@font/pfdindisplaypro_bolditalic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@id/minus_button"
+        android:background="@drawable/casino_minus_button"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/action_button"
+        app:layout_constraintHeight_percent="0.0595"
+        app:layout_constraintLeft_toRightOf="@id/action_button"
+        app:layout_constraintTop_toTopOf="@id/action_button"
+        app:layout_constraintWidth_percent="0.1333" />
+    <ImageView
+        android:id="@id/plus_button"
+        android:background="@drawable/casino_plus_button"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/action_button"
+        app:layout_constraintHeight_percent="0.0595"
+        app:layout_constraintRight_toLeftOf="@id/action_button"
+        app:layout_constraintTop_toTopOf="@id/action_button"
+        app:layout_constraintWidth_percent="0.1333" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/casino_win_screen"
+        android:background="@drawable/casino_win_bg"
+        android:visibility="gone"
+        android:clickable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:elevation="@dimen/_34sdp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:textSize="@dimen/_17sdp"
+                android:textColor="@color/white"
+                android:id="@id/win_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Отлично, вы выиграли!"
+                android:textAllCaps="true"
+                android:fontFamily="@font/pfdindisplaypro_bolditalic"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/win_title">
+                <TextView
+                    android:textSize="@dimen/_36sdp"
+                    android:textColor="@color/white"
+                    android:id="@id/win_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2000"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/pfdindisplaypro_bolditalic" />
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/casino_chip_white_ic" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/action_button_top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.8259" />
+</androidx.constraintlayout.widget.ConstraintLayout>

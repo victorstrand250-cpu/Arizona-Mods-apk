@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:background="@color/transparent80_grey"
+    android:focusable="true"
+    android:clickable="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.06" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.2" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.67" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.98" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.1" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.15" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.915" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.05" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/btnBack"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/ic_arrow_back_8"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer3"
+        app:layout_constraintHeight_percent="0.0944"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.0623" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:gravity="start|center"
+        android:id="@id/tvInventory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ИНВЕНТАРЬ"
+        android:textAllCaps="true"
+        android:layout_marginStart="16.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ivHealthTab"
+        android:layout_width="8.0dip"
+        android:layout_height="8.0dip"
+        android:src="@drawable/ic_heart_8"
+        android:adjustViewBounds="true"
+        android:layout_marginStart="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor1"
+        app:layout_constraintEnd_toStartOf="@id/ivHealthBar"
+        app:layout_constraintHeight_percent="0.1223"
+        app:layout_constraintStart_toEndOf="@id/guidelineVer1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.1223" />
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@id/ivHealthBar"
+        android:background="@drawable/rectangle_bar"
+        android:layout_width="74.0dip"
+        android:layout_height="8.0dip"
+        android:layout_marginStart="6.0dip"
+        app:indicatorColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@id/tvHealthCount"
+        app:layout_constraintStart_toEndOf="@id/ivHealthTab"
+        app:layout_constraintTop_toTopOf="@id/tvHealthCount"
+        app:trackColor="@color/ap_transparent"
+        app:trackCornerRadius="4.0dip"
+        app:trackThickness="4.0dip" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textSize="@dimen/_6sdp"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:gravity="start|center"
+        android:id="@id/tvHealthCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/ivHealthTab"
+        app:layout_constraintStart_toEndOf="@id/ivHealthBar"
+        app:layout_constraintTop_toTopOf="@id/ivHealthTab" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ivShieldTab"
+        android:layout_width="8.0dip"
+        android:layout_height="8.0dip"
+        android:src="@drawable/ic_shield_8"
+        android:layout_marginStart="16.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor1"
+        app:layout_constraintStart_toEndOf="@id/tvHealthCount"
+        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@id/ivShieldBar"
+        android:background="@drawable/rectangle_bar"
+        android:layout_width="74.0dip"
+        android:layout_height="8.0dip"
+        android:layout_marginStart="6.0dip"
+        app:indicatorColor="@color/blue"
+        app:layout_constraintBottom_toBottomOf="@id/tvShieldCount"
+        app:layout_constraintStart_toEndOf="@id/ivShieldTab"
+        app:layout_constraintTop_toTopOf="@id/tvShieldCount"
+        app:trackColor="@color/ap_transparent"
+        app:trackCornerRadius="4.0dip"
+        app:trackThickness="4.0dip" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textSize="@dimen/_6sdp"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:id="@id/tvShieldCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/ivShieldTab"
+        app:layout_constraintStart_toEndOf="@id/ivShieldBar"
+        app:layout_constraintTop_toTopOf="@id/ivShieldTab" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ivFoodTab"
+        android:layout_width="8.0dip"
+        android:layout_height="8.0dip"
+        android:src="@drawable/ic_food_8"
+        android:layout_marginStart="16.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/tvShieldCount"
+        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintStart_toEndOf="@id/tvShieldCount"
+        app:layout_constraintTop_toTopOf="@id/tvShieldCount"
+        app:layout_constraintWidth_percent="0.1223" />
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@id/ivFoodBar"
+        android:background="@drawable/rectangle_bar"
+        android:layout_width="74.0dip"
+        android:layout_height="8.0dip"
+        android:layout_marginStart="6.0dip"
+        app:indicatorColor="@color/orange"
+        app:layout_constraintBottom_toBottomOf="@id/tvFoodCount"
+        app:layout_constraintStart_toEndOf="@id/ivFoodTab"
+        app:layout_constraintTop_toTopOf="@id/tvFoodCount"
+        app:trackColor="@color/ap_transparent"
+        app:trackCornerRadius="4.0dip"
+        app:trackThickness="4.0dip" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textSize="@dimen/_6sdp"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:id="@id/tvFoodCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/ivFoodTab"
+        app:layout_constraintStart_toEndOf="@id/ivFoodBar"
+        app:layout_constraintTop_toTopOf="@id/ivFoodTab" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnStats"
+        android:background="@drawable/ic_btn_inventory_stats"
+        android:layout_width="@dimen/_72sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginTop="6.0dip"
+        android:layout_marginBottom="6.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor1"
+        app:layout_constraintEnd_toStartOf="@id/btnPassport"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnPassport"
+        android:background="@drawable/ic_btn_inventory_info"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginTop="6.0dip"
+        android:layout_marginBottom="6.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor1"
+        app:layout_constraintEnd_toStartOf="@id/btnMedbook"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnMedbook"
+        android:background="@drawable/ic_btn_inventory_star"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginTop="6.0dip"
+        android:layout_marginBottom="6.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor1"
+        app:layout_constraintEnd_toStartOf="@id/btnVipStatus"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnVipStatus"
+        android:background="@drawable/ic_btn_inventory_crown"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginTop="6.0dip"
+        android:layout_marginBottom="6.0dip"
+        android:layout_marginEnd="28.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor1"
+        app:layout_constraintEnd_toStartOf="@id/btnSortItems"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/btnSortItems"
+        android:background="@drawable/ic_btn_inventory_refresh"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginTop="6.0dip"
+        android:layout_marginBottom="6.0dip"
+        android:layout_marginEnd="20.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@id/viewLine"
+        android:layout_width="fill_parent"
+        android:layout_height="2.0dip"
+        android:src="@drawable/straight_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+    <androidx.constraintlayout.widget.Group
+        android:id="@id/groupCharacterInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="ivHealthTab,ivHealthBar,tvHealthCount,ivShieldTab,ivShieldBar,tvShieldCount,ivFoodTab, ivFoodBar, tvFoodCount" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rvCategoryMenu"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="24.0dip"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor1" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarSize="4.0dip"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar"
+        android:scrollbarStyle="outsideInset"
+        android:id="@id/rvGuardInventory"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        android:scrollbars="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="28.0dip"
+        android:layout_marginEnd="30.0dip"
+        android:scrollIndicators="end"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor1"
+        app:spanCount="5" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarSize="4.0dip"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar"
+        android:scrollbarStyle="outsideInset"
+        android:id="@id/rvMainInventory"
+        android:scrollbars="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="20.0dip"
+        android:scrollIndicators="end"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor2"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer1"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor1"
+        app:spanCount="5" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/ivCharacterImage"
+        android:visibility="visible"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer2"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor4" />
+    <include
+        android:id="@id/person_section"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer2"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor4"
+        layout="@layout/inventory_person_section" />
+    <include
+        android:id="@id/layoutGuards"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginStart="8.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer4"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer2"
+        app:layout_constraintTop_toTopOf="@id/rvMainInventory"
+        layout="@layout/layout_guard_inventory" />
+    <include
+        android:id="@id/layoutVehicle"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer2"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor5"
+        layout="@layout/layout_vehicle_inventory" />
+    <include
+        android:id="@id/layoutWarehouse"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="24.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer2"
+        app:layout_constraintTop_toTopOf="@id/guidelineHor1"
+        layout="@layout/layout_warehouse" />
+    <ProgressBar
+        android:id="@id/progressBar"
+        android:background="@drawable/circle_shape"
+        android:layout_width="1.0dip"
+        android:layout_height="1.0dip"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:elevation="2.0dip"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ivCharacterImage"
+        app:layout_constraintStart_toStartOf="@id/ivCharacterImage"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

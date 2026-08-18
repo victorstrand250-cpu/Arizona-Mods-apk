@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_34sdp"
+        android:src="@drawable/hud_counter_broking_ice_bg"
+        android:adjustViewBounds="true" />
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/hud_counter_broking_ice_item_bg"
+        android:adjustViewBounds="true" />
+    <LinearLayout
+        android:layout_gravity="start|center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/hud_counter_broking_ice_ic"
+            android:adjustViewBounds="true" />
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp">
+            <TextView
+                android:textSize="@dimen/_4sdp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Сломано льдин"
+                android:fontFamily="@font/heading_now_66_bold" />
+            <TextView
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:id="@id/tv_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_minus4sdp"
+                android:text="100/500"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:background="@drawable/btn_border_tuning"
+    android:layout_width="@dimen/_90sdp"
+    android:layout_height="@dimen/_36sdp"
+    android:layout_marginEnd="@dimen/_4sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:id="@id/backView"
+        android:background="@drawable/btn_border_tuning_gray"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:backgroundTint="@color/rodina_gray" />
+    <ImageView
+        android:id="@id/ivSubMenuIcon"
+        android:layout_width="@dimen/_16sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="@dimen/_7sdp"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:id="@id/tvMenuName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:fontFamily="@font/gotham"
+        android:layout_marginStart="8.0dip"
+        app:layout_constraintBottom_toBottomOf="@id/ivSubMenuIcon"
+        app:layout_constraintStart_toEndOf="@id/ivSubMenuIcon"
+        app:layout_constraintTop_toTopOf="@id/ivSubMenuIcon" />
+</androidx.constraintlayout.widget.ConstraintLayout>

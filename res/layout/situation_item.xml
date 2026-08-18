@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/situation_item"
+    android:layout_width="@dimen/_265sdp"
+    android:layout_height="fill_parent"
+    android:layout_marginRight="@dimen/_16sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/situation_main_container"
+        android:background="@drawable/situation_1_img"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@id/button_top_line"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/main_info_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_11sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:elevation="@dimen/_11sdp"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <TextView
+                android:textSize="@dimen/_18sdp"
+                android:textColor="#ffffffff"
+                android:id="@id/main_info_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Разбор завалов"
+                android:fontFamily="@font/heading_now_64_regular"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.cardview.widget.CardView
+                android:id="@id/main_info_title_line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:cardBackgroundColor="#10ffffff"
+                app:layout_constraintTop_toBottomOf="@id/main_info_title" />
+            <ImageView
+                android:id="@id/rang_ic"
+                android:layout_width="@dimen/_11sdp"
+                android:layout_height="@dimen/_11sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:src="@drawable/situation_rang_ic"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_info_title_line" />
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#60ffffff"
+                android:id="@id/rang_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_6sdp"
+                android:text="Доступно c "
+                android:fontFamily="@font/heading_now_64_regular"
+                app:layout_constraintBottom_toBottomOf="@id/rang_ic"
+                app:layout_constraintLeft_toRightOf="@id/rang_ic"
+                app:layout_constraintTop_toTopOf="@id/rang_ic" />
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ffffffff"
+                android:id="@id/rang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 ранга"
+                android:fontFamily="@font/heading_now_64_regular"
+                app:layout_constraintBottom_toBottomOf="@id/rang_ic"
+                app:layout_constraintLeft_toRightOf="@id/rang_title"
+                app:layout_constraintTop_toTopOf="@id/rang_ic" />
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#60ffffff"
+                android:id="@id/free_slots_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Свободные слоты: ∞"
+                android:fontFamily="@font/heading_now_64_regular"
+                app:layout_constraintBottom_toBottomOf="@id/rang_ic"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/rang_ic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/situation_full_info_container"
+            android:background="@drawable/situation_black_bg"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_11sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/full_info_top_line">
+                <TextView
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="#fff1f1f1"
+                    android:id="@id/full_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Вам предстоит охранять территорию крушения самолета и защищать ее от опасных мафиози, патрулируя всю территорию происшествия.\n\nЗа каждый завершенный патруль (круг) вы будете получать награду в виде 120 000$, а за убийство мафиози на территории крушения по 50 000$."
+                    android:lineSpacingMultiplier="1.4"
+                    android:fontFamily="@font/pfdbold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:orientation="horizontal"
+                android:id="@id/full_info_top_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.3885" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/info_button"
+        android:background="@drawable/situation_button_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_top_line"
+        app:layout_constraintWidth_percent="0.1224">
+        <ImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/situation_info_ic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/choose_button"
+        android:background="@drawable/situation_button_bg"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginLeft="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/info_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_top_line">
+        <TextView
+            android:textSize="@dimen/_11sdp"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Выбрать"
+            android:fontFamily="@font/heading_now_64_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/button_top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.8437" />
+</androidx.constraintlayout.widget.ConstraintLayout>

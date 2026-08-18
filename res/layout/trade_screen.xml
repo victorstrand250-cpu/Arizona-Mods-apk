@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/parentLayout"
+    android:background="@color/transparent80_grey"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.955" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.06" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="horizontal"
+        android:id="@id/guidelineHor1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.1" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/btnBack"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/ic_arrow_back_8"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVer4"
+        app:layout_constraintHeight_percent="0.0944"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.0623" />
+    <TextView
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:gravity="start|center"
+        android:id="@id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="true"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
+    <ImageView
+        android:id="@id/viewLine"
+        android:layout_width="fill_parent"
+        android:layout_height="2.0dip"
+        android:src="@drawable/straight_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rvInventory"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_marginTop="16.0dip"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHor2"
+        app:layout_constraintEnd_toStartOf="@id/guidelineVer2"
+        app:layout_constraintStart_toStartOf="@id/guidelineVer1"
+        app:layout_constraintTop_toBottomOf="@id/viewLine"
+        app:spanCount="5" />
+    <TextView
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:gravity="start|center"
+        android:id="@id/tvSendItems"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:text="@string/user_send"
+        android:rotation="-90.0"
+        android:textAllCaps="true"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/send_item_container"
+        app:layout_constraintStart_toEndOf="@id/guidelineVer2"
+        app:layout_constraintTop_toTopOf="@id/rvSendItems" />
+    <ImageView
+        android:id="@id/ivSendStatus"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/bg_trade_status_green"
+        app:layout_constraintBottom_toBottomOf="@id/send_item_container"
+        app:layout_constraintEnd_toEndOf="@id/rvSendItems"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@id/rvSendItems"
+        app:layout_constraintTop_toTopOf="@id/rvSendItems"
+        app:layout_constraintVertical_bias="1.0" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@id/rvSendItems"
+        android:background="@android:color/transparent"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toStartOf="@id/guidelineVer3"
+        app:layout_constraintStart_toEndOf="@id/tvSendItems"
+        app:layout_constraintTop_toBottomOf="@id/viewLine" />
+    <LinearLayout
+        android:id="@id/send_item_container"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@id/rvSendItems"
+        app:layout_constraintStart_toStartOf="@id/rvSendItems"
+        app:layout_constraintTop_toBottomOf="@id/rvSendItems">
+        <EditText
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:id="@id/etSendItems"
+            android:background="@drawable/bg_edittext"
+            android:paddingLeft="20.0dip"
+            android:paddingRight="20.0dip"
+            android:focusable="true"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="0"
+            android:editable="false"
+            android:layout_weight="1.0"
+            android:drawableEnd="@drawable/ic_dollar"
+            android:paddingHorizontal="20.0dip" />
+        <View
+            android:layout_width="@dimen/_6sdp"
+            android:layout_height="0.0dip" />
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:id="@id/btn_send_item"
+            android:visibility="gone"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="fill_parent"
+            app:backgroundMainColor="#ff292929"
+            app:borderMainColor="#0dffffff"
+            app:borderWidth="@dimen/_1sdp"
+            app:corners="10.0dip">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Обмен имущества"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    </LinearLayout>
+    <ImageView
+        android:id="@id/ivReceiveStatus"
+        android:visibility="gone"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:src="@drawable/bg_trade_status_green"
+        app:layout_constraintBottom_toBottomOf="@id/receive_items_container"
+        app:layout_constraintEnd_toEndOf="@id/rvReceiveItems"
+        app:layout_constraintStart_toStartOf="@id/rvReceiveItems"
+        app:layout_constraintTop_toTopOf="@id/rvReceiveItems" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@id/rvReceiveItems"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_18sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toStartOf="@id/guidelineVer3"
+        app:layout_constraintStart_toStartOf="@id/rvSendItems"
+        app:layout_constraintTop_toBottomOf="@id/send_item_container" />
+    <LinearLayout
+        android:id="@id/receive_items_container"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@id/rvReceiveItems"
+        app:layout_constraintStart_toStartOf="@id/rvReceiveItems"
+        app:layout_constraintTop_toBottomOf="@id/rvReceiveItems">
+        <EditText
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:id="@id/etReceiveItems"
+            android:background="@drawable/bg_edittext"
+            android:paddingLeft="20.0dip"
+            android:paddingRight="20.0dip"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="0"
+            android:editable="false"
+            android:layout_weight="1.0"
+            android:drawableEnd="@drawable/ic_dollar"
+            android:paddingHorizontal="20.0dip" />
+        <View
+            android:layout_width="@dimen/_6sdp"
+            android:layout_height="0.0dip" />
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:id="@id/btn_receive_item"
+            android:visibility="gone"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="fill_parent"
+            app:backgroundMainColor="#ff292929"
+            app:borderMainColor="#0dffffff"
+            app:borderWidth="@dimen/_1sdp"
+            app:corners="10.0dip">
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Обмен имущества"
+                android:textAllCaps="true"
+                android:fontFamily="@font/heading_now_66_bold" />
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+    </LinearLayout>
+    <TextView
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:id="@id/tvReceiveItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20.0dip"
+        android:text="@string/user_receive"
+        android:maxLines="1"
+        android:rotation="-90.0"
+        android:textAllCaps="true"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/layoutButtons"
+        app:layout_constraintEnd_toEndOf="@id/tvSendItems"
+        app:layout_constraintStart_toStartOf="@id/tvSendItems"
+        app:layout_constraintTop_toTopOf="@id/receive_items_container" />
+    <LinearLayout
+        android:id="@id/layoutButtons"
+        android:layout_width="0.0dip"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="@id/rvReceiveItems"
+        app:layout_constraintStart_toStartOf="@id/rvReceiveItems"
+        app:layout_constraintTop_toBottomOf="@id/receive_items_container">
+        <Button
+            android:id="@id/btnAccept"
+            android:background="@drawable/bttn_ready_trade"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="2.0" />
+        <Button
+            android:id="@id/btnCancel"
+            android:background="@drawable/ic_btn_cancel"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0" />
+    </LinearLayout>
+    <ProgressBar
+        android:id="@id/progressBar"
+        android:background="@drawable/circle_shape"
+        android:layout_width="@dimen/_44sdp"
+        android:layout_height="@dimen/_44sdp"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:elevation="2.0dip"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/receive_items_container"
+        app:layout_constraintEnd_toEndOf="@id/rvReceiveItems"
+        app:layout_constraintStart_toStartOf="@id/rvReceiveItems"
+        app:layout_constraintTop_toTopOf="@id/rvReceiveItems" />
+    <TextView
+        android:textSize="@dimen/_9sdp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:id="@id/tvLoadingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/trade_request"
+        android:textAllCaps="true"
+        android:fontFamily="@font/pfdregular"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/progressBar"
+        app:layout_constraintEnd_toEndOf="@id/progressBar"
+        app:layout_constraintStart_toStartOf="@id/progressBar"
+        app:layout_constraintTop_toTopOf="@id/progressBar" />
+    <androidx.constraintlayout.widget.Group
+        android:id="@id/groupProgressBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="progressBar, tvLoadingTitle" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.02" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.45" />
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@id/guidelineVer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.99" />
+</androidx.constraintlayout.widget.ConstraintLayout>

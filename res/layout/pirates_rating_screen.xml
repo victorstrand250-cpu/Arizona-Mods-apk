@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_16sdp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_24sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginHorizontal="@dimen/_24sdp">
+        <ru.mrlargha.commonui.utils.ui.CustomCardView
+            android:id="@id/back"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            app:backgroundMainColor="#33ffffff"
+            app:corners="@dimen/_4sdp">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="@dimen/_8sdp"
+                android:src="@drawable/hud_skip_button_arrow"
+                android:tint="@color/white"
+                android:rotation="180.0" />
+        </ru.mrlargha.commonui.utils.ui.CustomCardView>
+        <TextView
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_vertical"
+            android:id="@id/tab_ship"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Рейтинг"
+            android:layout_weight="1.0"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:layout_marginEnd="@dimen/_7sdp" />
+        <TextView
+            android:textSize="@dimen/_7sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_vertical"
+            android:id="@id/timedesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="До подведения итогов:"
+            android:fontFamily="@font/heading_now_64_regular"
+            android:layout_marginEnd="@dimen/_7sdp" />
+        <TextView
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_vertical"
+            android:id="@id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Рейтинг"
+            android:textAllCaps="true"
+            android:fontFamily="@font/heading_now_66_bold"
+            android:layout_marginEnd="@dimen/_7sdp" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarThumbVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_track"
+        android:scrollbarStyle="outsideInset"
+        android:layout_gravity="center"
+        android:id="@id/rv"
+        android:paddingRight="@dimen/_4sdp"
+        android:scrollbars="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/_24sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginHorizontal="@dimen/_24sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+</LinearLayout>

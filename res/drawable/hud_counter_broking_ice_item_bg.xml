@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="78.0dip"
+    android:width="280.0dip"
+    android:viewportWidth="280.0"
+    android:viewportHeight="78.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@drawable/$hud_counter_broking_ice_item_bg__0"
+        android:pathData="M0,68.75C0,73.86 4.14,78 9.25,78H270.75C275.86,78 280,73.86 280,68.75V9.25C280,4.14 275.86,0 270.75,0H9.25C4.14,0 0,4.14 0,9.25V68.75Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M9.25,77H270.75C275.31,77 279,73.31 279,68.75V9.25C279,4.69 275.31,1 270.75,1H9.25C4.69,1 1,4.69 1,9.25V68.75C1,73.31 4.69,77 9.25,77Z"
+        android:strokeColor="#ffffffff"
+        android:strokeWidth="2.0" />
+</vector>

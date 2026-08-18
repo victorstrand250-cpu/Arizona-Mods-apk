@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="84.0dip"
+    android:width="312.0dip"
+    android:viewportWidth="312.0"
+    android:viewportHeight="84.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:fillColor="@color/battlepass5"
+        android:pathData="M12,0L300,0A12,12 0,0 1,312 12L312,72A12,12 0,0 1,300 84L12,84A12,12 0,0 1,0 72L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem_roulette__0"
+        android:pathData="M12,0L300,0A12,12 0,0 1,312 12L312,72A12,12 0,0 1,300 84L12,84A12,12 0,0 1,0 72L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem_roulette__1"
+        android:pathData="M12,0L300,0A12,12 0,0 1,312 12L312,72A12,12 0,0 1,300 84L12,84A12,12 0,0 1,0 72L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem_roulette__2"
+        android:pathData="M12,0L300,0A12,12 0,0 1,312 12L312,72A12,12 0,0 1,300 84L12,84A12,12 0,0 1,0 72L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem_roulette__3"
+        android:pathData="M12,0L300,0A12,12 0,0 1,312 12L312,72A12,12 0,0 1,300 84L12,84A12,12 0,0 1,0 72L0,12A12,12 0,0 1,12 0z" />
+    <path
+        android:fillColor="@drawable/$button_background_buyprem_roulette__4"
+        android:pathData="M12,0L300,0A12,12 0,0 1,312 12L312,72A12,12 0,0 1,300 84L12,84A12,12 0,0 1,0 72L0,12A12,12 0,0 1,12 0z" />
+</vector>

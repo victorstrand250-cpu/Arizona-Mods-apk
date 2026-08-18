@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@id/neighbor_game_task_screen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_400sdp"
+        android:layout_height="fill_parent"
+        app:cardBackgroundColor="#14ffffff"
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:cardElevation="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:id="@id/container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/_12sdp">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_28sdp">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="@dimen/_116sdp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="#ffffffff"
+                            android:layout_gravity="center"
+                            android:id="@id/text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Дата / Время"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <ImageView
+                            android:layout_gravity="center_vertical"
+                            android:id="@id/arrow1"
+                            android:layout_width="@dimen/_8sdp"
+                            android:layout_height="@dimen/_8sdp"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:src="@drawable/family_rv_ic_sort" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="#99ffffff"
+                            android:layout_gravity="center"
+                            android:id="@id/text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="№ Территории"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <ImageView
+                            android:layout_gravity="center_vertical"
+                            android:id="@id/arrow2"
+                            android:layout_width="@dimen/_8sdp"
+                            android:layout_height="@dimen/_8sdp"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:src="@drawable/family_rv_ic_sort1" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="@dimen/_102sdp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="#99ffffff"
+                            android:layout_gravity="center"
+                            android:id="@id/text3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Наши встречи"
+                            android:fontFamily="@font/pfdindisplaypro_regular" />
+                        <ImageView
+                            android:layout_gravity="center_vertical"
+                            android:id="@id/arrow3"
+                            android:layout_width="@dimen/_8sdp"
+                            android:layout_height="@dimen/_8sdp"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:src="@drawable/family_rv_ic_sort1" />
+                    </LinearLayout>
+                </LinearLayout>
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                    <ProgressBar
+                        android:layout_gravity="center"
+                        android:id="@id/loader_bar"
+                        android:background="@drawable/circle_shape"
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:progressDrawable="@drawable/circular_progress_bar"
+                        android:elevation="2.0dip"
+                        android:indeterminateTint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="#ffffffff"
+                        android:layout_gravity="center"
+                        android:id="@id/empty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Список пуст"
+                        android:fontFamily="@font/pfdindisplaypro_regular" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:scrollbarThumbVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_thumb"
+                        android:scrollbarTrackVertical="@drawable/winter_battlepass_roulette_custom_scrollbar_track"
+                        android:scrollbarStyle="outsideInset"
+                        android:orientation="vertical"
+                        android:id="@id/task_recycle_view"
+                        android:paddingRight="@dimen/_8sdp"
+                        android:visibility="visible"
+                        android:scrollbars="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

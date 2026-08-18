@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/document_army_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/photo"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginLeft="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_88sdp"
+        android:src="@drawable/documents_vip_ic"
+        app:layout_constraintHeight_percent="0.46"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.24" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_24sdp"
+        app:layout_constraintLeft_toRightOf="@id/photo"
+        app:layout_constraintTop_toTopOf="@id/photo">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff71874e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Имя Фамилия:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="Имя Фамилия"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff71874e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Военный билет:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/have_army_ticket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="Мужской"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_150sdp"
+        app:layout_constraintLeft_toRightOf="@id/photo"
+        app:layout_constraintTop_toTopOf="@id/photo">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff71874e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Срок службы:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/army_online"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="72 года"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ff71874e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Звание:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="100/100"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textColor="#8071874e"
+        android:layout_gravity="center_horizontal"
+        android:id="@id/info"
+        android:background="@drawable/documents_army_desc_bg"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingRight="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="Если у вас есть военный билет, то Вы будете получать\nна 15% больше заработную плату в любой организации"
+        android:fontFamily="@font/pfdindisplaypro_medium"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@id/photo"
+        app:layout_constraintLeft_toRightOf="@id/photo" />
+    <ImageView
+        android:id="@id/info_ic"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_12sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_28sdp"
+        android:src="@drawable/documents_ic_army_info"
+        app:layout_constraintBottom_toBottomOf="@id/info"
+        app:layout_constraintLeft_toLeftOf="@id/info" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@id/notAvailableContainer"
+        android:background="@drawable/documents_army_not_bg"
+        android:visibility="visible"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/_11sdp"
+        android:layout_marginTop="@dimen/_37sdp"
+        android:layout_marginRight="@dimen/_11sdp"
+        android:layout_marginBottom="@dimen/_11sdp">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:id="@id/empty_desc"
+            android:background="@drawable/documents_army_not_desc_bg"
+            android:paddingLeft="@dimen/_24sdp"
+            android:paddingTop="@dimen/_18sdp"
+            android:paddingRight="@dimen/_24sdp"
+            android:paddingBottom="@dimen/_18sdp"
+            android:layout_width="@dimen/_326sdp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_24sdp"
+            android:paddingVertical="@dimen/_18sdp">
+            <ImageView
+                android:id="@id/alert_not"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:src="@drawable/documents_allert_ic"
+                android:tint="#ff334933"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#ff334933" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#ff334933"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:id="@id/empty_desc_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="У вас нет военного билета. Его можно получить при\nпрохождении военной службы в Армии LS, SF или\nТюрьме строгого режима, а также купить в донат-меню."
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

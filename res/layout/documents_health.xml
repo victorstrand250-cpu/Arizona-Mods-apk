@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/document_health_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@id/photo"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_marginLeft="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_88sdp"
+        android:src="@drawable/documents_vip_ic"
+        app:layout_constraintHeight_percent="0.46"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.24" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_24sdp"
+        app:layout_constraintLeft_toRightOf="@id/photo"
+        app:layout_constraintTop_toTopOf="@id/photo">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffb06262"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Имя Фамилия:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="Имя Фамилия"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffb06262"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Состояние здоровья:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/hp_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="Мужской"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffb06262"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Срок действия:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="01.01.1999"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/table2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_150sdp"
+        app:layout_constraintLeft_toRightOf="@id/photo"
+        app:layout_constraintTop_toTopOf="@id/photo">
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffb06262"
+            android:id="@id/tv_drugs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Зависимость от укропа:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/drugs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="72 года"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffb06262"
+            android:id="@id/tv_insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Медицинская страховка:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_9sdp"
+            android:textColor="#ff000000"
+            android:id="@id/insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="100/100"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <TextView
+            android:textSize="@dimen/_6sdp"
+            android:textColor="#ffb06262"
+            android:id="@id/psychLabel"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Лечился в псих больнице:"
+            android:fontFamily="@font/pfdindisplaypro_regular" />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp">
+            <TextView
+                android:textSize="@dimen/_9sdp"
+                android:textColor="#ff000000"
+                android:id="@id/psych"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="455 times"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+            <TextView
+                android:textSize="@dimen/_5sdp"
+                android:textColor="#ff000000"
+                android:id="@id/psychDesc"
+                android:background="@drawable/documents_health_text_bg"
+                android:paddingLeft="@dimen/_5sdp"
+                android:paddingTop="@dimen/_1sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_1sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:text="Имя Фамилия"
+                android:fontFamily="@font/pfdindisplaypro_regular"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_1sdp" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@id/review_container"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/photo"
+        app:layout_constraintLeft_toLeftOf="@id/table1"
+        app:layout_constraintRight_toRightOf="@id/desc">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="@dimen/_6sdp"
+                android:textColor="#ffb06262"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Медицинский осмотр:"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@id/medReviewImage"
+                    android:layout_width="@dimen/_8sdp"
+                    android:layout_height="@dimen/_8sdp"
+                    android:src="@drawable/documents_health_done_ic" />
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="#ffb06262"
+                    android:id="@id/medReviewText"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:text="Пройден"
+                    android:fontFamily="@font/pfdindisplaypro_regular" />
+                <TextView
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="#ff000000"
+                    android:id="@id/medReviewCount"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 / 10"
+                    android:fontFamily="@font/pfdindisplaypro_regular" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@id/medReviewBars"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp">
+            <include
+                android:id="@id/bar1"
+                layout="@layout/documents_health_bar_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/bar2"
+                layout="@layout/documents_health_bar_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/bar3"
+                layout="@layout/documents_health_bar_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/bar4"
+                layout="@layout/documents_health_bar_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/bar5"
+                layout="@layout/documents_health_bar_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/bar6"
+                layout="@layout/documents_health_bar_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/bar7"
+                layout="@layout/documents_health_bar_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/bar8"
+                layout="@layout/documents_health_bar_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/bar9"
+                layout="@layout/documents_health_bar_item" />
+            <View
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+            <include
+                android:id="@id/bar10"
+                layout="@layout/documents_health_bar_item" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/_8sdp"
+        android:textColor="#ff898989"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:id="@id/desc"
+        android:background="@drawable/documents_health_desc_bg"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_40sdp"
+        android:text="Пройдите 10 мед.осмотров у врачей 3+ ранга, чтобы больше\nне проходить его перед вылетом на работе пилота"
+        android:fontFamily="@font/pfdindisplaypro_medium"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:paddingVertical="@dimen/_8sdp"
+        app:layout_constraintLeft_toLeftOf="@id/photo"
+        app:layout_constraintTop_toBottomOf="@id/photo" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@id/notAvailableContainer"
+        android:background="@drawable/documents_health_not_bg"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/_11sdp"
+        android:layout_marginTop="@dimen/_37sdp"
+        android:layout_marginRight="@dimen/_11sdp"
+        android:layout_marginBottom="@dimen/_11sdp">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/documents_health_not_desc_bg"
+            android:paddingLeft="@dimen/_24sdp"
+            android:paddingTop="@dimen/_18sdp"
+            android:paddingRight="@dimen/_24sdp"
+            android:paddingBottom="@dimen/_18sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_24sdp"
+            android:paddingVertical="@dimen/_18sdp">
+            <ImageView
+                android:id="@id/alert_not"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:src="@drawable/documents_allert_ic"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#ff493333"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:id="@id/desc_text"
+                android:layout_width="@dimen/_180sdp"
+                android:layout_height="wrap_content"
+                android:text="У вас нет мед.карты. Вы можете оформить\nее в любой больнице штата. Используйте\nкнопку ниже, чтобы отметить на GPS\nближайшую больницу."
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@id/gps_button"
+            android:background="@drawable/documents_gps_bg"
+            android:paddingLeft="@dimen/_48sdp"
+            android:paddingTop="@dimen/_7sdp"
+            android:paddingRight="@dimen/_48sdp"
+            android:paddingBottom="@dimen/_7sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:paddingHorizontal="@dimen/_48sdp"
+            android:paddingVertical="@dimen/_7sdp">
+            <ImageView
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:src="@drawable/documents_gps_ic"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:textSize="@dimen/_7sdp"
+                android:textColor="#ff493333"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Отметить в GPS"
+                android:fontFamily="@font/pfdindisplaypro_regular" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
