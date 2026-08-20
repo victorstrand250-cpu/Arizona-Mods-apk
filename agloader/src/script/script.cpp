@@ -70,11 +70,92 @@ bool Script::is_alive() const
          info_.state != manager::State::Terminated;
 }
 
+namespace {
+
+// Ставится обработчиком ошибки в lua_pcall: к тексту ошибки дописывает стек
+// вызовов, иначе от упавшего скрипта остаётся только 'attempt to index nil'
+// без единого намёка, где именно.
+int traceback_handler(lua_State* L)
+{
+  const char* msg = lua_tostring(L, 1);
+  if (msg == nullptr) {
+    msg = "(ошибка без текста)";
+  }
+
+  lua_getglobal(L, "debug");
+  if (!lua_istable(L, -1)) {
+    lua_pop(L, 1);
+    lua_pushstring(L, msg);
+    return 1;
+  }
+  lua_getfield(L, -1, "traceback");
+  if (!lua_isfunction(L, -1)) {
+    lua_pop(L, 2);
+    lua_pushstring(L, msg);
+    return 1;
+  }
+
+  lua_pushstring(L, msg);
+  lua_pushinteger(L, 2);  // пропустить сам обработчик
+  if (lua_pcall(L, 2, 1, 0) != 0) {
+    lua_pop(L, 1);
+    lua_pushstring(L, msg);
+  }
+  return 1;
+}
+
+// Стек корутины живёт отдельно от основного состояния, поэтому для main()
+// трейс приходится собирать через debug.traceback(thread, msg).
+std::string thread_traceback(lua_State* L, lua_State* thread, const char* msg)
+{
+  std::string out { msg != nullptr ? msg : "(ошибка без текста)" };
+
+  lua_getglobal(L, "debug");
+  if (!lua_istable(L, -1)) {
+    lua_pop(L, 1);
+    return out;
+  }
+  lua_getfield(L, -1, "traceback");
+  if (!lua_isfunction(L, -1)) {
+    lua_pop(L, 2);
+    return out;
+  }
+
+  lua_pushthread(thread);
+  lua_xmove(thread, L, 1);
+  lua_pushstring(L, out.c_str());
+  if (lua_pcall(L, 2, 1, 0) == 0) {
+    const char* full = lua_tostring(L, -1);
+    if (full != nullptr) {
+      out = full;
+    }
+  }
+  lua_pop(L, 2);  // результат (или ошибка) + таблица debug
+  return out;
+}
+
+}  // namespace
+
 void Script::fail(const std::string& where, const char* lua_error)
 {
   info_.state = manager::State::Failed;
   info_.error = where + ": " + (lua_error != nullptr ? lua_error : "?");
-  AG_LOGE("[%s] %s", info_.file.c_str(), info_.error.c_str());
+
+  // Многострочный трейс режем на строки: в logcat одна строка на запись
+  // читается, а слипшийся в одну кусок — нет.
+  AG_LOGE("[%s] ОСТАНОВЛЕН ОШИБКОЙ в %s", info_.file.c_str(), where.c_str());
+  const std::string text { lua_error != nullptr ? lua_error : "?" };
+  std::size_t from = 0;
+  while (from <= text.size()) {
+    std::size_t nl = text.find('\n', from);
+    if (nl == std::string::npos) {
+      nl = text.size();
+    }
+    if (nl > from) {
+      AG_LOGE("           %s", text.substr(from, nl - from).c_str());
+    }
+    from = nl + 1;
+  }
 }
 
 bool Script::load()
@@ -178,7 +259,9 @@ void Script::tick(double now, double dt)
       info_.state = manager::State::Finished;
       AG_LOGI("[%s] main() завершился", info_.file.c_str());
     } else {
-      fail("main()", lua_tostring(thread_, -1));
+      const std::string trace =
+          thread_traceback(L_, thread_, lua_tostring(thread_, -1));
+      fail("main()", trace.c_str());
       main_running_ = false;
       info_.cpu_ms = now_ms() - t0;
       return;
@@ -209,7 +292,15 @@ bool Script::push_event(const char* name)
 
 void Script::run_protected(int nargs, int nresults, const char* where)
 {
-  if (lua_pcall(L_, nargs, nresults, 0) != 0) {
+  // Обработчик кладём под вызываемую функцию: pcall ждёт его индекс в стеке.
+  const int base = lua_gettop(L_) - nargs;
+  lua_pushcfunction(L_, traceback_handler);
+  lua_insert(L_, base);
+
+  const int rc = lua_pcall(L_, nargs, nresults, base);
+  lua_remove(L_, base);
+
+  if (rc != 0) {
     fail(where, lua_tostring(L_, -1));
     lua_pop(L_, 1);
   }

@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 
 #include <algorithm>
+#include <cstddef>
 #include <atomic>
 #include <chrono>
 #include <memory>
@@ -78,16 +79,45 @@ void destroy_all()
 void scan_and_load()
 {
   const auto files = list_lua_files(paths::scripts());
-  AG_LOGI("каталог скриптов: %s (найдено файлов: %zu)", paths::scripts().c_str(),
-          files.size());
+  AG_LOGI("каталог скриптов: %s", paths::scripts().c_str());
+  if (files.empty()) {
+    AG_LOGW("скриптов не найдено — положите .lua в этот каталог");
+    return;
+  }
+  AG_LOGI("найдено файлов: %zu, загружаю", files.size());
 
-  for (const auto& file : files) {
+  std::size_t ok = 0;
+  std::size_t failed = 0;
+  const std::size_t total = files.size();
+
+  for (std::size_t i = 0; i < total; ++i) {
+    const std::string& file = files[i];
     auto s = std::make_unique<Script>(g_next_id++, file,
                                       paths::scripts() + "/" + file);
-    if (!s->load()) {
-      AG_LOGE("[%s] не загружен: %s", file.c_str(), s->info().error.c_str());
+    const bool loaded = s->load();
+    const auto& in = s->info();
+
+    if (loaded) {
+      ++ok;
+      // script_name/author/version объявляются на верхнем уровне файла,
+      // то есть к этому моменту уже известны.
+      AG_LOGI("  [%zu/%zu] %s — \"%s\" %s, автор: %s", i + 1, total,
+              file.c_str(),
+              in.name.empty() ? "без имени" : in.name.c_str(),
+              in.version.empty() ? "?" : in.version.c_str(),
+              in.author.empty() ? "?" : in.author.c_str());
+    } else {
+      ++failed;
+      AG_LOGE("  [%zu/%zu] %s — НЕ ЗАГРУЖЕН", i + 1, total, file.c_str());
+      AG_LOGE("           причина: %s", in.error.c_str());
     }
     g_scripts.push_back(std::move(s));
+  }
+
+  if (failed == 0) {
+    AG_LOGI("загружено скриптов: %zu из %zu", ok, total);
+  } else {
+    AG_LOGE("загружено скриптов: %zu из %zu, с ошибками: %zu", ok, total, failed);
   }
 }
 

@@ -118,6 +118,12 @@ void JNICALL hk_android_step(JNIEnv* env, jclass cls)
 {
   engine::anchors().android_step(env, cls);
 
+  // androidInit у уже проинициализированной игры проходит раньше, чем мы
+  // успеваем перехватить якоря, и тогда его хук не срабатывает никогда.
+  // Кадр же случается гарантированно, поэтому подстраховываемся здесь —
+  // start() идемпотентен и второй раз ничего не делает.
+  script::manager::start();
+
   const auto now = std::chrono::steady_clock::now();
   double dt = 1.0 / 60.0;
   if (g_have_last_frame) {
