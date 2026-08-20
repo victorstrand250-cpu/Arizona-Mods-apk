@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "log.h"
 
-#include <cstdio>
 #include <ctime>
+
+#include <cstdio>
 #include <deque>
 #include <mutex>
 
@@ -78,8 +79,10 @@ void writev(Level lvl, const char* tag, const char* fmt, va_list ap)
   (void)tag;
 #endif
 
-  std::timespec ts {};
-  std::timespec_get(&ts, TIME_UTC);
+  // Не std::timespec_get: в bionic он появился только с API 29,
+  // а минимальная поддерживаемая версия здесь — 24.
+  timespec ts {};
+  clock_gettime(CLOCK_REALTIME, &ts);
   std::tm tm {};
   localtime_r(&ts.tv_sec, &tm);
 
