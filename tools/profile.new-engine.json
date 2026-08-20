@@ -1,0 +1,11 @@
+{
+  "profile_name": "Arizona new engine v17.7.1 (ag-client) — PROBE ONLY, hooks are dummies",
+  "gtasa_name": "libag-client.so",
+  "compat_scripts": [],
+  "samp_name": "",
+  "receiveignorerpc_pattern": "",
+  "cnetgame_ctor_pattern": "",
+  "rakclientinterface_netgame_offset": 0,
+  "use_samp_touch_workaround": false,
+  "nveventinsertnewest_offset": 0
+}

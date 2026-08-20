@@ -1,0 +1,350 @@
+[
+  {
+    "file": "ARIZONA MOD v17.0.3 (старый движок) lib/arm64-v8a/libGTASA.so",
+    "size": 8912696,
+    "stripped": true,
+    "dynsym_defined": 21646,
+    "dynsym_undefined": 274,
+    "bss_size": 4908496,
+    "text_size": 5087972,
+    "built_from": [
+      "RenderWare (Rockstar/Criterion)",
+      "OpenAL Soft (встроен)",
+      "mpg123"
+    ],
+    "jni_exports": [
+      "Java_com_nvidia_devtech_NvEventQueueActivity_jniNvAPKInit",
+      "Java_com_wardrumstudios_utils_WarAdMob_jniWarAdMob",
+      "Java_com_wardrumstudios_utils_WarMedia_NativeNotifyNetworkChange",
+      "Java_com_wardrumstudios_utils_WarService_jniWarService"
+    ],
+    "monetloader": {
+      "hooks": {
+        "present": [
+          "_Z14AND_TouchEventiiii",
+          "_Z24_rwOpenGLCameraEndUpdatePvS_i",
+          "_ZN11CTheScripts4InitEv",
+          "_ZN11CTheScripts7ProcessEv",
+          "_ZN14CRunningScript7ProcessEv",
+          "_ZN4CHID15FlushQueuedTextEv",
+          "_ZN5CGame7ProcessEv",
+          "_ZN5CGame8ShutdownEv",
+          "_ZN6CWorld3AddEP7CEntity",
+          "_ZN6CWorld6RemoveEP7CEntity"
+        ],
+        "missing": [],
+        "score": "10/10"
+      },
+      "common": {
+        "present": [
+          "_Z14AsciiToGxtCharPKcPt",
+          "_Z14GxtCharToAsciiPth",
+          "_ZN14CRunningScript17ProcessOneCommandEv",
+          "_ZN15CTouchInterface9IsTouchedENS_9WidgetIDsEP9CVector2Di",
+          "_ZN6CWorld18ProcessLineOfSightERK7CVectorS2_R9CColPointRP7CEntitybbbbbbbb",
+          "_ZN7CSprite15CalcScreenCoorsERK5RwV3dPS0_PfS4_bb",
+          "_ZN9CMessages10AddMessageEPKcPtjtb",
+          "_ZN9CMessages13AddBigMessageEPtjt",
+          "_ZN9CMessages15AddMessageJumpQEPKcPtjtb"
+        ],
+        "missing": [],
+        "score": "9/9"
+      },
+      "render": {
+        "present": [
+          "_Z12RwRasterLockP8RwRasterhi",
+          "_Z13RwImageCreateiii",
+          "_Z14RtPNGImageReadPKc",
+          "_Z14RwImageDestroyP7RwImage",
+          "_Z14RwRasterCreateiiii",
+          "_Z14RwRasterUnlockP8RwRaster",
+          "_Z15RwRasterDestroyP8RwRaster",
+          "_Z16RwRenderStateGet13RwRenderStatePv",
+          "_Z16RwRenderStateSet13RwRenderStatePv",
+          "_Z20RwIm2DGetNearScreenZv",
+          "_Z20RwRasterSetFromImageP8RwRasterP7RwImage",
+          "_Z21RwImageAllocatePixelsP7RwImage",
+          "_Z23RwImageFindRasterFormatP7RwImageiPiS1_S1_S1_",
+          "_Z35RwIm2DRenderIndexedPrimitive_BUGFIX15RwPrimitiveTypeP14RwOpenGLVertexiPti",
+          "_ZN7CWidget10SetScissorER5CRect"
+        ],
+        "missing": [],
+        "score": "15/15"
+      },
+      "globals": {
+        "present": [
+          "Pads",
+          "RsGlobal",
+          "TheCamera",
+          "TheText",
+          "_ZN6CPools11ms_pPedPoolE",
+          "_ZN6CPools14ms_pObjectPoolE",
+          "_ZN6CPools15ms_pVehiclePoolE",
+          "_ZN6CRadar13ms_RadarTraceE",
+          "_ZN6CTimer11m_CodePauseE",
+          "_ZN6CTimer11m_UserPauseE",
+          "_ZN9CSprite2d13RecipNearClipE",
+          "gMobileMenu"
+        ],
+        "missing": [],
+        "score": "12/12"
+      },
+      "total_score": "46/46",
+      "usable": true
+    }
+  },
+  {
+    "file": "ARIZONA MOD v17.0.3 (старый движок) lib/arm64-v8a/libsamp.so",
+    "size": 14271104,
+    "stripped": true,
+    "dynsym_defined": 11636,
+    "dynsym_undefined": 1309,
+    "bss_size": 16177136,
+    "text_size": 7142156,
+    "built_from": [
+      "RakNet",
+      "OpenAL Soft (встроен)",
+      "opus",
+      "nlohmann/json"
+    ],
+    "jni_exports": [
+      "Java_com_arizona_game_GTASA_Cef3DAddModel",
+      "Java_com_arizona_game_GTASA_Cef3DRemoveModels",
+      "Java_com_arizona_game_GTASA_Cef3DRotateModel",
+      "Java_com_arizona_game_GTASA_Cef3DScaleModel",
+      "Java_com_arizona_game_GTASA_Cef3DSetBackground",
+      "Java_com_arizona_game_GTASA_Cef3DSetDirty",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleColors",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleComponent",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleDirtAndWear",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleDoors",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleLightsAndPanels",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleTires",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleVinil",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleWear",
+      "Java_com_arizona_game_GTASA_Cef3DSetupScene",
+      "Java_com_arizona_game_GTASA_InitSetting",
+      "Java_com_arizona_game_GTASA_OnInputEnd",
+      "Java_com_arizona_game_GTASA_OnKeyboardClosed",
+      "Java_com_arizona_game_GTASA_OnKeyboardShowed",
+      "Java_com_arizona_game_GTASA_SetHudScale",
+      "Java_com_arizona_game_GTASA_SetHudTimer",
+      "Java_com_arizona_game_GTASA_clicked",
+      "Java_com_arizona_game_GTASA_initSAMP",
+      "Java_com_arizona_game_GTASA_onDialogResponse",
+      "Java_com_arizona_game_GTASA_sliderValueChanged",
+      "Java_com_arizona_game_GTASA_switchStatusChanged",
+      "Java_com_arizona_game_GTASA_viewShownStatusChanged"
+    ],
+    "monetloader": {
+      "hooks": {
+        "present": [],
+        "missing": [
+          "_Z14AND_TouchEventiiii",
+          "_Z24_rwOpenGLCameraEndUpdatePvS_i",
+          "_ZN11CTheScripts4InitEv",
+          "_ZN11CTheScripts7ProcessEv",
+          "_ZN14CRunningScript7ProcessEv",
+          "_ZN4CHID15FlushQueuedTextEv",
+          "_ZN5CGame7ProcessEv",
+          "_ZN5CGame8ShutdownEv",
+          "_ZN6CWorld3AddEP7CEntity",
+          "_ZN6CWorld6RemoveEP7CEntity"
+        ],
+        "score": "0/10"
+      },
+      "common": {
+        "present": [],
+        "missing": [
+          "_Z14AsciiToGxtCharPKcPt",
+          "_Z14GxtCharToAsciiPth",
+          "_ZN14CRunningScript17ProcessOneCommandEv",
+          "_ZN15CTouchInterface9IsTouchedENS_9WidgetIDsEP9CVector2Di",
+          "_ZN6CWorld18ProcessLineOfSightERK7CVectorS2_R9CColPointRP7CEntitybbbbbbbb",
+          "_ZN7CSprite15CalcScreenCoorsERK5RwV3dPS0_PfS4_bb",
+          "_ZN9CMessages10AddMessageEPKcPtjtb",
+          "_ZN9CMessages13AddBigMessageEPtjt",
+          "_ZN9CMessages15AddMessageJumpQEPKcPtjtb"
+        ],
+        "score": "0/9"
+      },
+      "render": {
+        "present": [],
+        "missing": [
+          "_Z12RwRasterLockP8RwRasterhi",
+          "_Z13RwImageCreateiii",
+          "_Z14RtPNGImageReadPKc",
+          "_Z14RwImageDestroyP7RwImage",
+          "_Z14RwRasterCreateiiii",
+          "_Z14RwRasterUnlockP8RwRaster",
+          "_Z15RwRasterDestroyP8RwRaster",
+          "_Z16RwRenderStateGet13RwRenderStatePv",
+          "_Z16RwRenderStateSet13RwRenderStatePv",
+          "_Z20RwIm2DGetNearScreenZv",
+          "_Z20RwRasterSetFromImageP8RwRasterP7RwImage",
+          "_Z21RwImageAllocatePixelsP7RwImage",
+          "_Z23RwImageFindRasterFormatP7RwImageiPiS1_S1_S1_",
+          "_Z35RwIm2DRenderIndexedPrimitive_BUGFIX15RwPrimitiveTypeP14RwOpenGLVertexiPti",
+          "_ZN7CWidget10SetScissorER5CRect"
+        ],
+        "score": "0/15"
+      },
+      "globals": {
+        "present": [],
+        "missing": [
+          "Pads",
+          "RsGlobal",
+          "TheCamera",
+          "TheText",
+          "_ZN6CPools11ms_pPedPoolE",
+          "_ZN6CPools14ms_pObjectPoolE",
+          "_ZN6CPools15ms_pVehiclePoolE",
+          "_ZN6CRadar13ms_RadarTraceE",
+          "_ZN6CTimer11m_CodePauseE",
+          "_ZN6CTimer11m_UserPauseE",
+          "_ZN9CSprite2d13RecipNearClipE",
+          "gMobileMenu"
+        ],
+        "score": "0/12"
+      },
+      "total_score": "0/46",
+      "usable": false
+    }
+  },
+  {
+    "file": "ARIZONA.ONLINE v17.7.1 (новый движок) lib/arm64-v8a/libag-client.so",
+    "size": 10219736,
+    "stripped": true,
+    "dynsym_defined": 4012,
+    "dynsym_undefined": 457,
+    "bss_size": 53798568,
+    "text_size": 6954196,
+    "built_from": [
+      "librw (open-source RenderWare)",
+      "boost.asio",
+      "spdlog",
+      "EASTL",
+      "tinyxml2",
+      "FreeType",
+      "OpenAL Soft (встроен)",
+      "mpg123",
+      "opus",
+      "nlohmann/json"
+    ],
+    "jni_exports": [
+      "Java_com_arizona_game_GTASA_Cef3DAddModel",
+      "Java_com_arizona_game_GTASA_Cef3DRemoveModels",
+      "Java_com_arizona_game_GTASA_Cef3DRotateModel",
+      "Java_com_arizona_game_GTASA_Cef3DScaleModel",
+      "Java_com_arizona_game_GTASA_Cef3DSetBackground",
+      "Java_com_arizona_game_GTASA_Cef3DSetDirty",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleColors",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleComponent",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleDirtAndWear",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleDoors",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleLightsAndPanels",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleTires",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleVinil",
+      "Java_com_arizona_game_GTASA_Cef3DSetVehicleWear",
+      "Java_com_arizona_game_GTASA_Cef3DSetupScene",
+      "Java_com_arizona_game_GTASA_InitSetting",
+      "Java_com_arizona_game_GTASA_OnInputEnd",
+      "Java_com_arizona_game_GTASA_OnKeyboardClosed",
+      "Java_com_arizona_game_GTASA_OnKeyboardShowed",
+      "Java_com_arizona_game_GTASA_SetHudScale",
+      "Java_com_arizona_game_GTASA_SetHudTimer",
+      "Java_com_arizona_game_GTASA_SetHudTimer2",
+      "Java_com_arizona_game_GTASA_SetLoggerLevel",
+      "Java_com_arizona_game_GTASA_SetupHudDisplay",
+      "Java_com_arizona_game_GTASA_TrimMemory",
+      "Java_com_arizona_game_GTASA_clicked",
+      "Java_com_arizona_game_GTASA_drawGameRadarCircle",
+      "Java_com_arizona_game_GTASA_getLocalVehicleSpeed",
+      "Java_com_arizona_game_GTASA_onDialogResponse",
+      "Java_com_arizona_game_GTASA_sliderValueChanged",
+      "Java_com_arizona_game_GTASA_switchStatusChanged",
+      "Java_com_arizona_game_GTASA_viewShownStatusChanged",
+      "Java_com_arizonagames_client_game_core_JNILib_androidInit",
+      "Java_com_arizonagames_client_game_core_JNILib_androidKeyEvent",
+      "Java_com_arizonagames_client_game_core_JNILib_androidMultiTouch",
+      "Java_com_arizonagames_client_game_core_JNILib_androidPause",
+      "Java_com_arizonagames_client_game_core_JNILib_androidResize",
+      "Java_com_arizonagames_client_game_core_JNILib_androidResume",
+      "Java_com_arizonagames_client_game_core_JNILib_androidStep"
+    ],
+    "monetloader": {
+      "hooks": {
+        "present": [],
+        "missing": [
+          "_Z14AND_TouchEventiiii",
+          "_Z24_rwOpenGLCameraEndUpdatePvS_i",
+          "_ZN11CTheScripts4InitEv",
+          "_ZN11CTheScripts7ProcessEv",
+          "_ZN14CRunningScript7ProcessEv",
+          "_ZN4CHID15FlushQueuedTextEv",
+          "_ZN5CGame7ProcessEv",
+          "_ZN5CGame8ShutdownEv",
+          "_ZN6CWorld3AddEP7CEntity",
+          "_ZN6CWorld6RemoveEP7CEntity"
+        ],
+        "score": "0/10"
+      },
+      "common": {
+        "present": [],
+        "missing": [
+          "_Z14AsciiToGxtCharPKcPt",
+          "_Z14GxtCharToAsciiPth",
+          "_ZN14CRunningScript17ProcessOneCommandEv",
+          "_ZN15CTouchInterface9IsTouchedENS_9WidgetIDsEP9CVector2Di",
+          "_ZN6CWorld18ProcessLineOfSightERK7CVectorS2_R9CColPointRP7CEntitybbbbbbbb",
+          "_ZN7CSprite15CalcScreenCoorsERK5RwV3dPS0_PfS4_bb",
+          "_ZN9CMessages10AddMessageEPKcPtjtb",
+          "_ZN9CMessages13AddBigMessageEPtjt",
+          "_ZN9CMessages15AddMessageJumpQEPKcPtjtb"
+        ],
+        "score": "0/9"
+      },
+      "render": {
+        "present": [],
+        "missing": [
+          "_Z12RwRasterLockP8RwRasterhi",
+          "_Z13RwImageCreateiii",
+          "_Z14RtPNGImageReadPKc",
+          "_Z14RwImageDestroyP7RwImage",
+          "_Z14RwRasterCreateiiii",
+          "_Z14RwRasterUnlockP8RwRaster",
+          "_Z15RwRasterDestroyP8RwRaster",
+          "_Z16RwRenderStateGet13RwRenderStatePv",
+          "_Z16RwRenderStateSet13RwRenderStatePv",
+          "_Z20RwIm2DGetNearScreenZv",
+          "_Z20RwRasterSetFromImageP8RwRasterP7RwImage",
+          "_Z21RwImageAllocatePixelsP7RwImage",
+          "_Z23RwImageFindRasterFormatP7RwImageiPiS1_S1_S1_",
+          "_Z35RwIm2DRenderIndexedPrimitive_BUGFIX15RwPrimitiveTypeP14RwOpenGLVertexiPti",
+          "_ZN7CWidget10SetScissorER5CRect"
+        ],
+        "score": "0/15"
+      },
+      "globals": {
+        "present": [],
+        "missing": [
+          "Pads",
+          "RsGlobal",
+          "TheCamera",
+          "TheText",
+          "_ZN6CPools11ms_pPedPoolE",
+          "_ZN6CPools14ms_pObjectPoolE",
+          "_ZN6CPools15ms_pVehiclePoolE",
+          "_ZN6CRadar13ms_RadarTraceE",
+          "_ZN6CTimer11m_CodePauseE",
+          "_ZN6CTimer11m_UserPauseE",
+          "_ZN9CSprite2d13RecipNearClipE",
+          "gMobileMenu"
+        ],
+        "score": "0/12"
+      },
+      "total_score": "0/46",
+      "usable": false
+    }
+  }
+]
