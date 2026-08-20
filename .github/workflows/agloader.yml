@@ -50,6 +50,15 @@ jobs:
           path: agloader/dist/**
           if-no-files-found: error
 
+      # Примеры скриптов отдельным артефактом: каталог scripts/ на устройстве
+      # загрузчик создаёт пустым, и их проще скачать сюда, чем вытаскивать
+      # из репозитория телефоном.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agloader-scripts
+          path: agloader/scripts/*.lua
+          if-no-files-found: error
+
   patch-apk:
     needs: build
     runs-on: ubuntu-latest
