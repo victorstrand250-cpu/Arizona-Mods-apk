@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 
 #include <algorithm>
+#include <atomic>
 #include <chrono>
 #include <memory>
 #include <mutex>
@@ -23,7 +24,10 @@ namespace {
 std::mutex g_lock;
 std::vector<std::unique_ptr<Script>> g_scripts;
 int g_next_id = 1;
-bool g_reload_requested = false;
+// Атомик, а не поле под g_lock: request_reload() вызывается из Lua, то есть
+// изнутри on_frame, который этот мьютекс уже держит. Захват здесь означал бы
+// мгновенный дедлок и зависшую игру.
+std::atomic<bool> g_reload_requested { false };
 bool g_started = false;
 bool g_inited = false;
 
@@ -106,6 +110,13 @@ void init()
   }
   g_inited = true;
   scan_and_load();
+  if (g_started) {
+    // start() успел отработать до того, как скрипты были прочитаны, —
+    // запускаем их здесь.
+    for (auto& s : g_scripts) {
+      s->start();
+    }
+  }
 }
 
 void start()
@@ -115,6 +126,9 @@ void start()
     return;
   }
   g_started = true;
+  if (!g_inited) {
+    return;  // init() ещё не отработал и запустит скрипты сам
+  }
   for (auto& s : g_scripts) {
     s->start();
   }
@@ -128,18 +142,13 @@ void shutdown()
   g_started = false;
 }
 
-void request_reload()
-{
-  std::lock_guard<std::mutex> guard { g_lock };
-  g_reload_requested = true;
-}
+void request_reload() { g_reload_requested.store(true); }
 
 void on_frame(double dt)
 {
   std::lock_guard<std::mutex> guard { g_lock };
 
-  if (g_reload_requested) {
-    g_reload_requested = false;
+  if (g_reload_requested.exchange(false)) {
     do_reload();
   }
 

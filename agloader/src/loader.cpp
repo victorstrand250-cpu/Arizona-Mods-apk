@@ -43,6 +43,16 @@ namespace {
 
 constexpr const char* kJniLibClass = "com/arizonagames/client/game/core/JNILib";
 
+// Android объявляет AttachCurrentThread(JNIEnv**), а JDK — (void**).
+// Шаблон выводит тип прямо из объявления в подключённом jni.h, поэтому
+// исходник собирается и NDK, и hostcheck'ом на заголовках JDK.
+template <typename EnvPtrPtr>
+jint attach_current_thread(JavaVM* vm, jint (JavaVM::*fn)(EnvPtrPtr, void*),
+                           JNIEnv** env)
+{
+  return (vm->*fn)(reinterpret_cast<EnvPtrPtr>(env), nullptr);
+}
+
 JavaVM* g_vm = nullptr;
 jclass g_jnilib_class = nullptr;
 
@@ -55,6 +65,7 @@ std::atomic<double> g_frame_time { 0.0 };
 std::chrono::steady_clock::time_point g_last_frame;
 bool g_have_last_frame = false;
 bool g_gui_started = false;
+bool g_gui_failed = false;
 
 // ---------------------------------------------------------------- обёртки
 
@@ -84,16 +95,22 @@ void JNICALL hk_android_step(JNIEnv* env, jclass cls)
   g_frame_time.store(dt);
   g_frames.fetch_add(1);
 
-  if (!g_gui_started) {
+  if (!g_gui_started && !g_gui_failed) {
     // Контекст GL уже текущий — самое время поднять ImGui.
     g_gui_started = gui::init();
     if (!g_gui_started) {
-      return;
+      // Одной попытки достаточно: если ImGui не поднялся, он не поднимется
+      // и на следующем кадре, а спамить в лог каждый кадр незачем.
+      g_gui_failed = true;
+      AG_LOGE("интерфейс не поднялся, скрипты продолжат работать без него");
     }
   }
 
+  // Скрипты крутятся независимо от интерфейса.
   script::manager::on_frame(dt);
-  gui::render(dt);
+  if (g_gui_started) {
+    gui::render(dt);
+  }
 }
 
 void JNICALL hk_android_resize(JNIEnv* env, jclass cls, jint w, jint h)
@@ -165,14 +182,16 @@ void init_thread()
   }
 
   JNIEnv* env = nullptr;
-  // Android объявляет AttachCurrentThread(JNIEnv**), JDK — (void**);
-  // приведение делает исходник переносимым между обоими заголовками.
   const jint attach =
-      g_vm->AttachCurrentThread(reinterpret_cast<void**>(&env), nullptr);
+      attach_current_thread(g_vm, &JavaVM::AttachCurrentThread, &env);
   if (attach != JNI_OK || env == nullptr) {
     AG_LOGE("AttachCurrentThread не удался (%d)", static_cast<int>(attach));
     return;
   }
+
+  // Скрипты загружаем до перерегистрации: иначе первый же androidStep
+  // придёт в пустой менеджер.
+  script::manager::init();
 
   const jint rc = env->RegisterNatives(
       g_jnilib_class, kMethods,
@@ -188,7 +207,6 @@ void init_thread()
   }
   g_vm->DetachCurrentThread();
 
-  script::manager::init();
   g_ready.store(true);
   AG_LOGI("якоря перехвачены, загрузчик готов");
 }
