@@ -173,6 +173,31 @@ std::vector<Range> client_data_ranges()
   return out;
 }
 
+std::vector<Range> heap_ranges()
+{
+  std::vector<Range> out;
+  for (const auto& reg : regions()) {
+    if (!reg.r || !reg.w) {
+      continue;
+    }
+    // Только безымянные отображения: файловые — это библиотеки и ресурсы,
+    // искать переменные игры там нет смысла.
+    if (!reg.name.empty() && reg.name.compare(0, 6, "[anon:") != 0) {
+      continue;
+    }
+    // Стек трогать не нужно: там временные значения текущего кадра.
+    if (reg.name.compare(0, 6, "[stack") == 0) {
+      continue;
+    }
+    if (!out.empty() && out.back().to == reg.from) {
+      out.back().to = reg.to;
+    } else {
+      out.push_back(Range { reg.from, reg.to });
+    }
+  }
+  return out;
+}
+
 bool find_module(const std::string& name_suffix, Module* out)
 {
   if (name_suffix.empty()) {

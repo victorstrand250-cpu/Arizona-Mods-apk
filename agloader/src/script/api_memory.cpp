@@ -482,10 +482,23 @@ int l_find_value(lua_State* L)
     return 2;
   }
 
-  auto ranges = engine::client_data_ranges();
+  // Третьим аргументом — где искать. По умолчанию везде: переменные игры
+  // почти всегда лежат в куче внутри синглтона, а не в .bss библиотеки.
+  const char* where = luaL_optstring(L, 3, "all");
+  const bool want_engine = std::strcmp(where, "heap") != 0;
+  const bool want_heap = std::strcmp(where, "engine") != 0;
+
+  std::vector<engine::Range> ranges;
+  if (want_engine) {
+    ranges = engine::client_data_ranges();
+  }
+  if (want_heap) {
+    auto heap = engine::heap_ranges();
+    ranges.insert(ranges.end(), heap.begin(), heap.end());
+  }
   if (ranges.empty()) {
     lua_pushnil(L);
-    lua_pushstring(L, "не нашёл области данных движка");
+    lua_pushstring(L, "не нашёл областей для поиска");
     return 2;
   }
 
@@ -524,6 +537,23 @@ int l_find_value(lua_State* L)
 
   lua_pushnumber(L, found);
   return 2;
+}
+
+// Читает указатель по адресу. Нужен, чтобы от базы библиотеки дойти до
+// синглтона в куче: адрес самого синглтона от запуска к запуску меняется,
+// а смещение поля внутри него — нет.
+int l_deref(lua_State* L)
+{
+  const auto addr = static_cast<std::uintptr_t>(
+      static_cast<long long>(luaL_checknumber(L, 1)));
+  std::uintptr_t value = 0;
+  if (!safe_read(addr, &value, sizeof(value))) {
+    lua_pushnil(L);
+    lua_pushstring(L, "адрес недоступен");
+    return 2;
+  }
+  lua_pushnumber(L, static_cast<lua_Number>(value));
+  return 1;
 }
 
 int l_refine(lua_State* L)
@@ -579,6 +609,7 @@ const luaL_Reg kMemory[] = {
     { "regions", l_regions },
     { "findvalue", l_find_value },
     { "refine", l_refine },
+    { "deref", l_deref },
     { "readi8", read_scalar<std::int8_t> },
     { "readu8", read_scalar<std::uint8_t> },
     { "readi16", read_scalar<std::int16_t> },

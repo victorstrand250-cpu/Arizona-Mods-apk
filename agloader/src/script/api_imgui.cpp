@@ -386,6 +386,22 @@ int l_same_line(lua_State* L)
   return 0;
 }
 
+// Без этого подпись слева и виджет справа стоят на разной высоте: текст
+// рисуется по своей базовой линии, а поле — с рамочными отступами.
+int l_align_text_to_frame_padding(lua_State* L)
+{
+  require_frame(L);
+  ImGui::AlignTextToFramePadding();
+  return 0;
+}
+
+int l_set_next_item_width(lua_State* L)
+{
+  require_frame(L);
+  ImGui::SetNextItemWidth(static_cast<float>(luaL_checknumber(L, 1)));
+  return 0;
+}
+
 int l_spacing(lua_State* L)
 {
   require_frame(L);
@@ -652,6 +668,8 @@ const luaL_Reg kFuncs[] = {
     { "Unindent", l_unindent },
     { "BeginGroup", l_begin_group },
     { "EndGroup", l_end_group },
+    { "AlignTextToFramePadding", l_align_text_to_frame_padding },
+    { "SetNextItemWidth", l_set_next_item_width },
     { "PushItemWidth", l_push_item_width },
     { "PopItemWidth", l_pop_item_width },
     { "CollapsingHeader", l_collapsing_header },

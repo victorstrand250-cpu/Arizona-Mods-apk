@@ -62,6 +62,10 @@ struct Range {
 };
 std::vector<Range> client_data_ranges();
 
+// Анонимная память процесса: куча и арены. Синглтоны движка живут именно
+// здесь, а не в .bss, поэтому без этих областей поиск значений бесполезен.
+std::vector<Range> heap_ranges();
+
 // База и размер самого движка (0, если ещё не загружен).
 std::uintptr_t client_base();
 std::size_t client_size();
