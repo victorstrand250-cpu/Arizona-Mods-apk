@@ -15,6 +15,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 CXX=${CXX:-aarch64-linux-gnu-g++}
+READELF=${READELF:-aarch64-linux-gnu-readelf}
 JAVA_INC=${JAVA_HOME:-/usr/lib/jvm/java-21-openjdk-amd64}/include
 OUT=$(mktemp -d)
 trap 'rm -rf "$OUT"' EXIT
@@ -93,3 +94,36 @@ if [ "$fail" -ne 0 ]; then
   exit 1
 fi
 echo "hostcheck: все файлы компилируются"
+
+# Отдельно проверяем exports.map: собрать всю библиотеку здесь нельзя (нужны
+# библиотеки Android), но синтаксис скрипта версий и то, что он не называет
+# несуществующих символов, проверяется пустышкой. Флаги те же, что у NDK:
+# --no-undefined-version превращает лишнее имя в ошибку линковки.
+printf '  %-52s ' "exports.map"
+cat > "$OUT/vs.cpp" <<'EOF'
+extern "C" __attribute__((visibility("default"))) int JNI_OnLoad(void*, void*)
+{
+  return 0x00010006;
+}
+extern "C" int should_stay_hidden() { return 1; }
+EOF
+
+if ! "$CXX" -shared -fPIC "$OUT/vs.cpp" -o "$OUT/vs.so" \
+     -Wl,--version-script="$(dirname "$0")/exports.map" \
+     -Wl,--exclude-libs,ALL -Wl,--no-undefined-version -Wl,--fatal-warnings \
+     2> "$OUT/err.txt"; then
+  echo "ОШИБКА"
+  sed 's/^/      /' "$OUT/err.txt"
+  exit 1
+fi
+
+exported=$("$READELF" --dyn-syms "$OUT/vs.so" \
+  | awk '$5 == "GLOBAL" || $5 == "WEAK" { if ($7 != "UND") print $8 }' \
+  | sed 's/@.*//' | grep -v '^$' | sort -u)
+if [ "$exported" != "JNI_OnLoad" ]; then
+  echo "ОШИБКА"
+  echo "      наружу должен торчать только JNI_OnLoad, а торчит:"
+  echo "$exported" | sed 's/^/        /'
+  exit 1
+fi
+echo "ok (наружу только JNI_OnLoad)"
