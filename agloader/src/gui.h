@@ -12,6 +12,12 @@ bool initialized();
 
 void on_resize(int width, int height);
 
+// Приложение вернулось из свёрнутого состояния. JNIGLSurfaceView вызывает
+// setPreserveEGLContextOnPause() со значением из настроек, то есть контекст
+// GL мог быть потерян, а вместе с ним — шейдеры и текстура шрифта ImGui.
+// Пересоздаём их на следующем кадре, уже на GL-потоке.
+void on_context_maybe_lost();
+
 // Полный кадр интерфейса: служебное меню + onImgui из скриптов.
 void render(double dt);
 

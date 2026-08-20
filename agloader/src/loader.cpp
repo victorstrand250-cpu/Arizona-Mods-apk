@@ -145,12 +145,16 @@ void JNICALL hk_android_key_event(JNIEnv* env, jclass cls, jint code, jint actio
 
 void JNICALL hk_android_pause(JNIEnv* env, jclass cls)
 {
+  // Пальцы, поднятые уже после сворачивания, до нас не дойдут — сбрасываем
+  // захват сами, иначе меню останется «зажатым».
+  input::reset();
   script::manager::on_pause();
   engine::anchors().android_pause(env, cls);
 }
 
 void JNICALL hk_android_resume(JNIEnv* env, jclass cls)
 {
+  gui::on_context_maybe_lost();
   script::manager::on_resume();
   engine::anchors().android_resume(env, cls);
 }

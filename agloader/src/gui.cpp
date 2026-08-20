@@ -33,6 +33,7 @@ bool g_button_dragging = false;
 ImVec2 g_button_grab { 0.0f, 0.0f };
 bool g_button_moved = false;
 
+bool g_recreate_device_objects = false;
 bool g_show_log = true;
 bool g_show_scripts = true;
 bool g_show_modules = false;
@@ -417,10 +418,20 @@ void on_resize(int width, int height)
   }
 }
 
+void on_context_maybe_lost() { g_recreate_device_objects = true; }
+
 void render(double dt)
 {
   if (!g_inited) {
     return;
+  }
+
+  if (g_recreate_device_objects) {
+    // Мы на GL-потоке: старые объекты можно снести, а NewFrame создаст их
+    // заново под текущий контекст.
+    g_recreate_device_objects = false;
+    ImGui_ImplOpenGL3_DestroyDeviceObjects();
+    AG_LOGI("объекты GL пересозданы после возврата из паузы");
   }
 
   ImGuiIO& io = ImGui::GetIO();
