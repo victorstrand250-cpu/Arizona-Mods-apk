@@ -1,0 +1,106 @@
+name: agloader
+
+# Собирает libagloader.so под Android и, по желанию, сразу встраивает его
+# в APK из релиза этого репозитория.
+#
+# Запуск: вкладка Actions -> agloader -> Run workflow.
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - 'agloader/**'
+      - 'tools/inject_native_lib.py'
+      - '.github/workflows/agloader.yml'
+  workflow_dispatch:
+    inputs:
+      apk_tag:
+        description: 'Тег релиза с APK, в который встроить загрузчик (пусто — не встраивать)'
+        required: false
+        default: 'Arizona_New'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Проверка компиляции кросс-компилятором
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq g++-aarch64-linux-gnu libgles-dev libegl-dev
+          cd agloader && ./hostcheck.sh
+
+      - name: Сборка NDK
+        run: |
+          echo "NDK: $ANDROID_NDK_LATEST_HOME"
+          cd agloader
+          ./build.sh --ndk "$ANDROID_NDK_LATEST_HOME"
+
+      - name: Что получилось
+        run: |
+          find agloader/dist -type f -print -exec file {} \;
+          echo '--- экспорты libagloader.so ---'
+          "$ANDROID_NDK_LATEST_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-readelf" \
+            --dyn-syms agloader/dist/arm64-v8a/libagloader.so | grep -i 'JNI_OnLoad' || true
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agloader-libs
+          path: agloader/dist/**
+          if-no-files-found: error
+
+  patch-apk:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && inputs.apk_tag != ''
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: agloader-libs
+          path: dist
+
+      - name: Инструменты smali
+        run: |
+          curl -sSL -o smali.jar    https://bitbucket.org/JesusFreke/smali/downloads/smali-2.5.2.jar
+          curl -sSL -o baksmali.jar https://bitbucket.org/JesusFreke/smali/downloads/baksmali-2.5.2.jar
+
+      - name: Скачать APK из релиза
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "${{ inputs.apk_tag }}" \
+            --repo "${{ github.repository }}" --pattern '*.apk' --dir apk
+          ls -la apk
+
+      - name: Встроить загрузчик
+        run: |
+          src=$(ls apk/*.apk | head -1)
+          out="patched/$(basename "${src%.apk}")_agloader.apk"
+          mkdir -p patched
+          python3 tools/inject_native_lib.py \
+            --apk "$src" --out "$out" \
+            --load luajit-5.1 --load agloader \
+            --lib arm64-v8a=dist/arm64-v8a/libluajit-5.1.so \
+            --lib arm64-v8a=dist/arm64-v8a/libagloader.so \
+            --lib armeabi-v7a=dist/armeabi-v7a/libluajit-5.1.so \
+            --lib armeabi-v7a=dist/armeabi-v7a/libagloader.so \
+            --smali smali.jar --baksmali baksmali.jar
+
+      - name: Подписать отладочным ключом
+        run: |
+          keytool -genkeypair -v -keystore debug.keystore -storepass android \
+            -keypass android -alias agloader -keyalg RSA -keysize 2048 \
+            -validity 10000 -dname "CN=AGLoader, OU=dev, O=dev, C=RU"
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BT/apksigner" sign --ks debug.keystore --ks-pass pass:android \
+            --key-pass pass:android --ks-key-alias agloader patched/*.apk
+          "$BT/apksigner" verify --print-certs patched/*.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arizona-agloader-apk
+          path: patched/*.apk
+          if-no-files-found: error

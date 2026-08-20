@@ -254,7 +254,10 @@ def main() -> int:
                 raise SystemExit(f"нет файла {target}")
 
             print(f"[*] патчу {args.cls}.smali")
-            for name in args.load:
+            # Каждая вставка идёт в самое начало <clinit>, поэтому проходим
+            # список задом наперёд — тогда итоговый порядок вызовов
+            # loadLibrary совпадает с порядком аргументов --load.
+            for name in reversed(args.load):
                 patch_smali(target, name)
 
             out_dex = os.path.join(tmp, "out.dex")
