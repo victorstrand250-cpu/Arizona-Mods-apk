@@ -28,4 +28,9 @@ bool hit_test(float x, float y);
 bool menu_open();
 void set_menu_open(bool open);
 
+// Плавающую кнопку можно убрать с экрана — тогда меню открывается
+// только чат-командой /agloader.
+bool button_visible();
+void set_button_visible(bool visible);
+
 }  // namespace ag::gui

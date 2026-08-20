@@ -21,6 +21,11 @@ struct Anchors {
   void (*android_key_event)(JNIEnv*, jclass, jint, jint) = nullptr;
   void (*android_pause)(JNIEnv*, jclass) = nullptr;
   void (*android_resume)(JNIEnv*, jclass) = nullptr;
+
+  // com.arizona.game.GTASA.OnInputEnd(String) — сюда приходит строка,
+  // которую игрок отправил из игрового чата. Метод нестатический,
+  // поэтому вторым аргументом идёт jobject, а не jclass.
+  void (*on_input_end)(JNIEnv*, jobject, jstring) = nullptr;
 };
 
 // Блокирующе ждёт появления libag-client.so в процессе (dlopen NOLOAD),
@@ -38,6 +43,24 @@ struct Module {
 };
 bool find_module(const std::string& name_suffix, Module* out);
 std::vector<Module> modules();
+
+// Каждое отображение из /proc/self/maps по отдельности, с правами и именем.
+struct Region {
+  std::uintptr_t from = 0;
+  std::uintptr_t to = 0;
+  bool r = false, w = false, x = false;
+  std::string name;  // путь, [anon:...], [stack] или пусто
+};
+std::vector<Region> regions();
+
+// Записываемые области данных движка: .data/.got самой библиотеки плюс
+// идущие сразу за ней анонимные страницы — там лежит .bss, а он у нового
+// клиента занимает 53 МБ и содержит все глобальные переменные игры.
+struct Range {
+  std::uintptr_t from = 0;
+  std::uintptr_t to = 0;
+};
+std::vector<Range> client_data_ranges();
 
 // База и размер самого движка (0, если ещё не загружен).
 std::uintptr_t client_base();

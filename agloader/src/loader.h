@@ -3,6 +3,8 @@
 
 #include <jni.h>
 
+#include <string>
+
 namespace ag::loader {
 
 struct Screen {
@@ -17,5 +19,16 @@ double frame_time();   // секунды между кадрами
 long long frame_count();
 
 JavaVM* vm();
+
+// Размер экрана берётся из androidResize, а если игра его не вызвала —
+// из вьюпорта GL при поднятии интерфейса.
+void set_screen(int width, int height);
+
+// Отправляет строку в игровой чат так же, как если бы её напечатал игрок:
+// через публичный GTASA.t_OnInputEnd(), который сам перекладывает вызов
+// на UI-поток. Возвращает false, если активити ещё не поймана
+// (до первой отправки чего-либо из чата её объект нам недоступен).
+bool send_chat(const std::string& text);
+bool can_send_chat();
 
 }  // namespace ag::loader

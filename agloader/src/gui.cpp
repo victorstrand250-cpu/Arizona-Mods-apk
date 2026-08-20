@@ -32,6 +32,7 @@ const ImVec2 kButtonSize { 132.0f, 56.0f };
 bool g_button_dragging = false;
 ImVec2 g_button_grab { 0.0f, 0.0f };
 bool g_button_moved = false;
+bool g_button_visible = true;
 
 bool g_recreate_device_objects = false;
 bool g_show_log = true;
@@ -341,6 +342,12 @@ void draw_main_window()
   ImGui::SameLine();
   ImGui::Checkbox("Модули", &g_show_modules);
 
+  if (ImGui::Checkbox("Показывать кнопку на экране", &g_button_visible) &&
+      !g_button_visible) {
+    AG_LOGI("кнопка скрыта — меню открывается командой /agloader");
+  }
+  ImGui::TextDisabled("Меню также открывается командой /agloader");
+
   if (ImGui::Button("Перезагрузить скрипты", ImVec2 { -1.0f, 0.0f })) {
     script::manager::request_reload();
   }
@@ -379,6 +386,9 @@ bool init()
     g_width = 1280;
     g_height = 720;
   }
+  // androidResize игра вызывает не всегда — размер, добытый из вьюпорта,
+  // публикуем сами, иначе getScreenSize() в скриптах вернёт 0x0.
+  loader::set_screen(g_width, g_height);
 
   // На 1080p-телефоне интерфейс в 1:1 нечитаем — масштабируем по высоте.
   const float scale = g_height > 0 ? static_cast<float>(g_height) / 720.0f : 1.0f;
@@ -415,6 +425,7 @@ void on_resize(int width, int height)
   if (width > 0 && height > 0) {
     g_width = width;
     g_height = height;
+    loader::set_screen(width, height);
   }
 }
 
@@ -449,7 +460,9 @@ void render(double dt)
   ImGui_ImplOpenGL3_NewFrame();
   ImGui::NewFrame();
 
-  draw_button();
+  if (g_button_visible) {
+    draw_button();
+  }
   if (g_menu_open) {
     draw_main_window();
     if (g_show_scripts) {
@@ -501,5 +514,7 @@ bool hit_test(float x, float y)
 
 bool menu_open() { return g_menu_open; }
 void set_menu_open(bool open) { g_menu_open = open; }
+bool button_visible() { return g_button_visible; }
+void set_button_visible(bool visible) { g_button_visible = visible; }
 
 }  // namespace ag::gui

@@ -25,6 +25,7 @@ constexpr const char* kSymTouch = "Java_com_arizonagames_client_game_core_JNILib
 constexpr const char* kSymKey = "Java_com_arizonagames_client_game_core_JNILib_androidKeyEvent";
 constexpr const char* kSymPause = "Java_com_arizonagames_client_game_core_JNILib_androidPause";
 constexpr const char* kSymResume = "Java_com_arizonagames_client_game_core_JNILib_androidResume";
+constexpr const char* kSymInputEnd = "Java_com_arizona_game_GTASA_OnInputEnd";
 
 Anchors g_anchors;
 bool g_resolved = false;
@@ -98,6 +99,80 @@ std::vector<Module> modules()
   return out;
 }
 
+std::vector<Region> regions()
+{
+  std::vector<Region> out;
+  std::FILE* f = std::fopen("/proc/self/maps", "r");
+  if (f == nullptr) {
+    return out;
+  }
+
+  char line[1024];
+  while (std::fgets(line, sizeof(line), f) != nullptr) {
+    unsigned long long start = 0;
+    unsigned long long end = 0;
+    char perms[8] = {};
+    int path_off = 0;
+    if (std::sscanf(line, "%llx-%llx %7s %*s %*s %*s %n", &start, &end, perms,
+                    &path_off) < 3) {
+      continue;
+    }
+
+    Region reg;
+    reg.from = static_cast<std::uintptr_t>(start);
+    reg.to = static_cast<std::uintptr_t>(end);
+    reg.r = perms[0] == 'r';
+    reg.w = perms[1] == 'w';
+    reg.x = perms[2] == 'x';
+    if (path_off > 0) {
+      reg.name = line + path_off;
+      while (!reg.name.empty() &&
+             (reg.name.back() == '\n' || reg.name.back() == ' ')) {
+        reg.name.pop_back();
+      }
+    }
+    out.push_back(std::move(reg));
+  }
+  std::fclose(f);
+  return out;
+}
+
+std::vector<Range> client_data_ranges()
+{
+  std::vector<Range> out;
+  if (g_client.path.empty()) {
+    return out;
+  }
+
+  const auto all = regions();
+  std::uintptr_t chain_end = 0;  // докуда тянется непрерывная цепочка от модуля
+
+  for (const auto& reg : all) {
+    const bool is_client = reg.name == g_client.path;
+    // .bss отображается анонимно вплотную к последнему сегменту библиотеки.
+    const bool is_tail =
+        chain_end != 0 && reg.from == chain_end &&
+        (reg.name.empty() || reg.name.compare(0, 6, "[anon:") == 0);
+
+    if (!is_client && !is_tail) {
+      if (chain_end != 0 && reg.from > chain_end) {
+        chain_end = 0;  // цепочка прервалась
+      }
+      continue;
+    }
+
+    chain_end = reg.to;
+    if (reg.r && reg.w) {
+      if (!out.empty() && out.back().to == reg.from) {
+        out.back().to = reg.to;  // склеиваем соседние
+      } else {
+        out.push_back(Range { reg.from, reg.to });
+      }
+    }
+  }
+  return out;
+}
+
 bool find_module(const std::string& name_suffix, Module* out)
 {
   if (name_suffix.empty()) {
@@ -156,6 +231,8 @@ bool wait_and_resolve(int timeout_ms)
       sym<decltype(Anchors::android_pause)>(handle, kSymPause, &missing);
   g_anchors.android_resume =
       sym<decltype(Anchors::android_resume)>(handle, kSymResume, &missing);
+  g_anchors.on_input_end =
+      sym<decltype(Anchors::on_input_end)>(handle, kSymInputEnd, &missing);
 
   // Хендл намеренно не закрываем: движок должен остаться загруженным,
   // а указатели — валидными до конца процесса.

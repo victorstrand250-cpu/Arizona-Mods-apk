@@ -14,6 +14,7 @@
 
 #include <cctype>
 #include <cerrno>
+#include <cmath>
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
@@ -385,6 +386,185 @@ int l_scan(lua_State* L)
   return 2;
 }
 
+// ------------------------------------------------- поиск значения в памяти
+//
+// Классический сценарий Cheat Engine: находим все адреса с известным
+// значением, ждём, пока оно в игре поменяется, и отсеиваем лишнее. Для
+// движка без символов это единственный способ добраться до глобальных
+// переменных вроде времени суток или погоды.
+
+enum class ValueType { I8, U8, I16, U16, I32, U32, F32 };
+
+bool parse_type(const char* name, ValueType* out, std::size_t* size)
+{
+  const struct { const char* name; ValueType type; std::size_t size; } kTypes[] = {
+      { "i8", ValueType::I8, 1 },   { "u8", ValueType::U8, 1 },
+      { "i16", ValueType::I16, 2 }, { "u16", ValueType::U16, 2 },
+      { "i32", ValueType::I32, 4 }, { "u32", ValueType::U32, 4 },
+      { "float", ValueType::F32, 4 },
+  };
+  for (const auto& t : kTypes) {
+    if (std::strcmp(name, t.name) == 0) {
+      *out = t.type;
+      *size = t.size;
+      return true;
+    }
+  }
+  return false;
+}
+
+bool value_matches(const unsigned char* p, ValueType type, double want)
+{
+  switch (type) {
+    case ValueType::I8:
+      return static_cast<double>(*reinterpret_cast<const std::int8_t*>(p)) == want;
+    case ValueType::U8:
+      return static_cast<double>(*p) == want;
+    case ValueType::I16:
+      return static_cast<double>(*reinterpret_cast<const std::int16_t*>(p)) == want;
+    case ValueType::U16:
+      return static_cast<double>(*reinterpret_cast<const std::uint16_t*>(p)) == want;
+    case ValueType::I32:
+      return static_cast<double>(*reinterpret_cast<const std::int32_t*>(p)) == want;
+    case ValueType::U32:
+      return static_cast<double>(*reinterpret_cast<const std::uint32_t*>(p)) == want;
+    case ValueType::F32: {
+      const float f = *reinterpret_cast<const float*>(p);
+      const double d = std::fabs(static_cast<double>(f) - want);
+      return d <= 0.001;
+    }
+  }
+  return false;
+}
+
+// Пределы, чтобы первый же поиск нуля не съел всю память под таблицу Lua.
+constexpr int kMaxHits = 200000;
+
+int l_regions(lua_State* L)
+{
+  const bool only_writable = lua_toboolean(L, 1) != 0;
+  lua_newtable(L);
+  int n = 0;
+  for (const auto& reg : engine::regions()) {
+    if (only_writable && !(reg.r && reg.w)) {
+      continue;
+    }
+    lua_newtable(L);
+    lua_pushnumber(L, static_cast<lua_Number>(reg.from));
+    lua_setfield(L, -2, "from");
+    lua_pushnumber(L, static_cast<lua_Number>(reg.to));
+    lua_setfield(L, -2, "to");
+    lua_pushnumber(L, static_cast<lua_Number>(reg.to - reg.from));
+    lua_setfield(L, -2, "size");
+    lua_pushboolean(L, reg.r ? 1 : 0);
+    lua_setfield(L, -2, "read");
+    lua_pushboolean(L, reg.w ? 1 : 0);
+    lua_setfield(L, -2, "write");
+    lua_pushboolean(L, reg.x ? 1 : 0);
+    lua_setfield(L, -2, "exec");
+    lua_pushstring(L, reg.name.c_str());
+    lua_setfield(L, -2, "name");
+    lua_rawseti(L, -2, ++n);
+  }
+  return 1;
+}
+
+int l_find_value(lua_State* L)
+{
+  const lua_Number want = luaL_checknumber(L, 1);
+  const char* type_name = luaL_optstring(L, 2, "i32");
+
+  ValueType type;
+  std::size_t width = 0;
+  if (!parse_type(type_name, &type, &width)) {
+    lua_pushnil(L);
+    lua_pushstring(L, "неизвестный тип значения");
+    return 2;
+  }
+
+  auto ranges = engine::client_data_ranges();
+  if (ranges.empty()) {
+    lua_pushnil(L);
+    lua_pushstring(L, "не нашёл области данных движка");
+    return 2;
+  }
+
+  lua_newtable(L);
+  int found = 0;
+  std::vector<unsigned char> buf;
+
+  for (const auto& range : ranges) {
+    const std::size_t span = range.to - range.from;
+    constexpr std::size_t kChunk = 1u << 20;
+    buf.resize(kChunk + 8);
+
+    for (std::size_t off = 0; off < span; off += kChunk) {
+      const std::size_t want_bytes =
+          span - off < kChunk + width ? span - off : kChunk + width;
+      const ssize_t got = read_partial(range.from + off, buf.data(), want_bytes);
+      if (got <= 0 || static_cast<std::size_t>(got) < width) {
+        continue;
+      }
+      const std::size_t limit = static_cast<std::size_t>(got) - width;
+      // Шаг — по размеру значения: игровые переменные выровнены,
+      // а побайтовый проход дал бы гору мусорных совпадений.
+      for (std::size_t i = 0; i <= limit; i += width) {
+        if (!value_matches(buf.data() + i, type, want)) {
+          continue;
+        }
+        lua_pushnumber(L, static_cast<lua_Number>(range.from + off + i));
+        lua_rawseti(L, -2, ++found);
+        if (found >= kMaxHits) {
+          lua_pushstring(L, "слишком много совпадений, список обрезан");
+          return 2;
+        }
+      }
+    }
+  }
+
+  lua_pushnumber(L, found);
+  return 2;
+}
+
+int l_refine(lua_State* L)
+{
+  luaL_checktype(L, 1, LUA_TTABLE);
+  const lua_Number want = luaL_checknumber(L, 2);
+  const char* type_name = luaL_optstring(L, 3, "i32");
+
+  ValueType type;
+  std::size_t width = 0;
+  if (!parse_type(type_name, &type, &width)) {
+    lua_pushnil(L);
+    lua_pushstring(L, "неизвестный тип значения");
+    return 2;
+  }
+
+  const int count = static_cast<int>(lua_objlen(L, 1));
+  lua_newtable(L);
+  int kept = 0;
+  unsigned char probe[8] = {};
+
+  for (int i = 1; i <= count; ++i) {
+    lua_rawgeti(L, 1, i);
+    const auto addr = static_cast<std::uintptr_t>(
+        static_cast<long long>(lua_tonumber(L, -1)));
+    lua_pop(L, 1);
+
+    if (!safe_read(addr, probe, width)) {
+      continue;
+    }
+    if (!value_matches(probe, type, want)) {
+      continue;
+    }
+    lua_pushnumber(L, static_cast<lua_Number>(addr));
+    lua_rawseti(L, -2, ++kept);
+  }
+
+  lua_pushnumber(L, kept);
+  return 2;
+}
+
 const luaL_Reg kMemory[] = {
     { "getmodulebase", l_get_module_base },
     { "getclientbase", l_get_client_base },
@@ -396,6 +576,9 @@ const luaL_Reg kMemory[] = {
     { "protect", l_protect },
     { "hex", l_hex },
     { "scan", l_scan },
+    { "regions", l_regions },
+    { "findvalue", l_find_value },
+    { "refine", l_refine },
     { "readi8", read_scalar<std::int8_t> },
     { "readu8", read_scalar<std::uint8_t> },
     { "readi16", read_scalar<std::int16_t> },

@@ -2,6 +2,8 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
+#include <vector>
 
 #include "script/manager.h"
 
@@ -37,6 +39,15 @@ class Script {
 
   void call_terminate();
 
+  // Регистрация чат-команды. Функция берётся с вершины стека Lua.
+  void set_command(const std::string& name, int lua_ref);
+  void clear_command(const std::string& name);
+
+  // Если команда зарегистрирована — вызывает её и возвращает true.
+  bool call_command(const std::string& name, const std::string& args);
+
+  std::vector<std::string> command_names() const;
+
   // Помечает скрипт остановленным, но lua_State оставляет живым
   // (например, чтобы показать текст ошибки в меню).
   void stop();
@@ -66,6 +77,9 @@ class Script {
   int thread_ref_ = -1;
   bool main_running_ = false;
   double wake_at_ = 0.0;
+
+  // имя команды -> ссылка на функцию в реестре Lua
+  std::unordered_map<std::string, int> commands_;
 };
 
 }  // namespace ag::script

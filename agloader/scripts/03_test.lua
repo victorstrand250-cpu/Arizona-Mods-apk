@@ -4,7 +4,7 @@
 -- Проверяет по очереди всё, что умеет загрузчик: корутину main, события,
 -- ImGui-окно, рисование поверх игры, тач и работу с памятью движка.
 --
--- Открыть окно: кнопка «Тест» рядом с кнопкой AGLoader.
+-- Открыть окно: команда /test в игровом чате (или кнопка «Тест» на экране).
 
 script_name('AGLoader Test')
 script_author('agloader')
@@ -12,13 +12,12 @@ script_version('1.0')
 
 -- ------------------------------------------------------------------ состояние
 
-local show = true
+local show = false
 local ticks = 0
 local started_at = os.time()
 
 local overlay = true
 local eat_touch = false
-local box_size = 120
 
 local last_touch = 'касаний ещё не было'
 local touch_count = 0
@@ -74,6 +73,21 @@ function main()
     log('чтение битого адреса безопасно отклонено: ' .. tostring(err))
   else
     log('внимание: чтение по 0x10 почему-то удалось')
+  end
+
+  -- Чат-команды: перехват идёт через GTASA.OnInputEnd, то есть работает
+  -- ровно так же, как если бы игрок ввёл команду серверу — только строка
+  -- до сервера не доходит.
+  registerChatCommand('test', function(args)
+    show = not show
+    if args ~= '' then
+      log('аргументы команды: ' .. args)
+    end
+  end)
+  log('команда /test открывает и закрывает окно')
+
+  if canSendChat() then
+    log('отправка в чат доступна: sendChat("/time")')
   end
 
   log('=== проверка пройдена, окно открыто ===')
@@ -157,11 +171,6 @@ function onImgui()
 
     imgui.DrawRectFilled(x - 10, y - 6, x + tw + 10, y + th + 6, 0, 0, 0, 0.6)
     imgui.DrawText(x, y, line, 0.4, 1.0, 0.6, 1.0)
-
-    -- Квадрат по центру — видно, что координаты совпадают с тачем.
-    local cx, cy = w / 2, h / 2
-    local s = box_size
-    imgui.DrawRect(cx - s, cy - s, cx + s, cy + s, 0.2, 0.8, 1.0, 0.5, 3)
   end
 
   -- 2. Кнопка вызова окна.
@@ -199,11 +208,10 @@ function onImgui()
 
         local ch
         ch, overlay = imgui.Checkbox('рисовать поверх игры', overlay)
-        ch, box_size = imgui.SliderInt('размер рамки', box_size, 40, 400)
 
         imgui.Separator()
         if imgui.Button('написать в лог') then
-          log('кнопка нажата, рамка = ' .. box_size)
+          log('кнопка нажата')
         end
         imgui.SameLine()
         if imgui.Button('перезагрузить скрипты') then

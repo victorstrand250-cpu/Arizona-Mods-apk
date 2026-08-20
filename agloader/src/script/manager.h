@@ -36,6 +36,11 @@ void on_frame(double dt);
 void on_imgui();
 bool on_touch(int action, int pointer_id, int x, int y);
 bool on_key(int code, int action);
+
+// Строка, отправленная игроком из игрового чата. Возвращает true, если это
+// была зарегистрированная команда и передавать её игре не нужно.
+// Вызывается с UI-потока, не с потока отрисовки.
+bool on_chat_input(const std::string& line);
 void on_pause();
 void on_resume();
 

@@ -247,6 +247,54 @@ bool Script::call_event_consumable(const char* name, int a, int b, int c, int d,
   return consumed;
 }
 
+void Script::set_command(const std::string& name, int lua_ref)
+{
+  clear_command(name);
+  commands_[name] = lua_ref;
+}
+
+void Script::clear_command(const std::string& name)
+{
+  auto it = commands_.find(name);
+  if (it == commands_.end()) {
+    return;
+  }
+  if (L_ != nullptr) {
+    luaL_unref(L_, LUA_REGISTRYINDEX, it->second);
+  }
+  commands_.erase(it);
+}
+
+bool Script::call_command(const std::string& name, const std::string& args)
+{
+  if (!is_alive()) {
+    return false;
+  }
+  auto it = commands_.find(name);
+  if (it == commands_.end()) {
+    return false;
+  }
+
+  lua_rawgeti(L_, LUA_REGISTRYINDEX, it->second);
+  if (!lua_isfunction(L_, -1)) {
+    lua_pop(L_, 1);
+    return false;
+  }
+  lua_pushlstring(L_, args.c_str(), args.size());
+  run_protected(1, 0, ("команда /" + name).c_str());
+  return true;
+}
+
+std::vector<std::string> Script::command_names() const
+{
+  std::vector<std::string> out;
+  out.reserve(commands_.size());
+  for (const auto& kv : commands_) {
+    out.push_back(kv.first);
+  }
+  return out;
+}
+
 void Script::call_terminate()
 {
   if (!is_alive()) {
@@ -269,6 +317,10 @@ void Script::close()
   if (L_ == nullptr) {
     return;
   }
+  for (auto& kv : commands_) {
+    luaL_unref(L_, LUA_REGISTRYINDEX, kv.second);
+  }
+  commands_.clear();
   if (thread_ref_ != -1) {
     luaL_unref(L_, LUA_REGISTRYINDEX, thread_ref_);
     thread_ref_ = -1;

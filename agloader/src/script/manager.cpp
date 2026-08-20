@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 
+#include "gui.h"
 #include "lua.hpp"
 #include "log.h"
 #include "paths.h"
@@ -191,6 +192,43 @@ bool on_key(int code, int action)
     }
   }
   return consumed;
+}
+
+bool on_chat_input(const std::string& line)
+{
+  if (line.empty() || line[0] != '/') {
+    return false;
+  }
+
+  // '/имя аргументы' -> имя, аргументы
+  std::size_t end = line.find(' ');
+  if (end == std::string::npos) {
+    end = line.size();
+  }
+  const std::string name = line.substr(1, end - 1);
+  if (name.empty()) {
+    return false;
+  }
+  std::string args;
+  if (end < line.size()) {
+    args = line.substr(end + 1);
+  }
+
+  {
+    std::lock_guard<std::mutex> guard { g_lock };
+    for (auto& s : g_scripts) {
+      if (s->call_command(name, args)) {
+        return true;
+      }
+    }
+  }
+
+  // Встроенная команда: без неё спрятанную кнопку было бы нечем вернуть.
+  if (name == "agloader") {
+    gui::set_menu_open(!gui::menu_open());
+    return true;
+  }
+  return false;
 }
 
 void on_pause()

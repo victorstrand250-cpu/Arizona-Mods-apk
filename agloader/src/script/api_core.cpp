@@ -15,6 +15,7 @@
 #include "script/manager.h"
 #include "script/script.h"
 
+
 namespace ag::script::api {
 namespace {
 
@@ -176,6 +177,57 @@ int l_set_menu_open(lua_State* L)
   return 0;
 }
 
+// ------------------------------------------------------------------ чат
+
+int l_register_chat_command(lua_State* L)
+{
+  const char* name = luaL_checkstring(L, 1);
+  luaL_checktype(L, 2, LUA_TFUNCTION);
+  Script* s = self(L);
+
+  if (name[0] == '/') {
+    ++name;  // '/cmd' и 'cmd' — одно и то же
+  }
+  const std::string key { name };
+  if (key.empty()) {
+    lua_pushboolean(L, 0);
+    return 1;
+  }
+
+  lua_pushvalue(L, 2);
+  const int ref = luaL_ref(L, LUA_REGISTRYINDEX);
+  s->set_command(key, ref);
+
+  log::write(log::Level::Script, "agloader", "[%s] команда /%s",
+             s->info().file.c_str(), key.c_str());
+  lua_pushboolean(L, 1);
+  return 1;
+}
+
+int l_unregister_chat_command(lua_State* L)
+{
+  const char* name = luaL_checkstring(L, 1);
+  Script* s = self(L);
+  if (name[0] == '/') {
+    ++name;
+  }
+  s->clear_command(name);
+  return 0;
+}
+
+int l_send_chat(lua_State* L)
+{
+  const char* text = luaL_checkstring(L, 1);
+  lua_pushboolean(L, loader::send_chat(text) ? 1 : 0);
+  return 1;
+}
+
+int l_can_send_chat(lua_State* L)
+{
+  lua_pushboolean(L, loader::can_send_chat() ? 1 : 0);
+  return 1;
+}
+
 int l_loader_version(lua_State* L)
 {
   lua_pushstring(L, AGLOADER_VERSION);
@@ -198,6 +250,10 @@ const luaL_Reg kGlobals[] = {
     { "isMenuOpen", l_is_menu_open },
     { "setMenuOpen", l_set_menu_open },
     { "loaderVersion", l_loader_version },
+    { "registerChatCommand", l_register_chat_command },
+    { "unregisterChatCommand", l_unregister_chat_command },
+    { "sendChat", l_send_chat },
+    { "canSendChat", l_can_send_chat },
     { nullptr, nullptr },
 };
 

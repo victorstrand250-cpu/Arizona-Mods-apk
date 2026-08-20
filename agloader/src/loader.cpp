@@ -29,6 +29,9 @@
 #include <atomic>
 #include <chrono>
 #include <cstring>
+#include <deque>
+#include <mutex>
+#include <string>
 #include <thread>
 
 #include "engine.h"
@@ -42,6 +45,7 @@ namespace ag::loader {
 namespace {
 
 constexpr const char* kJniLibClass = "com/arizonagames/client/game/core/JNILib";
+constexpr const char* kGtasaClass = "com.arizona.game.GTASA";
 
 // Android объявляет AttachCurrentThread(JNIEnv**), а JDK — (void**).
 // Шаблон выводит тип прямо из объявления в подключённом jni.h, поэтому
@@ -55,6 +59,38 @@ jint attach_current_thread(JavaVM* vm, jint (JavaVM::*fn)(EnvPtrPtr, void*),
 
 JavaVM* g_vm = nullptr;
 jclass g_jnilib_class = nullptr;
+
+// Класс GTASA берётся не через FindClass, а через classLoader.loadClass():
+// FindClass из фонового потока видит только системный загрузчик классов,
+// а вызывать его прямо в JNI_OnLoad нельзя — это инициализировало бы GTASA
+// посреди <clinit> другого класса.
+jobject g_class_loader = nullptr;
+jmethodID g_load_class = nullptr;
+jclass g_gtasa_class = nullptr;
+
+// Объект активити ловим из первого же OnInputEnd: раньше он нам недоступен,
+// а без него нечем вызвать t_OnInputEnd, чтобы отправить текст самим.
+jobject g_gtasa_instance = nullptr;
+jmethodID g_t_on_input_end = nullptr;
+
+// t_OnInputEnd перекладывает вызов на UI-поток, поэтому к моменту, когда
+// сработает наш хук, «флаг отправки» уже сбросился бы. Вместо флага держим
+// список того, что отправили сами, и не разбираем эти строки как команды —
+// иначе скрипт, отправивший '/что-то', зациклил бы сам себя.
+std::mutex g_sent_lock;
+std::deque<std::string> g_sent_lines;
+
+bool take_own_line(const std::string& line)
+{
+  std::lock_guard<std::mutex> guard { g_sent_lock };
+  for (auto it = g_sent_lines.begin(); it != g_sent_lines.end(); ++it) {
+    if (*it == line) {
+      g_sent_lines.erase(it);
+      return true;
+    }
+  }
+  return false;
+}
 
 std::atomic<bool> g_ready { false };
 std::atomic<int> g_width { 0 };
@@ -159,6 +195,37 @@ void JNICALL hk_android_resume(JNIEnv* env, jclass cls)
   engine::anchors().android_resume(env, cls);
 }
 
+std::string jstring_to_utf8(JNIEnv* env, jstring js)
+{
+  if (js == nullptr) {
+    return {};
+  }
+  const char* raw = env->GetStringUTFChars(js, nullptr);
+  if (raw == nullptr) {
+    return {};
+  }
+  std::string out { raw };
+  env->ReleaseStringUTFChars(js, raw);
+  return out;
+}
+
+void JNICALL hk_on_input_end(JNIEnv* env, jobject thiz, jstring text)
+{
+  // Первый же ввод даёт нам объект активити — через него скрипты потом
+  // смогут отправлять текст сами.
+  if (g_gtasa_instance == nullptr && thiz != nullptr) {
+    g_gtasa_instance = env->NewGlobalRef(thiz);
+  }
+
+  const std::string line = jstring_to_utf8(env, text);
+  if (!line.empty() && !take_own_line(line) &&
+      script::manager::on_chat_input(line)) {
+    return;  // команда обработана скриптом, игре её не передаём
+  }
+
+  engine::anchors().on_input_end(env, thiz, text);
+}
+
 const JNINativeMethod kMethods[] = {
     { const_cast<char*>("androidInit"), const_cast<char*>("(Ljava/lang/String;)V"),
       reinterpret_cast<void*>(hk_android_init) },
@@ -174,6 +241,11 @@ const JNINativeMethod kMethods[] = {
       reinterpret_cast<void*>(hk_android_pause) },
     { const_cast<char*>("androidResume"), const_cast<char*>("()V"),
       reinterpret_cast<void*>(hk_android_resume) },
+};
+
+const JNINativeMethod kGtasaMethods[] = {
+    { const_cast<char*>("OnInputEnd"), const_cast<char*>("(Ljava/lang/String;)V"),
+      reinterpret_cast<void*>(hk_on_input_end) },
 };
 
 // ------------------------------------------------------------ инициализация
@@ -209,6 +281,45 @@ void init_thread()
     g_vm->DetachCurrentThread();
     return;
   }
+
+  // Чат — отдельным классом и отдельной регистрацией: если он почему-то
+  // не найдётся, всё остальное должно продолжать работать.
+  if (g_class_loader != nullptr && g_load_class != nullptr) {
+    jstring name = env->NewStringUTF(kGtasaClass);
+    jobject cls = env->CallObjectMethod(g_class_loader, g_load_class, name);
+    env->DeleteLocalRef(name);
+
+    if (env->ExceptionCheck()) {
+      env->ExceptionClear();
+      cls = nullptr;
+    }
+    if (cls != nullptr) {
+      g_gtasa_class = static_cast<jclass>(env->NewGlobalRef(cls));
+      env->DeleteLocalRef(cls);
+
+      const jint rc_chat = env->RegisterNatives(
+          g_gtasa_class, kGtasaMethods,
+          static_cast<jint>(sizeof(kGtasaMethods) / sizeof(kGtasaMethods[0])));
+      if (rc_chat == JNI_OK) {
+        g_t_on_input_end = env->GetMethodID(g_gtasa_class, "t_OnInputEnd",
+                                            "(Ljava/lang/String;)V");
+        if (env->ExceptionCheck()) {
+          env->ExceptionClear();
+          g_t_on_input_end = nullptr;
+        }
+        AG_LOGI("чат перехвачен, команды доступны");
+      } else {
+        if (env->ExceptionCheck()) {
+          env->ExceptionClear();
+        }
+        AG_LOGW("не удалось перехватить чат (%d) — команды работать не будут",
+                static_cast<int>(rc_chat));
+      }
+    } else {
+      AG_LOGW("класс %s не найден — команды работать не будут", kGtasaClass);
+    }
+  }
+
   g_vm->DetachCurrentThread();
 
   g_ready.store(true);
@@ -230,6 +341,60 @@ Screen screen()
 double frame_time() { return g_frame_time.load(); }
 long long frame_count() { return g_frames.load(); }
 JavaVM* vm() { return g_vm; }
+
+void set_screen(int width, int height)
+{
+  if (width > 0 && height > 0) {
+    g_width.store(width);
+    g_height.store(height);
+  }
+}
+
+bool can_send_chat()
+{
+  return g_gtasa_instance != nullptr && g_t_on_input_end != nullptr;
+}
+
+bool send_chat(const std::string& text)
+{
+  if (!can_send_chat() || text.empty()) {
+    return false;
+  }
+
+  JNIEnv* env = nullptr;
+  bool attached = false;
+  if (g_vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK) {
+    if (attach_current_thread(g_vm, &JavaVM::AttachCurrentThread, &env) != JNI_OK) {
+      return false;
+    }
+    attached = true;
+  }
+
+  {
+    std::lock_guard<std::mutex> guard { g_sent_lock };
+    g_sent_lines.push_back(text);
+    // Страховка от рассинхрона: если хук по какой-то причине не сработает,
+    // список не должен расти бесконечно.
+    while (g_sent_lines.size() > 16) {
+      g_sent_lines.pop_front();
+    }
+  }
+
+  jstring js = env->NewStringUTF(text.c_str());
+  // t_OnInputEnd публичный и сам перекладывает вызов на UI-поток, поэтому
+  // звать его можно откуда угодно — в отличие от нативного OnInputEnd.
+  env->CallVoidMethod(g_gtasa_instance, g_t_on_input_end, js);
+
+  if (env->ExceptionCheck()) {
+    env->ExceptionClear();
+  }
+  env->DeleteLocalRef(js);
+
+  if (attached) {
+    g_vm->DetachCurrentThread();
+  }
+  return true;
+}
 
 }  // namespace ag::loader
 
@@ -263,6 +428,34 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
     return JNI_VERSION_1_6;
   }
   loader::g_jnilib_class = static_cast<jclass>(env->NewGlobalRef(local));
+
+  // Тот же приём для GTASA не годится: FindClass инициализировал бы класс
+  // прямо посреди <clinit> JNILib. Поэтому запоминаем загрузчик классов
+  // приложения и достанем GTASA через него позже, из фонового потока.
+  jclass class_class = env->FindClass("java/lang/Class");
+  if (class_class != nullptr) {
+    jmethodID get_loader = env->GetMethodID(class_class, "getClassLoader",
+                                            "()Ljava/lang/ClassLoader;");
+    if (get_loader != nullptr) {
+      jobject cl = env->CallObjectMethod(local, get_loader);
+      if (cl != nullptr) {
+        loader::g_class_loader = env->NewGlobalRef(cl);
+        jclass cl_class = env->GetObjectClass(cl);
+        loader::g_load_class = env->GetMethodID(
+            cl_class, "loadClass", "(Ljava/lang/String;)Ljava/lang/Class;");
+        env->DeleteLocalRef(cl_class);
+        env->DeleteLocalRef(cl);
+      }
+    }
+    env->DeleteLocalRef(class_class);
+  }
+  if (env->ExceptionCheck()) {
+    env->ExceptionClear();
+  }
+  if (loader::g_class_loader == nullptr) {
+    AG_LOGW("загрузчик классов не получен — чат-команды будут недоступны");
+  }
+
   env->DeleteLocalRef(local);
 
   // Движок в этот момент ещё не загружен (наш loadLibrary идёт первым),
