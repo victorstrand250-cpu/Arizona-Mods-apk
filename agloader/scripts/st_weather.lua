@@ -187,7 +187,7 @@ local VTYPES    = { 'u8', 'u16', 'i32' }
 local function finderStart()
   -- Ищем везде, включая кучу: переменные движка лежат в синглтоне, а не
   -- в .bss библиотеки, и поиск только по модулю их не видит.
-  local list, count = memory.findvalue(finder.value, finder.vtype, 'all')
+  local list, count, truncated = memory.findvalue(finder.value, finder.vtype, 'all')
   if not list then
     finder.message = 'ошибка: ' .. tostring(count)
     return
@@ -195,6 +195,11 @@ local function finderStart()
   finder.list, finder.count, finder.step = list, count, 1
   finder.message = ('найдено %d. Дождитесь, пока значение в игре изменится, ' ..
                     'впишите новое и жмите «Отсеять»'):format(count)
+  if truncated then
+    finder.message = finder.message ..
+      ' Список обрезан по лимиту — возьмите значение поредче ' ..
+      '(например, не 0 и не 1) или тип пошире.'
+  end
 end
 
 local function finderRefine()

@@ -47,8 +47,18 @@ std::uintptr_t to_addr(lua_State* L, int idx)
 // Возвращает, сколько байт реально прочитано: диапазон может обрываться на
 // неотображённой странице, и для сканера сигнатур полезнее получить начало,
 // чем ничего.
+// Android помечает указатели кучи: аллокатор кладёт метку в старший байт,
+// железо её игнорирует (top-byte-ignore), а process_vm_readv — нет. Плюс
+// такой указатель вылезает за 2^53 и теряет точность в числе Lua.
+// Поэтому метку снимаем везде, где адрес пересекает границу с Lua.
+constexpr std::uintptr_t untag(std::uintptr_t addr)
+{
+  return addr & 0x00FFFFFFFFFFFFFFull;
+}
+
 ssize_t read_partial(std::uintptr_t addr, void* dst, std::size_t len)
 {
+  addr = untag(addr);
   if (addr == 0 || len == 0) {
     return 0;
   }
@@ -64,6 +74,7 @@ bool safe_read(std::uintptr_t addr, void* dst, std::size_t len)
 
 bool safe_write(std::uintptr_t addr, const void* src, std::size_t len)
 {
+  addr = untag(addr);
   if (addr == 0 || len == 0) {
     return false;
   }
@@ -528,15 +539,19 @@ int l_find_value(lua_State* L)
         lua_pushnumber(L, static_cast<lua_Number>(range.from + off + i));
         lua_rawseti(L, -2, ++found);
         if (found >= kMaxHits) {
-          lua_pushstring(L, "слишком много совпадений, список обрезан");
-          return 2;
+          // Второе значение всегда число: раньше здесь возвращалась строка,
+          // и вызывающий код падал на форматировании счётчика.
+          lua_pushnumber(L, static_cast<lua_Number>(found));
+          lua_pushboolean(L, 1);  // список обрезан
+          return 3;
         }
       }
     }
   }
 
   lua_pushnumber(L, found);
-  return 2;
+  lua_pushboolean(L, 0);
+  return 3;
 }
 
 // Читает указатель по адресу. Нужен, чтобы от базы библиотеки дойти до
@@ -552,7 +567,7 @@ int l_deref(lua_State* L)
     lua_pushstring(L, "адрес недоступен");
     return 2;
   }
-  lua_pushnumber(L, static_cast<lua_Number>(value));
+  lua_pushnumber(L, static_cast<lua_Number>(untag(value)));
   return 1;
 }
 

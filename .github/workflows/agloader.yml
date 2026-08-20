@@ -40,9 +40,28 @@ jobs:
       - name: Что получилось
         run: |
           find agloader/dist -type f -print -exec file {} \;
-          echo '--- экспорты libagloader.so ---'
-          "$ANDROID_NDK_LATEST_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-readelf" \
-            --dyn-syms agloader/dist/arm64-v8a/libagloader.so | grep -i 'JNI_OnLoad' || true
+
+      # Библиотека грузится раньше движка, поэтому её экспорт стоит в таблице
+      # поиска впереди. Утечёт наружу ImGui — вызовы движка уедут в нашу копию
+      # и он упадёт на чужом контексте. Проверяем, что наружу торчит только
+      # JNI_OnLoad, и роняем сборку, если это перестало быть так.
+      - name: Проверить, что наружу торчит только JNI_OnLoad
+        run: |
+          READELF="$ANDROID_NDK_LATEST_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-readelf"
+          for abi in arm64-v8a armeabi-v7a; do
+            so="agloader/dist/$abi/libagloader.so"
+            names=$("$READELF" --dyn-syms "$so" \
+              | awk '$5 == "GLOBAL" || $5 == "WEAK" { if ($7 != "UND") print $8 }' \
+              | sed 's/@.*//' | grep -v '^$' | sort -u)
+            echo "--- $abi экспортирует:"
+            echo "$names" | sed 's/^/    /'
+            extra=$(echo "$names" | grep -v -E '^(JNI_OnLoad|JNI_OnUnload)$' || true)
+            if [ -n "$extra" ]; then
+              echo "ОШИБКА: наружу торчит лишнее:"
+              echo "$extra" | sed 's/^/    /'
+              exit 1
+            fi
+          done
 
       - uses: actions/upload-artifact@v4
         with:
@@ -104,14 +123,15 @@ jobs:
             --lib armeabi-v7a=dist/armeabi-v7a/libagloader.so \
             --smali smali.jar --baksmali baksmali.jar
 
-      - name: Подписать отладочным ключом
+      # Ключ лежит в репозитории и больше не меняется. Раньше он генерировался
+      # заново на каждом запуске, поэтому каждая сборка была подписана по-новому
+      # и не вставала поверх предыдущей — приходилось сносить игру.
+      - name: Подписать постоянным ключом
         run: |
-          keytool -genkeypair -v -keystore debug.keystore -storepass android \
-            -keypass android -alias agloader -keyalg RSA -keysize 2048 \
-            -validity 10000 -dname "CN=AGLoader, OU=dev, O=dev, C=RU"
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
-          "$BT/apksigner" sign --ks debug.keystore --ks-pass pass:android \
-            --key-pass pass:android --ks-key-alias agloader patched/*.apk
+          "$BT/apksigner" sign --ks agloader/agloader.keystore \
+            --ks-pass pass:agloader --key-pass pass:agloader \
+            --ks-key-alias agloader patched/*.apk
           "$BT/apksigner" verify --print-certs patched/*.apk
 
       - uses: actions/upload-artifact@v4

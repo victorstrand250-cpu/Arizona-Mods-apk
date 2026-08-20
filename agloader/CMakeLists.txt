@@ -26,6 +26,9 @@ add_library(imgui STATIC
   third_party/imgui/imgui_widgets.cpp
   third_party/imgui/backends/imgui_impl_opengl3.cpp
 )
+# У движка своя копия ImGui. Наши символы не должны быть видны снаружи,
+# иначе его вызовы уедут к нам — см. exports.map.
+target_compile_options(imgui PRIVATE -fvisibility=hidden -fvisibility-inlines-hidden)
 target_include_directories(imgui PUBLIC
   third_party/imgui
   third_party/imgui/backends
@@ -72,9 +75,15 @@ target_compile_options(agloader PRIVATE
 )
 target_link_libraries(agloader PRIVATE imgui luajit log android EGL GLESv3)
 
-# JNI_OnLoad должен остаться видимым несмотря на -fvisibility=hidden:
-# он помечен JNIEXPORT, остальное прячем.
-target_link_options(agloader PRIVATE -Wl,--no-undefined)
+# Наружу отдаём только JNI_OnLoad, всё остальное прячем — см. exports.map.
+# Одного -fvisibility=hidden мало: он стоит PRIVATE у agloader и на статическую
+# библиотеку imgui не распространяется, поэтому её символы утекали в
+# динамическую таблицу и перехватывали вызовы ImGui у самого движка.
+target_link_options(agloader PRIVATE
+  -Wl,--no-undefined
+  -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exports.map
+  -Wl,--exclude-libs,ALL
+)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
   target_compile_options(agloader PRIVATE -O2)
