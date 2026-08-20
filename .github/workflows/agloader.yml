@@ -53,7 +53,11 @@ jobs:
   patch-apk:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' && inputs.apk_tag != ''
+    # На push берём тег по умолчанию, чтобы готовый к установке APK
+    # появлялся артефактом сам, без ручного запуска.
+    if: github.event_name != 'workflow_dispatch' || inputs.apk_tag != ''
+    env:
+      APK_TAG: ${{ inputs.apk_tag || 'Arizona_New' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -71,7 +75,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download "${{ inputs.apk_tag }}" \
+          gh release download "$APK_TAG" \
             --repo "${{ github.repository }}" --pattern '*.apk' --dir apk
           ls -la apk
 
