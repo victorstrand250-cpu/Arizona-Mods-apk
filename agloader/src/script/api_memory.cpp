@@ -38,17 +38,27 @@ std::uintptr_t to_addr(lua_State* L, int idx)
       static_cast<long long>(luaL_checknumber(L, idx)));
 }
 
-// Безопасное чтение чужой (для нас — своей же, но потенциально невалидной)
-// памяти. Ошибка адреса приходит кодом возврата, а не сигналом.
-bool safe_read(std::uintptr_t addr, void* dst, std::size_t len)
+// Безопасное чтение своей же, но потенциально невалидной памяти: ошибка
+// адреса приходит кодом возврата, а не SIGSEGV. Для процесса, читающего сам
+// себя, ядро пропускает проверку ptrace (same_thread_group), так что ни
+// разрешений, ни SELinux-политики это не требует.
+//
+// Возвращает, сколько байт реально прочитано: диапазон может обрываться на
+// неотображённой странице, и для сканера сигнатур полезнее получить начало,
+// чем ничего.
+ssize_t read_partial(std::uintptr_t addr, void* dst, std::size_t len)
 {
   if (addr == 0 || len == 0) {
-    return false;
+    return 0;
   }
   iovec local { dst, len };
   iovec remote { reinterpret_cast<void*>(addr), len };
-  const ssize_t n = ::process_vm_readv(::getpid(), &local, 1, &remote, 1, 0);
-  return n == static_cast<ssize_t>(len);
+  return ::process_vm_readv(::getpid(), &local, 1, &remote, 1, 0);
+}
+
+bool safe_read(std::uintptr_t addr, void* dst, std::size_t len)
+{
+  return read_partial(addr, dst, len) == static_cast<ssize_t>(len);
 }
 
 bool safe_write(std::uintptr_t addr, const void* src, std::size_t len)
@@ -344,13 +354,13 @@ int l_scan(lua_State* L)
     const std::size_t want = span - off < kChunk + pattern.size()
                                  ? span - off
                                  : kChunk + pattern.size();
-    if (!safe_read(m.base + off, buf.data(), want)) {
+    // Частичное чтение — норма: у модуля есть неотображённые дыры.
+    // Берём то, что дали, вместо того чтобы терять целый мегабайт.
+    const ssize_t got = read_partial(m.base + off, buf.data(), want);
+    if (got <= 0 || static_cast<std::size_t>(got) < pattern.size()) {
       continue;
     }
-    if (want < pattern.size()) {
-      continue;
-    }
-    const std::size_t limit = want - pattern.size();
+    const std::size_t limit = static_cast<std::size_t>(got) - pattern.size();
     for (std::size_t i = 0; i <= limit; ++i) {
       bool hit = true;
       for (std::size_t j = 0; j < pattern.size(); ++j) {
