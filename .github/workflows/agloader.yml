@@ -75,7 +75,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: agloader-scripts
-          path: agloader/scripts/*.lua
+          path: |
+            agloader/scripts/*.lua
+            agloader/lib/**
           if-no-files-found: error
 
   patch-apk:
@@ -153,7 +155,11 @@ jobs:
           cp dist/arm64-v8a/libluajit-5.1.so   release/libluajit-5.1-arm64-v8a.so
           cp dist/armeabi-v7a/libagloader.so   release/libagloader-armeabi-v7a.so
           cp dist/armeabi-v7a/libluajit-5.1.so release/libluajit-5.1-armeabi-v7a.so
-          (cd agloader/scripts && zip -q -r ../../release/agloader-scripts.zip *.lua)
+          # В архиве сразу два каталога, scripts и lib, чтобы распаковывалось
+          # одним движением прямо в agloader/ на устройстве.
+          (cd agloader && zip -q -r ../release/agloader-scripts.zip \
+             scripts -i 'scripts/*.lua' && \
+           zip -q -r ../release/agloader-scripts.zip lib)
 
           gh release delete agloader-latest --repo "${{ github.repository }}" --yes || true
           gh release create agloader-latest release/* \
@@ -163,4 +169,4 @@ jobs:
 
           * \`*_agloader.apk\` — игра с уже встроенным загрузчиком, подписана отладочным ключом. Официальную версию перед установкой удалить.
           * \`libagloader-*.so\` + \`libluajit-5.1-*.so\` — только библиотеки, если встраиваете в свой APK сами.
-          * \`agloader-scripts.zip\` — примеры скриптов, распаковать в \`Android/media/<пакет>/agloader/scripts/\`."
+          * \`agloader-scripts.zip\` — скрипты и библиотеки. Распаковать целиком в \`Android/media/<пакет>/agloader/\` — внутри уже есть \`scripts/\` и \`lib/\`."

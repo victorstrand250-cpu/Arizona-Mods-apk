@@ -6,6 +6,8 @@
 #include <string>
 
 #include "engine.h"
+#include <sys/stat.h>
+#include <cerrno>
 #include "gui.h"
 #include "loader.h"
 #include "log.h"
@@ -123,6 +125,64 @@ int l_print(lua_State* L) { return l_log(L); }
 
 // Аналог MONET_DPI_SCALE: явные размеры ImGui не масштабирует, и скрипт,
 // рассчитанный на 720p, на телефоне выйдет крошечным.
+// ────────────────────────────────────── файловые функции в духе MoonLoader
+
+// Библиотеки вроде inicfg рассчитывают на эти имена и без них не работают.
+// Рабочим каталогом считается каталог данных загрузчика.
+int l_get_working_directory(lua_State* L)
+{
+  lua_pushstring(L, paths::root().c_str());
+  return 1;
+}
+
+int l_does_file_exist(lua_State* L)
+{
+  const char* path = luaL_checkstring(L, 1);
+  struct ::stat st {};
+  const bool ok = ::stat(path, &st) == 0 && S_ISREG(st.st_mode);
+  lua_pushboolean(L, ok ? 1 : 0);
+  return 1;
+}
+
+int l_does_directory_exist(lua_State* L)
+{
+  const char* path = luaL_checkstring(L, 1);
+  struct ::stat st {};
+  const bool ok = ::stat(path, &st) == 0 && S_ISDIR(st.st_mode);
+  lua_pushboolean(L, ok ? 1 : 0);
+  return 1;
+}
+
+int l_create_directory(lua_State* L)
+{
+  const char* path = luaL_checkstring(L, 1);
+  // Создаём по всей глубине: скрипты часто просят сразу вложенный каталог.
+  std::string acc;
+  const std::string full { path };
+  bool ok = true;
+  for (std::size_t i = 0; i <= full.size(); ++i) {
+    if (i == full.size() || full[i] == '/') {
+      if (acc.size() > 1) {
+        if (::mkdir(acc.c_str(), 0775) != 0 && errno != EEXIST) {
+          ok = false;
+        }
+      }
+    }
+    if (i < full.size()) {
+      acc.push_back(full[i]);
+    }
+  }
+  lua_pushboolean(L, ok ? 1 : 0);
+  return 1;
+}
+
+int l_delete_file(lua_State* L)
+{
+  const char* path = luaL_checkstring(L, 1);
+  lua_pushboolean(L, ::remove(path) == 0 ? 1 : 0);
+  return 1;
+}
+
 int l_get_ui_scale(lua_State* L)
 {
   lua_pushnumber(L, gui::ui_scale());
@@ -252,6 +312,11 @@ const luaL_Reg kGlobals[] = {
     { "print", l_print },
     { "getScreenSize", l_get_screen_size },
     { "getUiScale", l_get_ui_scale },
+    { "getWorkingDirectory", l_get_working_directory },
+    { "doesFileExist", l_does_file_exist },
+    { "doesDirectoryExist", l_does_directory_exist },
+    { "createDirectory", l_create_directory },
+    { "deleteFile", l_delete_file },
     { "getFrameTime", l_get_frame_time },
     { "getFrameCount", l_get_frame_count },
     { "getPaths", l_get_paths },

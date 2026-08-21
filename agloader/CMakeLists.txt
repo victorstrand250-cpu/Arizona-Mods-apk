@@ -63,6 +63,7 @@ add_library(agloader SHARED
   src/paths.cpp
   src/script/manager.cpp
   src/script/script.cpp
+  src/script/prelude.cpp
   src/script/api_core.cpp
   src/script/api_memory.cpp
   src/script/api_imgui.cpp

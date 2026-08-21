@@ -8,6 +8,7 @@
 #include "lua.hpp"
 #include "paths.h"
 #include "script/api.h"
+#include "script/prelude.h"
 
 namespace ag::script {
 namespace {
@@ -175,6 +176,14 @@ bool Script::load()
 
   api::open_all(L_);
 
+  // Пролог до кода скрипта: даёт lua_thread и привычные имена MoonLoader.
+  if (luaL_loadstring(L_, prelude_source()) != 0 ||
+      lua_pcall(L_, 0, 0, 0) != 0) {
+    fail("пролог", lua_tostring(L_, -1));
+    lua_pop(L_, 1);
+    return false;
+  }
+
   if (luaL_loadfile(L_, info_.path.c_str()) != 0) {
     fail("компиляция", lua_tostring(L_, -1));
     lua_pop(L_, 1);
@@ -268,7 +277,13 @@ void Script::tick(double now, double dt)
     }
   }
 
-  // 2. Событие onFrame(dt)
+  // 2. Фоновые корутины lua_thread — их крутит планировщик из пролога.
+  if (push_event("__agloader_tick")) {
+    lua_pushnumber(L_, dt);
+    run_protected(1, 0, "lua_thread");
+  }
+
+  // 3. Событие onFrame(dt)
   if (push_event("onFrame")) {
     lua_pushnumber(L_, dt);
     run_protected(1, 0, "onFrame");
