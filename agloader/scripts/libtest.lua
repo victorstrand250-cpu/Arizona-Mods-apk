@@ -209,6 +209,13 @@ local function runLocal()
                    r.round and 'круглый' or 'прямоугольный',
                    r.radius or 0, r.x or 0, r.y or 0)
   end)
+  check('загрузчик', 'клавиатура игры', function()
+    assert(type(keyboardAvailable) == 'function', 'нет функции')
+    assert(keyboardAvailable(),
+           'GTASA.SetInputLayout или _instance не нашлись — ' ..
+           'поля ввода поднимут нарисованную клавиатуру')
+    return 'та же, что под чатом'
+  end)
   check('движок', 'касания', function()
     -- Настоящее касание тут не подложить: игрок этого не просил. Проверяем
     -- только, что якорь на месте и вызов доходит.

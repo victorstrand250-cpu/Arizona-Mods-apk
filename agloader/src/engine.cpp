@@ -26,6 +26,8 @@ constexpr const char* kSymKey = "Java_com_arizonagames_client_game_core_JNILib_a
 constexpr const char* kSymPause = "Java_com_arizonagames_client_game_core_JNILib_androidPause";
 constexpr const char* kSymResume = "Java_com_arizonagames_client_game_core_JNILib_androidResume";
 constexpr const char* kSymInputEnd = "Java_com_arizona_game_GTASA_OnInputEnd";
+constexpr const char* kSymKbdClosed =
+    "Java_com_arizona_game_GTASA_OnKeyboardClosed";
 
 Anchors g_anchors;
 bool g_resolved = false;
@@ -258,6 +260,8 @@ bool wait_and_resolve(int timeout_ms)
       sym<decltype(Anchors::android_resume)>(handle, kSymResume, &missing);
   g_anchors.on_input_end =
       sym<decltype(Anchors::on_input_end)>(handle, kSymInputEnd, &missing);
+  g_anchors.on_keyboard_closed =
+      sym<decltype(Anchors::on_keyboard_closed)>(handle, kSymKbdClosed, &missing);
 
   // Хендл намеренно не закрываем: движок должен остаться загруженным,
   // а указатели — валидными до конца процесса.

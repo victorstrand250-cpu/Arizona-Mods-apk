@@ -136,6 +136,20 @@ int l_touch(lua_State* L)
   return 1;
 }
 
+// keyboardAvailable() — доступна ли клавиатура самой игры.
+int l_keyboard_available(lua_State* L)
+{
+  lua_pushboolean(L, loader::keyboard_available() ? 1 : 0);
+  return 1;
+}
+
+// hideKeyboard() — закрыть клавиатуру, если она открыта.
+int l_hide_keyboard(lua_State* L)
+{
+  loader::hide_keyboard();
+  return 0;
+}
+
 // notify(текст, [секунды]) — сообщение поверх игры, без записи в лог.
 int l_notify(lua_State* L)
 {
@@ -346,6 +360,8 @@ const luaL_Reg kGlobals[] = {
     { "log", l_log },
     { "notify", l_notify },
     { "touch", l_touch },
+    { "keyboardAvailable", l_keyboard_available },
+    { "hideKeyboard", l_hide_keyboard },
     { "print", l_print },
     { "getScreenSize", l_get_screen_size },
     { "getUiScale", l_get_ui_scale },

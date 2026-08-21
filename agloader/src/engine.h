@@ -26,6 +26,7 @@ struct Anchors {
   // которую игрок отправил из игрового чата. Метод нестатический,
   // поэтому вторым аргументом идёт jobject, а не jclass.
   void (*on_input_end)(JNIEnv*, jobject, jstring) = nullptr;
+  void (*on_keyboard_closed)(JNIEnv*, jobject) = nullptr;
 };
 
 // Блокирующе ждёт появления libag-client.so в процессе (dlopen NOLOAD),

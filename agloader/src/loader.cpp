@@ -68,10 +68,21 @@ jobject g_class_loader = nullptr;
 jmethodID g_load_class = nullptr;
 jclass g_gtasa_class = nullptr;
 
-// Объект активити ловим из первого же OnInputEnd: раньше он нам недоступен,
-// а без него нечем вызвать t_OnInputEnd, чтобы отправить текст самим.
+// Объект активити берём из статического поля GTASA._instance — оно есть с
+// самого старта. Раньше его ловили из первого OnInputEnd, то есть до первой
+// отправки чего-либо в чат ни клавиатуру открыть, ни текст послать было
+// нечем.
 jobject g_gtasa_instance = nullptr;
 jmethodID g_t_on_input_end = nullptr;
+
+// GTASA.SetInputLayout(int type, boolean is_chat) — то самое, чем игра
+// открывает клавиатуру под чат. Ненулевой тип открывает, ноль закрывает,
+// а runOnUiThread метод делает сам, поэтому звать можно откуда угодно.
+jmethodID g_set_input_layout = nullptr;
+
+// Клавиатуру открыли мы, а не игра: значит следующий OnInputEnd — ответ
+// нашему полю ввода, и в игру его пускать нельзя, иначе текст уйдёт в чат.
+std::atomic<bool> g_keyboard_ours { false };
 
 // t_OnInputEnd перекладывает вызов на UI-поток, поэтому к моменту, когда
 // сработает наш хук, «флаг отправки» уже сбросился бы. Вместо флага держим
@@ -217,19 +228,35 @@ std::string jstring_to_utf8(JNIEnv* env, jstring js)
 
 void JNICALL hk_on_input_end(JNIEnv* env, jobject thiz, jstring text)
 {
-  // Первый же ввод даёт нам объект активити — через него скрипты потом
-  // смогут отправлять текст сами.
   if (g_gtasa_instance == nullptr && thiz != nullptr) {
     g_gtasa_instance = env->NewGlobalRef(thiz);
   }
 
   const std::string line = jstring_to_utf8(env, text);
+
+  // Клавиатуру открывали под наше поле ввода — текст забираем себе целиком
+  // и в игру не отдаём, иначе он ушёл бы в чат.
+  if (g_keyboard_ours.exchange(false)) {
+    gui::deliver_text(line);
+    return;
+  }
+
   if (!line.empty() && !take_own_line(line) &&
       script::manager::on_chat_input(line)) {
     return;  // команда обработана скриптом, игре её не передаём
   }
 
   engine::anchors().on_input_end(env, thiz, text);
+}
+
+// Клавиатуру закрыли, ничего не отправив. Если её открывали мы, поле ввода
+// должно об этом узнать, иначе оно так и осталось бы ждать.
+void JNICALL hk_on_keyboard_closed(JNIEnv* env, jobject thiz)
+{
+  if (g_keyboard_ours.exchange(false)) {
+    gui::cancel_text();
+  }
+  engine::anchors().on_keyboard_closed(env, thiz);
 }
 
 const JNINativeMethod kMethods[] = {
@@ -252,6 +279,8 @@ const JNINativeMethod kMethods[] = {
 const JNINativeMethod kGtasaMethods[] = {
     { const_cast<char*>("OnInputEnd"), const_cast<char*>("(Ljava/lang/String;)V"),
       reinterpret_cast<void*>(hk_on_input_end) },
+    { const_cast<char*>("OnKeyboardClosed"), const_cast<char*>("()V"),
+      reinterpret_cast<void*>(hk_on_keyboard_closed) },
 };
 
 // ------------------------------------------------------------ инициализация
@@ -313,7 +342,34 @@ void init_thread()
           env->ExceptionClear();
           g_t_on_input_end = nullptr;
         }
-        AG_LOGI("чат перехвачен, команды доступны");
+
+        // Клавиатура: метод, которым игра открывает поле чата, и активити
+        // из статического поля — без него звать метод не на чем.
+        g_set_input_layout =
+            env->GetMethodID(g_gtasa_class, "SetInputLayout", "(IZ)V");
+        if (env->ExceptionCheck()) {
+          env->ExceptionClear();
+          g_set_input_layout = nullptr;
+        }
+
+        if (g_gtasa_instance == nullptr) {
+          const jfieldID inst = env->GetStaticFieldID(
+              g_gtasa_class, "_instance", "Lcom/arizona/game/GTASA;");
+          if (env->ExceptionCheck()) {
+            env->ExceptionClear();
+          } else if (inst != nullptr) {
+            jobject obj = env->GetStaticObjectField(g_gtasa_class, inst);
+            if (obj != nullptr) {
+              g_gtasa_instance = env->NewGlobalRef(obj);
+              env->DeleteLocalRef(obj);
+            }
+          }
+        }
+
+        AG_LOGI("чат перехвачен, команды доступны%s",
+                (g_set_input_layout != nullptr && g_gtasa_instance != nullptr)
+                    ? ", клавиатура игры доступна"
+                    : ", клавиатура игры недоступна");
       } else {
         if (env->ExceptionCheck()) {
           env->ExceptionClear();
@@ -347,6 +403,53 @@ Screen screen()
 double frame_time() { return g_frame_time.load(); }
 long long frame_count() { return g_frames.load(); }
 JavaVM* vm() { return g_vm; }
+
+bool keyboard_available()
+{
+  return g_set_input_layout != nullptr && g_gtasa_instance != nullptr;
+}
+
+// Открывает клавиатуру игры — ту же, что и под чатом, со всеми её
+// настройками и раскладками. Текст придёт в OnInputEnd, который мы уже
+// перехватываем; флаг говорит, что это ответ нам, а не сообщение в чат.
+bool show_keyboard()
+{
+  if (!keyboard_available() || g_vm == nullptr) {
+    return false;
+  }
+  JNIEnv* env = nullptr;
+  if (g_vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK) {
+    return false;
+  }
+  g_keyboard_ours.store(true);
+  // Первый аргумент — тип поля, второй — «это чат». Чатом не притворяемся:
+  // тогда игра не подставит свою историю сообщений и подсказки команд.
+  env->CallVoidMethod(g_gtasa_instance, g_set_input_layout,
+                      static_cast<jint>(1), JNI_FALSE);
+  if (env->ExceptionCheck()) {
+    env->ExceptionClear();
+    g_keyboard_ours.store(false);
+    return false;
+  }
+  return true;
+}
+
+void hide_keyboard()
+{
+  if (!keyboard_available() || g_vm == nullptr) {
+    return;
+  }
+  JNIEnv* env = nullptr;
+  if (g_vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK) {
+    return;
+  }
+  g_keyboard_ours.store(false);
+  env->CallVoidMethod(g_gtasa_instance, g_set_input_layout,
+                      static_cast<jint>(0), JNI_FALSE);
+  if (env->ExceptionCheck()) {
+    env->ExceptionClear();
+  }
+}
 
 bool inject_touch(int action, int pointer_id, int x, int y)
 {

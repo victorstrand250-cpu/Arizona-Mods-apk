@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #pragma once
 
+#include <string>
+
 namespace ag::gui {
 
 // Поднимает ImGui и GLES3-бэкенд. Звать только с активным GL-контекстом,
@@ -50,6 +52,15 @@ void set_notifications_enabled(bool on);
 // ему фокус на следующем кадре.
 void keyboard_note_input(const char* label);
 bool keyboard_take_refocus(const char* label);
+
+// Ввод через клавиатуру самой игры. Поле просит текст, загрузчик открывает
+// ту же клавиатуру, что и под чатом, а напечатанное возвращается сюда же.
+// Нарисованная клавиатура остаётся запасным вариантом на случай, если у
+// игры её открыть не вышло.
+void request_text(const char* label, const char* current);
+void deliver_text(const std::string& text);
+void cancel_text();
+bool take_text(const char* label, std::string* out);
 
 bool menu_open();
 void set_menu_open(bool open);

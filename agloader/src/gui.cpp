@@ -121,6 +121,12 @@ bool g_kbd_ru = true;
 std::string g_kbd_last_input;
 std::string g_kbd_refocus;
 
+// Ввод через клавиатуру игры: какое поле ждёт текст и что для него пришло.
+std::mutex g_text_lock;
+std::string g_text_pending_label;   // поле, ради которого открыта клавиатура
+std::string g_text_ready_label;     // поле, для которого текст уже пришёл
+std::string g_text_ready_value;
+
 const char* const kRowsEn[4] = {
     "1234567890",
     "qwertyuiop",
@@ -197,6 +203,12 @@ void kbd_key(ImGuiKey key)
 
 void draw_keyboard()
 {
+  // Когда доступна клавиатура самой игры, своя не нужна вовсе: у той и
+  // раскладки привычные, и предсказание, и она не отбирает фокус у поля.
+  if (loader::keyboard_available()) {
+    return;
+  }
+
   ImGuiIO& io = ImGui::GetIO();
   // Пока идёт возврат фокуса, поле на один кадр неактивно — если в этот
   // момент спрятать клавиатуру, она будет мигать на каждой букве.
@@ -600,6 +612,11 @@ void draw_main_window()
     AG_LOGI("кнопка скрыта — меню открывается командой /agloader");
   }
   ImGui::Checkbox("Ответы скриптов поверх игры", &g_toasts_enabled);
+  if (loader::keyboard_available()) {
+    ImGui::TextDisabled("Клавиатура: игровая (как в чате)");
+  } else {
+    ImGui::TextDisabled("Клавиатура: своя — игровую открыть не вышло");
+  }
   ImGui::TextDisabled("Меню также открывается командой /agloader");
 
   if (ImGui::Button("Перезагрузить скрипты", ImVec2 { -1.0f, 0.0f })) {
@@ -786,6 +803,56 @@ void notify(const char* text, double seconds)
     g_toasts.erase(g_toasts.begin());
   }
   g_toasts.push_back(Toast { text, now_seconds() + seconds });
+}
+
+void request_text(const char* label, const char* current)
+{
+  if (label == nullptr) {
+    return;
+  }
+  {
+    std::lock_guard<std::mutex> guard { g_text_lock };
+    if (!g_text_pending_label.empty()) {
+      return;  // одна клавиатура за раз
+    }
+    g_text_pending_label = label;
+  }
+  if (!loader::show_keyboard()) {
+    std::lock_guard<std::mutex> guard { g_text_lock };
+    g_text_pending_label.clear();
+  }
+}
+
+void deliver_text(const std::string& text)
+{
+  std::lock_guard<std::mutex> guard { g_text_lock };
+  if (g_text_pending_label.empty()) {
+    return;
+  }
+  g_text_ready_label = g_text_pending_label;
+  g_text_ready_value = text;
+  g_text_pending_label.clear();
+}
+
+void cancel_text()
+{
+  std::lock_guard<std::mutex> guard { g_text_lock };
+  g_text_pending_label.clear();
+}
+
+bool take_text(const char* label, std::string* out)
+{
+  if (label == nullptr || out == nullptr) {
+    return false;
+  }
+  std::lock_guard<std::mutex> guard { g_text_lock };
+  if (g_text_ready_label.empty() || g_text_ready_label != label) {
+    return false;
+  }
+  *out = g_text_ready_value;
+  g_text_ready_label.clear();
+  g_text_ready_value.clear();
+  return true;
 }
 
 void keyboard_note_input(const char* label)

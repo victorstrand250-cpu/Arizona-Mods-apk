@@ -284,12 +284,28 @@ int l_input_text(lua_State* L)
   std::vector<char> buf(static_cast<std::size_t>(cap > 8 ? cap : 8), '\0');
   std::snprintf(buf.data(), buf.size(), "%s", initial);
 
-  // Нажатие на экранную клавиатуру снимает с поля фокус, потому что это
+  // Текст, набранный на клавиатуре игры, приходит сюда — поле его и
+  // отдаёт скрипту как изменение.
+  std::string typed;
+  if (gui::take_text(label, &typed)) {
+    std::snprintf(buf.data(), buf.size(), "%s", typed.c_str());
+    ImGui::InputText(label, buf.data(), buf.size());
+    lua_pushboolean(L, 1);
+    lua_pushstring(L, buf.data());
+    return 2;
+  }
+
+  // Нажатие на нарисованную клавиатуру снимает с поля фокус, потому что это
   // клик мимо. Возвращаем его обратно на следующем кадре.
   if (gui::keyboard_take_refocus(label)) {
     ImGui::SetKeyboardFocusHere();
   }
   const bool changed = ImGui::InputText(label, buf.data(), buf.size());
+
+  // По касанию поля поднимаем клавиатуру игры — ту же, что под чатом.
+  if (ImGui::IsItemActivated()) {
+    gui::request_text(label, buf.data());
+  }
   if (ImGui::IsItemActive()) {
     gui::keyboard_note_input(label);
   }
