@@ -13,17 +13,35 @@ local open = false
 local results = {}
 local running = false
 
+-- assert подставляет в начало сообщения путь к файлу и номер строки. На
+-- телефоне путь занимает полстроки, а сама причина уезжает за край окна,
+-- поэтому голову отрезаем.
+local function clean(msg)
+  msg = tostring(msg)
+  return (msg:gsub('^.-:%d+:%s*', ''))
+end
+
 -- Одна проверка: имя, что вернулось, и почему упало, если упало.
 local function check(group, name, fn)
   local ok, res = pcall(fn)
   results[#results + 1] = {
     group = group, name = name,
     ok = ok and res ~= false,
-    note = ok and (res ~= true and tostring(res) or '') or tostring(res),
+    note = ok and (res ~= true and tostring(res) or '') or clean(res),
   }
 end
 
 -- ═══════════════════════════════════════════════════════════ проверки
+
+-- Всё, что про движок, имеет смысл проверять только когда игрок уже в мире:
+-- до этого ни массива игроков, ни пулов ещё нет.
+local function inWorld()
+  local ok, ag = pcall(require, 'arizona')
+  if not ok then return false end
+  local me = ag.localPlayer()
+  if not me then return false end
+  return ag.position(me) ~= nil
+end
 
 local function runLocal()
   results = {}
@@ -177,6 +195,42 @@ local function runLocal()
   end)
 
   -- ── библиотеки ─────────────────────────────────────────────────────
+  -- ── нативные модули ────────────────────────────────────────────────
+  check('нативные', 'cjson', function()
+    local cjson = require 'cjson'
+    local t = cjson.decode('{"a":[1,2,3],"b":"текст"}')
+    assert(t.a[3] == 3 and t.b == 'текст', 'разобралось не так')
+    local s = cjson.encode({ x = 1 })
+    assert(cjson.decode(s).x == 1, 'обратно не сошлось')
+    return s
+  end)
+  check('нативные', 'lfs', function()
+    local lfs = require 'lfs'
+    local n = 0
+    for _ in lfs.dir(getPaths().scripts) do n = n + 1 end
+    assert(n > 0, 'каталог скриптов пуст')
+    return ('записей в scripts: %d'):format(n)
+  end)
+  check('нативные', 'socket.core', function()
+    local socket = require 'socket'
+    local c = assert(socket.tcp(), 'сокет TCP не создался')
+    c:close()
+    local u = assert(socket.udp(), 'сокет UDP не создался')
+    u:close()
+    return tostring(socket._VERSION)
+  end)
+  check('нативные', 'mime.core', function()
+    local mime = require 'mime'
+    local enc = mime.b64('AGLoader')
+    assert(enc == 'QUdMb2FkZXI=', 'вышло: ' .. tostring(enc))
+    return enc
+  end)
+  check('нативные', 'ssl.https', function()
+    local https = require 'ssl.https'
+    assert(type(https.request) == 'function', 'нет request')
+    return 'на месте'
+  end)
+
   check('json', 'разбор и сборка', function()
     local json = require 'json'
     local t = json.decode('{"a":[1,2,3],"b":"текст","c":true,"d":null}')
@@ -279,6 +333,11 @@ local function runLocal()
     assert(type(ml) == 'table', 'не таблица')
     return 'ок'
   end)
+  check('пролог', 'MONET_VERSION', function()
+    assert(MONET_VERSION, 'не задан — inicfg и jsoncfg будут писать по ' ..
+           'windows-путям и не найдут свои файлы')
+    return tostring(MONET_VERSION)
+  end)
   check('пролог', 'encodeJson/decodeJson', function()
     local s = encodeJson({ a = 1 })
     assert(decodeJson(s).a == 1, 'обратно не сошлось')
@@ -372,6 +431,12 @@ function onImgui()
                       failed == 0 and 0.30 or 1.00,
                       failed == 0 and 0.90 or 0.60, 0.45, 1)
 
+    if not inWorld() then
+      imgui.TextColored('Игрок ещё не в мире — проверки движка будут ' ..
+                        'падать. Зайдите на сервер и нажмите «Прогнать ' ..
+                        'заново».', 1.00, 0.75, 0.25, 1)
+    end
+
     imgui.Separator()
 
     if imgui.BeginChild('##list', 540 * MDS, 370 * MDS, false) then
@@ -413,8 +478,12 @@ function main()
 
   log('[LibTest] /libtest — проверка всех библиотек')
 
-  -- Первый прогон сразу в лог: так видно результат, даже не открывая окно.
-  wait(2000)
+  -- Первый прогон только когда игрок появился в мире: до этого половина
+  -- проверок падала бы просто потому, что игра ещё на загрузке.
+  for _ = 1, 120 do
+    if inWorld() then break end
+    wait(2000)
+  end
   runLocal()
   local passed, failed = 0, 0
   for _, r in ipairs(results) do

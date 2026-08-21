@@ -21,7 +21,8 @@ local showSlot = true
 local showNick = true
 
 local MDS, sw, sh = 1, 1280, 720
-local cache, lastRefresh = {}, 0
+local cache = {}
+local camNote = 'камера ещё не искалась'
 
 local cfgPath = getPaths().config .. '/playeresp.ini'
 
@@ -146,12 +147,17 @@ function onImgui()
     imgui.Separator()
     imgui.Text(('Видно игроков: %d'):format(#cache))
     if ag.cam.addr == 0 then
-      imgui.TextColored('Камера не найдена — откройте /recon и нажмите ' ..
-                        '«Найти камеру»', 1.0, 0.45, 0.30, 1)
+      imgui.TextColored(camNote, 1.0, 0.45, 0.30, 1)
+      if imgui.Button('Найти камеру сейчас', 340 * MDS, 0) then
+        lua_thread.create(function()
+          ensureCamera()
+          log('[PlayerESP] ' .. camNote)
+        end)
+      end
     else
-      imgui.TextDisabled(('камера 0x%X, поле зрения %d°')
-                         :format(ag.cam.addr, ag.cam.fov))
+      imgui.TextDisabled(camNote)
     end
+    imgui.Text(('Игроков в массиве: %d'):format(#ag.players()))
     if not ag.nickOffset then
       imgui.TextDisabled('Ник не подключён: /recon → «Слот» → найти ник')
     end
@@ -170,9 +176,37 @@ end
 
 -- ═════════════════════════════════════════════════════════════════ main
 
+-- Камера нужна, чтобы было куда проецировать. Ищется один раз, в фоне и
+-- молча: заставлять открывать разведку ради метки над игроком незачем.
+local function ensureCamera()
+  local addr, why = ag.ensureCamera()
+  if addr then
+    camNote = ('камера 0x%X, поле зрения %d°'):format(addr, ag.cam.fov)
+    return true
+  end
+  camNote = 'камера не найдена: ' .. tostring(why)
+  return false
+end
+
 function main()
   loadCfg()
   ag.loadProjection()
+
+  -- Пока игрок не в мире, искать нечего: ждём и пробуем снова.
+  lua_thread.create(function()
+    for _ = 1, 40 do
+      if ag.cam.addr ~= 0 and ag.cameraMatrix() then
+        camNote = ('камера 0x%X, поле зрения %d°'):format(ag.cam.addr, ag.cam.fov)
+        return
+      end
+      if ag.localPlayer() and ensureCamera() then
+        log('[PlayerESP] ' .. camNote)
+        return
+      end
+      wait(3000)
+    end
+    log('[PlayerESP] ' .. camNote)
+  end)
 
   registerChatCommand('pesp', function()
     espOn = not espOn

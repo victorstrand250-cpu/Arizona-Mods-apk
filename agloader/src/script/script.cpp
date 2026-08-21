@@ -10,8 +10,40 @@
 #include "script/api.h"
 #include "script/prelude.h"
 
+// Нативные модули для скриптов. Собраны прямо в загрузчик (см. CMakeLists,
+// цель luamods) и подставляются в package.preload вместо отдельных .so:
+// каталог Android/media примонтирован без права выполнения, dlopen оттуда
+// невозможен в принципе.
+extern "C" {
+int luaopen_cjson(lua_State* L);
+int luaopen_cjson_safe(lua_State* L);
+int luaopen_lfs(lua_State* L);
+int luaopen_socket_core(lua_State* L);
+int luaopen_mime_core(lua_State* L);
+}
+
 namespace ag::script {
 namespace {
+
+// require('имя') для модуля, который уже внутри библиотеки.
+void preload(lua_State* L, const char* name, lua_CFunction fn)
+{
+  lua_getfield(L, LUA_GLOBALSINDEX, "package");
+  lua_getfield(L, -1, "preload");
+  lua_pushcfunction(L, fn);
+  lua_setfield(L, -2, name);
+  lua_pop(L, 2);
+}
+
+void open_native_modules(lua_State* L)
+{
+  preload(L, "cjson", luaopen_cjson);
+  preload(L, "cjson.safe", luaopen_cjson_safe);
+  preload(L, "lfs", luaopen_lfs);
+  preload(L, "socket.core", luaopen_socket_core);
+  preload(L, "mime.core", luaopen_mime_core);
+}
+
 
 constexpr const char* kRegistryKey = "agloader.script";
 
@@ -170,6 +202,7 @@ bool Script::load()
 
   luaL_openlibs(L_);
   set_package_paths(L_);
+  open_native_modules(L_);
 
   lua_pushlightuserdata(L_, this);
   lua_setfield(L_, LUA_REGISTRYINDEX, kRegistryKey);

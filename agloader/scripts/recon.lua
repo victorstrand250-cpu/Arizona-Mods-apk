@@ -493,7 +493,10 @@ local function tabPool()
     'Сущности движок держит тремя пулами, и в библиотеке лежит не сам ' ..
     'массив, а указатель на него: массив выделен в куче и переезжает при ' ..
     'каждом запуске. Пределы мест взяты из кода, там же рядом с ними стоит ' ..
-    'чтение позиции по +56 — то же смещение, что у игрока.')
+    'чтение позиции по +56 — то же смещение, что у игрока. Пока игрок не ' ..
+    'в мире, пулы пустые — это нормально. Если они пусты и в игре, кнопка ' ..
+    'ниже ищет массивы от обратного: по тому, откуда показывают на живых ' ..
+    'игроков.')
 
   imgui.Spacing()
   label('Смещение позиции')
@@ -504,15 +507,36 @@ local function tabPool()
   end
 
   imgui.Separator()
-  for n = 1, #ag.POOLS do
-    local def = ag.POOLS[n]
-    local addr, count = ag.poolArray(n)
-    imgui.Text(('%-10s база +0x%X'):format(def.name, def.global))
-    imgui.SameLine(260 * MDS)
-    if addr then
-      imgui.TextColored(('0x%X, мест %d'):format(addr, count), 0.3, 1.0, 0.4, 1)
+  for _, p in ipairs(ag.poolProbe()) do
+    imgui.Text(('%-10s +0x%X'):format(p.name, p.global))
+    imgui.SameLine(240 * MDS)
+    if p.addr then
+      imgui.TextColored(('0x%X — занято %d из %d')
+                        :format(p.addr, p.live or 0, p.count), 0.3, 1.0, 0.4, 1)
+    elseif p.raw and p.raw ~= 0 then
+      -- Не ноль, но и не похоже на указатель: значит либо адрес пула не
+      -- подошёл к этой версии игры, либо там вообще не указатель.
+      imgui.TextColored(('лежит 0x%X, на указатель не похоже'):format(p.raw),
+                        1.0, 0.65, 0.25, 1)
     else
-      imgui.TextDisabled('не выделен')
+      imgui.TextDisabled('пусто — мир ещё не прогружен')
+    end
+  end
+
+  imgui.Spacing()
+  if imgui.Button('Найти массивы пулов заново', WIN_W - 70, 44) then
+    local found, why = ag.findEntityArrays()
+    if not found or #found == 0 then
+      poolNote = 'массивы не нашлись: ' .. tostring(why or 'нет совпадений')
+    else
+      local parts = {}
+      for i = 1, math.min(#found, 4) do
+        local f = found[i]
+        parts[#parts + 1] = ('0x%X (%d сущн., %d мест)')
+                            :format(f.addr, f.hits, f.span)
+      end
+      poolNote = 'нашлись: ' .. table.concat(parts, '; ')
+      log('[разведка] ' .. poolNote)
     end
   end
 

@@ -639,19 +639,54 @@ const char* elf_section_hint(std::uintptr_t addr)
 // process_vm_readv умеет забрать много разрозненных кусков за один вызов,
 // на этом и построены readptrs с gather.
 
-// Читает длинный сплошной кусок по частям. Дырка в середине не должна
-// обрывать всё: непрочитанные части остаются нулями и помечаются в ok.
+// Читает длинный сплошной кусок по частям. Одна неотображённая страница
+// посреди диапазона не должна обрывать всё: неудачный кусок делится пополам
+// и перечитывается, пока не дойдём до страницы. Так теряется ровно дырка, а
+// не весь мегабайт вокруг неё.
+//
+// ok размечает годность по страницам: иначе после дробления пришлось бы
+// хранить границы кусков, а страница — естественная единица, мельче ядро
+// всё равно не отображает.
+constexpr std::size_t kPage = 4096;
+
+void span_read_range(std::uintptr_t addr, unsigned char* dst,
+                     std::size_t off, std::size_t len,
+                     std::vector<char>& ok)
+{
+  if (len == 0) {
+    return;
+  }
+  if (safe_read(addr + off, dst + off, len)) {
+    for (std::size_t p = off / kPage; p * kPage < off + len; ++p) {
+      if (p < ok.size()) {
+        ok[p] = 1;
+      }
+    }
+    return;
+  }
+  if (len <= kPage) {
+    return;  // дальше дробить нечего: страница целиком не читается
+  }
+  // Делим по границе страницы, иначе половинки съезжали бы с неё.
+  std::size_t half = (len / 2 + kPage - 1) / kPage * kPage;
+  if (half >= len) {
+    half = len - kPage;
+  }
+  span_read_range(addr, dst, off, half, ok);
+  span_read_range(addr, dst, off + half, len - half, ok);
+}
+
 void span_read(std::uintptr_t addr, std::vector<unsigned char>& out,
                std::vector<char>& ok, std::size_t chunk)
 {
   const std::size_t total = out.size();
-  ok.assign((total + chunk - 1) / chunk, 0);
-  for (std::size_t off = 0, c = 0; off < total; off += chunk, ++c) {
+  ok.assign((total + kPage - 1) / kPage, 0);
+  for (std::size_t off = 0; off < total; off += chunk) {
     std::size_t len = total - off;
     if (len > chunk) {
       len = chunk;
     }
-    ok[c] = safe_read(addr + off, &out[off], len) ? 1 : 0;
+    span_read_range(addr, out.data(), off, len, ok);
   }
 }
 
@@ -753,7 +788,8 @@ int l_read_ptrs(lua_State* L)
   for (long long i = 0; i < count; ++i) {
     const std::size_t at = static_cast<std::size_t>(i) *
                            static_cast<std::size_t>(stride);
-    if (!ok[at / kChunk]) {
+    // Указатель может лечь на стык двух страниц, поэтому проверяются обе.
+    if (!ok[at / kPage] || !ok[(at + 7) / kPage]) {
       continue;
     }
     std::uint64_t raw = 0;

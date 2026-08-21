@@ -178,6 +178,93 @@ function arizona.poolUsed(n, index)
   return u ~= nil and u ~= 0
 end
 
+-- Что лежит в глобалах пулов прямо сейчас — для разведки. Возвращает список
+-- { name, global, raw, addr, count, live }, где raw — сырое значение по
+-- адресу, а addr — оно же со снятой меткой, если похоже на указатель.
+function arizona.poolProbe()
+  local b = getBase()
+  local out = {}
+  for n, p in ipairs(arizona.POOLS) do
+    local rec = { name = p.name, global = p.global, count = p.count }
+    if b ~= 0 then
+      rec.raw = memory.readu64(b + p.global)
+      local a = memory.deref(b + p.global)
+      if sanePointer(a) then
+        rec.addr = a
+        local ptrs = memory.readptrs(a, p.count)
+        rec.live = ptrs and #ptrs or 0
+      end
+    end
+    out[n] = rec
+  end
+  return out
+end
+
+-- Ищет массивы, в которых лежат переданные указатели на сущности.
+--
+-- Нужно, когда известные адреса пулов не подошли: например, игра
+-- обновилась. Работает от обратного — берём заведомо живые сущности
+-- (игроков) и смотрим, откуда на них показывают. Если из одного места
+-- памяти показывают на многих сразу с шагом восемь байт, это и есть массив
+-- пула.
+--
+-- Возвращает список { addr, hits, span } — адрес предполагаемого начала,
+-- сколько наших сущностей в нём нашлось и сколько мест он занимает.
+function arizona.findEntityArrays(ptrs, opts)
+  opts = opts or {}
+  local minHits = opts.minHits or 4
+
+  if not ptrs then
+    ptrs = {}
+    for _, p in ipairs(arizona.players({ withPos = false })) do
+      ptrs[#ptrs + 1] = p.ptr
+    end
+  end
+  if #ptrs == 0 then return {}, 'нет ни одной известной сущности' end
+
+  -- Больше десятка проб не нужно: массив выдаст себя и на них, а каждый
+  -- поиск — это проход по всей памяти.
+  local probes = math.min(#ptrs, opts.probes or 8)
+
+  local hits = {}
+  for i = 1, probes do
+    local list = memory.findpointerto(ptrs[i], { where = opts.where or 'all' })
+    for _, addr in ipairs(list or {}) do
+      hits[#hits + 1] = addr
+    end
+  end
+  if #hits == 0 then return {}, 'на сущности никто не показывает' end
+
+  table.sort(hits)
+
+  -- Собираем подряд идущие места: разрыв больше килобайта — это уже другой
+  -- массив, а не дырка в этом.
+  local groups = {}
+  local cur = { from = hits[1], to = hits[1], n = 1 }
+  for i = 2, #hits do
+    if hits[i] - cur.to <= 1024 then
+      cur.to = hits[i]
+      cur.n = cur.n + 1
+    else
+      groups[#groups + 1] = cur
+      cur = { from = hits[i], to = hits[i], n = 1 }
+    end
+  end
+  groups[#groups + 1] = cur
+
+  local out = {}
+  for _, g in ipairs(groups) do
+    if g.n >= minHits then
+      out[#out + 1] = {
+        addr = g.from, hits = g.n,
+        span = math.floor((g.to - g.from) / 8) + 1,
+      }
+    end
+  end
+  table.sort(out, function(a, c) return a.hits > c.hits end)
+  return out
+end
+
 -- Описание модели по её номеру.
 function arizona.modelInfo(model)
   local b = getBase()
@@ -793,6 +880,27 @@ function arizona.findCamera(candidates)
   arizona.cam.upAxis = bestUp
 
   return best, bestDot, bestDist
+end
+
+-- Поднимает камеру, если её ещё нет: сперва из сохранённых настроек, потом
+-- поиском по памяти. Скрипты с ESP зовут это сами, чтобы не заставлять
+-- открывать разведку вручную.
+--
+-- Возвращает адрес камеры либо nil и причину.
+function arizona.ensureCamera()
+  if arizona.cam.addr ~= 0 and arizona.cameraMatrix() then
+    return arizona.cam.addr
+  end
+
+  arizona.loadProjection()
+  if arizona.cam.addr ~= 0 and arizona.cameraMatrix() then
+    return arizona.cam.addr
+  end
+
+  local addr, acc = arizona.findCamera()
+  if not addr then return nil, tostring(acc) end
+  arizona.saveProjection()
+  return addr, acc
 end
 
 function arizona.cameraMatrix()

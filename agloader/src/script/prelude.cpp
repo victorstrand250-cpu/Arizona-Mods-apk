@@ -164,6 +164,19 @@ end
 -- Библиотеки MoonLoader (jsoncfg и подобные) обращаются к script.this и к
 -- encodeJson/decodeJson как к чему-то, что есть всегда. Даём то же самое,
 -- иначе они падают на первой же строке.
+
+-- Отдельная история — MONET_VERSION. Библиотеки смотрят на него не чтобы
+-- узнать версию, а чтобы понять, где они выполняются: если его нет, значит
+-- это MoonLoader на Windows, и разделитель пути надо брать обратный. У нас
+-- пути обычные, так что переменная должна быть задана, иначе inicfg и
+-- jsoncfg пишут конфиги по путям вида «каталог\config\файл.ini» и не
+-- находят их обратно.
+MONET_VERSION = MONET_VERSION or (loaderVersion and loaderVersion() or '0.1.0')
+
+-- А это уже для самих скриптов: отличить AGLoader от MonetLoader.
+AGLOADER = true
+AGLOADER_VERSION = MONET_VERSION
+
 script = script or {}
 
 do

@@ -49,12 +49,18 @@ mapfile -t IMGUI_SOURCES < <(
   sed -n '/^add_library(imgui STATIC/,/^)/p' CMakeLists.txt |
   grep -oE 'third_party/[A-Za-z0-9_/]+\.cpp'
 )
+# Нативные модули для скриптов — это C, а не C++, поэтому собираются отдельно
+# своим компилятором и своими флагами.
+mapfile -t C_SOURCES < <(
+  sed -n '/^add_library(luamods STATIC/,/^)/p' CMakeLists.txt |
+  grep -oE 'third_party/[A-Za-z0-9_/]+\.c'
+)
 
 if [ "${#SOURCES[@]}" -eq 0 ] || [ "${#IMGUI_SOURCES[@]}" -eq 0 ]; then
   echo "hostcheck: не смог вычитать список файлов из CMakeLists.txt"
   exit 1
 fi
-echo "hostcheck: файлов из CMakeLists — своих ${#SOURCES[@]}, imgui ${#IMGUI_SOURCES[@]}"
+echo "hostcheck: файлов из CMakeLists — своих ${#SOURCES[@]}, imgui ${#IMGUI_SOURCES[@]}, модулей ${#C_SOURCES[@]}"
 
 
 FLAGS=(
@@ -77,6 +83,27 @@ fail=0
 for f in "${IMGUI_SOURCES[@]}" "${SOURCES[@]}"; do
   printf '  %-52s ' "$f"
   if "$CXX" "${FLAGS[@]}" "$f" -o "$OUT/$(basename "$f").o" 2> "$OUT/err.txt"; then
+    echo "ok"
+  else
+    echo "ОШИБКА"
+    sed 's/^/      /' "$OUT/err.txt"
+    fail=1
+  fi
+done
+
+CC=${CC:-aarch64-linux-gnu-gcc}
+CFLAGS=(
+  -std=gnu99 -c -O1 -w
+  -D__ANDROID__=1
+  -DLUASOCKET_NODEBUG
+  -I third_party/cjson
+  -I third_party/lfs
+  -I third_party/luasocket
+  -I third_party/luajit/include
+)
+for f in "${C_SOURCES[@]}"; do
+  printf '  %-52s ' "$f"
+  if "$CC" "${CFLAGS[@]}" "$f" -o "$OUT/$(basename "$f").o" 2> "$OUT/err.txt"; then
     echo "ok"
   else
     echo "ОШИБКА"

@@ -52,6 +52,50 @@ add_library(luajit SHARED IMPORTED)
 set_target_properties(luajit PROPERTIES IMPORTED_LOCATION "${LUAJIT_LIB}")
 target_include_directories(luajit INTERFACE third_party/luajit/include)
 
+# ------------------------------------------- нативные модули для скриптов
+#
+# Настоящие C-модули, которые скрипты MonetLoader считают данностью: cjson,
+# lfs и LuaSocket. Взяты из NeoMLoader (github.com/neomloader) — там лежат
+# те же версии, что использует он сам.
+#
+# Собираются не отдельными .so, а прямо в загрузчик, и подставляются в
+# package.preload. Так надёжнее: файл на Android/media примонтирован без
+# права выполнения, dlopen оттуда невозможен, а из APK пришлось бы городить
+# плоские имена и разбирать пути внутри архива.
+
+add_library(luamods STATIC
+  third_party/cjson/lua_cjson.c
+  third_party/cjson/strbuf.c
+  third_party/cjson/fpconv.c
+  third_party/lfs/lfs.c
+  third_party/luasocket/luasocket.c
+  third_party/luasocket/timeout.c
+  third_party/luasocket/buffer.c
+  third_party/luasocket/io.c
+  third_party/luasocket/auxiliar.c
+  third_party/luasocket/options.c
+  third_party/luasocket/inet.c
+  third_party/luasocket/except.c
+  third_party/luasocket/select.c
+  third_party/luasocket/tcp.c
+  third_party/luasocket/udp.c
+  third_party/luasocket/usocket.c
+  third_party/luasocket/compat.c
+  third_party/luasocket/mime.c
+)
+target_include_directories(luamods PUBLIC
+  third_party/cjson
+  third_party/lfs
+  third_party/luasocket
+)
+# cjson умеет печатать числа сам (dtoa) или через snprintf. Берём второе:
+# USE_INTERNAL_FPCONV не задаём вовсе — заголовок проверяет его через ifdef,
+# и даже нулевое значение включило бы встроенный вариант, а он конфликтует
+# с fpconv.c. Отсюда же отсутствие dtoa.c и g_fmt.c в списке файлов.
+target_compile_definitions(luamods PRIVATE LUASOCKET_NODEBUG)
+target_compile_options(luamods PRIVATE -fvisibility=hidden -w)
+target_link_libraries(luamods PUBLIC luajit)
+
 # --------------------------------------------------------------- загрузчик
 
 add_library(agloader SHARED
@@ -76,7 +120,7 @@ target_compile_definitions(agloader PRIVATE AGLOADER_VERSION="${AGLOADER_VERSION
 target_compile_options(agloader PRIVATE
   -Wall -Wextra -Wno-unused-parameter -fvisibility=hidden
 )
-target_link_libraries(agloader PRIVATE imgui luajit log android EGL GLESv3)
+target_link_libraries(agloader PRIVATE imgui luamods luajit log android EGL GLESv3)
 
 # Наружу отдаём только JNI_OnLoad, всё остальное прячем — см. exports.map.
 # Одного -fvisibility=hidden мало: он стоит PRIVATE у agloader и на статическую
