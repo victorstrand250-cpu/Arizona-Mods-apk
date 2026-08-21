@@ -17,6 +17,7 @@
 #include <cmath>
 #include <cstdint>
 #include <cstdlib>
+#include <cstdio>
 #include <cstring>
 #include <string>
 #include <vector>
@@ -805,6 +806,133 @@ int l_find_pointer_to(lua_State* L)
   return 3;
 }
 
+// Похожи ли байты на осмысленный текст: печатные ASCII или кириллица UTF-8.
+bool looks_like_text(const unsigned char* p, std::size_t len, std::size_t* used)
+{
+  std::size_t good = 0;
+  std::size_t i = 0;
+  while (i < len) {
+    const unsigned char c = p[i];
+    if (c == 0) {
+      break;
+    }
+    if (c >= 0x20 && c < 0x7F) {
+      ++good;
+      ++i;
+      continue;
+    }
+    // Двухбайтовая последовательность UTF-8 — сюда попадает кириллица.
+    if (c >= 0xC2 && c <= 0xDF && i + 1 < len &&
+        p[i + 1] >= 0x80 && p[i + 1] <= 0xBF) {
+      good += 2;
+      i += 2;
+      continue;
+    }
+    break;
+  }
+  *used = i;
+  // Три символа — уже не случайность, но и не каждый мусор.
+  return good >= 3;
+}
+
+// memory.inspect(addr, [размер]) -> список строк по 8 байт
+//
+// Для каждой строки: смещение, байты, два int32, два float, и, если
+// восьмёрка похожа на указатель, текст по этому адресу. Плюс попытка
+// прочитать текст прямо здесь — короткие строки C++ лежат внутри объекта,
+// а не по указателю.
+//
+// Этим ищутся поля, которых нет в разборе кода: ник, номер, здоровье.
+int l_inspect(lua_State* L)
+{
+  const auto addr = untag(static_cast<std::uintptr_t>(
+      static_cast<long long>(luaL_checknumber(L, 1))));
+  std::size_t size = static_cast<std::size_t>(luaL_optinteger(L, 2, 256));
+  if (size > 8192) {
+    size = 8192;
+  }
+  size = (size + 7) & ~std::size_t { 7 };
+
+  std::vector<unsigned char> buf(size, 0);
+  const ssize_t got = read_partial(addr, buf.data(), size);
+  if (got <= 0) {
+    lua_pushnil(L);
+    lua_pushstring(L, "адрес недоступен");
+    return 2;
+  }
+  const std::size_t have = static_cast<std::size_t>(got) & ~std::size_t { 7 };
+
+  lua_newtable(L);
+  int row = 0;
+
+  for (std::size_t off = 0; off + 8 <= have; off += 8) {
+    const unsigned char* p = buf.data() + off;
+
+    lua_newtable(L);
+    lua_pushnumber(L, static_cast<lua_Number>(off));
+    lua_setfield(L, -2, "off");
+
+    char hex[24];
+    std::snprintf(hex, sizeof(hex), "%02X %02X %02X %02X %02X %02X %02X %02X",
+                  p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7]);
+    lua_pushstring(L, hex);
+    lua_setfield(L, -2, "hex");
+
+    std::int32_t i0 = 0, i1 = 0;
+    float f0 = 0.0f, f1 = 0.0f;
+    std::uintptr_t q = 0;
+    std::memcpy(&i0, p, 4);
+    std::memcpy(&i1, p + 4, 4);
+    std::memcpy(&f0, p, 4);
+    std::memcpy(&f1, p + 4, 4);
+    std::memcpy(&q, p, 8);
+
+    lua_pushnumber(L, static_cast<lua_Number>(i0));
+    lua_setfield(L, -2, "i0");
+    lua_pushnumber(L, static_cast<lua_Number>(i1));
+    lua_setfield(L, -2, "i1");
+    // NaN в Lua сравнивать неудобно, поэтому мусор отдаём как nil.
+    if (f0 == f0 && f0 > -1e30f && f0 < 1e30f) {
+      lua_pushnumber(L, f0);
+      lua_setfield(L, -2, "f0");
+    }
+    if (f1 == f1 && f1 > -1e30f && f1 < 1e30f) {
+      lua_pushnumber(L, f1);
+      lua_setfield(L, -2, "f1");
+    }
+
+    // Текст прямо здесь — короткая строка C++ хранится внутри объекта.
+    std::size_t used = 0;
+    const std::size_t room = have - off;
+    if (looks_like_text(p, room < 48 ? room : 48, &used)) {
+      lua_pushlstring(L, reinterpret_cast<const char*>(p), used);
+      lua_setfield(L, -2, "text");
+    }
+
+    // Текст по указателю — длинная строка лежит отдельно.
+    const std::uintptr_t target = untag(q);
+    if (target > 0x10000 && target < 0x1000000000000ull) {
+      lua_pushnumber(L, static_cast<lua_Number>(target));
+      lua_setfield(L, -2, "ptr");
+
+      unsigned char probe[64] = {};
+      const ssize_t n = read_partial(target, probe, sizeof(probe));
+      if (n > 4) {
+        std::size_t plen = 0;
+        if (looks_like_text(probe, static_cast<std::size_t>(n), &plen)) {
+          lua_pushlstring(L, reinterpret_cast<const char*>(probe), plen);
+          lua_setfield(L, -2, "deref");
+        }
+      }
+    }
+
+    lua_rawseti(L, -2, ++row);
+  }
+
+  lua_pushnumber(L, row);
+  return 2;
+}
+
 // memory.readmatrix(addr) -> таблица из 16 чисел
 int l_read_matrix(lua_State* L)
 {
@@ -1034,6 +1162,7 @@ const luaL_Reg kMemory[] = {
     { "findfloat3", l_find_float3 },
     { "findpointerto", l_find_pointer_to },
     { "readpositions", l_read_positions },
+    { "inspect", l_inspect },
     { "deref", l_deref },
     { "readi8", read_scalar<std::int8_t> },
     { "readu8", read_scalar<std::uint8_t> },

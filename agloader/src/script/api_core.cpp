@@ -346,6 +346,7 @@ void open_all(lua_State* L)
   open_core(L);
   open_memory(L);
   open_imgui(L);
+  open_net(L);
 }
 
 }  // namespace ag::script::api

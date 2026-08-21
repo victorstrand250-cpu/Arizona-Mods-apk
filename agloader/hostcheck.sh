@@ -39,27 +39,23 @@ int __android_log_print(int prio, const char* tag, const char* fmt, ...);
 #endif
 EOF
 
-SOURCES=(
-  src/loader.cpp
-  src/engine.cpp
-  src/gui.cpp
-  src/input.cpp
-  src/log.cpp
-  src/paths.cpp
-  src/script/manager.cpp
-  src/script/script.cpp
-  src/script/api_core.cpp
-  src/script/api_memory.cpp
-  src/script/api_imgui.cpp
+# Список берём из CMakeLists, а не держим свой: две копии неизбежно
+# разъезжаются, и новый файл молча остаётся непроверенным.
+mapfile -t SOURCES < <(
+  sed -n '/^add_library(agloader SHARED/,/^)/p' CMakeLists.txt |
+  grep -oE 'src/[A-Za-z0-9_/]+\.cpp'
+)
+mapfile -t IMGUI_SOURCES < <(
+  sed -n '/^add_library(imgui STATIC/,/^)/p' CMakeLists.txt |
+  grep -oE 'third_party/[A-Za-z0-9_/]+\.cpp'
 )
 
-IMGUI_SOURCES=(
-  third_party/imgui/imgui.cpp
-  third_party/imgui/imgui_draw.cpp
-  third_party/imgui/imgui_tables.cpp
-  third_party/imgui/imgui_widgets.cpp
-  third_party/imgui/backends/imgui_impl_opengl3.cpp
-)
+if [ "${#SOURCES[@]}" -eq 0 ] || [ "${#IMGUI_SOURCES[@]}" -eq 0 ]; then
+  echo "hostcheck: не смог вычитать список файлов из CMakeLists.txt"
+  exit 1
+fi
+echo "hostcheck: файлов из CMakeLists — своих ${#SOURCES[@]}, imgui ${#IMGUI_SOURCES[@]}"
+
 
 FLAGS=(
   -std=c++17 -c -O1 -Wall -Wextra -Wno-unused-parameter

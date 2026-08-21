@@ -11,6 +11,7 @@ void open_all(lua_State* L);
 void open_core(lua_State* L);
 void open_memory(lua_State* L);
 void open_imgui(lua_State* L);
+void open_net(lua_State* L);
 
 // imgui.* можно звать только внутри onImgui, между NewFrame и Render.
 // Менеджер выставляет флаг на время вызова событий.

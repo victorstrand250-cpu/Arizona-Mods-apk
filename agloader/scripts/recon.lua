@@ -27,7 +27,7 @@ end
 
 local show   = false
 local tab    = 1
-local TABS   = { 'Игрок', 'Игроки', 'Камера', 'Проекция' }
+local TABS   = { 'Игрок', 'Игроки', 'Камера', 'Проекция', 'Объект', 'Сеть' }
 local status = ''
 
 local cands   = {}
@@ -44,6 +44,20 @@ local espPlayers = false
 local espDist    = 300
 
 local cfgPath = getPaths().config .. '/recon.ini'
+
+-- Разведчик структуры: адрес, окно просмотра и последний снимок.
+local insAddr   = ''
+local insOffset = 0
+local insSize   = 512
+local insRows   = {}
+local insOnlyText = false
+local insNote   = 'выберите объект и нажмите «Прочитать»'
+
+-- Проверка сети.
+local netUrl    = 'https://api.github.com/zen'
+local netState  = 'не запускали'
+local netBody   = ''
+local netBusy   = false
 
 -- ═════════════════════════════════════════════════════ матрица и проекция
 
@@ -471,6 +485,141 @@ local function tabProjection()
   imgui.TextWrapped(status)
 end
 
+local function tabInspect()
+  title('Что лежит в объекте')
+  imgui.TextWrapped(
+    'Показывает память по восемь байт: как числа, как дробные и как текст. ' ..
+    'Короткие строки C++ лежат прямо внутри объекта, длинные — по указателю, ' ..
+    'поэтому пробуются оба варианта. Так ищутся поля, которых не видно в ' ..
+    'разборе кода: ник, номер, здоровье.')
+
+  imgui.Spacing()
+  label('Адрес')
+  local ch, v = imgui.InputText('##ia', insAddr, 32)
+  if ch then insAddr = v end
+
+  if imgui.Button('Взять свой объект', (WIN_W - 80) / 2, 40) then
+    local me = ag.localPlayer()
+    insAddr = me and ('0x%X'):format(me) or ''
+    insNote = me and 'адрес подставлен' or 'игрок не найден'
+  end
+  imgui.SameLine(0, 10)
+  if imgui.Button('Взять свой транспорт', (WIN_W - 80) / 2, 40) then
+    local me = ag.localPlayer()
+    local veh = me and ag.vehiclePtr(me)
+    insAddr = veh and ('0x%X'):format(veh) or ''
+    insNote = veh and 'адрес транспорта подставлен' or 'вы не в транспорте'
+  end
+
+  label('Смещение от начала')
+  ch, v = imgui.InputInt('##io', insOffset, 64)
+  if ch then insOffset = math.max(0, v) end
+
+  label('Сколько байт')
+  ch, v = imgui.SliderInt('##is', insSize, 64, 2048, tostring(insSize))
+  if ch then insSize = v end
+
+  label('Только со строками')
+  ch, v = imgui.Checkbox('##it', insOnlyText)
+  if ch then insOnlyText = v end
+
+  imgui.Spacing()
+  if imgui.Button('Прочитать', WIN_W - 70, 44) then
+    local a = tonumber(insAddr)
+    if not a then
+      insNote = 'адрес не разобран'
+      insRows = {}
+    else
+      local rows, n = memory.inspect(a + insOffset, insSize)
+      if not rows then
+        insNote = 'не прочиталось: ' .. tostring(n)
+        insRows = {}
+      else
+        insRows = rows
+        insNote = ('прочитано строк: %d, от +%d'):format(n, insOffset)
+      end
+    end
+  end
+
+  imgui.Spacing()
+  imgui.TextWrapped(insNote)
+  imgui.Separator()
+
+  if imgui.BeginChild('##ins', 0, WIN_H - 470, true) then
+    for _, r in ipairs(insRows) do
+      local interesting = r.text or r.deref
+      if not insOnlyText or interesting then
+        local off = insOffset + r.off
+        local line = ('+%-6d %s'):format(off, r.hex)
+        if r.f0 and math.abs(r.f0) > 0.0001 and math.abs(r.f0) < 1e6 then
+          line = line .. ('   %.3f'):format(r.f0)
+        end
+        if r.i0 ~= 0 and (r.i0 > -100000 and r.i0 < 100000) then
+          line = line .. ('   [%d]'):format(r.i0)
+        end
+
+        if r.text then
+          imgui.TextColored(line .. '   «' .. r.text .. '»', 0.4, 1.0, 0.5, 1.0)
+        elseif r.deref then
+          imgui.TextColored(line .. '   -> «' .. r.deref .. '»',
+                            1.0, 0.85, 0.3, 1.0)
+        else
+          imgui.Text(line)
+        end
+      end
+    end
+    if #insRows == 0 then
+      imgui.TextDisabled('пусто')
+    end
+  end
+  imgui.EndChild()
+end
+
+local function tabNet()
+  title('Проверка сети')
+  imgui.TextWrapped(
+    'Запросы идут через системный стек Android, поэтому HTTPS работает без ' ..
+    'дополнительных библиотек. Сам запрос уходит в фоновый поток, игра на ' ..
+    'нём не висит.')
+
+  imgui.Spacing()
+  label('Адрес')
+  local ch, v = imgui.InputText('##nu', netUrl, 256)
+  if ch then netUrl = v end
+
+  if imgui.Button('Запросить', WIN_W - 70, 44) and not netBusy then
+    netBusy = true
+    netState = 'запрос пошёл…'
+    netBody = ''
+    -- В отдельной корутине: сам вызов внутри ждёт ответа через wait().
+    lua_thread.create(function()
+      local requests = require 'requests'
+      local r = requests.get(netUrl)
+      netBusy = false
+      if r.error then
+        netState = 'ошибка: ' .. tostring(r.error)
+      else
+        netState = ('код %d, байт %d'):format(r.status_code, #r.text)
+        netBody = r.text:sub(1, 2000)
+      end
+    end)
+  end
+
+  imgui.Spacing()
+  label('Состояние')
+  imgui.Text(netState)
+  label('Запросов в работе')
+  imgui.Text(tostring(net.pending()))
+
+  if netBody ~= '' then
+    imgui.Separator()
+    if imgui.BeginChild('##nb', 0, WIN_H - 480, true) then
+      imgui.TextWrapped(netBody)
+    end
+    imgui.EndChild()
+  end
+end
+
 function onImgui()
   refreshMetrics()
   drawEsp()
@@ -502,7 +651,9 @@ function onImgui()
       if     tab == 1 then tabLocal()
       elseif tab == 2 then tabPlayers()
       elseif tab == 3 then tabCamera()
-      else                 tabProjection()
+      elseif tab == 4 then tabProjection()
+      elseif tab == 5 then tabInspect()
+      else                 tabNet()
       end
     end
     imgui.EndChild()
