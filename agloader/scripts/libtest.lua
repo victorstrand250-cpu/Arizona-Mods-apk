@@ -160,6 +160,14 @@ local function runLocal()
     end
     error('ни одно описание модели не прочиталось')
   end)
+  check('движок', 'радар', function()
+    local r = assert(ag.radar(), 'база не найдена')
+    assert(r.radius, 'значения не читаются')
+    return ('%s, %s, радиус %.0f, экран %.0f %.0f')
+           :format(r.shown and 'показан' or 'скрыт',
+                   r.round and 'круглый' or 'прямоугольный',
+                   r.radius or 0, r.x or 0, r.y or 0)
+  end)
   check('движок', 'камера', function()
     ag.loadProjection()
     assert(ag.cam.addr ~= 0, 'не найдена — /recon → «Найти камеру»')

@@ -588,39 +588,81 @@ function arizona.slotAddr(index)
   return b + arizona.OFF_PLAYER_ARRAY + index * arizona.SLOT_STRIDE
 end
 
--- Смещение ника в слоте. Определяется на живой игре: находится тот текст,
--- который совпадает у своего слота с известным ником.
+-- Где лежит ник. Определяется на живой игре: находится тот текст, который
+-- совпал с известным ником, и запоминается место — слот игрока или сама
+-- сущность. Смещение общее для всех игроков.
 arizona.nickOffset = nil
+arizona.nickWhere  = 'слот'    -- 'слот' или 'сущность'
+
+local function nickBase(index)
+  if arizona.nickWhere == 'сущность' then
+    return arizona.playerPtr(index)
+  end
+  return arizona.slotAddr(index)
+end
 
 function arizona.nick(index)
   if not arizona.nickOffset then return nil end
-  local a = arizona.slotAddr(index)
+  local a = nickBase(index)
   if not a then return nil end
   return arizona.readText(a + arizona.nickOffset)
 end
 
--- Ищет смещение ника: перебирает тексты в слоте и берёт тот, что совпал
--- с переданным ником. Смещение общее для всех слотов.
-function arizona.findNickOffset(nick, index)
+-- Ищет ник и там, и там: в 336-байтовом слоте и в начале объекта сущности.
+-- Возвращает смещение, вид строки и где нашлось.
+function arizona.findNickOffset(nick, index, opts)
+  opts = opts or {}
   index = index or arizona.localIndex()
   if not index then return nil, 'слот не определён' end
-  local a = arizona.slotAddr(index)
-  if not a then return nil, 'база не найдена' end
 
-  local list = arizona.findTexts(a, arizona.SLOT_STRIDE)
-  for _, t in ipairs(list) do
-    if t.text == nick then
-      arizona.nickOffset = t.off
-      return t.off, t.kind
+  local places = {
+    { where = 'слот',     addr = arizona.slotAddr(index),
+      size = arizona.SLOT_STRIDE },
+    { where = 'сущность', addr = arizona.playerPtr(index),
+      size = opts.entitySize or 4096 },
+  }
+
+  local partial
+  for _, place in ipairs(places) do
+    if place.addr then
+      for _, t in ipairs(arizona.findTexts(place.addr, place.size)) do
+        if t.text == nick then
+          arizona.nickOffset, arizona.nickWhere = t.off, place.where
+          return t.off, t.kind, place.where
+        end
+        if not partial and t.text:find(nick, 1, true) then
+          partial = { off = t.off, kind = t.kind, where = place.where }
+        end
+      end
     end
   end
-  for _, t in ipairs(list) do
-    if t.text:find(nick, 1, true) then
-      arizona.nickOffset = t.off
-      return t.off, t.kind
+
+  if partial then
+    arizona.nickOffset, arizona.nickWhere = partial.off, partial.where
+    return partial.off, partial.kind, partial.where
+  end
+  return nil, 'такого текста ни в слоте, ни в сущности нет'
+end
+
+-- Все тексты игрока разом — и из слота, и из сущности. Для разведки:
+-- в списке видно и ник, и всё остальное, что движок держит строками.
+function arizona.playerTexts(index, opts)
+  opts = opts or {}
+  index = index or arizona.localIndex()
+  local out = {}
+  if not index then return out end
+
+  local function add(where, addr, size)
+    if not addr then return end
+    for _, t in ipairs(arizona.findTexts(addr, size)) do
+      t.where = where
+      out[#out + 1] = t
     end
   end
-  return nil, 'такой текст в слоте не встретился'
+
+  add('слот', arizona.slotAddr(index), arizona.SLOT_STRIDE)
+  add('сущность', arizona.playerPtr(index), opts.entitySize or 4096)
+  return out
 end
 
 function arizona.distanceTo(ptr, x, y, z)
@@ -628,6 +670,42 @@ function arizona.distanceTo(ptr, x, y, z)
   if not px then return nil end
   local dx, dy, dz = px - x, py - y, pz - z
   return math.sqrt(dx * dx + dy * dy + dz * dz)
+end
+
+-- ═══════════════════════════════════════════════════════════════ радар
+--
+-- Найдено через JNI-методы SetupHudDisplay и drawGameRadarCircle: сами они
+-- только кладут задачу в очередь, а глобалы пишет уже обработчик
+-- (0x74A6FC и 0x74A79C). Java эти методы не зовёт, но код отрисовки радара
+-- те же глобалы читает — значит, состояние настоящее.
+
+arizona.RADAR = {
+  shown  = 0x9AF7B8,    -- uint8, показан ли
+  round  = 0x117E384,   -- uint8, круглый (1) или прямоугольный (0)
+  radius = 0x9948B0,    -- float
+  x      = 0x9948B4,    -- float, на экране
+  y      = 0x9948B8,    -- float, на экране
+}
+
+-- Где радар на экране и виден ли он. Скриптам это нужно, чтобы не рисовать
+-- поверх него.
+function arizona.radar()
+  local b = getBase()
+  if b == 0 then return nil end
+  local r = arizona.RADAR
+  return {
+    shown  = (memory.readu8(b + r.shown) or 0) ~= 0,
+    round  = (memory.readu8(b + r.round) or 0) ~= 0,
+    radius = memory.readfloat(b + r.radius),
+    x      = memory.readfloat(b + r.x),
+    y      = memory.readfloat(b + r.y),
+  }
+end
+
+function arizona.setRadarShown(on)
+  local b = getBase()
+  if b == 0 then return false end
+  return memory.writeu8(b + arizona.RADAR.shown, on and 1 or 0) and true or false
 end
 
 -- ══════════════════════════════════════════════════ камера и проекция
@@ -774,7 +852,8 @@ function arizona.saveProjection(path)
     f:write(('poolPos=%d\n'):format(arizona.poolPosOffset))
   end
   if arizona.nickOffset then
-    f:write(('nickOff=%d\n'):format(arizona.nickOffset))
+    f:write(('nickOff=%d\nnickWhere=%s\n')
+            :format(arizona.nickOffset, arizona.nickWhere))
   end
   f:close()
   return true
@@ -795,6 +874,7 @@ function arizona.loadProjection(path)
     elseif k == 'mirrorY' then c.mirrorY = (v == 'true')
     elseif k == 'poolPos' then arizona.poolPosOffset = tonumber(v)
     elseif k == 'nickOff' then arizona.nickOffset = tonumber(v)
+    elseif k == 'nickWhere' then arizona.nickWhere = v
     end
   end
   f:close()

@@ -598,11 +598,12 @@ local nickInput = ''
 local function tabSlot()
   title('Слот игрока: ник и прочие подписи')
   imgui.TextWrapped(
-    'Слот игрока — 336 байт, из которых указатель на сущность занимает ' ..
-    'только первые восемь. Остальное чем-то занято, и ник почти наверняка ' ..
-    'там же. Кнопка ниже перебирает весь слот и показывает всё, что похоже ' ..
-    'на текст: и строки прямо в слоте, и строки по указателю. Узнайте себя ' ..
-    'в списке — или впишите ник и найдите смещение сразу.')
+    'Ник в коде не находится: движок разбирает его из ответа сервера и ' ..
+    'кладёт куда-то в игрока. Зато на живой игре он ищется сам — надо ' ..
+    'только знать, как он написан. Кнопка перебирает и 336-байтовый слот, ' ..
+    'и начало объекта сущности, и показывает всё, что похоже на текст: и ' ..
+    'строки на месте, и строки по указателю. Узнайте себя в списке — или ' ..
+    'впишите ник и получите смещение сразу.')
 
   imgui.Spacing()
   label('Свой слот')
@@ -610,7 +611,10 @@ local function tabSlot()
   imgui.Text(me and tostring(me) or 'не определён')
   label('Смещение ника')
   if ag.nickOffset then
-    imgui.TextColored(('+%d'):format(ag.nickOffset), 0.3, 1.0, 0.4, 1.0)
+    imgui.TextColored(('+%d в %s'):format(ag.nickOffset, ag.nickWhere),
+                      0.3, 1.0, 0.4, 1.0)
+    imgui.SameLine()
+    imgui.TextDisabled('= ' .. tostring(ag.nick(me) or '?'))
   else
     imgui.TextDisabled('не найдено')
   end
@@ -624,9 +628,9 @@ local function tabSlot()
     if nickInput == '' then
       slotNote = 'впишите свой ник как он написан в игре'
     else
-      local off, kind = ag.findNickOffset(nickInput)
+      local off, kind, where = ag.findNickOffset(nickInput)
       if off then
-        slotNote = ('ник найден: +%d (%s)'):format(off, kind)
+        slotNote = ('ник найден: +%d в %s (%s)'):format(off, where, kind)
         ag.saveProjection()
         log('[разведка] ' .. slotNote)
       else
@@ -636,14 +640,9 @@ local function tabSlot()
   end
 
   imgui.Spacing()
-  if imgui.Button('Показать весь текст слота', WIN_W - 70, 44) then
-    local a = ag.slotAddr(me)
-    if not a then
-      slotNote = 'слот не определён'
-    else
-      slotTexts = ag.findTexts(a, ag.SLOT_STRIDE)
-      slotNote = ('найдено текстов: %d'):format(#slotTexts)
-    end
+  if imgui.Button('Показать весь текст игрока', WIN_W - 70, 44) then
+    slotTexts = ag.playerTexts(me)
+    slotNote = ('найдено текстов: %d'):format(#slotTexts)
   end
 
   imgui.Spacing()
@@ -655,7 +654,8 @@ local function tabSlot()
       imgui.TextDisabled('пусто — нажмите кнопку выше')
     end
     for _, t in ipairs(slotTexts) do
-      imgui.Text(('+%-4d %-11s %s'):format(t.off, t.kind, t.text))
+      imgui.Text(('%-9s +%-5d %-11s %s')
+                 :format(t.where or 'слот', t.off, t.kind, t.text))
     end
   end
   imgui.EndChild()
