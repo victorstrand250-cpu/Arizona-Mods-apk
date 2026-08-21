@@ -26,6 +26,23 @@ for _, file in ipairs(list) do
       bad = bad + 1
       io.write(('  %-28s ВЫПОЛНЕНИЕ: %s\n'):format(short, e))
     else
+      -- Явный false из onTouch означает «касание поглощено»: скрипт,
+      -- который возвращает его всегда, отбирает у игры весь ввод, и это
+      -- выглядит как зависшая игра. Ловим до сборки.
+      if type(onTouch) == 'function' then
+        for _, act in ipairs({ 0, 2, 1 }) do
+          local okT, res = pcall(onTouch, act, 0, 100, 100)
+          if not okT then
+            bad = bad + 1
+            io.write(('  %-28s onTouch: %s\n'):format(short, res))
+          elseif res == false then
+            bad = bad + 1
+            io.write(('  %-28s onTouch вернул false — это «поглотить ' ..
+                      'касание», игра его не увидит\n'):format(short))
+          end
+        end
+      end
+
       if type(onImgui) == 'function' then
         local ok2, e2 = pcall(onImgui)
         if not ok2 then

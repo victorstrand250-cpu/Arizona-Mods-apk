@@ -53,6 +53,9 @@ if [ -n "$LUAC" ] && ! "$LUAC" -p "$prelude" >/dev/null 2>&1; then
   exit 1
 fi
 
+echo "scriptcheck: проверка lib/arizona"
+AGL_ROOT=. "$LUA" test/arizona_spec.lua
+
 echo "scriptcheck: прогон скриптов"
 AGL_ROOT=. AGL_TEST=test AGL_CFG=$(mktemp -d) \
   "$LUA" test/runscripts.lua "$prelude"
