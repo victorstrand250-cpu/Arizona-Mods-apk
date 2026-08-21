@@ -1,0 +1,137 @@
+cmake_minimum_required(VERSION 3.22)
+project(agloader LANGUAGES C CXX)
+
+set(AGLOADER_VERSION "0.1.0" CACHE STRING "Версия загрузчика")
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+if(NOT ANDROID)
+  message(FATAL_ERROR
+    "agloader собирается только Android NDK.\n"
+    "Пример:\n"
+    "  cmake -B build -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \\\n"
+    "        -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24\n"
+    "Либо запустите ./build.sh")
+endif()
+
+# ------------------------------------------------------------------ imgui
+
+add_library(imgui STATIC
+  third_party/imgui/imgui.cpp
+  third_party/imgui/imgui_draw.cpp
+  third_party/imgui/imgui_tables.cpp
+  third_party/imgui/imgui_widgets.cpp
+  third_party/imgui/backends/imgui_impl_opengl3.cpp
+)
+# У движка своя копия ImGui. Наши символы не должны быть видны снаружи,
+# иначе его вызовы уедут к нам — см. exports.map.
+target_compile_options(imgui PRIVATE -fvisibility=hidden -fvisibility-inlines-hidden)
+target_include_directories(imgui PUBLIC
+  third_party/imgui
+  third_party/imgui/backends
+)
+# Бэкенд ImGui сам определяет GLES по этому макросу.
+target_compile_definitions(imgui PUBLIC
+  IMGUI_IMPL_OPENGL_ES3
+  IMGUI_DISABLE_OBSOLETE_FUNCTIONS
+  IMGUI_DISABLE_DEMO_WINDOWS
+)
+target_link_libraries(imgui PUBLIC GLESv3 EGL)
+
+# ----------------------------------------------------------------- luajit
+
+set(LUAJIT_LIB "${CMAKE_CURRENT_SOURCE_DIR}/third_party/luajit/lib/${ANDROID_ABI}/libluajit-5.1.so")
+if(NOT EXISTS "${LUAJIT_LIB}")
+  message(FATAL_ERROR "нет готового LuaJIT для ABI ${ANDROID_ABI}: ${LUAJIT_LIB}")
+endif()
+
+add_library(luajit SHARED IMPORTED)
+set_target_properties(luajit PROPERTIES IMPORTED_LOCATION "${LUAJIT_LIB}")
+target_include_directories(luajit INTERFACE third_party/luajit/include)
+
+# ------------------------------------------- нативные модули для скриптов
+#
+# Настоящие C-модули, которые скрипты MonetLoader считают данностью: cjson,
+# lfs и LuaSocket. Взяты из NeoMLoader (github.com/neomloader) — там лежат
+# те же версии, что использует он сам.
+#
+# Собираются не отдельными .so, а прямо в загрузчик, и подставляются в
+# package.preload. Так надёжнее: файл на Android/media примонтирован без
+# права выполнения, dlopen оттуда невозможен, а из APK пришлось бы городить
+# плоские имена и разбирать пути внутри архива.
+
+add_library(luamods STATIC
+  third_party/cjson/lua_cjson.c
+  third_party/cjson/strbuf.c
+  third_party/cjson/fpconv.c
+  third_party/lfs/lfs.c
+  third_party/luasocket/luasocket.c
+  third_party/luasocket/timeout.c
+  third_party/luasocket/buffer.c
+  third_party/luasocket/io.c
+  third_party/luasocket/auxiliar.c
+  third_party/luasocket/options.c
+  third_party/luasocket/inet.c
+  third_party/luasocket/except.c
+  third_party/luasocket/select.c
+  third_party/luasocket/tcp.c
+  third_party/luasocket/udp.c
+  third_party/luasocket/usocket.c
+  third_party/luasocket/compat.c
+  third_party/luasocket/mime.c
+)
+target_include_directories(luamods PUBLIC
+  third_party/cjson
+  third_party/lfs
+  third_party/luasocket
+)
+# cjson умеет печатать числа сам (dtoa) или через snprintf. Берём второе:
+# USE_INTERNAL_FPCONV не задаём вовсе — заголовок проверяет его через ifdef,
+# и даже нулевое значение включило бы встроенный вариант, а он конфликтует
+# с fpconv.c. Отсюда же отсутствие dtoa.c и g_fmt.c в списке файлов.
+target_compile_definitions(luamods PRIVATE LUASOCKET_NODEBUG)
+target_compile_options(luamods PRIVATE -fvisibility=hidden -w)
+target_link_libraries(luamods PUBLIC luajit)
+
+# --------------------------------------------------------------- загрузчик
+
+add_library(agloader SHARED
+  src/loader.cpp
+  src/engine.cpp
+  src/gui.cpp
+  src/input.cpp
+  src/log.cpp
+  src/paths.cpp
+  src/net.cpp
+  src/script/manager.cpp
+  src/script/script.cpp
+  src/script/prelude.cpp
+  src/script/api_core.cpp
+  src/script/api_memory.cpp
+  src/script/api_net.cpp
+  src/script/api_imgui.cpp
+)
+
+target_include_directories(agloader PRIVATE src)
+target_compile_definitions(agloader PRIVATE AGLOADER_VERSION="${AGLOADER_VERSION}")
+target_compile_options(agloader PRIVATE
+  -Wall -Wextra -Wno-unused-parameter -fvisibility=hidden
+)
+target_link_libraries(agloader PRIVATE imgui luamods luajit log android EGL GLESv3)
+
+# Наружу отдаём только JNI_OnLoad, всё остальное прячем — см. exports.map.
+# Одного -fvisibility=hidden мало: он стоит PRIVATE у agloader и на статическую
+# библиотеку imgui не распространяется, поэтому её символы утекали в
+# динамическую таблицу и перехватывали вызовы ImGui у самого движка.
+target_link_options(agloader PRIVATE
+  -Wl,--no-undefined
+  -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exports.map
+  -Wl,--exclude-libs,ALL
+)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+  target_compile_options(agloader PRIVATE -O2)
+endif()

@@ -1,0 +1,177 @@
+name: agloader
+
+# Собирает libagloader.so под Android и, по желанию, сразу встраивает его
+# в APK из релиза этого репозитория.
+#
+# Запуск: вкладка Actions -> agloader -> Run workflow.
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - 'agloader/**'
+      - 'tools/inject_native_lib.py'
+      - '.github/workflows/agloader.yml'
+  workflow_dispatch:
+    inputs:
+      apk_tag:
+        description: 'Тег релиза с APK, в который встроить загрузчик (пусто — не встраивать)'
+        required: false
+        default: 'Arizona_New'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Проверка компиляции кросс-компилятором
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq g++-aarch64-linux-gnu libgles-dev libegl-dev
+          cd agloader && ./hostcheck.sh
+
+      - name: Проверка скриптов
+        run: |
+          sudo apt-get install -y -qq lua5.1
+          cd agloader && ./scriptcheck.sh
+
+      - name: Сборка NDK
+        run: |
+          echo "NDK: $ANDROID_NDK_LATEST_HOME"
+          cd agloader
+          ./build.sh --ndk "$ANDROID_NDK_LATEST_HOME"
+
+      - name: Что получилось
+        run: |
+          find agloader/dist -type f -print -exec file {} \;
+
+      # Библиотека грузится раньше движка, поэтому её экспорт стоит в таблице
+      # поиска впереди. Утечёт наружу ImGui — вызовы движка уедут в нашу копию
+      # и он упадёт на чужом контексте. Проверяем, что наружу торчит только
+      # JNI_OnLoad, и роняем сборку, если это перестало быть так.
+      - name: Проверить, что наружу торчит только JNI_OnLoad
+        run: |
+          READELF="$ANDROID_NDK_LATEST_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-readelf"
+          for abi in arm64-v8a armeabi-v7a; do
+            so="agloader/dist/$abi/libagloader.so"
+            names=$("$READELF" --dyn-syms "$so" \
+              | awk '$5 == "GLOBAL" || $5 == "WEAK" { if ($7 != "UND") print $8 }' \
+              | sed 's/@.*//' | grep -v '^$' | sort -u)
+            echo "--- $abi экспортирует:"
+            echo "$names" | sed 's/^/    /'
+            extra=$(echo "$names" | grep -v -E '^(JNI_OnLoad|JNI_OnUnload)$' || true)
+            if [ -n "$extra" ]; then
+              echo "ОШИБКА: наружу торчит лишнее:"
+              echo "$extra" | sed 's/^/    /'
+              exit 1
+            fi
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agloader-libs
+          path: agloader/dist/**
+          if-no-files-found: error
+
+      # Примеры скриптов отдельным артефактом: каталог scripts/ на устройстве
+      # загрузчик создаёт пустым, и их проще скачать сюда, чем вытаскивать
+      # из репозитория телефоном.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agloader-scripts
+          path: |
+            agloader/scripts/*.lua
+            agloader/lib/**
+          if-no-files-found: error
+
+  patch-apk:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    # На push берём тег по умолчанию, чтобы готовый к установке APK
+    # появлялся артефактом сам, без ручного запуска.
+    if: github.event_name != 'workflow_dispatch' || inputs.apk_tag != ''
+    env:
+      APK_TAG: ${{ inputs.apk_tag || 'Arizona_New' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: agloader-libs
+          path: dist
+
+      - name: Инструменты smali
+        run: |
+          curl -sSL -o smali.jar    https://bitbucket.org/JesusFreke/smali/downloads/smali-2.5.2.jar
+          curl -sSL -o baksmali.jar https://bitbucket.org/JesusFreke/smali/downloads/baksmali-2.5.2.jar
+
+      - name: Скачать APK из релиза
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "$APK_TAG" \
+            --repo "${{ github.repository }}" --pattern '*.apk' --dir apk
+          ls -la apk
+
+      - name: Встроить загрузчик
+        run: |
+          src=$(ls apk/*.apk | head -1)
+          out="patched/$(basename "${src%.apk}")_agloader.apk"
+          mkdir -p patched
+          python3 tools/inject_native_lib.py \
+            --apk "$src" --out "$out" \
+            --load luajit-5.1 --load agloader \
+            --lib arm64-v8a=dist/arm64-v8a/libluajit-5.1.so \
+            --lib arm64-v8a=dist/arm64-v8a/libagloader.so \
+            --lib armeabi-v7a=dist/armeabi-v7a/libluajit-5.1.so \
+            --lib armeabi-v7a=dist/armeabi-v7a/libagloader.so \
+            --smali smali.jar --baksmali baksmali.jar
+
+      # Ключ лежит в репозитории и больше не меняется. Раньше он генерировался
+      # заново на каждом запуске, поэтому каждая сборка была подписана по-новому
+      # и не вставала поверх предыдущей — приходилось сносить игру.
+      - name: Подписать постоянным ключом
+        run: |
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BT/apksigner" sign --ks agloader/agloader.keystore \
+            --ks-pass pass:agloader --key-pass pass:agloader \
+            --ks-key-alias agloader patched/*.apk
+          "$BT/apksigner" verify --print-certs patched/*.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arizona-agloader-apk
+          path: patched/*.apk
+          if-no-files-found: error
+
+      # Артефакты Actions скачиваются только под логином и приходят вложенным
+      # zip — с телефона это неудобно. Поэтому то же самое кладётся в релиз
+      # с постоянной ссылкой, которую можно открыть прямо в браузере.
+      - name: Выложить в релиз agloader-latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p release
+          cp patched/*.apk release/
+          cp dist/arm64-v8a/libagloader.so     release/libagloader-arm64-v8a.so
+          cp dist/arm64-v8a/libluajit-5.1.so   release/libluajit-5.1-arm64-v8a.so
+          cp dist/armeabi-v7a/libagloader.so   release/libagloader-armeabi-v7a.so
+          cp dist/armeabi-v7a/libluajit-5.1.so release/libluajit-5.1-armeabi-v7a.so
+          # В архиве сразу два каталога, scripts и lib, чтобы распаковывалось
+          # одним движением прямо в agloader/ на устройстве.
+          (cd agloader && zip -q -r ../release/agloader-scripts.zip \
+             scripts -i 'scripts/*.lua' && \
+           zip -q -r ../release/agloader-scripts.zip lib)
+
+          gh release delete agloader-latest --repo "${{ github.repository }}" --yes || true
+          gh release create agloader-latest release/* \
+            --repo "${{ github.repository }}" \
+            --title "AGLoader — последняя сборка" \
+            --notes "Автосборка из ветки ${{ github.ref_name }}, коммит ${{ github.sha }}.
+
+          * \`*_agloader.apk\` — игра с уже встроенным загрузчиком, подписана отладочным ключом. Официальную версию перед установкой удалить.
+          * \`libagloader-*.so\` + \`libluajit-5.1-*.so\` — только библиотеки, если встраиваете в свой APK сами.
+          * \`agloader-scripts.zip\` — скрипты и библиотеки. Распаковать целиком в \`Android/media/<пакет>/agloader/\` — внутри уже есть \`scripts/\` и \`lib/\`."
