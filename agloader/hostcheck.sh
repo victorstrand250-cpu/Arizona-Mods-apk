@@ -132,7 +132,7 @@ extern "C" int should_stay_hidden() { return 1; }
 EOF
 
 if ! "$CXX" -shared -fPIC "$OUT/vs.cpp" -o "$OUT/vs.so" \
-     -Wl,--version-script="$(dirname "$0")/exports.map" \
+     -Wl,--version-script=exports.map \
      -Wl,--exclude-libs,ALL -Wl,--no-undefined-version -Wl,--fatal-warnings \
      2> "$OUT/err.txt"; then
   echo "ОШИБКА"
