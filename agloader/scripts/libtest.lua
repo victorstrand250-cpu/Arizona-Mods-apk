@@ -160,12 +160,35 @@ local function runLocal()
     local me = assert(ag.localPlayer(), 'игрок не найден')
     local x, y, z = ag.position(me)
     assert(x, 'позиция не читается')
-    local o = ag.entities({ near = { x, y, z }, radius = 200 })
-    assert(#o > 0, 'вокруг игрока пусто — смещение позиции неверное')
-    local near = o[1]
-    for _, e in ipairs(o) do if e.dist < near.dist then near = e end end
-    return ('%d в 200 м, ближайшая модель %d в %.1f м')
-           :format(#o, near.model or -1, near.dist)
+
+    -- Считаем всё сразу, чтобы по одной строке было видно, где обрыв:
+    -- пусты ли пулы, или они полны, а рядом никого — тогда виновато
+    -- смещение позиции.
+    local all = ag.entities({ max = 8000 })
+    if #all == 0 then
+      return 'пулы пусты — мир ещё не прогрузился'
+    end
+
+    local withPos, nearest = 0, nil
+    for _, e in ipairs(all) do
+      if e.x then
+        withPos = withPos + 1
+        local d = getDistanceBetweenCoords3d(x, y, z, e.x, e.y, e.z)
+        if not nearest or d < nearest then nearest = d end
+      end
+    end
+
+    assert(withPos > 0,
+           ('сущностей %d, но координат нет ни у одной — смещение +%d не то')
+           :format(#all, ag.poolPosOffset or -1))
+    assert(nearest and nearest < 500,
+           ('сущностей %d, с координатами %d, ближайшая в %.0f м — ' ..
+            'смещение +%d не то')
+           :format(#all, withPos, nearest or -1, ag.poolPosOffset or -1))
+
+    local near = ag.entities({ near = { x, y, z }, radius = 200 })
+    return ('%d всего, %d с координатами, ближайшая %.0f м, в 200 м — %d')
+           :format(#all, withPos, nearest, #near)
   end)
   check('движок', 'описание модели', function()
     local me = assert(ag.localPlayer(), 'игрок не найден')
