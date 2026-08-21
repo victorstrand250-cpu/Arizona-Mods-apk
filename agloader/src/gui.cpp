@@ -27,6 +27,7 @@ int g_width = 0;
 int g_height = 0;
 
 // Плавающая кнопка вызова меню: на телефоне другого способа нет.
+float g_ui_scale = 1.0f;
 ImVec2 g_button_pos { 24.0f, 24.0f };
 const ImVec2 kButtonSize { 132.0f, 56.0f };
 bool g_button_dragging = false;
@@ -357,6 +358,8 @@ void draw_main_window()
 
 }  // namespace
 
+float ui_scale() { return g_ui_scale; }
+
 bool init()
 {
   if (g_inited) {
@@ -403,6 +406,7 @@ bool init()
   }
 
   g_button_pos = ImVec2 { 24.0f * ui_scale, 24.0f * ui_scale };
+  g_ui_scale = ui_scale;
   g_inited = true;
   AG_LOGI("интерфейс поднят: %dx%d, масштаб %.2f", g_width, g_height, ui_scale);
   return true;

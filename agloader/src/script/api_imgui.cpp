@@ -238,7 +238,8 @@ int l_slider_int(lua_State* L)
   int value = static_cast<int>(luaL_checkinteger(L, 2));
   const int lo = static_cast<int>(luaL_checkinteger(L, 3));
   const int hi = static_cast<int>(luaL_checkinteger(L, 4));
-  const bool changed = ImGui::SliderInt(label, &value, lo, hi);
+  const char* fmt = luaL_optstring(L, 5, "%d");
+  const bool changed = ImGui::SliderInt(label, &value, lo, hi, fmt);
   lua_pushboolean(L, changed ? 1 : 0);
   lua_pushinteger(L, value);
   return 2;
@@ -304,10 +305,35 @@ int l_input_int(lua_State* L)
   require_frame(L);
   const char* label = luaL_checkstring(L, 1);
   int value = static_cast<int>(luaL_checkinteger(L, 2));
-  const bool changed = ImGui::InputInt(label, &value);
+  const bool changed = ImGui::InputInt(label, &value,
+                                      static_cast<int>(luaL_optinteger(L, 3, 1)));
   lua_pushboolean(L, changed ? 1 : 0);
   lua_pushinteger(L, value);
   return 2;
+}
+
+int l_color_edit4(lua_State* L)
+{
+  require_frame(L);
+  const char* label = luaL_checkstring(L, 1);
+  float rgba[4] = { static_cast<float>(luaL_checknumber(L, 2)),
+                    static_cast<float>(luaL_checknumber(L, 3)),
+                    static_cast<float>(luaL_checknumber(L, 4)),
+                    static_cast<float>(luaL_optnumber(L, 5, 1.0)) };
+  const int flags = static_cast<int>(luaL_optinteger(L, 6, 0));
+  const bool changed = ImGui::ColorEdit4(label, rgba, flags);
+  lua_pushboolean(L, changed ? 1 : 0);
+  for (float v : rgba) {
+    lua_pushnumber(L, v);
+  }
+  return 5;
+}
+
+int l_get_window_width(lua_State* L)
+{
+  require_frame(L);
+  lua_pushnumber(L, ImGui::GetWindowWidth());
+  return 1;
 }
 
 int l_color_edit3(lua_State* L)
@@ -546,18 +572,104 @@ int l_is_item_clicked(lua_State* L)
   return 1;
 }
 
+// Сколько раз скрипт за кадр трогал стек стиля. Если он упадёт между Push и
+// Pop, несвёрнутый стек утащит за собой и меню загрузчика, поэтому остаток
+// разматывается в конце кадра.
+int g_style_colors = 0;
+int g_style_vars = 0;
+
 int l_push_style_color(lua_State* L)
 {
   require_frame(L);
   const int idx = static_cast<int>(luaL_checkinteger(L, 1));
   ImGui::PushStyleColor(idx, color_at(L, 2));
+  ++g_style_colors;
+  return 0;
+}
+
+// Разово меняет цвет в самом стиле — для скриптов, которые красят интерфейс
+// один раз при запуске, а не каждый кадр.
+int l_set_style_color(lua_State* L)
+{
+  const int idx = static_cast<int>(luaL_checkinteger(L, 1));
+  if (idx < 0 || idx >= ImGuiCol_COUNT) {
+    return 0;
+  }
+  ImGui::GetStyle().Colors[idx] = color_at(L, 2);
+  return 0;
+}
+
+int l_push_style_var(lua_State* L)
+{
+  require_frame(L);
+  const int idx = static_cast<int>(luaL_checkinteger(L, 1));
+  // Два числа — вектор (отступы), одно — скаляр (скругления, толщина).
+  if (lua_isnumber(L, 3)) {
+    ImGui::PushStyleVar(idx, ImVec2(static_cast<float>(luaL_checknumber(L, 2)),
+                                    static_cast<float>(luaL_checknumber(L, 3))));
+  } else {
+    ImGui::PushStyleVar(idx, static_cast<float>(luaL_checknumber(L, 2)));
+  }
+  ++g_style_vars;
+  return 0;
+}
+
+int l_pop_style_var(lua_State* L)
+{
+  require_frame(L);
+  int n = static_cast<int>(luaL_optinteger(L, 1, 1));
+  if (n > g_style_vars) {
+    n = g_style_vars;  // не даём скрипту сорвать чужой стиль
+  }
+  if (n > 0) {
+    ImGui::PopStyleVar(n);
+    g_style_vars -= n;
+  }
+  return 0;
+}
+
+// Разовая настройка стиля по имени: скругления, отступы, толщина рамок.
+int l_set_style(lua_State* L)
+{
+  const char* name = luaL_checkstring(L, 1);
+  const double a = luaL_checknumber(L, 2);
+  const double b = luaL_optnumber(L, 3, a);
+  ImGuiStyle& st = ImGui::GetStyle();
+
+  const std::string key { name };
+  if (key == "WindowRounding")        st.WindowRounding = static_cast<float>(a);
+  else if (key == "ChildRounding")    st.ChildRounding = static_cast<float>(a);
+  else if (key == "FrameRounding")    st.FrameRounding = static_cast<float>(a);
+  else if (key == "PopupRounding")    st.PopupRounding = static_cast<float>(a);
+  else if (key == "GrabRounding")     st.GrabRounding = static_cast<float>(a);
+  else if (key == "TabRounding")      st.TabRounding = static_cast<float>(a);
+  else if (key == "ScrollbarRounding") st.ScrollbarRounding = static_cast<float>(a);
+  else if (key == "WindowBorderSize") st.WindowBorderSize = static_cast<float>(a);
+  else if (key == "ChildBorderSize")  st.ChildBorderSize = static_cast<float>(a);
+  else if (key == "FrameBorderSize")  st.FrameBorderSize = static_cast<float>(a);
+  else if (key == "ScrollbarSize")    st.ScrollbarSize = static_cast<float>(a);
+  else if (key == "WindowPadding")
+    st.WindowPadding = ImVec2(static_cast<float>(a), static_cast<float>(b));
+  else if (key == "FramePadding")
+    st.FramePadding = ImVec2(static_cast<float>(a), static_cast<float>(b));
+  else if (key == "ItemSpacing")
+    st.ItemSpacing = ImVec2(static_cast<float>(a), static_cast<float>(b));
+  else if (key == "ItemInnerSpacing")
+    st.ItemInnerSpacing = ImVec2(static_cast<float>(a), static_cast<float>(b));
   return 0;
 }
 
 int l_pop_style_color(lua_State* L)
 {
   require_frame(L);
-  ImGui::PopStyleColor(static_cast<int>(luaL_optinteger(L, 1, 1)));
+  int n = static_cast<int>(luaL_optinteger(L, 1, 1));
+  if (n > g_style_colors) {
+    n = g_style_colors;
+  }
+  if (n > 0) {
+    ImGui::PopStyleColor(n);
+    g_style_colors -= n;
+  }
   return 0;
 }
 
@@ -657,6 +769,12 @@ const luaL_Reg kFuncs[] = {
     { "InputFloat", l_input_float },
     { "InputInt", l_input_int },
     { "ColorEdit3", l_color_edit3 },
+    { "ColorEdit4", l_color_edit4 },
+    { "GetWindowWidth", l_get_window_width },
+    { "SetStyleColor", l_set_style_color },
+    { "SetStyle", l_set_style },
+    { "PushStyleVar", l_push_style_var },
+    { "PopStyleVar", l_pop_style_var },
     { "ProgressBar", l_progress_bar },
     { "Combo", l_combo },
     { "Separator", l_separator },
@@ -712,12 +830,85 @@ const Constant kConstants[] = {
     { "Cond_FirstUseEver", ImGuiCond_FirstUseEver },
     { "Cond_Appearing", ImGuiCond_Appearing },
     { "Col_Text", ImGuiCol_Text },
+    { "Col_TextDisabled", ImGuiCol_TextDisabled },
     { "Col_WindowBg", ImGuiCol_WindowBg },
+    { "Col_ChildBg", ImGuiCol_ChildBg },
+    { "Col_PopupBg", ImGuiCol_PopupBg },
+    { "Col_Border", ImGuiCol_Border },
+    { "Col_BorderShadow", ImGuiCol_BorderShadow },
+    { "Col_FrameBg", ImGuiCol_FrameBg },
+    { "Col_FrameBgHovered", ImGuiCol_FrameBgHovered },
+    { "Col_FrameBgActive", ImGuiCol_FrameBgActive },
+    { "Col_TitleBg", ImGuiCol_TitleBg },
+    { "Col_TitleBgActive", ImGuiCol_TitleBgActive },
+    { "Col_TitleBgCollapsed", ImGuiCol_TitleBgCollapsed },
+    { "Col_MenuBarBg", ImGuiCol_MenuBarBg },
+    { "Col_ScrollbarBg", ImGuiCol_ScrollbarBg },
+    { "Col_ScrollbarGrab", ImGuiCol_ScrollbarGrab },
+    { "Col_ScrollbarGrabHovered", ImGuiCol_ScrollbarGrabHovered },
+    { "Col_ScrollbarGrabActive", ImGuiCol_ScrollbarGrabActive },
+    { "Col_CheckMark", ImGuiCol_CheckMark },
+    { "Col_SliderGrab", ImGuiCol_SliderGrab },
+    { "Col_SliderGrabActive", ImGuiCol_SliderGrabActive },
     { "Col_Button", ImGuiCol_Button },
     { "Col_ButtonHovered", ImGuiCol_ButtonHovered },
     { "Col_ButtonActive", ImGuiCol_ButtonActive },
-    { "Col_FrameBg", ImGuiCol_FrameBg },
     { "Col_Header", ImGuiCol_Header },
+    { "Col_HeaderHovered", ImGuiCol_HeaderHovered },
+    { "Col_HeaderActive", ImGuiCol_HeaderActive },
+    { "Col_Separator", ImGuiCol_Separator },
+    { "Col_SeparatorHovered", ImGuiCol_SeparatorHovered },
+    { "Col_SeparatorActive", ImGuiCol_SeparatorActive },
+    { "Col_ResizeGrip", ImGuiCol_ResizeGrip },
+    { "Col_ResizeGripHovered", ImGuiCol_ResizeGripHovered },
+    { "Col_ResizeGripActive", ImGuiCol_ResizeGripActive },
+    { "Col_Tab", ImGuiCol_Tab },
+    { "Col_TabHovered", ImGuiCol_TabHovered },
+    { "Col_PlotLines", ImGuiCol_PlotLines },
+    { "Col_PlotHistogram", ImGuiCol_PlotHistogram },
+    { "Col_TableHeaderBg", ImGuiCol_TableHeaderBg },
+    { "Col_TableBorderStrong", ImGuiCol_TableBorderStrong },
+    { "Col_TableRowBg", ImGuiCol_TableRowBg },
+    { "Col_TableRowBgAlt", ImGuiCol_TableRowBgAlt },
+    { "Col_TextSelectedBg", ImGuiCol_TextSelectedBg },
+    { "Col_DragDropTarget", ImGuiCol_DragDropTarget },
+    { "Col_NavWindowingHighlight", ImGuiCol_NavWindowingHighlight },
+    { "Col_NavWindowingDimBg", ImGuiCol_NavWindowingDimBg },
+    { "Col_ModalWindowDimBg", ImGuiCol_ModalWindowDimBg },
+    { "StyleVar_Alpha", ImGuiStyleVar_Alpha },
+    { "StyleVar_DisabledAlpha", ImGuiStyleVar_DisabledAlpha },
+    { "StyleVar_WindowPadding", ImGuiStyleVar_WindowPadding },
+    { "StyleVar_WindowRounding", ImGuiStyleVar_WindowRounding },
+    { "StyleVar_WindowBorderSize", ImGuiStyleVar_WindowBorderSize },
+    { "StyleVar_ChildRounding", ImGuiStyleVar_ChildRounding },
+    { "StyleVar_ChildBorderSize", ImGuiStyleVar_ChildBorderSize },
+    { "StyleVar_PopupRounding", ImGuiStyleVar_PopupRounding },
+    { "StyleVar_PopupBorderSize", ImGuiStyleVar_PopupBorderSize },
+    { "StyleVar_FramePadding", ImGuiStyleVar_FramePadding },
+    { "StyleVar_FrameRounding", ImGuiStyleVar_FrameRounding },
+    { "StyleVar_FrameBorderSize", ImGuiStyleVar_FrameBorderSize },
+    { "StyleVar_ItemSpacing", ImGuiStyleVar_ItemSpacing },
+    { "StyleVar_ItemInnerSpacing", ImGuiStyleVar_ItemInnerSpacing },
+    { "StyleVar_IndentSpacing", ImGuiStyleVar_IndentSpacing },
+    { "StyleVar_ScrollbarSize", ImGuiStyleVar_ScrollbarSize },
+    { "StyleVar_ScrollbarRounding", ImGuiStyleVar_ScrollbarRounding },
+    { "StyleVar_GrabMinSize", ImGuiStyleVar_GrabMinSize },
+    { "StyleVar_GrabRounding", ImGuiStyleVar_GrabRounding },
+    { "StyleVar_TabRounding", ImGuiStyleVar_TabRounding },
+    { "ColorEditFlags_NoAlpha", ImGuiColorEditFlags_NoAlpha },
+    { "ColorEditFlags_NoPicker", ImGuiColorEditFlags_NoPicker },
+    { "ColorEditFlags_NoInputs", ImGuiColorEditFlags_NoInputs },
+    { "ColorEditFlags_NoTooltip", ImGuiColorEditFlags_NoTooltip },
+    { "ColorEditFlags_NoLabel", ImGuiColorEditFlags_NoLabel },
+    { "ColorEditFlags_NoSidePreview", ImGuiColorEditFlags_NoSidePreview },
+    { "ColorEditFlags_AlphaBar", ImGuiColorEditFlags_AlphaBar },
+    { "ColorEditFlags_AlphaPreview", ImGuiColorEditFlags_AlphaPreview },
+    { "ColorEditFlags_AlphaPreviewHalf", ImGuiColorEditFlags_AlphaPreviewHalf },
+    { "ColorEditFlags_DisplayRGB", ImGuiColorEditFlags_DisplayRGB },
+    { "ColorEditFlags_DisplayHSV", ImGuiColorEditFlags_DisplayHSV },
+    { "ColorEditFlags_DisplayHex", ImGuiColorEditFlags_DisplayHex },
+    { "ColorEditFlags_PickerHueBar", ImGuiColorEditFlags_PickerHueBar },
+    { "ColorEditFlags_PickerHueWheel", ImGuiColorEditFlags_PickerHueWheel },
     { nullptr, 0 },
 };
 
@@ -747,6 +938,15 @@ void imgui_unwind()
       case Scope::kTable: ImGui::EndTable(); break;
     }
     g_scopes.pop_back();
+  }
+
+  if (g_style_colors > 0) {
+    ImGui::PopStyleColor(g_style_colors);
+    g_style_colors = 0;
+  }
+  if (g_style_vars > 0) {
+    ImGui::PopStyleVar(g_style_vars);
+    g_style_vars = 0;
   }
 }
 

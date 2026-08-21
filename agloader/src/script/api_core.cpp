@@ -121,6 +121,14 @@ int l_print(lua_State* L) { return l_log(L); }
 
 // ------------------------------------------------------------- окружение
 
+// Аналог MONET_DPI_SCALE: явные размеры ImGui не масштабирует, и скрипт,
+// рассчитанный на 720p, на телефоне выйдет крошечным.
+int l_get_ui_scale(lua_State* L)
+{
+  lua_pushnumber(L, gui::ui_scale());
+  return 1;
+}
+
 int l_get_screen_size(lua_State* L)
 {
   const loader::Screen s = loader::screen();
@@ -243,6 +251,7 @@ const luaL_Reg kGlobals[] = {
     { "log", l_log },
     { "print", l_print },
     { "getScreenSize", l_get_screen_size },
+    { "getUiScale", l_get_ui_scale },
     { "getFrameTime", l_get_frame_time },
     { "getFrameCount", l_get_frame_count },
     { "getPaths", l_get_paths },
