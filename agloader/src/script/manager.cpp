@@ -233,6 +233,19 @@ bool on_touch(int action, int pointer_id, int x, int y)
   for (auto& s : g_scripts) {
     if (s->call_event_consumable("onTouch", action, pointer_id, x, y)) {
       consumed = true;
+
+      // Поглощённое касание игра не увидит вовсе. Скрипт, который по
+      // недосмотру возвращает false на каждое событие, отбирает у игрока
+      // весь ввод разом — ни идти, ни чат открыть, и со стороны это
+      // выглядит как зависшая игра. Молчать об этом нельзя.
+      s->touches_eaten += 1;
+      if (s->touches_eaten == 40 && !s->touch_warned) {
+        s->touch_warned = true;
+        const std::string msg =
+            s->info().file + " поглощает касания — игра их не видит";
+        AG_LOGE("%s", msg.c_str());
+        gui::notify(msg.c_str(), 10.0);
+      }
     }
   }
   return consumed;

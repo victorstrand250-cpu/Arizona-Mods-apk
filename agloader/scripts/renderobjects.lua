@@ -174,8 +174,9 @@ local function collectObjects()
   local px, py, pz = ag.position(me)
   if not px then return {} end
 
-  local cam = ag.cameraMatrix()
-  if not cam then return {} end
+  -- Камера здесь нужна только как признак «есть куда проецировать»:
+  -- сам сбор объектов от неё не зависит.
+  if not (ag.rwMatrixCache or ag.cameraMatrix()) then return {} end
 
   local clock = os.clock or os.time
   local t0 = clock()
@@ -238,7 +239,8 @@ end
 local function drawEsp()
   if #objCache == 0 then return end
 
-  local cam = ag.cameraMatrix() or ag.rwMatrixCache
+  -- Вид камеры на этот кадр поднят в onImgui, до отрисовки.
+  local cam = ag.rwMatrixCache or ag.cameraMatrix()
   if not cam then return end
 
   -- Игрок на экране: от него тянутся линии.

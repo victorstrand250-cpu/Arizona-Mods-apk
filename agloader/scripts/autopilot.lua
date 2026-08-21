@@ -229,8 +229,13 @@ end
 
 -- Запись джойстика: где палец опустился — там центр, куда увели —
 -- радиус. Одно движение, и настраивать больше нечего.
+--
+-- Возвращать отсюда false нельзя ни в коем случае: в загрузчике, как и в
+-- MoonLoader, явный false означает «касание поглощено». Скрипт, который
+-- вернул его на каждое касание, отбирает у игры весь ввод — ни идти, ни
+-- чат открыть. Поэтому здесь либо ничего не возвращается, либо true.
 function onTouch(action, id, x, y)
-  if not recording then return false end
+  if not recording then return end
   if action == 0 then
     recDown = { x = x, y = y }
     recMax = 0
@@ -248,7 +253,7 @@ function onTouch(action, id, x, y)
     notify(('[AutoPilot] джойстик записан: %.0f %.0f, радиус %.0f')
            :format(stick.x * sw, stick.y * sh, stick.r * sw), 5)
   end
-  return false          -- игре тоже отдаём: пусть персонаж честно идёт
+  return true           -- игре тоже отдаём: пусть персонаж честно идёт
 end
 
 function onImgui()

@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 
+#include "gui.h"
 #include "imgui.h"
 #include "lua.hpp"
 #include "script/api.h"
@@ -282,7 +283,16 @@ int l_input_text(lua_State* L)
 
   std::vector<char> buf(static_cast<std::size_t>(cap > 8 ? cap : 8), '\0');
   std::snprintf(buf.data(), buf.size(), "%s", initial);
+
+  // Нажатие на экранную клавиатуру снимает с поля фокус, потому что это
+  // клик мимо. Возвращаем его обратно на следующем кадре.
+  if (gui::keyboard_take_refocus(label)) {
+    ImGui::SetKeyboardFocusHere();
+  }
   const bool changed = ImGui::InputText(label, buf.data(), buf.size());
+  if (ImGui::IsItemActive()) {
+    gui::keyboard_note_input(label);
+  }
 
   lua_pushboolean(L, changed ? 1 : 0);
   lua_pushstring(L, buf.data());

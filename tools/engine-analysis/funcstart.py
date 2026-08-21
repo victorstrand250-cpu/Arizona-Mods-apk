@@ -37,7 +37,7 @@ def is_end(w):
     return False
 
 
-def find(elf, addr, limit=4000):
+def find(elf, addr, limit=60000):
     t = elf.sec('.text')
     base, off, size = t['addr'], t['off'], t['size']
     n = size // 4

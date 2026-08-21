@@ -82,25 +82,215 @@ void draw_toasts()
     return;
   }
 
+  // Слева внизу и без рамки: посреди экрана это мешает игре, а внизу
+  // сообщение видно краем глаза и оно ничего не закрывает.
   ImDrawList* dl = ImGui::GetForegroundDrawList();
   const float scale = ui_scale();
-  const float pad = 8.0f * scale;
-  const float line = ImGui::GetFontSize() + 6.0f * scale;
-  const float w = static_cast<float>(g_width);
+  const float pad = 6.0f * scale;
+  const float line = ImGui::GetFontSize() + 4.0f * scale;
+  const float x = 10.0f * scale;
 
-  float y = 96.0f * scale;
+  float y = static_cast<float>(g_height) - 64.0f * scale -
+            line * static_cast<float>(shown.size());
   for (const auto& toast : shown) {
     const ImVec2 size = ImGui::CalcTextSize(toast.text.c_str());
-    const float bw = size.x + pad * 2.0f;
-    const float x = (w - bw) * 0.5f;
-    dl->AddRectFilled(ImVec2 { x, y }, ImVec2 { x + bw, y + line },
-                      IM_COL32(12, 14, 20, 220), 6.0f * scale);
-    dl->AddRect(ImVec2 { x, y }, ImVec2 { x + bw, y + line },
-                IM_COL32(90, 100, 130, 200), 6.0f * scale);
-    dl->AddText(ImVec2 { x + pad, y + 3.0f * scale },
-                IM_COL32(235, 238, 245, 255), toast.text.c_str());
-    y += line + 4.0f * scale;
+    dl->AddRectFilled(ImVec2 { x - pad * 0.5f, y },
+                      ImVec2 { x + size.x + pad, y + line },
+                      IM_COL32(10, 12, 16, 150), 4.0f * scale);
+    // Подложка тёмная и полупрозрачная, текст с тенью — читается и на
+    // светлом небе, и на асфальте.
+    dl->AddText(ImVec2 { x + 1.0f, y + 2.0f * scale + 1.0f },
+                IM_COL32(0, 0, 0, 180), toast.text.c_str());
+    dl->AddText(ImVec2 { x, y + 2.0f * scale },
+                IM_COL32(225, 230, 240, 235), toast.text.c_str());
+    y += line;
   }
+}
+
+
+// ────────────────────────────────────────────── экранная клавиатура
+//
+// ImGui на Android сам клавиатуру не поднимает: системную вызывает Java, а
+// у игры своя, и до неё из оверлея не дотянуться. Поэтому клавиатура здесь
+// своя — обычные кнопки ImGui, которые кладут символы прямо во ввод.
+// Появляется, когда активно любое поле ввода, и исчезает, когда ввод
+// закончен, так что специально включать её не нужно.
+
+bool g_kbd_shift = false;
+bool g_kbd_ru = true;
+std::string g_kbd_last_input;
+std::string g_kbd_refocus;
+
+const char* const kRowsEn[4] = {
+    "1234567890",
+    "qwertyuiop",
+    "asdfghjkl",
+    "zxcvbnm",
+};
+
+// Кириллица в UTF-8, по строке на ряд: раскладывается по одному символу
+// через разбор UTF-8, а не по байтам.
+const char* const kRowsRu[4] = {
+    "1234567890",
+    "йцукенгшщзхъ",
+    "фывапролджэ",
+    "ячсмитьбю",
+};
+
+// Один символ UTF-8 из строки: возвращает его длину в байтах.
+int utf8_len(unsigned char c)
+{
+  if (c < 0x80) return 1;
+  if ((c >> 5) == 0x6) return 2;
+  if ((c >> 4) == 0xE) return 3;
+  if ((c >> 3) == 0x1E) return 4;
+  return 1;
+}
+
+// Верхний регистр для одного символа: латиница таблицей, кириллица сдвигом
+// на 0x20 внутри своего блока UTF-8.
+std::string upper_utf8(const std::string& ch)
+{
+  if (ch.size() == 1) {
+    char c = ch[0];
+    if (c >= 'a' && c <= 'z') {
+      return std::string(1, static_cast<char>(c - 'a' + 'A'));
+    }
+    return ch;
+  }
+  if (ch.size() == 2) {
+    const unsigned char b0 = static_cast<unsigned char>(ch[0]);
+    const unsigned char b1 = static_cast<unsigned char>(ch[1]);
+    // а..я это U+0430..U+044F, А..Я — U+0410..U+042F.
+    unsigned int cp = ((b0 & 0x1Fu) << 6) | (b1 & 0x3Fu);
+    if (cp >= 0x430 && cp <= 0x44F) {
+      cp -= 0x20;
+    } else if (cp == 0x451) {  // ё -> Ё
+      cp = 0x401;
+    } else {
+      return ch;
+    }
+    std::string out;
+    out += static_cast<char>(0xC0 | (cp >> 6));
+    out += static_cast<char>(0x80 | (cp & 0x3F));
+    return out;
+  }
+  return ch;
+}
+
+void kbd_send(const std::string& ch)
+{
+  ImGuiIO& io = ImGui::GetIO();
+  const std::string text = g_kbd_shift ? upper_utf8(ch) : ch;
+  io.AddInputCharactersUTF8(text.c_str());
+  g_kbd_shift = false;
+  g_kbd_refocus = g_kbd_last_input;
+}
+
+void kbd_key(ImGuiKey key)
+{
+  ImGuiIO& io = ImGui::GetIO();
+  io.AddKeyEvent(key, true);
+  io.AddKeyEvent(key, false);
+  g_kbd_refocus = g_kbd_last_input;
+}
+
+void draw_keyboard()
+{
+  ImGuiIO& io = ImGui::GetIO();
+  // Пока идёт возврат фокуса, поле на один кадр неактивно — если в этот
+  // момент спрятать клавиатуру, она будет мигать на каждой букве.
+  if (!io.WantTextInput && g_kbd_refocus.empty()) {
+    g_kbd_last_input.clear();
+    return;
+  }
+
+  const float scale = ui_scale();
+  const float kw = 46.0f * scale;
+  const float kh = 40.0f * scale;
+  const float gap = 4.0f * scale;
+
+  const float width = kw * 12.0f + gap * 13.0f;
+  const float height = kh * 5.0f + gap * 7.0f;
+
+  ImGui::SetNextWindowPos(
+      ImVec2 { (static_cast<float>(g_width) - width) * 0.5f,
+               static_cast<float>(g_height) - height - 12.0f * scale },
+      ImGuiCond_Always);
+  ImGui::SetNextWindowSize(ImVec2 { width, height }, ImGuiCond_Always);
+  ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,
+                      ImVec2 { gap * 1.5f, gap * 1.5f });
+  ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2 { gap, gap });
+
+  if (ImGui::Begin("##agkbd", nullptr,
+                   ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
+                       ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar |
+                       ImGuiWindowFlags_NoNavFocus |
+                       ImGuiWindowFlags_NoFocusOnAppearing)) {
+    const char* const* rows = g_kbd_ru ? kRowsRu : kRowsEn;
+
+    for (int r = 0; r < 4; ++r) {
+      const std::string row = rows[r];
+      // Ряды короче первого сдвигаем, чтобы клавиатура не выглядела рваной.
+      std::size_t count = 0;
+      for (std::size_t i = 0; i < row.size();) {
+        i += static_cast<std::size_t>(
+            utf8_len(static_cast<unsigned char>(row[i])));
+        ++count;
+      }
+      const float indent =
+          (width - gap * 3.0f - (kw + gap) * static_cast<float>(count)) * 0.5f;
+      if (indent > 0.0f) {
+        ImGui::Dummy(ImVec2 { indent, 1.0f });
+        ImGui::SameLine();
+      }
+
+      int n = 0;
+      for (std::size_t i = 0; i < row.size();) {
+        const int len = utf8_len(static_cast<unsigned char>(row[i]));
+        std::string ch = row.substr(i, static_cast<std::size_t>(len));
+        i += static_cast<std::size_t>(len);
+
+        if (n > 0) {
+          ImGui::SameLine();
+        }
+        ++n;
+        const std::string label =
+            (g_kbd_shift ? upper_utf8(ch) : ch) + "##k" + std::to_string(r) +
+            "_" + std::to_string(n);
+        if (ImGui::Button(label.c_str(), ImVec2 { kw, kh })) {
+          kbd_send(ch);
+        }
+      }
+    }
+
+    // Нижний ряд: регистр, язык, пробел, точка, стереть, ввод.
+    if (ImGui::Button(g_kbd_shift ? "ШИФТ" : "шифт", ImVec2 { kw * 1.6f, kh })) {
+      g_kbd_shift = !g_kbd_shift;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button(g_kbd_ru ? "РУС" : "ENG", ImVec2 { kw * 1.4f, kh })) {
+      g_kbd_ru = !g_kbd_ru;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("пробел", ImVec2 { kw * 4.0f, kh })) {
+      kbd_send(" ");
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("-", ImVec2 { kw, kh })) {
+      kbd_send("-");
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("<-", ImVec2 { kw * 1.6f, kh })) {
+      kbd_key(ImGuiKey_Backspace);
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("ввод", ImVec2 { kw * 1.6f, kh })) {
+      kbd_key(ImGuiKey_Enter);
+    }
+  }
+  ImGui::End();
+  ImGui::PopStyleVar(2);
 }
 
 void apply_style(float scale)
@@ -547,6 +737,10 @@ void render(double dt)
 
   script::manager::on_imgui();
 
+  // После скриптов: клавиатура нужна и их полям ввода, и она должна
+  // лежать поверх окна, в котором это поле.
+  draw_keyboard();
+
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
@@ -587,11 +781,27 @@ void notify(const char* text, double seconds)
     return;
   }
   std::lock_guard<std::mutex> guard { g_toast_lock };
-  // Больше шести строк на экране — это уже не подсказка, а помеха.
-  if (g_toasts.size() >= 6) {
+  // Больше четырёх строк на экране — это уже не подсказка, а помеха.
+  if (g_toasts.size() >= 4) {
     g_toasts.erase(g_toasts.begin());
   }
   g_toasts.push_back(Toast { text, now_seconds() + seconds });
+}
+
+void keyboard_note_input(const char* label)
+{
+  if (label != nullptr) {
+    g_kbd_last_input = label;
+  }
+}
+
+bool keyboard_take_refocus(const char* label)
+{
+  if (label == nullptr || g_kbd_refocus.empty() || g_kbd_refocus != label) {
+    return false;
+  }
+  g_kbd_refocus.clear();
+  return true;
 }
 
 bool notifications_enabled() { return g_toasts_enabled; }

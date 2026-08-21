@@ -41,6 +41,16 @@ void notify(const char* text, double seconds = 3.0);
 bool notifications_enabled();
 void set_notifications_enabled(bool on);
 
+// Экранная клавиатура. ImGui на Android сам ввода не поднимает: системную
+// клавиатуру вызывает Java, у игры своя, и до неё из оверлея не дотянуться.
+// Поэтому клавиатура нарисована обычными кнопками ImGui.
+//
+// Нажатие на кнопку клавиатуры — это клик мимо поля ввода, и ImGui снял бы
+// с поля фокус. Поэтому поле сообщает о себе, а клавиатура просит вернуть
+// ему фокус на следующем кадре.
+void keyboard_note_input(const char* label);
+bool keyboard_take_refocus(const char* label);
+
 bool menu_open();
 void set_menu_open(bool open);
 

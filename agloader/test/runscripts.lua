@@ -6,6 +6,7 @@ dofile(arg[1])                       -- пролог загрузчика, вы�
 
 local root = env.root
 local bad = 0
+local fileBad = 0
 
 local list = {}
 local p = io.popen('ls ' .. root .. '/scripts/*.lua')
@@ -14,6 +15,7 @@ p:close()
 
 for _, file in ipairs(list) do
   local short = file:match('([^/]+)$')
+  fileBad = bad
   local chunk, err = loadfile(file)
   if not chunk then
     bad = bad + 1
@@ -31,6 +33,25 @@ for _, file in ipairs(list) do
           io.write(('  %-28s onImgui: %s\n'):format(short, e2))
         end
       end
+      -- Отдельная проверка onTouch. В загрузчике, как и в MoonLoader,
+      -- явный false означает «касание поглощено»: скрипт, который вернул
+      -- его на обычное событие, отбирает у игры весь ввод — ни идти, ни
+      -- чат открыть. Со стороны это выглядит как зависшая игра, поэтому
+      -- ловим здесь, а не на телефоне.
+      if type(onTouch) == 'function' then
+        for _, act in ipairs({ 0, 2, 1 }) do
+          local ok4, res = pcall(onTouch, act, 0, 100, 200)
+          if not ok4 then
+            bad = bad + 1
+            io.write(('  %-28s onTouch(%d): %s\n'):format(short, act, res))
+          elseif res == false then
+            bad = bad + 1
+            io.write(('  %-28s onTouch(%d) вернул false — это поглощает '
+                      .. 'касание, игра его не увидит\n'):format(short, act))
+          end
+        end
+      end
+
       for name, fn in pairs(env.cmds) do
         local ok3, e3 = pcall(fn, '')
         if not ok3 then
@@ -38,7 +59,7 @@ for _, file in ipairs(list) do
           io.write(('  %-28s /%s: %s\n'):format(short, name, e3))
         end
       end
-      if bad == 0 then io.write(('  %-28s ok\n'):format(short)) end
+      if bad == fileBad then io.write(('  %-28s ok\n'):format(short)) end
     end
     onImgui, onFrame, onTouch, onKey = nil, nil, nil, nil
     onPause, onResume, onScriptTerminate, main = nil, nil, nil, nil

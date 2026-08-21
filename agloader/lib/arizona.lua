@@ -833,6 +833,32 @@ function arizona.engineMs()
   return memory.readu32(b + arizona.OFF_ENGINE_MS)
 end
 
+-- Встроенный в движок редактор таймцикла. Это его собственное отладочное
+-- окно на ImGui: освещение, туман, дальность прорисовки, небо и
+-- постобработка по восьми точкам суток, с сохранением в DATA/TIMECYC.JSON.
+-- Скомпилировано в релизную сборку, просто выключено флагом.
+arizona.OFF_TC_EDITOR = 0x35E5028   -- bool, показывать окно
+arizona.OFF_TC_SLOT   = 0x35E5024   -- int32, выбранная точка суток, 0..7
+
+function arizona.timecycleEditor(on)
+  local b = getBase()
+  if b == 0 then return nil end
+  if on ~= nil then
+    memory.writeu8(b + arizona.OFF_TC_EDITOR, on and 1 or 0)
+  end
+  return (memory.readu8(b + arizona.OFF_TC_EDITOR) or 0) ~= 0
+end
+
+function arizona.timecycleSlot(slot)
+  local b = getBase()
+  if b == 0 then return nil end
+  if slot then
+    memory.writei32(b + arizona.OFF_TC_SLOT,
+                    math.max(0, math.min(7, math.floor(slot))))
+  end
+  return memory.readi32(b + arizona.OFF_TC_SLOT)
+end
+
 function arizona.lightning(strength)
   local b = getBase()
   if b == 0 then return nil end
@@ -935,168 +961,77 @@ function arizona.rwCamera()
   return sanePointer(c) and c or nil
 end
 
--- Матрица мир -> экран, как её посчитал сам движок. Четыре вектора по три
--- числа с выравниванием в 16 байт: right, up, at, pos.
+-- Всё, что нужно для проекции, одним чтением: положение камеры, её оси и
+-- размер окна вида. Возвращает таблицу либо nil.
 --
--- Возвращает 12 чисел одной таблицей либо nil.
-function arizona.viewMatrix()
+-- Матрицу Camera::viewMatrix брать нельзя, хотя соблазн есть: у rw::Matrix
+-- нет четвёртой строки, и как матрица отсечения на OpenGL она не работает —
+-- отсюда и были отметки, слипшиеся в углу экрана. Бэкенд GL строит свои
+-- матрицы сам, из ltm кадра камеры и viewWindow, и здесь считается ровно
+-- то же самое.
+function arizona.cameraView()
   local c = arizona.rwCamera()
   if not c then return nil end
-  -- Четыре вектора читаются одной пачкой: матрица нужна каждый кадр, и
-  -- двенадцать отдельных чтений тут были бы двенадцатью системными вызовами.
-  local rows = {}
-  for i = 0, 3 do rows[i + 1] = c + arizona.OFF_CAM_VIEWM + i * 16 end
-  local vals, ok = memory.gather(rows, 0, 'f32x3')
-  if not vals then return nil end
+  local f = memory.deref(c + arizona.OFF_CAM_FRAME)
+  if not sanePointer(f) then return nil end
+
+  local ltm = f + arizona.OFF_FRAME_LTM
+  -- Четыре вектора матрицы и окно вида одной пачкой.
+  local rows = { ltm, ltm + 16, ltm + 32, ltm + 48 }
+  local v, ok = memory.gather(rows, 0, 'f32x3')
+  if not v then return nil end
   for i = 1, 4 do
     if not ok[i] then return nil end
   end
   for i = 1, 12 do
-    if not vals[i] or vals[i] ~= vals[i] then return nil end
+    if not v[i] or v[i] ~= v[i] then return nil end
   end
-  return vals
+
+  local wx = memory.readfloat(c + arizona.OFF_CAM_VIEWW)
+  local wy = memory.readfloat(c + arizona.OFF_CAM_VIEWW + 4)
+  if not wx or not wy or wx ~= wx or wy ~= wy then return nil end
+  if wx <= 0.001 or wy <= 0.001 or wx > 10 or wy > 10 then return nil end
+
+  return {
+    rx = v[1],  ry = v[2],  rz = v[3],     -- правая ось
+    ux = v[5],  uy = v[6],  uz = v[7],     -- верх
+    ax = v[9],  ay = v[10], az = v[11],    -- вперёд
+    px = v[13], py = v[14], pz = v[15],    -- где стоит камера
+    wx = wx, wy = wy,
+  }
 end
 
--- Где стоит камера и куда смотрит. Берётся из ltm её же кадра — той самой
--- матрицы, которую движок обновляет каждый кадр.
-function arizona.cameraFrame()
-  local c = arizona.rwCamera()
-  if not c then return nil end
-  local f = memory.deref(c + arizona.OFF_CAM_FRAME)
-  return sanePointer(f) and f or nil
-end
-
--- Возвращает позицию камеры и её направление «вперёд».
-function arizona.cameraPose()
-  local f = arizona.cameraFrame()
-  if not f then return nil end
-  local ltm = f + arizona.OFF_FRAME_LTM
-  local px = memory.readfloat(ltm + arizona.OFF_MAT_POS)
-  local py = memory.readfloat(ltm + arizona.OFF_MAT_POS + 4)
-  local pz = memory.readfloat(ltm + arizona.OFF_MAT_POS + 8)
-  -- «Вперёд» у rw::Matrix — третий вектор, at.
-  local ax = memory.readfloat(ltm + 32)
-  local ay = memory.readfloat(ltm + 36)
-  local az = memory.readfloat(ltm + 40)
-  if not saneCoord(px) or not ax or ax ~= ax then return nil end
-  return px, py, pz, ax, ay, az
-end
-
--- Поле зрения по горизонтали в градусах, прямо из камеры.
-function arizona.fov()
-  local c = arizona.rwCamera()
-  if not c then return nil end
-  local w = memory.readfloat(c + arizona.OFF_CAM_VIEWW)
-  if not w or w ~= w or w <= 0.01 or w > 10 then return nil end
-  return math.deg(math.atan(w)) * 2
-end
-
--- Мировые координаты в экранные по матрице движка.
+-- Мировые координаты в экранные.
 --
--- Ничего подбирать не нужно: движок сам посчитал матрицу, в которой уже
--- сидят и поле зрения, и соотношение сторон, и все развороты осей. Результат
--- матрицы — доли экрана от 0 до 1, поэтому остаётся умножить на размер.
+-- Считается так же, как это делает бэкенд GL у librw:
 --
--- Возвращает x, y на экране и глубину, либо nil, если точка за спиной.
-function arizona.rwWorldToScreen(wx, wy, wz, sw, sh, m)
-  m = m or arizona.viewMatrix()
-  if not m then return nil end
+--   v.x = -( (p - камера) . правая )   -- ось X он переворачивает,
+--   v.y =  ( (p - камера) . верх )     -- чтобы пространство вида стало
+--   v.z =  ( (p - камера) . вперёд )   -- левосторонним
+--   экран.x = ширина  * (0.5 + v.x / (2 * окно.x * v.z))
+--   экран.y = высота  * (0.5 - v.y / (2 * окно.y * v.z))
+--
+-- Ни поля зрения, ни соотношения сторон подставлять не надо: и то и другое
+-- уже сидит в окне вида, которое движок пересчитывает сам.
+--
+-- Возвращает x, y и расстояние вдоль взгляда, либо nil, если точка позади.
+function arizona.rwWorldToScreen(wx, wy, wz, sw, sh, cam)
+  cam = cam or arizona.cameraView()
+  if not cam then return nil end
   if not sw then sw, sh = getScreenSize() end
   if not sw or sw == 0 then return nil end
 
-  local u = m[1] * wx + m[4] * wy + m[7] * wz + m[10]
-  local v = m[2] * wx + m[5] * wy + m[8] * wz + m[11]
-  local w = m[3] * wx + m[6] * wy + m[9] * wz + m[12]
+  local dx, dy, dz = wx - cam.px, wy - cam.py, wz - cam.pz
 
-  if w <= 0.001 then return nil end
-  return (u / w) * sw, (v / w) * sh, w
-end
+  local depth = dx * cam.ax + dy * cam.ay + dz * cam.az
+  if depth <= 0.05 then return nil end
 
--- ══════════════════════════════════════════════════ камера и проекция
---
--- Матрицу камеры в коде найти не удалось: движок пишет вызовы GL в командный
--- буфер, и указатель на матрицы в аргументах — копия внутри буфера. Зато на
--- живой игре камера опознаётся однозначно: это единственная матрица
--- положения, которая стоит в нескольких метрах от игрока и смотрит прямо
--- на него. Позиция игрока известна статически, так что проверка точная.
+  local side = -(dx * cam.rx + dy * cam.ry + dz * cam.rz)
+  local up   =   dx * cam.ux + dy * cam.uy + dz * cam.uz
 
-arizona.cam = {
-  addr    = 0,
-  fov     = 70,
-  fwdAxis = 2,
-  upAxis  = 3,
-  fwdSign = 1,
-  mirrorX = false,
-  mirrorY = false,
-}
-
-local function matRow(m, i)
-  local o = (i - 1) * 4
-  return m[o + 1], m[o + 2], m[o + 3]
-end
-
-local function dot3(ax, ay, az, bx, by, bz)
-  return ax * bx + ay * by + az * bz
-end
-
--- Ищет камеру среди матриц памяти. candidates — уже готовый список от
--- memory.findmatrix; если не передан, сканирование делается здесь.
--- Возвращает адрес и точность попадания, либо nil.
-function arizona.findCamera(candidates)
-  local me = arizona.localPlayer()
-  if not me then return nil, 'игрок не найден' end
-  local px, py, pz = arizona.position(me)
-  if not px then return nil, 'позиция игрока не читается' end
-
-  local list = candidates
-  if not list then
-    local found, count = memory.findmatrix({ tol = 0.01, limit = 20000 })
-    if not found then return nil, tostring(count) end
-    list = found
-  end
-
-  local best, bestDot, bestAxis, bestSign, bestDist = 0, 0.90, 0, 1, 0
-  for _, addr in ipairs(list) do
-    local m = memory.readmatrix(addr)
-    if m then
-      local cx, cy, cz = m[13], m[14], m[15]
-      local dx, dy, dz = px - cx, py - cy, pz - cz
-      local dist = math.sqrt(dx * dx + dy * dy + dz * dz)
-      -- Слишком близко — это сам игрок, слишком далеко — не наша камера.
-      if dist > 0.7 and dist < 40 then
-        local tx, ty, tz = dx / dist, dy / dist, dz / dist
-        for axis = 1, 3 do
-          local ax, ay, az = matRow(m, axis)
-          for _, sign in ipairs({ 1, -1 }) do
-            local d = dot3(ax * sign, ay * sign, az * sign, tx, ty, tz)
-            if d > bestDot then
-              best, bestDot, bestAxis, bestSign, bestDist =
-                addr, d, axis, sign, dist
-            end
-          end
-        end
-      end
-    end
-  end
-
-  if best == 0 then return nil, 'камера не опознана' end
-
-  arizona.cam.addr = best
-  arizona.cam.fwdAxis = bestAxis
-  arizona.cam.fwdSign = bestSign
-
-  -- «Вверх» — из двух оставшихся осей та, что ближе к мировой вертикали.
-  local cm = memory.readmatrix(best)
-  local bestUp, bestUpZ = 0, -2
-  for axis = 1, 3 do
-    if axis ~= bestAxis then
-      local _, _, az = matRow(cm, axis)
-      if az > bestUpZ then bestUp, bestUpZ = axis, az end
-    end
-  end
-  arizona.cam.upAxis = bestUp
-
-  return best, bestDot, bestDist
+  local x = sw * (0.5 + side / (2 * cam.wx * depth))
+  local y = sh * (0.5 - up   / (2 * cam.wy * depth))
+  return x, y, depth
 end
 
 -- Поднимает камеру, если её ещё нет: сперва из сохранённых настроек, потом
@@ -1110,7 +1045,7 @@ function arizona.ensureCamera()
   -- игра обновится и смещение уедет.
   if arizona.useEngineCamera then
     local c = arizona.rwCamera()
-    if c and arizona.viewMatrix() then
+    if c and arizona.cameraView() then
       arizona.cam.addr = c
       arizona.cam.fov = math.floor((arizona.fov() or 70) + 0.5)
       return c, 'камера движка'
@@ -1132,7 +1067,11 @@ function arizona.ensureCamera()
   return addr, acc
 end
 
+-- Матрица камеры, найденной поиском по памяти. Когда работает камера
+-- движка, этого пути нет вовсе: cam.addr тогда указывает на rw::Camera, а
+-- читать её как матрицу положения бессмысленно.
 function arizona.cameraMatrix()
+  if arizona.useEngineCamera and arizona.rwCamera() then return nil end
   if arizona.cam.addr == 0 then return nil end
   return memory.readmatrix(arizona.cam.addr)
 end
@@ -1143,7 +1082,7 @@ arizona.rwMatrixCache = nil
 arizona.useEngineCamera = true
 
 function arizona.beginFrame()
-  arizona.rwMatrixCache = arizona.useEngineCamera and arizona.viewMatrix() or nil
+  arizona.rwMatrixCache = arizona.useEngineCamera and arizona.cameraView() or nil
   return arizona.rwMatrixCache
 end
 
