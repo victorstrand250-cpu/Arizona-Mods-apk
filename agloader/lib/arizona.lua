@@ -54,31 +54,59 @@ arizona.SPEED_TO_KMH = 175.0
 -- поэтому берём с запасом и проверяем каждый слот на осмысленность.
 arizona.MAX_SLOTS = 1024
 
--- ═════════════════════════════════════════════════════════ пул сущностей
+-- ══════════════════════════════════════════════════════ сущности мира
 
--- Второй крупный массив движка: указатели на сущности мира, шаг 8 байт.
--- Найден по коду, где рядом стоит предел индекса и проверка типа:
+-- Пулы сущностей движок держит не в .bss, а в куче: в библиотеке лежит
+-- только указатель на массив. В коде это выглядит так (0x56DBA0):
+--
+--   adrp x8, 0x315a000
+--   ldr  x8, [x8, #3608]        ; сам массив
+--   ldrh w9, [x22, #172]        ; номер места
+--   cmp  w9, #0x7cf             ; предел, 2000 мест
+--   ldr  x10, [x8, x9, lsl #3]  ; сущность
+--   ldr  d0, [x10, #56]         ; позиция x и y
+--   ldr  s1, [x10, #64]         ; позиция z
+--
+-- Сразу за массивом указателей идёт карта занятости — по байту на место
+-- (0x699C20: strb wzr, [массив + 8000 + номер]).
+arizona.POOLS = {
+  { name = 'сущности', global = 0x315AE18, count = 2000 },
+  { name = 'объекты',  global = 0x315AE28, count = 1000 },
+  { name = 'пешеходы', global = 0x3159650, count = 1000 },
+}
+
+-- Поля сущности. Позиция и скорость те же, что у игрока: пешеход,
+-- транспорт и объект мира происходят от одного класса.
+arizona.OFF_ENT_MODEL = 108   -- int16, номер модели (230 обращений в коде)
+arizona.OFF_ENT_STATE = 980   -- int32, состояние; 49 — за рулём
+
+-- Массив описаний моделей: 30300 мест по указателю. Раньше он принимался
+-- за пул сущностей — отсюда и пустой ESP. Отличается однозначно: сущность
+-- читают по +56 (позиция), описание модели — по +29 и +44, а по +56 не
+-- читают никогда.
 --
 --   mov  w8, #0x765c          ; предел 30300
---   cmp  w20, w8
---   adrp x8, 0x3110000
---   add  x8, x8, #0x540
 --   ldr  x22, [x8, x20, lsl #3]
 --   ldrb w8, [x22, #29]       ; тип
 --   mov  w9, #0x4e0           ; маска допустимых типов
---   tst  w8, w9
 --
--- Маска 0x4E0 пропускает типы 5, 6, 7, 8 и 10.
-arizona.OFF_POOL   = 0x3110540
-arizona.POOL_MAX   = 30300
-arizona.OFF_TYPE   = 29     -- uint8, тип сущности
-arizona.OFF_MODEL  = 44     -- uint16, номер модели
-arizona.OFF_INNER  = 32     -- указатель на описание модели с габаритами
+-- Индекс сюда берут прямо из сущности: ldrsh w, [сущность, #108].
+arizona.OFF_MODEL_INFO  = 0x3110540
+arizona.MODEL_INFO_MAX  = 30300
+arizona.OFF_MI_TYPE     = 29    -- uint8, тип модели
+arizona.OFF_MI_INDEX    = 44    -- uint16, номер модели
+arizona.OFF_MI_INNER    = 32    -- указатель на геометрию
 
--- Смещение позиции внутри объекта пула по коду вычислить не удалось:
--- отрисовка берёт её через матрицу, а не полем. Зато его можно определить
--- на живой игре — см. findPoolPositionOffset ниже.
-arizona.poolPosOffset = nil
+-- Старые имена: ими пользовались скрипты, пока пул считался сущностным.
+arizona.OFF_POOL  = arizona.OFF_MODEL_INFO
+arizona.POOL_MAX  = arizona.MODEL_INFO_MAX
+arizona.OFF_TYPE  = arizona.OFF_MI_TYPE
+arizona.OFF_MODEL = arizona.OFF_MI_INDEX
+arizona.OFF_INNER = arizona.OFF_MI_INNER
+
+-- Позиция сущности лежит там же, где у игрока. Значение перепроверяется на
+-- живой игре — см. findPoolPositionOffset.
+arizona.poolPosOffset = 56
 
 -- ═══════════════════════════════════════════════════════════════ основа
 
@@ -131,25 +159,60 @@ end
 
 -- ═══════════════════════════════════════════════════════ работа с пулом
 
-function arizona.poolPtr(index)
+-- Адрес массива сущностей для пула: в библиотеке лежит указатель, сам
+-- массив выделен в куче и переезжает при каждом запуске.
+function arizona.poolArray(n)
   local b = getBase()
-  if b == 0 or not index then return nil end
-  local p = memory.deref(b + arizona.OFF_POOL + index * 8)
+  local p = arizona.POOLS[n]
+  if b == 0 or not p then return nil end
+  local addr = memory.deref(b + p.global)
+  if not sanePointer(addr) then return nil end
+  return addr, p.count, p.name
+end
+
+-- Карта занятости: по байту на место сразу за массивом указателей.
+function arizona.poolUsed(n, index)
+  local addr, count = arizona.poolArray(n)
+  if not addr or index < 0 or index >= count then return false end
+  local u = memory.readu8(addr + count * 8 + index)
+  return u ~= nil and u ~= 0
+end
+
+-- Описание модели по её номеру.
+function arizona.modelInfo(model)
+  local b = getBase()
+  if b == 0 or not model or model < 0 or model >= arizona.MODEL_INFO_MAX then
+    return nil
+  end
+  local p = memory.deref(b + arizona.OFF_MODEL_INFO + model * 8)
+  if not sanePointer(p) then return nil end
+  return p, memory.readu8(p + arizona.OFF_MI_TYPE)
+end
+
+-- Место пула. Обратная совместимость: без номера пула берётся первый.
+function arizona.poolPtr(index, n)
+  local addr, count = arizona.poolArray(n or 1)
+  if not addr or not index or index < 0 or index >= count then return nil end
+  local p = memory.deref(addr + index * 8)
   if not sanePointer(p) then return nil end
   return p
 end
 
 function arizona.poolType(ptr)
-  return ptr and memory.readu8(ptr + arizona.OFF_TYPE) or nil
+  if not ptr then return nil end
+  local model = memory.readi16(ptr + arizona.OFF_ENT_MODEL)
+  if not model then return nil end
+  local _, t = arizona.modelInfo(model)
+  return t
 end
 
 function arizona.poolModel(ptr)
-  return ptr and memory.readu16(ptr + arizona.OFF_MODEL) or nil
+  return ptr and memory.readi16(ptr + arizona.OFF_ENT_MODEL) or nil
 end
 
 function arizona.poolPosition(ptr)
-  local off = arizona.poolPosOffset
-  if not ptr or not off then return nil end
+  local off = arizona.poolPosOffset or arizona.OFF_POS
+  if not ptr then return nil end
   local x = memory.readfloat(ptr + off)
   local y = memory.readfloat(ptr + off + 4)
   local z = memory.readfloat(ptr + off + 8)
@@ -159,88 +222,146 @@ function arizona.poolPosition(ptr)
   return x, y, z
 end
 
--- Занятые места пула.
+-- Сущности мира из всех пулов сразу.
 --
--- opts: { limit = 30300, max = 2000, near = {x,y,z}, radius = 300 }
-function arizona.poolObjects(opts)
+-- opts: { pools = {1,2,3}, near = {x,y,z}, radius = 300, max = 4000 }
+--
+-- Читается пакетно: массив указателей одним куском, затем каждое поле сразу
+-- у всех сущностей. Поштучное чтение здесь неприменимо — на четыре тысячи
+-- мест вышло бы больше десяти тысяч системных вызовов на одно обновление.
+function arizona.entities(opts)
   opts = opts or {}
-  local limit = math.min(opts.limit or arizona.POOL_MAX, arizona.POOL_MAX)
-  local max = opts.max or 2000
+  local max = opts.max or 4000
   local near, radius = opts.near, opts.radius or 300
+  local which = opts.pools
 
   if getBase() == 0 then return {} end
 
+  local r2 = radius * radius
+  local nx, ny, nz
+  if near then nx, ny, nz = near[1], near[2], near[3] end
+
+  local off = arizona.poolPosOffset or arizona.OFF_POS
   local out = {}
-  for i = 0, limit - 1 do
-    local ptr = arizona.poolPtr(i)
-    if ptr then
-      local rec = { index = i, ptr = ptr,
-                    type = arizona.poolType(ptr),
-                    model = arizona.poolModel(ptr) }
-      if arizona.poolPosOffset then
-        local x, y, z = arizona.poolPosition(ptr)
-        if x then
-          rec.x, rec.y, rec.z = x, y, z
-          if near then
-            local dx, dy, dz = x - near[1], y - near[2], z - near[3]
-            local d = math.sqrt(dx * dx + dy * dy + dz * dz)
-            if d > radius then rec = nil else rec.dist = d end
+
+  for n = 1, #arizona.POOLS do
+    local take = true
+    if which then
+      take = false
+      for _, w in ipairs(which) do if w == n then take = true end end
+    end
+
+    local addr, count, name = arizona.poolArray(n)
+    if take and addr then
+      local ptrs, slots = memory.readptrs(addr, count)
+      if ptrs and #ptrs > 0 then
+        local pos, posOk = memory.gather(ptrs, off, 'f32x3')
+        local models = memory.gather(ptrs, arizona.OFF_ENT_MODEL, 'i16')
+
+        for i = 1, #ptrs do
+          local x, y, z, d
+          local keep = true
+          if posOk[i] then
+            local o = (i - 1) * 3
+            x, y, z = pos[o + 1], pos[o + 2], pos[o + 3]
+            if not (saneCoord(x) and saneCoord(y) and saneCoord(z)) then
+              x, y, z = nil, nil, nil
+            end
           end
-        elseif near then
-          rec = nil
+          if near then
+            if not x then
+              keep = false
+            else
+              local dx, dy, dz = x - nx, y - ny, z - nz
+              local q = dx * dx + dy * dy + dz * dz
+              if q > r2 then keep = false else d = math.sqrt(q) end
+            end
+          end
+          if keep then
+            out[#out + 1] = {
+              pool = n, poolName = name, index = slots[i], ptr = ptrs[i],
+              model = models and models[i], x = x, y = y, z = z, dist = d,
+            }
+            if #out >= max then return out end
+          end
         end
-      end
-      if rec then
-        out[#out + 1] = rec
-        if #out >= max then break end
       end
     end
   end
   return out
 end
 
--- Определяет смещение позиции опытным путём. Объекты пула стримятся вокруг
--- игрока, поэтому верное смещение — то, где у большинства объектов лежат
--- три числа, похожие на координаты неподалёку.
+-- Прежнее имя: скрипты звали пул объектов так.
+function arizona.poolObjects(opts)
+  return arizona.entities(opts)
+end
+
+-- Проверяет, что позиция сущности действительно лежит по known-смещению, и
+-- при расхождении подбирает верное. Сущности стримятся вокруг игрока,
+-- поэтому верное смещение — то, где у большинства лежат координаты
+-- неподалёку.
+--
+-- Возвращает смещение, сколько сущностей его подтвердили и размер выборки.
 function arizona.findPoolPositionOffset(px, py, pz, opts)
   opts = opts or {}
-  local sample = opts.sample or 300
+  local sample = opts.sample or 400
   local maxOff = opts.maxOff or 512
   local radius = opts.radius or 600
 
   local objs = {}
-  for i = 0, arizona.POOL_MAX - 1 do
-    local p = arizona.poolPtr(i)
-    if p then
-      objs[#objs + 1] = p
-      if #objs >= sample then break end
+  for n = 1, #arizona.POOLS do
+    local addr, count = arizona.poolArray(n)
+    if addr then
+      local ptrs = memory.readptrs(addr, count)
+      for i = 1, #ptrs do
+        objs[#objs + 1] = ptrs[i]
+        if #objs >= sample then break end
+      end
     end
+    if #objs >= sample then break end
   end
   if #objs < 8 then return nil, 0, #objs end
 
-  local best, bestHits = nil, 0
-  for off = 0, maxOff - 12, 4 do
+  local function score(o)
+    local pos, ok = memory.gather(objs, o, 'f32x3')
+    if not pos then return 0 end
     local hits = 0
-    for _, p in ipairs(objs) do
-      local x = memory.readfloat(p + off)
-      if x and x == x and x > -30000 and x < 30000 then
-        local y = memory.readfloat(p + off + 4)
-        local z = memory.readfloat(p + off + 8)
-        if y and z and y == y and z == z then
+    for i = 1, #objs do
+      if ok[i] then
+        local k = (i - 1) * 3
+        local x, y, z = pos[k + 1], pos[k + 2], pos[k + 3]
+        -- Ровный ноль встречается в памяти слишком часто, чтобы верить.
+        if saneCoord(x) and saneCoord(y) and saneCoord(z)
+           and not (x == 0 and y == 0 and z == 0) then
           local dx, dy, dz = x - px, y - py, z - pz
-          local d = math.sqrt(dx * dx + dy * dy + dz * dz)
-          -- Ровный ноль встречается в памяти слишком часто, чтобы верить.
-          if d < radius and not (x == 0 and y == 0 and z == 0) then
+          if dx * dx + dy * dy + dz * dz < radius * radius then
             hits = hits + 1
           end
         end
       end
     end
-    if hits > bestHits then best, bestHits = off, hits end
+    return hits
   end
 
-  -- Меньше четверти выборки — это совпадение, а не находка.
-  if bestHits < #objs / 4 then return nil, bestHits, #objs end
+  local need = #objs / 4
+  local known = arizona.OFF_POS
+  local kh = score(known)
+  if kh >= need then
+    arizona.poolPosOffset = known
+    return known, kh, #objs
+  end
+
+  local best, bestHits = nil, kh
+  for o = 0, maxOff - 12, 4 do
+    if o ~= known then
+      local h = score(o)
+      if h > bestHits then best, bestHits = o, h end
+    end
+  end
+
+  if not best or bestHits < need then
+    return nil, bestHits, #objs
+  end
   arizona.poolPosOffset = best
   return best, bestHits, #objs
 end
@@ -306,33 +427,200 @@ end
 -- opts: { limit = 1024, withPos = true, skipLocal = false }
 function arizona.players(opts)
   opts = opts or {}
-  local limit = opts.limit or arizona.MAX_SLOTS
+  local limit = math.min(opts.limit or arizona.MAX_SLOTS, arizona.MAX_SLOTS)
   local withPos = opts.withPos ~= false
   local b = getBase()
   if b == 0 then return {} end
 
   local me = arizona.localIndex()
-  local out = {}
 
-  for i = 0, limit - 1 do
-    if not (opts.skipLocal and i == me) then
-      local ptr = arizona.playerPtr(i)
-      if ptr then
-        local rec = { index = i, ptr = ptr, isLocal = (i == me) }
-        if withPos then
-          local x, y, z = arizona.position(ptr)
-          if x then
+  -- Массив слотов читается одним куском, поля — пакетами: так весь список
+  -- игроков обходится примерно за пяток системных вызовов.
+  local ptrs, slots = memory.readptrs(b + arizona.OFF_PLAYER_ARRAY, limit,
+                                      arizona.SLOT_STRIDE)
+  if not ptrs or #ptrs == 0 then return {} end
+
+  local pos, posOk, veh, inVeh
+  if withPos then
+    pos, posOk = memory.gather(ptrs, arizona.OFF_POS, 'f32x3')
+    veh = memory.gather(ptrs, arizona.OFF_VEHICLE, 'ptr')
+    inVeh = memory.gather(ptrs, arizona.OFF_IN_VEH, 'u8')
+  end
+
+  local out = {}
+  for i = 1, #ptrs do
+    local idx = slots[i]
+    if not (opts.skipLocal and idx == me) then
+      local rec = { index = idx, ptr = ptrs[i], isLocal = (idx == me) }
+      if withPos then
+        rec.inVehicle = (inVeh[i] ~= 0) and sanePointer(veh[i]) or false
+        rec.vehicle = rec.inVehicle and veh[i] or nil
+        if posOk[i] then
+          local o = (i - 1) * 3
+          local x, y, z = pos[o + 1], pos[o + 2], pos[o + 3]
+          if saneCoord(x) and saneCoord(y) and saneCoord(z) then
             rec.x, rec.y, rec.z = x, y, z
-            rec.inVehicle = arizona.inVehicle(ptr)
-            out[#out + 1] = rec
           end
-        else
-          out[#out + 1] = rec
         end
+        -- В транспорте координаты живут в объекте транспорта.
+        if rec.inVehicle then
+          local vx, vy, vz = arizona.position(rec.vehicle)
+          if vx then rec.x, rec.y, rec.z = vx, vy, vz end
+        end
+        if rec.x then out[#out + 1] = rec end
+      else
+        out[#out + 1] = rec
       end
     end
   end
   return out
+end
+
+-- ═══════════════════════════════════════════════════════════════ текст
+--
+-- Ник, название и прочие подписи движок держит в std::string. У libc++
+-- короткая строка лежит прямо в объекте: первый байт — длина, сдвинутая на
+-- бит, дальше сами символы. Длинная — указатель, длина и ёмкость. Оба вида
+-- распознаются здесь, поэтому искать подпись можно, ничего не зная о том,
+-- какой она длины.
+
+local function printableRun(bytes)
+  local n = 0
+  for i = 1, #bytes do
+    local c = bytes:byte(i)
+    if c == 0 then break end
+    -- Печатная латиница, знаки и старшая половина: там кириллица UTF-8.
+    if c < 0x20 or c == 0x7F then return nil end
+    n = n + 1
+  end
+  return n
+end
+
+-- Читает строку по адресу: сначала как std::string, потом как обычную
+-- нуль-терминированную. Возвращает текст и вид ('короткая', 'длинная',
+-- 'c-строка'), либо nil.
+function arizona.readText(addr, maxLen)
+  maxLen = maxLen or 128
+  if not sanePointer(addr) then return nil end
+
+  local head = memory.readbytes(addr, 24)
+  if not head or #head < 24 then return nil end
+
+  -- Длинная строка libc++: [0..7] данные, [8..15] длина, старший бит
+  -- ёмкости взведён.
+  local dataPtr = memory.deref(addr)
+  local len = memory.readu32(addr + 8)
+  if sanePointer(dataPtr) and len and len > 0 and len <= maxLen then
+    local body = memory.readbytes(dataPtr, len)
+    if body and #body == len and printableRun(body) == len then
+      return body, 'длинная'
+    end
+  end
+
+  -- Короткая строка libc++: длина в первом байте, сдвинутая влево на бит.
+  local first = head:byte(1)
+  local shortLen = math.floor(first / 2)
+  if first % 2 == 0 and shortLen >= 1 and shortLen <= 22 then
+    local body = head:sub(2, 1 + shortLen)
+    if #body == shortLen and printableRun(body) == shortLen
+       and head:byte(2 + shortLen) == 0 then
+      return body, 'короткая'
+    end
+  end
+
+  -- Просто char[]: текст лежит с самого начала.
+  local raw = memory.readbytes(addr, maxLen)
+  if raw then
+    local n = printableRun(raw)
+    if n and n >= 3 then return raw:sub(1, n), 'c-строка' end
+  end
+  return nil
+end
+
+-- Перебирает блок памяти и собирает всё, что похоже на текст: и сами
+-- строки, и указатели на них. Так находится ник — не зная его смещения,
+-- достаточно узнать себя в списке.
+--
+-- Возвращает список { off = смещение, kind = вид, text = текст }.
+function arizona.findTexts(addr, size, opts)
+  opts = opts or {}
+  local minLen = opts.minLen or 3
+  local out = {}
+  if not sanePointer(addr) then return out end
+
+  local blockSize = math.min(size or 512, 65536)
+  local block = memory.readbytes(addr, blockSize)
+  if not block then return out end
+
+  local seen = {}
+  for off = 0, #block - 1 do
+    -- Текст прямо в блоке.
+    local tail = block:sub(off + 1, math.min(off + 64, #block))
+    local n = printableRun(tail)
+    if n and n >= minLen and not seen[off] then
+      local text = tail:sub(1, n)
+      out[#out + 1] = { off = off, kind = 'в блоке', text = text }
+      for k = off, off + n - 1 do seen[k] = true end
+    end
+  end
+
+  -- Указатели на текст: каждые 8 байт по выравниванию.
+  for off = 0, #block - 8, 8 do
+    local lo = 0
+    for k = 7, 0, -1 do lo = lo * 256 + block:byte(off + k + 1) end
+    local p = lo % 0x1000000000000
+    if sanePointer(p) then
+      local text, kind = arizona.readText(addr + off)
+      if text and #text >= minLen then
+        out[#out + 1] = { off = off, kind = kind, text = text }
+      end
+    end
+  end
+
+  table.sort(out, function(a, c) return a.off < c.off end)
+  return out
+end
+
+-- Адрес самого слота игрока (не объекта): 336 байт, в начале указатель.
+function arizona.slotAddr(index)
+  local b = getBase()
+  if b == 0 or not index then return nil end
+  return b + arizona.OFF_PLAYER_ARRAY + index * arizona.SLOT_STRIDE
+end
+
+-- Смещение ника в слоте. Определяется на живой игре: находится тот текст,
+-- который совпадает у своего слота с известным ником.
+arizona.nickOffset = nil
+
+function arizona.nick(index)
+  if not arizona.nickOffset then return nil end
+  local a = arizona.slotAddr(index)
+  if not a then return nil end
+  return arizona.readText(a + arizona.nickOffset)
+end
+
+-- Ищет смещение ника: перебирает тексты в слоте и берёт тот, что совпал
+-- с переданным ником. Смещение общее для всех слотов.
+function arizona.findNickOffset(nick, index)
+  index = index or arizona.localIndex()
+  if not index then return nil, 'слот не определён' end
+  local a = arizona.slotAddr(index)
+  if not a then return nil, 'база не найдена' end
+
+  local list = arizona.findTexts(a, arizona.SLOT_STRIDE)
+  for _, t in ipairs(list) do
+    if t.text == nick then
+      arizona.nickOffset = t.off
+      return t.off, t.kind
+    end
+  end
+  for _, t in ipairs(list) do
+    if t.text:find(nick, 1, true) then
+      arizona.nickOffset = t.off
+      return t.off, t.kind
+    end
+  end
+  return nil, 'такой текст в слоте не встретился'
 end
 
 function arizona.distanceTo(ptr, x, y, z)
@@ -485,6 +773,9 @@ function arizona.saveProjection(path)
   if arizona.poolPosOffset then
     f:write(('poolPos=%d\n'):format(arizona.poolPosOffset))
   end
+  if arizona.nickOffset then
+    f:write(('nickOff=%d\n'):format(arizona.nickOffset))
+  end
   f:close()
   return true
 end
@@ -503,6 +794,7 @@ function arizona.loadProjection(path)
     elseif k == 'mirrorX' then c.mirrorX = (v == 'true')
     elseif k == 'mirrorY' then c.mirrorY = (v == 'true')
     elseif k == 'poolPos' then arizona.poolPosOffset = tonumber(v)
+    elseif k == 'nickOff' then arizona.nickOffset = tonumber(v)
     end
   end
   f:close()

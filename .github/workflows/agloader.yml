@@ -31,6 +31,11 @@ jobs:
           sudo apt-get install -y -qq g++-aarch64-linux-gnu libgles-dev libegl-dev
           cd agloader && ./hostcheck.sh
 
+      - name: Проверка скриптов
+        run: |
+          sudo apt-get install -y -qq lua5.1
+          cd agloader && ./scriptcheck.sh
+
       - name: Сборка NDK
         run: |
           echo "NDK: $ANDROID_NDK_LATEST_HOME"

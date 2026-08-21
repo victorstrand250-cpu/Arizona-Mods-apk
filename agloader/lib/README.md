@@ -24,7 +24,10 @@ local json     = require 'json'
 | `bitex` | libstd | нужен `bit`, он есть в LuaJIT |
 | `moonloader` | MoonLoader (MIT) | таблицы констант |
 | `sampfuncs` | libstd | таблицы констант |
-| `arizona` | написан для AGLoader | данные игрока и игроков из движка |
+| `sha1` | libstd | как есть, чистый Lua при отсутствии `bit` |
+| `timerwheel` | libstd | как есть |
+| `jsoncfg` | libstd (MoonLoader) | как есть, поверх `json` |
+| `arizona` | написан для AGLoader | игрок, игроки, пулы сущностей, модели и камера |
 | `socket`, `socket.http`, `socket.url` | написаны для AGLoader | сеть в духе LuaSocket |
 | `requests` | написан для AGLoader | как в MonetLoader, поверх socket.http |
 
@@ -113,6 +116,8 @@ local body, code, headers = http.request('https://example.com')
 | `cjson` | C-модуль; вместо него `json` |
 | `iconv` | C-модуль; вместо него `encoding` |
 | `fAwesome5/6` | это имена иконок, но шрифт загрузчика — системный Roboto, глифов иконок в нём нет |
+| `mime` | держится на C-модуле `mime.core`; base64 закрыт своим `base64` |
+| `widgets` | номера экранных кнопок старого движка, в новом их нет |
 
 ## Что даёт сам загрузчик
 
@@ -124,4 +129,34 @@ local body, code, headers = http.request('https://example.com')
   `doesFileExist`, `doesDirectoryExist`, `createDirectory`, `deleteFile`;
 * `getScreenResolution` (то же, что `getScreenSize`), `getUiScale`;
 * `getDistanceBetweenCoords2d/3d`, `round`, `stripColorCodes`;
-* `print` уходит в лог загрузчика.
+* `print` уходит в лог загрузчика;
+* `script.this`, `encodeJson`, `decodeJson`, `setTimer` — их ждут
+  библиотеки MoonLoader, поэтому они есть всегда.
+
+## arizona
+
+Всё, что найдено в движке, собрано здесь — отдельно искать адреса не нужно:
+
+```lua
+local ag = require 'arizona'
+
+local me = ag.localPlayer()
+local x, y, z = ag.position(me)
+print(ag.speedKmh(me), ag.inVehicle(me))
+
+for _, p in ipairs(ag.players({ skipLocal = true })) do
+  print(p.index, p.x, p.y, p.z, ag.nick(p.index))
+end
+
+-- Сущности мира из всех трёх пулов сразу, только рядом с игроком.
+for _, e in ipairs(ag.entities({ near = { x, y, z }, radius = 100 })) do
+  print(e.poolName, e.index, e.model, e.dist)
+end
+
+-- Мировые координаты в экранные — для ESP.
+local sx, sy = ag.worldToScreen(e.x, e.y, e.z)
+```
+
+Камера и смещения, которые определяются на живой игре, лежат в общем файле
+настроек: `ag.saveProjection()` и `ag.loadProjection()`. Подбирает их
+`/recon`, а пользуются все скрипты.

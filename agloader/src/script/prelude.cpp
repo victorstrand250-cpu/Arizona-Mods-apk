@@ -159,6 +159,43 @@ function round(num, places)
   return math.floor(num * mult + 0.5) / mult
 end
 
+-- ───────────────────────────────── привычные глобали MoonLoader
+
+-- Библиотеки MoonLoader (jsoncfg и подобные) обращаются к script.this и к
+-- encodeJson/decodeJson как к чему-то, что есть всегда. Даём то же самое,
+-- иначе они падают на первой же строке.
+script = script or {}
+
+do
+  local info = thisScript and thisScript() or nil
+  script.this = info or { name = '?', filename = '?', path = '?',
+                          version = '?', author = '?', id = 0 }
+  -- В MoonLoader script.this.filename — имя файла без пути.
+  script.this.filename = (script.this.filename or '?')
+                         :match('([^/\\]+)$') or script.this.filename
+  script.this.name = script.this.name or script.this.filename
+end
+
+function encodeJson(value, pretty)
+  return require('json').encode(value, pretty)
+end
+
+function decodeJson(text)
+  local ok, res = pcall(function() return require('json').decode(text) end)
+  if not ok then error(res, 2) end
+  if res == nil then error('json: не разобрать', 2) end
+  return res
+end
+
+-- MoonLoader: отложенный вызов внутри корутины.
+function setTimer(ms, fn, ...)
+  local args = { ... }
+  return lua_thread.create(function()
+    wait(ms)
+    fn(unpack(args))
+  end)
+end
+
 -- Расстояние между точками — есть почти в каждом скрипте.
 function getDistanceBetweenCoords3d(x1, y1, z1, x2, y2, z2)
   local dx, dy, dz = x1 - x2, y1 - y2, z1 - z2

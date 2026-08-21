@@ -632,6 +632,269 @@ const char* elf_section_hint(std::uintptr_t addr)
   return "куча";
 }
 
+// ═══════════════════════════════════════════════════════ пакетное чтение
+//
+// Перебор пула — это десятки тысяч адресов. Поштучное чтение здесь
+// невозможно: тридцать тысяч системных вызовов на кадр кладут игру намертво.
+// process_vm_readv умеет забрать много разрозненных кусков за один вызов,
+// на этом и построены readptrs с gather.
+
+// Читает длинный сплошной кусок по частям. Дырка в середине не должна
+// обрывать всё: непрочитанные части остаются нулями и помечаются в ok.
+void span_read(std::uintptr_t addr, std::vector<unsigned char>& out,
+               std::vector<char>& ok, std::size_t chunk)
+{
+  const std::size_t total = out.size();
+  ok.assign((total + chunk - 1) / chunk, 0);
+  for (std::size_t off = 0, c = 0; off < total; off += chunk, ++c) {
+    std::size_t len = total - off;
+    if (len > chunk) {
+      len = chunk;
+    }
+    ok[c] = safe_read(addr + off, &out[off], len) ? 1 : 0;
+  }
+}
+
+// Один process_vm_readv на много разрозненных кусков. Ядро останавливается
+// на первом неудачном куске и возвращает, сколько успело, — значит битый
+// указатель виден по месту обрыва. Помечаем его и продолжаем со следующего,
+// так один мусорный адрес из тысячи не рушит всю пачку.
+void batch_read(const std::vector<std::uintptr_t>& addrs, std::size_t elem,
+                std::vector<unsigned char>& out, std::vector<char>& ok)
+{
+  const std::size_t n = addrs.size();
+  out.assign(n * elem, 0);
+  ok.assign(n, 0);
+  if (n == 0 || elem == 0) {
+    return;
+  }
+
+  // Ядро принимает не больше IOV_MAX кусков за раз.
+  constexpr std::size_t kBatch = 512;
+
+  std::vector<iovec> local;
+  std::vector<iovec> remote;
+
+  std::size_t i = 0;
+  while (i < n) {
+    std::size_t take = n - i;
+    if (take > kBatch) {
+      take = kBatch;
+    }
+
+    local.clear();
+    remote.clear();
+    local.reserve(take);
+    remote.reserve(take);
+    for (std::size_t k = 0; k < take; ++k) {
+      local.push_back(iovec { &out[(i + k) * elem], elem });
+      remote.push_back(
+          iovec { reinterpret_cast<void*>(addrs[i + k]), elem });
+    }
+
+    const ssize_t got = ::process_vm_readv(::getpid(), local.data(),
+                                           local.size(), remote.data(),
+                                           remote.size(), 0);
+    if (got <= 0) {
+      ++i;  // споткнулись на самом первом — он и битый
+      continue;
+    }
+
+    std::size_t done = static_cast<std::size_t>(got) / elem;
+    if (done > take) {
+      done = take;
+    }
+    for (std::size_t k = 0; k < done; ++k) {
+      ok[i + k] = 1;
+    }
+    i += (done >= take) ? take : (done + 1);
+  }
+}
+
+// memory.readptrs(адрес, сколько, [шаг]) -> указатели, номера мест
+//
+// Читает массив указателей одним куском и возвращает только осмысленные,
+// вместе с номерами мест, где они лежали. Тридцать тысяч мест пула — это
+// один системный вызов вместо тридцати тысяч.
+int l_read_ptrs(lua_State* L)
+{
+  const std::uintptr_t addr = untag(to_addr(L, 1));
+  long long count = static_cast<long long>(luaL_checknumber(L, 2));
+  long long stride = static_cast<long long>(luaL_optnumber(L, 3, 8));
+
+  if (count < 0) {
+    count = 0;
+  }
+  if (count > 4000000) {
+    count = 4000000;
+  }
+  if (stride < 8) {
+    stride = 8;
+  }
+
+  const std::size_t total = static_cast<std::size_t>(count) *
+                            static_cast<std::size_t>(stride);
+  // Кусок кратен шагу, иначе очередной указатель попал бы на стык двух
+  // кусков и склеился из прочитанного с непрочитанным.
+  const std::size_t kChunk =
+      ((1u << 20) / static_cast<std::size_t>(stride)) *
+      static_cast<std::size_t>(stride);
+
+  std::vector<unsigned char> buf(total, 0);
+  std::vector<char> ok;
+  if (total != 0) {
+    span_read(addr, buf, ok, kChunk);
+  }
+
+  lua_newtable(L);  // указатели
+  lua_newtable(L);  // номера мест
+  int out = 0;
+
+  for (long long i = 0; i < count; ++i) {
+    const std::size_t at = static_cast<std::size_t>(i) *
+                           static_cast<std::size_t>(stride);
+    if (!ok[at / kChunk]) {
+      continue;
+    }
+    std::uint64_t raw = 0;
+    std::memcpy(&raw, &buf[at], sizeof(raw));
+    const std::uintptr_t p = untag(static_cast<std::uintptr_t>(raw));
+    if (p <= 0x10000 || p >= (1ull << 48)) {
+      continue;
+    }
+    ++out;
+    lua_pushnumber(L, static_cast<lua_Number>(p));
+    lua_rawseti(L, -3, out);
+    lua_pushnumber(L, static_cast<lua_Number>(i));
+    lua_rawseti(L, -2, out);
+  }
+  return 2;
+}
+
+// memory.gather(указатели, смещение, тип) -> значения, годность
+//
+// Читает одно и то же поле сразу у многих объектов. Значений столько же,
+// сколько указателей, кроме 'f32x3' и 'f32x4' — там на объект приходится
+// три или четыре числа подряд. Второй результат — таблица «прочиталось ли»
+// по каждому объекту; у непрочитанных значения нулевые.
+int l_gather(lua_State* L)
+{
+  luaL_checktype(L, 1, LUA_TTABLE);
+  const long long offset = static_cast<long long>(luaL_optnumber(L, 2, 0));
+  const char* type = luaL_optstring(L, 3, "u32");
+
+  std::size_t elem = 4;
+  int comps = 1;
+  if (!std::strcmp(type, "i8") || !std::strcmp(type, "u8")) {
+    elem = 1;
+  } else if (!std::strcmp(type, "i16") || !std::strcmp(type, "u16")) {
+    elem = 2;
+  } else if (!std::strcmp(type, "i32") || !std::strcmp(type, "u32") ||
+             !std::strcmp(type, "f32")) {
+    elem = 4;
+  } else if (!std::strcmp(type, "i64") || !std::strcmp(type, "u64") ||
+             !std::strcmp(type, "f64") || !std::strcmp(type, "ptr")) {
+    elem = 8;
+  } else if (!std::strcmp(type, "f32x3")) {
+    elem = 12;
+    comps = 3;
+  } else if (!std::strcmp(type, "f32x4")) {
+    elem = 16;
+    comps = 4;
+  } else {
+    lua_pushnil(L);
+    lua_pushfstring(L, "неизвестный тип поля: %s", type);
+    return 2;
+  }
+
+  const std::size_t n = static_cast<std::size_t>(lua_objlen(L, 1));
+  std::vector<std::uintptr_t> addrs;
+  addrs.reserve(n);
+  for (std::size_t i = 0; i < n; ++i) {
+    lua_rawgeti(L, 1, static_cast<int>(i) + 1);
+    addrs.push_back(untag(static_cast<std::uintptr_t>(
+        static_cast<long long>(lua_tonumber(L, -1)))) +
+        static_cast<std::uintptr_t>(offset));
+    lua_pop(L, 1);
+  }
+
+  std::vector<unsigned char> data;
+  std::vector<char> ok;
+  batch_read(addrs, elem, data, ok);
+
+  lua_createtable(L, static_cast<int>(n) * comps, 0);
+  lua_createtable(L, static_cast<int>(n), 0);
+
+  for (std::size_t i = 0; i < n; ++i) {
+    const unsigned char* p = &data[i * elem];
+    for (int c = 0; c < comps; ++c) {
+      lua_Number v = 0;
+      if (comps > 1) {
+        float f = 0;
+        std::memcpy(&f, p + c * 4, 4);
+        v = static_cast<lua_Number>(f);
+      } else if (!std::strcmp(type, "i8")) {
+        v = *reinterpret_cast<const std::int8_t*>(p);
+      } else if (!std::strcmp(type, "u8")) {
+        v = *p;
+      } else if (!std::strcmp(type, "i16")) {
+        std::int16_t t = 0; std::memcpy(&t, p, 2); v = t;
+      } else if (!std::strcmp(type, "u16")) {
+        std::uint16_t t = 0; std::memcpy(&t, p, 2); v = t;
+      } else if (!std::strcmp(type, "i32")) {
+        std::int32_t t = 0; std::memcpy(&t, p, 4); v = t;
+      } else if (!std::strcmp(type, "u32")) {
+        std::uint32_t t = 0; std::memcpy(&t, p, 4); v = t;
+      } else if (!std::strcmp(type, "f32")) {
+        float t = 0; std::memcpy(&t, p, 4); v = t;
+      } else if (!std::strcmp(type, "f64")) {
+        double t = 0; std::memcpy(&t, p, 8); v = t;
+      } else if (!std::strcmp(type, "i64")) {
+        std::int64_t t = 0; std::memcpy(&t, p, 8);
+        v = static_cast<lua_Number>(t);
+      } else {  // u64 и ptr
+        std::uint64_t t = 0; std::memcpy(&t, p, 8);
+        if (!std::strcmp(type, "ptr")) {
+          t = untag(static_cast<std::uintptr_t>(t));
+        }
+        v = static_cast<lua_Number>(t);
+      }
+      lua_pushnumber(L, v);
+      lua_rawseti(L, -3, static_cast<int>(i) * comps + c + 1);
+    }
+    lua_pushboolean(L, ok[i]);
+    lua_rawseti(L, -2, static_cast<int>(i) + 1);
+  }
+  return 2;
+}
+
+// memory.readbytes(адрес, сколько) -> строка
+//
+// Сырой кусок памяти строкой. Нужен там, где содержимое разбирают уже в
+// Lua: например, ищут в 336-байтовом слоте игрока текст ника.
+int l_read_bytes(lua_State* L)
+{
+  const std::uintptr_t addr = untag(to_addr(L, 1));
+  long long len = static_cast<long long>(luaL_checknumber(L, 2));
+  if (len <= 0) {
+    lua_pushstring(L, "");
+    return 1;
+  }
+  if (len > (1 << 20)) {
+    len = 1 << 20;
+  }
+  std::vector<unsigned char> buf(static_cast<std::size_t>(len), 0);
+  const ssize_t got = read_partial(addr, buf.data(), buf.size());
+  if (got <= 0) {
+    lua_pushnil(L);
+    lua_pushstring(L, "адрес не читается");
+    return 2;
+  }
+  lua_pushlstring(L, reinterpret_cast<const char*>(buf.data()),
+                  static_cast<std::size_t>(got));
+  return 1;
+}
+
 // memory.readpositions(список, [сколько]) -> { {addr=, x=, y=, z=}, ... }
 //
 // Читает сдвиг сразу у многих матриц. Поштучное чтение здесь не годится:
@@ -1162,6 +1425,9 @@ const luaL_Reg kMemory[] = {
     { "findfloat3", l_find_float3 },
     { "findpointerto", l_find_pointer_to },
     { "readpositions", l_read_positions },
+    { "readptrs", l_read_ptrs },
+    { "gather", l_gather },
+    { "readbytes", l_read_bytes },
     { "inspect", l_inspect },
     { "deref", l_deref },
     { "readi8", read_scalar<std::int8_t> },

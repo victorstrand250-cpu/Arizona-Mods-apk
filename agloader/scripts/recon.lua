@@ -27,7 +27,7 @@ end
 
 local show   = false
 local tab    = 1
-local TABS   = { 'Игрок', 'Игроки', 'Камера', 'Проекция', 'Пул', 'Объект', 'Сеть' }
+local TABS   = { 'Игрок', 'Игроки', 'Камера', 'Проекция', 'Пулы', 'Слот', 'Объект', 'Сеть' }
 local status = ''
 
 local cands   = {}
@@ -488,29 +488,36 @@ local function tabProjection()
 end
 
 local function tabPool()
-  title('Пул сущностей мира')
+  title('Пулы сущностей мира')
   imgui.TextWrapped(
-    'Второй крупный массив движка: указатели на предметы, транспорт и ' ..
-    'прочее, 30300 мест. Найден разбором кода вместе с пределом индекса и ' ..
-    'проверкой типа. А вот смещение позиции внутри объекта по коду не ' ..
-    'вычислялось — отрисовка берёт её через матрицу. Зато его видно на ' ..
-    'живой игре: объекты стримятся вокруг игрока, значит верное смещение ' ..
-    'то, где у большинства лежат координаты неподалёку.')
+    'Сущности движок держит тремя пулами, и в библиотеке лежит не сам ' ..
+    'массив, а указатель на него: массив выделен в куче и переезжает при ' ..
+    'каждом запуске. Пределы мест взяты из кода, там же рядом с ними стоит ' ..
+    'чтение позиции по +56 — то же смещение, что у игрока.')
 
   imgui.Spacing()
-  label('Адрес пула')
-  imgui.Text(('база +0x%X'):format(ag.OFF_POOL))
-  label('Мест в пуле')
-  imgui.Text(tostring(ag.POOL_MAX))
   label('Смещение позиции')
   if ag.poolPosOffset then
     imgui.TextColored(('+%d'):format(ag.poolPosOffset), 0.3, 1.0, 0.4, 1.0)
   else
-    imgui.TextDisabled('не найдено')
+    imgui.TextDisabled('не подтверждено')
+  end
+
+  imgui.Separator()
+  for n = 1, #ag.POOLS do
+    local def = ag.POOLS[n]
+    local addr, count = ag.poolArray(n)
+    imgui.Text(('%-10s база +0x%X'):format(def.name, def.global))
+    imgui.SameLine(260 * MDS)
+    if addr then
+      imgui.TextColored(('0x%X, мест %d'):format(addr, count), 0.3, 1.0, 0.4, 1)
+    else
+      imgui.TextDisabled('не выделен')
+    end
   end
 
   imgui.Spacing()
-  if imgui.Button('Найти смещение позиции', WIN_W - 70, 46) then
+  if imgui.Button('Проверить смещение позиции', WIN_W - 70, 44) then
     local me = ag.localPlayer()
     if not me then
       poolNote = 'игрок не найден'
@@ -521,12 +528,12 @@ local function tabPool()
       else
         local off, hits, sample = ag.findPoolPositionOffset(px, py, pz)
         if off then
-          poolNote = ('смещение +%d, подтвердили %d объектов из %d')
+          poolNote = ('смещение +%d, подтвердили %d сущностей из %d')
                      :format(off, hits, sample)
           ag.saveProjection()
           log('[разведка] ' .. poolNote)
         else
-          poolNote = ('не нашлось: лучший результат %d из %d')
+          poolNote = ('не подтвердилось: лучший результат %d из %d')
                      :format(hits or 0, sample or 0)
         end
       end
@@ -537,13 +544,14 @@ local function tabPool()
   if imgui.Button('Пересчитать список', WIN_W - 70, 44) then
     local me = ag.localPlayer()
     local px, py, pz = me and ag.position(me)
-    poolList = ag.poolObjects({
+    poolList = ag.entities({
       near = px and { px, py, pz } or nil,
       radius = 300, max = 400,
     })
     poolTypes = {}
     for _, o in ipairs(poolList) do
-      poolTypes[o.type or -1] = (poolTypes[o.type or -1] or 0) + 1
+      local key = o.poolName or '?'
+      poolTypes[key] = (poolTypes[key] or 0) + 1
     end
     poolNote = ('в списке: %d'):format(#poolList)
   end
@@ -555,14 +563,14 @@ local function tabPool()
     imgui.Separator()
     local parts = {}
     for t, c in pairs(poolTypes) do
-      parts[#parts + 1] = ('тип %d: %d'):format(t, c)
+      parts[#parts + 1] = ('%s: %d'):format(t, c)
     end
     table.sort(parts)
     imgui.TextWrapped(table.concat(parts, '   '))
   end
 
   imgui.Separator()
-  if imgui.BeginChild('##pool', 0, WIN_H - 480, true) then
+  if imgui.BeginChild('##pool', 0, WIN_H - 520, true) then
     if #poolList == 0 then
       imgui.TextDisabled('список пуст')
     end
@@ -571,9 +579,83 @@ local function tabPool()
     end)
     for i, o in ipairs(poolList) do
       if i > 80 then break end
-      imgui.Text(('#%-6d тип %-3d модель %-6d %s')
-                 :format(o.index, o.type or -1, o.model or -1,
+      local _, mtype = ag.modelInfo(o.model)
+      imgui.Text(('%-9s #%-5d модель %-6d тип %-3d %s')
+                 :format(o.poolName or '?', o.index, o.model or -1,
+                         mtype or -1,
                          o.dist and ('%.1f м'):format(o.dist) or ''))
+    end
+  end
+  imgui.EndChild()
+end
+
+-- ─────────────────────────────────────────────────────── слот игрока
+
+local slotTexts = {}
+local slotNote  = ''
+local nickInput = ''
+
+local function tabSlot()
+  title('Слот игрока: ник и прочие подписи')
+  imgui.TextWrapped(
+    'Слот игрока — 336 байт, из которых указатель на сущность занимает ' ..
+    'только первые восемь. Остальное чем-то занято, и ник почти наверняка ' ..
+    'там же. Кнопка ниже перебирает весь слот и показывает всё, что похоже ' ..
+    'на текст: и строки прямо в слоте, и строки по указателю. Узнайте себя ' ..
+    'в списке — или впишите ник и найдите смещение сразу.')
+
+  imgui.Spacing()
+  label('Свой слот')
+  local me = ag.localIndex()
+  imgui.Text(me and tostring(me) or 'не определён')
+  label('Смещение ника')
+  if ag.nickOffset then
+    imgui.TextColored(('+%d'):format(ag.nickOffset), 0.3, 1.0, 0.4, 1.0)
+  else
+    imgui.TextDisabled('не найдено')
+  end
+
+  imgui.Spacing()
+  imgui.SetNextItemWidth(WIN_W - 220 * MDS)
+  local ch, v = imgui.InputText('##nick', nickInput, 32)
+  if ch then nickInput = v end
+  imgui.SameLine()
+  if imgui.Button('Найти по нику', 180 * MDS, 0) then
+    if nickInput == '' then
+      slotNote = 'впишите свой ник как он написан в игре'
+    else
+      local off, kind = ag.findNickOffset(nickInput)
+      if off then
+        slotNote = ('ник найден: +%d (%s)'):format(off, kind)
+        ag.saveProjection()
+        log('[разведка] ' .. slotNote)
+      else
+        slotNote = 'такого текста в слоте нет: ' .. tostring(kind)
+      end
+    end
+  end
+
+  imgui.Spacing()
+  if imgui.Button('Показать весь текст слота', WIN_W - 70, 44) then
+    local a = ag.slotAddr(me)
+    if not a then
+      slotNote = 'слот не определён'
+    else
+      slotTexts = ag.findTexts(a, ag.SLOT_STRIDE)
+      slotNote = ('найдено текстов: %d'):format(#slotTexts)
+    end
+  end
+
+  imgui.Spacing()
+  imgui.TextWrapped(slotNote)
+  imgui.Separator()
+
+  if imgui.BeginChild('##slot', 0, WIN_H - 470, true) then
+    if #slotTexts == 0 then
+      imgui.TextDisabled('пусто — нажмите кнопку выше')
+    end
+    for _, t in ipairs(slotTexts) do
+      imgui.Text(('+%-4d %-11s %s'):format(t.off, t.kind, t.text))
     end
   end
   imgui.EndChild()
@@ -747,7 +829,8 @@ function onImgui()
       elseif tab == 3 then tabCamera()
       elseif tab == 4 then tabProjection()
       elseif tab == 5 then tabPool()
-      elseif tab == 6 then tabInspect()
+      elseif tab == 6 then tabSlot()
+      elseif tab == 7 then tabInspect()
       else                 tabNet()
       end
     end

@@ -12,7 +12,7 @@
 
 script_name('RenderObjects')
 script_author('Victor Strand')
-script_version('2.3-agloader')
+script_version('2.4-agloader')
 
 local ag = require 'arizona'
 
@@ -43,6 +43,16 @@ local chatAlert    = false
 
 local alertShown = {}
 local objCache   = {}
+
+-- Счётчики для вкладки Info: молчаливый ESP отличается от сломанного только
+-- цифрами, поэтому они всегда на виду.
+local diag = {
+  pool    = 0,   -- занятых мест в пуле
+  near    = 0,   -- из них в радиусе
+  onScreen = 0,  -- из них попало на экран
+  drawn   = 0,   -- из них подошло под список моделей
+  ms      = 0,   -- сколько занял последний обход
+}
 
 -- ═════════════════════════════════════════════════════════════════ конфиг
 
@@ -130,16 +140,17 @@ local function prepareSource()
     return false
   end
 
-  if not ag.poolPosOffset then
-    local off, hits, sample = ag.findPoolPositionOffset(px, py, pz)
-    if not off then
-      sourceNote = ('смещение позиции в пуле не найдено (%d из %d)')
-                   :format(hits or 0, sample or 0)
-      return false
-    end
-    log(('[RenderObjects] смещение позиции в пуле: +%d (подтвердили %d из %d)')
-        :format(off, hits, sample))
+  -- Смещение +56 известно из разбора кода, но игра обновляется, поэтому
+  -- оно каждый раз перепроверяется на живых объектах вокруг игрока.
+  local off, hits, sample = ag.findPoolPositionOffset(px, py, pz)
+  if not off then
+    sourceNote = ('смещение позиции в пуле не подтвердилось (%d из %d). ' ..
+                  'Встаньте в застроенном месте и попробуйте снова.')
+                 :format(hits or 0, sample or 0)
+    return false
   end
+  log(('[RenderObjects] смещение позиции в пуле: +%d (подтвердили %d из %d)')
+      :format(off, hits, sample))
 
   if ag.cam.addr == 0 then
     local addr, acc = ag.findCamera()
@@ -166,12 +177,30 @@ local function collectObjects()
   local cam = ag.cameraMatrix()
   if not cam then return {} end
 
+  local clock = os.clock or os.time
+  local t0 = clock()
+
+  -- Занятость пула считается без фильтра по радиусу: если объектов ноль,
+  -- виноват пул, а если их тысячи и в радиусе ноль — смещение позиции.
+  local all = ag.poolObjects({ max = 40000 })
+  diag.pool = #all
+
   local out = {}
-  local objs = ag.poolObjects({
-    near = { px, py, pz },
-    radius = renderRadius,
-    max = 600,
-  })
+  local objs = {}
+  local r2 = renderRadius * renderRadius
+  for _, o in ipairs(all) do
+    if o.x then
+      local dx, dy, dz = o.x - px, o.y - py, o.z - pz
+      local q = dx * dx + dy * dy + dz * dz
+      if q <= r2 then
+        o.dist = math.sqrt(q)
+        objs[#objs + 1] = o
+        if #objs >= 600 then break end
+      end
+    end
+  end
+  diag.near = #objs
+  diag.ms = (clock() - t0) * 1000
 
   for _, o in ipairs(objs) do
     out[#out + 1] = {
@@ -224,12 +253,15 @@ local function drawEsp()
   end
 
   local fsz = 13 * MDS
+  local onScreen, drawn = 0, 0
 
   for _, obj in ipairs(objCache) do
     local sx, sy = ag.worldToScreen(obj.wx, obj.wy, obj.wz, sw, sh, cam)
     if sx and sx > -200 and sx < sw + 200 and sy > -200 and sy < sh + 200 then
+      onScreen = onScreen + 1
 
       if scanMode then
+        drawn = drawn + 1
         local txt = obj.sampId and obj.sampId ~= -1
           and ('id:%d model:%d %.1fm'):format(obj.sampId, obj.model, obj.dist)
           or  ('id:- model:%d %.1fm'):format(obj.model, obj.dist)
@@ -237,6 +269,7 @@ local function drawEsp()
       else
         for _, e in ipairs(entries) do
           if e.enabled and e.model == obj.model then
+            drawn = drawn + 1
             local dispName = (e.name ~= '') and e.name or ('model:' .. obj.model)
             local idPart   = (obj.sampId and obj.sampId ~= -1)
                              and ('  id:' .. obj.sampId) or ''
@@ -273,6 +306,8 @@ local function drawEsp()
       end
     end
   end
+
+  diag.onScreen, diag.drawn = onScreen, drawn
 end
 
 -- ═══════════════════════════════════════════════════════════════════ стиль
@@ -465,7 +500,7 @@ local function tabInfo()
     imgui.TextColored(val, r or 0.9, g or 0.9, b or 0.9, 1)
   end
 
-  row('Скрипт:',   'RenderObjects v2.2')
+  row('Скрипт:',   'RenderObjects v2.4')
   row('Автор:',    'Victor Strand',   0.95, 0.30, 0.30)
   row('Telegram:', '@victor_st0',     0.30, 0.70, 1.00)
   row('Каталог:',  '@strand_scripts', 0.30, 0.70, 1.00)
@@ -505,6 +540,34 @@ local function tabInfo()
   end
 
   imgui.Spacing()
+  imgui.Separator()
+  imgui.Spacing()
+  imgui.TextColored('Что видит скрипт прямо сейчас', 0.80, 0.82, 0.88, 1)
+  row('Пул занят:',  ('%d объектов'):format(diag.pool))
+  row('В радиусе:',  ('%d (%d м)'):format(diag.near, renderRadius))
+  row('На экране:',  ('%d'):format(diag.onScreen))
+  row('Отрисовано:', ('%d'):format(diag.drawn))
+  row('Обход пула:', ('%.1f мс'):format(diag.ms))
+
+  -- Ноли в этих строках сразу говорят, где именно всё встало.
+  if diag.pool == 0 then
+    imgui.TextWrapped('Пул пуст — движок ещё не прогрузил мир либо адрес ' ..
+                      'пула не подошёл к этой версии игры.')
+  elseif diag.near == 0 then
+    imgui.TextWrapped('Объекты есть, но ни один не попал в радиус: скорее ' ..
+                      'всего смещение позиции неверное. Нажмите ' ..
+                      '«Найти заново».')
+  elseif diag.onScreen == 0 then
+    imgui.TextWrapped('Объекты рядом есть, но ни один не спроецировался: ' ..
+                      'камера найдена неверно либо смотрит не туда. ' ..
+                      'Нажмите «Найти заново», стоя от третьего лица.')
+  elseif diag.drawn == 0 and not scanMode then
+    imgui.TextWrapped('Всё работает, но ни одна модель из списка рядом не ' ..
+                      'встретилась. Включите сканер — он подпишет номера ' ..
+                      'моделей всех объектов вокруг.')
+  end
+
+  imgui.Spacing()
   if imgui.Button(haveSource() and 'Найти заново' or 'Подготовить источник',
                   WIN_W - 70, 44) then
     prepareSource()
@@ -529,7 +592,7 @@ function onImgui()
   imgui.SetNextWindowPos((sw - WIN_W) / 2, sh / 2 - 260 * MDS,
                          imgui.Cond_FirstUseEver)
 
-  local visible, open = imgui.Begin('Рендер объектов  v2.2', winOpen,
+  local visible, open = imgui.Begin('Рендер объектов  v2.4', winOpen,
     imgui.WindowFlags_NoResize + imgui.WindowFlags_NoCollapse +
     imgui.WindowFlags_AlwaysAutoResize)
   winOpen = open
@@ -634,7 +697,7 @@ function main()
     log('[RenderObjects] scan: ' .. (scanMode and 'ON' or 'OFF'))
   end)
 
-  log('[RenderObjects v2.3] /renderob')
+  log('[RenderObjects v2.4] /renderob')
 
   -- Пробуем поднять источник сами: если игрок уже в мире, всё найдётся
   -- с первого раза и от пользователя ничего не потребуется.
