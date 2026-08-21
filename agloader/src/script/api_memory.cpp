@@ -480,6 +480,411 @@ int l_regions(lua_State* L)
   return 1;
 }
 
+// ─────────────────────────────────────────────────── поиск по структуре
+
+// Собирает области для сканирования по тому же правилу, что и findvalue.
+std::vector<engine::Range> scan_ranges(const char* where)
+{
+  std::vector<engine::Range> ranges;
+  if (std::strcmp(where, "heap") != 0) {
+    ranges = engine::client_data_ranges();
+  }
+  if (std::strcmp(where, "engine") != 0) {
+    auto heap = engine::heap_ranges();
+    ranges.insert(ranges.end(), heap.begin(), heap.end());
+  }
+  return ranges;
+}
+
+bool finite(float v)
+{
+  return v == v && v > -3.0e38f && v < 3.0e38f;
+}
+
+// Похож ли блок из 16 float на матрицу положения: верхний левый угол 3x3
+// ортонормирован (оси единичной длины и взаимно перпендикулярны), а сдвиг
+// лежит в разумных мировых пределах. Так выглядят матрицы камеры, игрока,
+// транспорта и объектов — в librw они хранятся именно в таком виде.
+bool looks_like_matrix(const float* m, float tol, float world_limit)
+{
+  for (int i = 0; i < 16; ++i) {
+    if (!finite(m[i])) {
+      return false;
+    }
+  }
+
+  const float* r[3] = { m + 0, m + 4, m + 8 };
+  for (const float* row : r) {
+    const float len = row[0] * row[0] + row[1] * row[1] + row[2] * row[2];
+    if (len < 1.0f - tol || len > 1.0f + tol) {
+      return false;
+    }
+  }
+  // Попарная перпендикулярность.
+  for (int a = 0; a < 3; ++a) {
+    for (int b = a + 1; b < 3; ++b) {
+      const float d = r[a][0] * r[b][0] + r[a][1] * r[b][1] + r[a][2] * r[b][2];
+      if (d > tol || d < -tol) {
+        return false;
+      }
+    }
+  }
+  // Вырожденная единичная матрица встречается в памяти пачками и только
+  // засоряет выдачу.
+  const bool identity = m[0] > 0.999f && m[5] > 0.999f && m[10] > 0.999f &&
+                        m[12] == 0.0f && m[13] == 0.0f && m[14] == 0.0f;
+  if (identity) {
+    return false;
+  }
+
+  for (int i = 12; i < 15; ++i) {
+    if (m[i] > world_limit || m[i] < -world_limit) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// memory.findmatrix([opts]) -> список адресов, число
+//
+// opts: { tol = 0.01, limit = 20000, world = 100000, where = 'all' }
+int l_find_matrix(lua_State* L)
+{
+  float tol = 0.01f;
+  float world_limit = 100000.0f;
+  int limit = 20000;
+  const char* where = "all";
+
+  if (lua_istable(L, 1)) {
+    lua_getfield(L, 1, "tol");
+    if (lua_isnumber(L, -1)) tol = static_cast<float>(lua_tonumber(L, -1));
+    lua_pop(L, 1);
+    lua_getfield(L, 1, "world");
+    if (lua_isnumber(L, -1)) world_limit = static_cast<float>(lua_tonumber(L, -1));
+    lua_pop(L, 1);
+    lua_getfield(L, 1, "limit");
+    if (lua_isnumber(L, -1)) limit = static_cast<int>(lua_tonumber(L, -1));
+    lua_pop(L, 1);
+    lua_getfield(L, 1, "where");
+    if (lua_isstring(L, -1)) where = lua_tostring(L, -1);
+    lua_pop(L, 1);
+  }
+
+  auto ranges = scan_ranges(where);
+  if (ranges.empty()) {
+    lua_pushnil(L);
+    lua_pushstring(L, "не нашёл областей для поиска");
+    return 2;
+  }
+
+  lua_newtable(L);
+  int found = 0;
+  std::vector<unsigned char> buf;
+  constexpr std::size_t kChunk = 1u << 20;
+  constexpr std::size_t kMatrix = 16 * sizeof(float);
+
+  for (const auto& range : ranges) {
+    const std::size_t span = range.to - range.from;
+    buf.resize(kChunk + kMatrix);
+
+    for (std::size_t off = 0; off < span; off += kChunk) {
+      const std::size_t want =
+          span - off < kChunk + kMatrix ? span - off : kChunk + kMatrix;
+      const ssize_t got = read_partial(range.from + off, buf.data(), want);
+      if (got <= 0 || static_cast<std::size_t>(got) < kMatrix) {
+        continue;
+      }
+      const std::size_t limit_bytes = static_cast<std::size_t>(got) - kMatrix;
+      for (std::size_t i = 0; i <= limit_bytes; i += 4) {
+        float m[16];
+        std::memcpy(m, buf.data() + i, kMatrix);
+        if (!looks_like_matrix(m, tol, world_limit)) {
+          continue;
+        }
+        lua_pushnumber(L, static_cast<lua_Number>(range.from + off + i));
+        lua_rawseti(L, -2, ++found);
+        if (found >= limit) {
+          lua_pushnumber(L, static_cast<lua_Number>(found));
+          lua_pushboolean(L, 1);
+          return 3;
+        }
+      }
+    }
+  }
+
+  lua_pushnumber(L, found);
+  lua_pushboolean(L, 0);
+  return 3;
+}
+
+// Подсказка, где именно найден указатель: адрес внутри самой библиотеки
+// сохраняется между запусками, адрес в куче — нет.
+const char* elf_section_hint(std::uintptr_t addr)
+{
+  // client_data_ranges — это .data и .bss самой библиотеки: адрес там живёт
+  // на фиксированном смещении от базы и переживает перезапуск.
+  for (const auto& r : engine::client_data_ranges()) {
+    if (addr >= r.from && addr < r.to) {
+      return "модуль";
+    }
+  }
+  return "куча";
+}
+
+// memory.readpositions(список, [сколько]) -> { {addr=, x=, y=, z=}, ... }
+//
+// Читает сдвиг сразу у многих матриц. Поштучное чтение здесь не годится:
+// на пару сотен объектов это пара сотен системных вызовов каждый кадр.
+// process_vm_readv умеет забрать несколько разрозненных кусков за один
+// вызов, чем мы и пользуемся.
+int l_read_positions(lua_State* L)
+{
+  luaL_checktype(L, 1, LUA_TTABLE);
+  const int total = static_cast<int>(lua_objlen(L, 1));
+  int want = static_cast<int>(luaL_optinteger(L, 2, total));
+  if (want > total) {
+    want = total;
+  }
+  if (want < 0) {
+    want = 0;
+  }
+
+  // Ядро принимает не больше IOV_MAX кусков за раз.
+  constexpr int kBatch = 512;
+  constexpr std::size_t kVec = 3 * sizeof(float);
+  constexpr std::size_t kPosOffset = 12 * sizeof(float);  // сдвиг в матрице
+
+  lua_newtable(L);
+  int out = 0;
+
+  std::vector<std::uintptr_t> addrs;
+  std::vector<float> data;
+  std::vector<iovec> local;
+  std::vector<iovec> remote;
+
+  for (int start = 0; start < want; start += kBatch) {
+    const int n = (want - start < kBatch) ? (want - start) : kBatch;
+
+    addrs.clear();
+    addrs.reserve(static_cast<std::size_t>(n));
+    for (int i = 0; i < n; ++i) {
+      lua_rawgeti(L, 1, start + i + 1);
+      addrs.push_back(untag(static_cast<std::uintptr_t>(
+          static_cast<long long>(lua_tonumber(L, -1)))));
+      lua_pop(L, 1);
+    }
+
+    data.assign(static_cast<std::size_t>(n) * 3, 0.0f);
+    local.clear();
+    remote.clear();
+    local.reserve(static_cast<std::size_t>(n));
+    remote.reserve(static_cast<std::size_t>(n));
+
+    for (int i = 0; i < n; ++i) {
+      local.push_back(iovec { &data[static_cast<std::size_t>(i) * 3], kVec });
+      remote.push_back(iovec {
+          reinterpret_cast<void*>(addrs[static_cast<std::size_t>(i)] + kPosOffset),
+          kVec });
+    }
+
+    const ssize_t got = ::process_vm_readv(::getpid(), local.data(),
+                                           local.size(), remote.data(),
+                                           remote.size(), 0);
+    if (got <= 0) {
+      continue;
+    }
+    // Ядро заполняет куски по порядку, поэтому сколько байт вернулось —
+    // столько первых записей и достоверны.
+    const int ok_count =
+        static_cast<int>(static_cast<std::size_t>(got) / kVec);
+
+    for (int i = 0; i < ok_count && i < n; ++i) {
+      const float* v = &data[static_cast<std::size_t>(i) * 3];
+      if (v[0] != v[0] || v[1] != v[1] || v[2] != v[2]) {
+        continue;  // NaN — мусор, не показываем
+      }
+      lua_newtable(L);
+      lua_pushnumber(L, static_cast<lua_Number>(addrs[static_cast<std::size_t>(i)]));
+      lua_setfield(L, -2, "addr");
+      lua_pushnumber(L, v[0]);
+      lua_setfield(L, -2, "x");
+      lua_pushnumber(L, v[1]);
+      lua_setfield(L, -2, "y");
+      lua_pushnumber(L, v[2]);
+      lua_setfield(L, -2, "z");
+      lua_rawseti(L, -2, ++out);
+    }
+  }
+
+  lua_pushnumber(L, out);
+  return 2;
+}
+
+// memory.findpointerto(addr, [opts]) -> список адресов, число
+//
+// Ищет 8-байтовые значения, равные заданному адресу (или попадающие в
+// диапазон addr..addr+range). Матрицы камеры и игрока живут в куче, их адрес
+// меняется при каждом запуске, а вот указатель на них где-то лежит — и если
+// он окажется в .bss библиотеки, находку можно сохранить навсегда.
+//
+// opts: { range = 0, where = 'all' } — range > 0 ищет указатели на начало
+// структуры, внутри которой лежит адрес, и возвращает ещё и смещение.
+int l_find_pointer_to(lua_State* L)
+{
+  const auto target = untag(static_cast<std::uintptr_t>(
+      static_cast<long long>(luaL_checknumber(L, 1))));
+  std::uintptr_t range = 0;
+  const char* where = "all";
+  constexpr int kLimit = 20000;
+
+  if (lua_istable(L, 2)) {
+    lua_getfield(L, 2, "range");
+    if (lua_isnumber(L, -1)) {
+      range = static_cast<std::uintptr_t>(lua_tonumber(L, -1));
+    }
+    lua_pop(L, 1);
+    lua_getfield(L, 2, "where");
+    if (lua_isstring(L, -1)) where = lua_tostring(L, -1);
+    lua_pop(L, 1);
+  }
+
+  auto ranges = scan_ranges(where);
+  if (ranges.empty()) {
+    lua_pushnil(L);
+    lua_pushstring(L, "не нашёл областей для поиска");
+    return 2;
+  }
+
+  lua_newtable(L);
+  int found = 0;
+  std::vector<unsigned char> buf;
+  constexpr std::size_t kChunk = 1u << 20;
+  constexpr std::size_t kPtr = sizeof(std::uintptr_t);
+
+  for (const auto& reg : ranges) {
+    const std::size_t span = reg.to - reg.from;
+    buf.resize(kChunk + kPtr);
+
+    for (std::size_t off = 0; off < span; off += kChunk) {
+      const std::size_t want =
+          span - off < kChunk + kPtr ? span - off : kChunk + kPtr;
+      const ssize_t got = read_partial(reg.from + off, buf.data(), want);
+      if (got <= 0 || static_cast<std::size_t>(got) < kPtr) {
+        continue;
+      }
+      const std::size_t limit_bytes = static_cast<std::size_t>(got) - kPtr;
+      // Указатели выровнены по 8, побайтовый проход только мусорил бы.
+      for (std::size_t i = 0; i + kPtr <= limit_bytes + kPtr; i += 8) {
+        std::uintptr_t v = 0;
+        std::memcpy(&v, buf.data() + i, kPtr);
+        v = untag(v);
+        if (v != target && (range == 0 || v > target || target - v > range)) {
+          continue;
+        }
+        // Пара: где лежит указатель и на сколько байт вглубь смотрит цель.
+        lua_newtable(L);
+        lua_pushnumber(L, static_cast<lua_Number>(reg.from + off + i));
+        lua_setfield(L, -2, "at");
+        lua_pushnumber(L, static_cast<lua_Number>(target - v));
+        lua_setfield(L, -2, "offset");
+        lua_pushstring(L, elf_section_hint(reg.from + off + i));
+        lua_setfield(L, -2, "where");
+        lua_rawseti(L, -2, ++found);
+
+        if (found >= kLimit) {
+          lua_pushnumber(L, static_cast<lua_Number>(found));
+          lua_pushboolean(L, 1);
+          return 3;
+        }
+      }
+    }
+  }
+
+  lua_pushnumber(L, found);
+  lua_pushboolean(L, 0);
+  return 3;
+}
+
+// memory.readmatrix(addr) -> таблица из 16 чисел
+int l_read_matrix(lua_State* L)
+{
+  const auto addr = static_cast<std::uintptr_t>(
+      static_cast<long long>(luaL_checknumber(L, 1)));
+  float m[16];
+  if (!safe_read(addr, m, sizeof(m))) {
+    lua_pushnil(L);
+    lua_pushstring(L, "адрес недоступен");
+    return 2;
+  }
+  lua_newtable(L);
+  for (int i = 0; i < 16; ++i) {
+    lua_pushnumber(L, m[i]);
+    lua_rawseti(L, -2, i + 1);
+  }
+  return 1;
+}
+
+// memory.findfloat3(x, y, z, eps, [opts]) -> список адресов, число
+//
+// Три подряд идущих float рядом с заданными — так ищется позиция, когда
+// она уже известна из матрицы, но нужен другой её экземпляр в памяти.
+int l_find_float3(lua_State* L)
+{
+  const float want_x = static_cast<float>(luaL_checknumber(L, 1));
+  const float want_y = static_cast<float>(luaL_checknumber(L, 2));
+  const float want_z = static_cast<float>(luaL_checknumber(L, 3));
+  const float eps = static_cast<float>(luaL_optnumber(L, 4, 0.05));
+  const char* where = luaL_optstring(L, 5, "all");
+  constexpr int kLimit = 50000;
+
+  auto ranges = scan_ranges(where);
+  if (ranges.empty()) {
+    lua_pushnil(L);
+    lua_pushstring(L, "не нашёл областей для поиска");
+    return 2;
+  }
+
+  lua_newtable(L);
+  int found = 0;
+  std::vector<unsigned char> buf;
+  constexpr std::size_t kChunk = 1u << 20;
+  constexpr std::size_t kVec = 3 * sizeof(float);
+
+  for (const auto& range : ranges) {
+    const std::size_t span = range.to - range.from;
+    buf.resize(kChunk + kVec);
+
+    for (std::size_t off = 0; off < span; off += kChunk) {
+      const std::size_t want =
+          span - off < kChunk + kVec ? span - off : kChunk + kVec;
+      const ssize_t got = read_partial(range.from + off, buf.data(), want);
+      if (got <= 0 || static_cast<std::size_t>(got) < kVec) {
+        continue;
+      }
+      const std::size_t limit_bytes = static_cast<std::size_t>(got) - kVec;
+      for (std::size_t i = 0; i <= limit_bytes; i += 4) {
+        float v[3];
+        std::memcpy(v, buf.data() + i, kVec);
+        if (v[0] < want_x - eps || v[0] > want_x + eps) continue;
+        if (v[1] < want_y - eps || v[1] > want_y + eps) continue;
+        if (v[2] < want_z - eps || v[2] > want_z + eps) continue;
+
+        lua_pushnumber(L, static_cast<lua_Number>(range.from + off + i));
+        lua_rawseti(L, -2, ++found);
+        if (found >= kLimit) {
+          lua_pushnumber(L, static_cast<lua_Number>(found));
+          lua_pushboolean(L, 1);
+          return 3;
+        }
+      }
+    }
+  }
+
+  lua_pushnumber(L, found);
+  lua_pushboolean(L, 0);
+  return 3;
+}
+
 int l_find_value(lua_State* L)
 {
   const lua_Number want = luaL_checknumber(L, 1);
@@ -624,6 +1029,11 @@ const luaL_Reg kMemory[] = {
     { "regions", l_regions },
     { "findvalue", l_find_value },
     { "refine", l_refine },
+    { "findmatrix", l_find_matrix },
+    { "readmatrix", l_read_matrix },
+    { "findfloat3", l_find_float3 },
+    { "findpointerto", l_find_pointer_to },
+    { "readpositions", l_read_positions },
     { "deref", l_deref },
     { "readi8", read_scalar<std::int8_t> },
     { "readu8", read_scalar<std::uint8_t> },
