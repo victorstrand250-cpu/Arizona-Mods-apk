@@ -1,24 +1,18 @@
--- Разведка движка — поиск камеры, игрока и настройка проекции.
+-- Разведка движка: игрок, игроки вокруг, камера и проекция.
 --
 -- Открыть: /recon
 --
--- Зачем. Движок собран без символов, поэтому адреса камеры и игрока в нём
--- не написаны нигде — их надо найти на живой игре. Ищутся они не перебором
--- значений, а по форме данных: матрица положения узнаётся математически,
--- у неё верхний левый блок 3x3 ортонормирован (оси единичной длины и
--- взаимно перпендикулярны). Так выглядят матрицы камеры, игрока,
--- транспорта и объектов.
---
--- Дальше кандидаты разделяются поведением:
---   * покрутили камеру, не сходя с места — сдвинулась только камера;
---   * прошли пару шагов — сдвинулся игрок.
---
--- Найдя камеру, можно считать перевод мировых координат в экранные, а это
--- то, без чего не работает ни один ESP.
+-- Данные игрока берутся по адресам, вытащенным разбором libag-client.so —
+-- см. lib/arizona.lua, там расписано откуда. Камера в коде не нашлась, но
+-- её можно найти на живой игре: она единственная матрица, которая стоит
+-- рядом с игроком и смотрит прямо на него. Это и делает кнопка автопоиска,
+-- заодно определяя, какая из осей матрицы означает «вперёд».
 
 script_name('Разведка движка')
 script_author('agloader')
-script_version('1.0')
+script_version('2.0')
+
+local ag = require 'arizona'
 
 local MDS, sw, sh = 1, 1280, 720
 
@@ -31,72 +25,54 @@ end
 
 -- ═══════════════════════════════════════════════════════════════ состояние
 
-local show = false
-local step = 0            -- 0 не начинали, 1 снят слепок, 2 отсеяли камеру, 3 нашли игрока
-local status = 'нажмите «Сканировать»'
-local busy = ''
+local show   = false
+local tab    = 1
+local TABS   = { 'Игрок', 'Игроки', 'Камера', 'Проекция' }
+local status = ''
 
-local cands   = {}        -- адреса-кандидаты
-local snap    = {}        -- addr -> матрица на момент слепка
-local moving  = {}        -- те, что сдвинулись при повороте камеры
-local staying = {}        -- те, что не сдвинулись
+local cands   = {}
+local camAddr = 0
 
-local camAddr, playerAddr = 0, 0
+local fov     = 70
+local fwdAxis = 2
+local upAxis  = 3
+local fwdSign = 1
+local mirrorX = false
+local mirrorY = false
 
--- Настройка проекции.
-local fov       = 70
-local fwdAxis   = 2       -- 1 right, 2 up, 3 at
-local upAxis    = 3
-local fwdSign   = 1
-local mirrorX   = false
-local mirrorY   = false
-local showDots  = true
-local dotLimit  = 400
+local espPlayers = false
+local espDist    = 300
 
 local cfgPath = getPaths().config .. '/recon.ini'
 
--- ═════════════════════════════════════════════════════════════ работа с матрицей
+-- ═════════════════════════════════════════════════════ матрица и проекция
 
--- Матрица лежит как 16 float подряд: три оси по четыре числа и сдвиг.
--- В Lua индексы с единицы, поэтому строка i начинается с (i-1)*4+1.
 local function row(m, i)
   local o = (i - 1) * 4
   return m[o + 1], m[o + 2], m[o + 3]
 end
 
-local function pos(m)
-  return m[13], m[14], m[15]
-end
+local function mpos(m) return m[13], m[14], m[15] end
 
 local function dot3(ax, ay, az, bx, by, bz)
   return ax * bx + ay * by + az * bz
 end
 
-local function dist3(a, b)
-  local dx, dy, dz = a[13] - b[13], a[14] - b[14], a[15] - b[15]
-  return math.sqrt(dx * dx + dy * dy + dz * dz)
+local function norm3(x, y, z)
+  local len = math.sqrt(x * x + y * y + z * z)
+  if len < 1e-6 then return 0, 0, 0, 0 end
+  return x / len, y / len, z / len, len
 end
-
--- Насколько повернулась матрица: сумма расхождений по первой оси.
-local function rotDelta(a, b)
-  local d = 0
-  for i = 1, 3 do
-    d = d + math.abs(a[i] - b[i])
-  end
-  return d
-end
-
--- ══════════════════════════════════════════════════════════ проекция
 
 local function worldToScreen(wx, wy, wz, cam)
-  local px, py, pz = pos(cam)
+  local px, py, pz = mpos(cam)
   local dx, dy, dz = wx - px, wy - py, wz - pz
 
   local fx, fy, fz = row(cam, fwdAxis)
   fx, fy, fz = fx * fwdSign, fy * fwdSign, fz * fwdSign
   local ux, uy, uz = row(cam, upAxis)
 
-  -- Правая ось — векторное произведение, так она всегда согласована
+  -- Правая ось через векторное произведение — так она всегда согласована
   -- с выбранными «вперёд» и «вверх».
   local rx = fy * uz - fz * uy
   local ry = fz * ux - fx * uz
@@ -109,9 +85,7 @@ local function worldToScreen(wx, wy, wz, cam)
   local hy = dot3(dx, dy, dz, ux, uy, uz)
 
   local tanHalf = math.tan(math.rad(fov) / 2)
-  local aspect  = sw / sh
-
-  local nx = hx / (depth * tanHalf * aspect)
+  local nx = hx / (depth * tanHalf * (sw / sh))
   local ny = hy / (depth * tanHalf)
   if mirrorX then nx = -nx end
   if mirrorY then ny = -ny end
@@ -119,111 +93,120 @@ local function worldToScreen(wx, wy, wz, cam)
   return sw / 2 + nx * (sw / 2), sh / 2 - ny * (sh / 2), depth
 end
 
--- ═══════════════════════════════════════════════════════════════ шаги
+-- ═══════════════════════════════════════════════════════ поиск камеры
 
-local function takeSnapshot(list)
-  local out = {}
-  for _, a in ipairs(list) do
-    local m = memory.readmatrix(a)
-    if m then out[a] = m end
-  end
-  return out
-end
-
-local function doScan()
-  busy = 'сканирую память…'
-  local list, count, truncated = memory.findmatrix({ tol = 0.01, limit = 20000 })
-  busy = ''
+local function scanMatrices()
+  local list, count = memory.findmatrix({ tol = 0.01, limit = 20000 })
   if not list then
-    status = 'ошибка: ' .. tostring(count)
-    return
+    status = 'ошибка поиска: ' .. tostring(count)
+    return false
   end
   cands = list
-  snap = takeSnapshot(cands)
-  step = 1
-  status = ('найдено матриц: %d%s. Теперь встаньте на месте, покрутите ' ..
-            'камеру и нажмите «Камера сдвинулась»')
-           :format(count, truncated and ' (список обрезан)' or '')
-  log(('[разведка] матриц-кандидатов: %d'):format(count))
+  status = ('найдено матриц: %d'):format(count)
+  log('[разведка] ' .. status)
+  return true
 end
 
-local function splitByMovement(threshold)
-  local moved, stayed = {}, {}
-  for _, a in ipairs(cands) do
-    local before = snap[a]
-    local now = memory.readmatrix(a)
-    if before and now then
-      if dist3(before, now) > threshold or rotDelta(before, now) > 0.05 then
-        moved[#moved + 1] = a
-      else
-        stayed[#stayed + 1] = a
+-- Камера стоит рядом с игроком и смотрит на него. Проверяем все три оси в
+-- обе стороны: та, что указывает на игрока, и есть «вперёд».
+local function autoFindCamera()
+  local me = ag.localPlayer()
+  if not me then
+    status = 'игрок не найден — движок ещё не прогрузился?'
+    return
+  end
+  local px, py, pz = ag.position(me)
+  if not px then
+    status = 'позиция игрока не читается'
+    return
+  end
+
+  if #cands == 0 and not scanMatrices() then return end
+
+  local best, bestDot, bestAxis, bestSign, bestDist = 0, 0.90, 0, 1, 0
+
+  for _, addr in ipairs(cands) do
+    local m = memory.readmatrix(addr)
+    if m then
+      local cx, cy, cz = mpos(m)
+      local tx, ty, tz, dist = norm3(px - cx, py - cy, pz - cz)
+      -- Слишком близко — это сам игрок, слишком далеко — не наша камера.
+      if dist > 0.7 and dist < 40 then
+        for axis = 1, 3 do
+          local ax, ay, az = row(m, axis)
+          for _, sign in ipairs({ 1, -1 }) do
+            local d = dot3(ax * sign, ay * sign, az * sign, tx, ty, tz)
+            if d > bestDot then
+              best, bestDot, bestAxis, bestSign, bestDist =
+                addr, d, axis, sign, dist
+            end
+          end
+        end
       end
     end
   end
-  return moved, stayed
-end
 
-local function doCameraStep()
-  moving, staying = splitByMovement(0.3)
-  if #moving == 0 then
-    status = 'ничего не сдвинулось — покрутите камеру подольше и повторите'
+  if best == 0 then
+    status = 'камера не опознана. Попробуйте от третьего лица и не в меню, ' ..
+             'затем «Пересканировать память»'
     return
   end
-  -- Кандидат в камеру: сдвинулся сильнее всех по положению.
-  local best, bestD = 0, -1
-  for _, a in ipairs(moving) do
-    local before, now = snap[a], memory.readmatrix(a)
-    if before and now then
-      local d = dist3(before, now)
-      if d > bestD then best, bestD = a, d end
+
+  camAddr, fwdAxis, fwdSign = best, bestAxis, bestSign
+
+  -- «Вверх» — из двух оставшихся осей та, что ближе к мировой вертикали.
+  local cm = memory.readmatrix(camAddr)
+  local bestUp, bestUpZ = 0, -2
+  for axis = 1, 3 do
+    if axis ~= fwdAxis then
+      local _, _, az = row(cm, axis)
+      if az > bestUpZ then bestUp, bestUpZ = axis, az end
     end
   end
-  camAddr = best
-  snap = takeSnapshot(staying)
-  step = 2
-  status = ('камера: 0x%X (сдвиг %.1f). Осталось неподвижных: %d. ' ..
-            'Теперь пройдите несколько шагов и нажмите «Я прошёл»')
-           :format(camAddr, bestD, #staying)
-  log(('[разведка] камера 0x%X'):format(camAddr))
+  upAxis = bestUp
+
+  status = ('камера: 0x%X, до игрока %.1f м, точность %.3f. ' ..
+            'Ось «вперёд» %d (%s), «вверх» %d')
+           :format(camAddr, bestDist, bestDot, fwdAxis,
+                   fwdSign > 0 and '+' or '-', upAxis)
+  log('[разведка] ' .. status)
 end
 
-local function doPlayerStep()
-  local moved = {}
-  for _, a in ipairs(staying) do
-    local before, now = snap[a], memory.readmatrix(a)
-    if before and now and dist3(before, now) > 0.5 then
-      moved[#moved + 1] = { addr = a, d = dist3(before, now) }
-    end
-  end
-  if #moved == 0 then
-    status = 'ничего не сдвинулось — пройдите подальше и повторите'
+-- Игрок должен проецироваться примерно в центр экрана. Если по X он ушёл
+-- в сторону — правая ось смотрит не туда, это лечится зеркалом.
+local function autoFixMirror()
+  local me = ag.localPlayer()
+  local cam = camAddr ~= 0 and memory.readmatrix(camAddr) or nil
+  if not me or not cam then return end
+  local px, py, pz = ag.position(me)
+  if not px then return end
+
+  local x = worldToScreen(px, py, pz, cam)
+  if not x then
+    status = 'игрок за камерой — сначала разверните ось «вперёд»'
     return
   end
-  table.sort(moved, function(x, y) return x.d > y.d end)
-  playerAddr = moved[1].addr
-  step = 3
-  status = ('игрок: 0x%X (сдвиг %.1f). Кандидатов было %d. ' ..
-            'Переходите к настройке проекции')
-           :format(playerAddr, moved[1].d, #moved)
-  log(('[разведка] игрок 0x%X'):format(playerAddr))
+  if math.abs(x - sw / 2) > sw * 0.25 then
+    mirrorX = not mirrorX
+    status = 'зеркало по X переключено'
+  else
+    status = 'игрок и так близко к центру, зеркало не нужно'
+  end
 end
 
-local function saveFound()
+-- ══════════════════════════════════════════════════════════════ конфиг
+
+local function saveCfg()
   local f = io.open(cfgPath, 'w')
   if not f then return end
-  f:write('; найденное разведкой. Адреса кучи меняются при перезапуске,\n')
-  f:write('; поэтому здесь только настройки проекции.\n')
-  f:write(('fov=%d\n'):format(fov))
-  f:write(('fwdAxis=%d\n'):format(fwdAxis))
-  f:write(('upAxis=%d\n'):format(upAxis))
-  f:write(('fwdSign=%d\n'):format(fwdSign))
-  f:write(('mirrorX=%s\n'):format(tostring(mirrorX)))
-  f:write(('mirrorY=%s\n'):format(tostring(mirrorY)))
+  f:write(('fov=%d\nfwdAxis=%d\nupAxis=%d\nfwdSign=%d\nmirrorX=%s\nmirrorY=%s\n')
+          :format(fov, fwdAxis, upAxis, fwdSign,
+                  tostring(mirrorX), tostring(mirrorY)))
   f:close()
-  status = 'настройки проекции сохранены в config/recon.ini'
+  status = 'настройки сохранены'
 end
 
-local function loadFound()
+local function loadCfg()
   local f = io.open(cfgPath, 'r')
   if not f then return end
   for line in f:lines() do
@@ -239,76 +222,38 @@ local function loadFound()
   f:close()
 end
 
--- Ищет, откуда на найденный адрес показывает указатель. Если он окажется
--- внутри библиотеки, находка переживёт перезапуск игры.
-local function tracePointers(addr, label)
-  busy = 'ищу указатели…'
-  local list, count = memory.findpointerto(addr, { range = 0x400 })
-  busy = ''
-  if not list then
-    status = 'поиск указателей: ' .. tostring(count)
-    return
-  end
-  log(('[разведка] на %s (0x%X) указывают %d мест:'):format(label, addr, count))
-  local shown = 0
-  for _, p in ipairs(list) do
-    if p.where == 'модуль' then
-      local base = memory.getclientbase()
-      log(('   модуль +0x%X  -> смещение внутрь %d')
-          :format(p.at - base, p.offset))
-      shown = shown + 1
-      if shown >= 12 then break end
-    end
-  end
-  if shown == 0 then
-    log('   ни одного указателя из самой библиотеки — только из кучи')
-  end
-  status = ('указателей на %s: %d, статических: %d (подробности в логе)')
-           :format(label, count, shown)
-end
-
 -- ═══════════════════════════════════════════════════════════ отрисовка
 
-local function drawOverlay()
-  if camAddr == 0 or not showDots then return end
+local function drawEsp()
+  if not espPlayers or camAddr == 0 then return end
   local cam = memory.readmatrix(camAddr)
   if not cam then return end
 
-  -- Точки на всех кандидатах: если проекция настроена верно, они лягут
-  -- на реальные предметы в мире. Это и есть проверка настройки.
-  --
-  -- Позиции читаются одним пакетным вызовом: поштучно это было бы сотни
-  -- системных вызовов на кадр и заметная просадка.
-  local list = memory.readpositions(cands, dotLimit)
-  if list then
-    for _, o in ipairs(list) do
-      local x, y, depth = worldToScreen(o.x, o.y, o.z, cam)
-      if x and x > -50 and x < sw + 50 and y > -50 and y < sh + 50 then
-        local far = depth > 60
-        imgui.DrawCircleFilled(x, y, far and 3 or 5,
-                               far and 0.4 or 1.0, far and 0.6 or 0.9,
-                               1.0, far and 0.5 or 0.9)
-      end
-    end
-  end
+  local me = ag.localPlayer()
+  local mx, my, mz
+  if me then mx, my, mz = ag.position(me) end
 
-  if playerAddr ~= 0 then
-    local pm = memory.readmatrix(playerAddr)
-    if pm then
-      local wx, wy, wz = pos(pm)
-      local x, y = worldToScreen(wx, wy, wz, cam)
-      if x then
-        imgui.DrawCircleFilled(x, y, 12 * MDS, 0.2, 1.0, 0.3, 1.0)
-        imgui.DrawText(x + 16 * MDS, y - 10 * MDS, 'игрок', 0.2, 1.0, 0.3, 1.0)
-      end
+  for _, p in ipairs(ag.players({ skipLocal = true })) do
+    local x, y, depth = worldToScreen(p.x, p.y, p.z, cam)
+    if x and x > -100 and x < sw + 100 and y > -100 and y < sh + 100
+       and depth < espDist then
+      local dist = mx and getDistanceBetweenCoords3d(mx, my, mz, p.x, p.y, p.z)
+                   or depth
+      local r, g, b = 0.3, 1.0, 0.4
+      if p.inVehicle then r, g, b = 1.0, 0.8, 0.2 end
+
+      imgui.DrawCircleFilled(x, y, 6 * MDS, r, g, b, 0.95)
+      local text = ('%d  %.0fм'):format(p.index, dist)
+      imgui.DrawText(x + 10 * MDS, y - 8 * MDS, text, 0, 0, 0, 0.7)
+      imgui.DrawText(x + 9 * MDS, y - 9 * MDS, text, r, g, b, 1.0)
     end
   end
 end
 
 -- ═════════════════════════════════════════════════════════════ интерфейс
 
-local WIN_W, WIN_H = 940, 660
-local LABEL_W = 280
+local WIN_W, WIN_H = 960, 680
+local LABEL_W = 300
 
 local function label(text)
   imgui.AlignTextToFramePadding()
@@ -324,70 +269,163 @@ local function title(text)
   imgui.Spacing()
 end
 
-local tab = 1
-local TABS = { 'Поиск', 'Проекция', 'Найденное' }
+local function tabLocal()
+  title('Свой игрок')
 
-local function tabSearch()
-  title('Шаг 1 — снять слепок')
-  imgui.TextWrapped(
-    'Сканирует память и собирает всё, что похоже на матрицу положения. ' ..
-    'Сюда попадут камера, игрок, транспорт и объекты вокруг.')
-  imgui.TextDisabled('игра замрёт на пару секунд — это нормально')
-  if imgui.Button('Сканировать', WIN_W - 70, 46) then doScan() end
-
-  title('Шаг 2 — отделить камеру')
-  imgui.TextWrapped(
-    'Встаньте на месте и покрутите камеру, не двигаясь. Сдвинется только ' ..
-    'она — остальное останется на месте.')
-  if step >= 1 then
-    if imgui.Button('Камера сдвинулась', WIN_W - 70, 46) then doCameraStep() end
-  else
-    imgui.TextDisabled('сначала «Сканировать»')
-  end
-
-  title('Шаг 3 — найти игрока')
-  imgui.TextWrapped(
-    'Теперь пройдите несколько шагов. Из того, что стояло на месте, ' ..
-    'сдвинется ваш персонаж.')
-  if step >= 2 then
-    if imgui.Button('Я прошёл', WIN_W - 70, 46) then doPlayerStep() end
-  else
-    imgui.TextDisabled('сначала шаг 2')
-  end
-
-  imgui.Spacing()
-  imgui.Separator()
-  imgui.Spacing()
-  if busy ~= '' then
-    imgui.TextColored(busy, 1.0, 0.8, 0.2, 1.0)
-  end
-  imgui.TextWrapped(status)
-end
-
-local AXIS = { 'ось 1 (right)', 'ось 2 (up)', 'ось 3 (at)' }
-
-local function tabProjection()
-  if camAddr == 0 then
-    imgui.TextColored('Сначала найдите камеру на вкладке «Поиск».',
-                      1.0, 0.5, 0.4, 1.0)
+  if not ag.available() then
+    imgui.TextColored('движок не найден', 1.0, 0.4, 0.4, 1.0)
     return
   end
 
-  title('Настройка')
+  local idx = ag.localIndex()
+  label('Слот')
+  imgui.Text(idx and tostring(idx) or 'нет (0xFFFF)')
+
+  local me = ag.localPlayer()
+  label('Объект')
+  imgui.Text(me and ('0x%X'):format(me) or 'не получен')
+
+  if me then
+    local x, y, z = ag.position(me)
+    label('Позиция')
+    imgui.Text(x and ('%.2f   %.2f   %.2f'):format(x, y, z) or 'не читается')
+
+    label('В транспорте')
+    if ag.inVehicle(me) then
+      imgui.TextColored(('да, 0x%X'):format(ag.vehiclePtr(me)),
+                        0.3, 1.0, 0.4, 1.0)
+    else
+      imgui.TextDisabled('нет')
+    end
+
+    label('Скорость')
+    imgui.Text(('%.1f км/ч'):format(ag.speedKmh(me)))
+
+    local vx, vy, vz = ag.velocity(me)
+    label('Вектор скорости')
+    imgui.Text(vx and ('%.3f  %.3f  %.3f'):format(vx, vy, vz) or '—')
+  end
+
+  title('Откуда адреса')
   imgui.TextWrapped(
-    'Точки рисуются на всех найденных матрицах. Крутите параметры, пока ' ..
-    'точки не лягут на реальные предметы вокруг — значит перевод мировых ' ..
-    'координат в экранные считается верно.')
+    'Разбор экспортируемого движком метода getLocalVehicleSpeed дал всю ' ..
+    'цепочку: индекс своего слота, массив игроков с шагом 336 байт и ' ..
+    'смещения полей. Подробности — в комментариях lib/arizona.lua.')
+
+  label('Массив игроков')
+  imgui.Text(('база +0x%X'):format(ag.OFF_PLAYER_ARRAY))
+  label('Индекс своего слота')
+  imgui.Text(('база +0x%X'):format(ag.OFF_LOCAL_INDEX))
+  label('Позиция в объекте')
+  imgui.Text(('+%d'):format(ag.OFF_POS))
+end
+
+local function tabPlayers()
+  title('Игроки рядом')
+
+  local me = ag.localPlayer()
+  local mx, my, mz
+  if me then mx, my, mz = ag.position(me) end
+
+  local list = ag.players({ skipLocal = true })
+  label('Найдено')
+  imgui.Text(tostring(#list))
 
   imgui.Spacing()
-  label('Показывать точки')
-  local ch, v = imgui.Checkbox('##dots', showDots)
-  if ch then showDots = v end
+  if imgui.BeginChild('##pl', 0, WIN_H - 320, true) then
+    if #list == 0 then
+      imgui.TextDisabled('пусто — либо рядом никого, либо движок не прогрузился')
+    end
+    -- Ближайшие сверху: так список полезнее.
+    if mx then
+      table.sort(list, function(a, b)
+        local da = getDistanceBetweenCoords3d(mx, my, mz, a.x, a.y, a.z)
+        local db = getDistanceBetweenCoords3d(mx, my, mz, b.x, b.y, b.z)
+        return da < db
+      end)
+    end
+    for i, p in ipairs(list) do
+      if i > 60 then break end
+      local d = mx and getDistanceBetweenCoords3d(mx, my, mz, p.x, p.y, p.z) or 0
+      local line = ('слот %-5d %8.1f м   %.0f %.0f %.0f%s')
+                   :format(p.index, d, p.x, p.y, p.z,
+                           p.inVehicle and '   в транспорте' or '')
+      if p.inVehicle then
+        imgui.TextColored(line, 1.0, 0.8, 0.2, 1.0)
+      else
+        imgui.Text(line)
+      end
+    end
+  end
+  imgui.EndChild()
+end
 
+local function tabCamera()
+  title('Поиск камеры')
+  imgui.TextWrapped(
+    'Камера ищется автоматически: она стоит в нескольких метрах от игрока ' ..
+    'и смотрит прямо на него. Встаньте от третьего лица, закройте игровые ' ..
+    'меню и нажмите кнопку. Сканирование памяти займёт пару секунд, игра ' ..
+    'на это время замрёт.')
+
+  imgui.Spacing()
+  if imgui.Button('Найти камеру', WIN_W - 70, 48) then autoFindCamera() end
+  imgui.Spacing()
+  if imgui.Button('Пересканировать память', (WIN_W - 80) / 2, 44) then
+    cands = {}
+    scanMatrices()
+  end
+  imgui.SameLine(0, 10)
+  if imgui.Button('Поправить зеркало', (WIN_W - 80) / 2, 44) then
+    autoFixMirror()
+  end
+
+  title('Результат')
+  label('Матриц-кандидатов')
+  imgui.Text(tostring(#cands))
+  label('Камера')
+  imgui.Text(camAddr ~= 0 and ('0x%X'):format(camAddr) or 'не найдена')
+
+  if camAddr ~= 0 then
+    local cm = memory.readmatrix(camAddr)
+    if cm then
+      local cx, cy, cz = mpos(cm)
+      label('Камера в мире')
+      imgui.Text(('%.1f  %.1f  %.1f'):format(cx, cy, cz))
+    end
+  end
+
+  imgui.Spacing()
+  imgui.TextWrapped(status)
+end
+
+local function tabProjection()
+  if camAddr == 0 then
+    imgui.TextColored('Сначала найдите камеру.', 1.0, 0.5, 0.4, 1.0)
+    return
+  end
+
+  title('Проверка на игроках')
+  imgui.TextWrapped(
+    'Включите отметки и посмотрите на людей вокруг: если кружки держатся ' ..
+    'на них при повороте камеры — проекция настроена верно. Если ползут ' ..
+    'в сторону, крутите поле зрения.')
+
+  imgui.Spacing()
+  label('Отметки игроков')
+  local ch, v = imgui.Checkbox('##esp', espPlayers)
+  if ch then espPlayers = v end
+
+  label('Дальность отметок')
+  ch, v = imgui.SliderInt('##ed', espDist, 20, 1000, tostring(espDist) .. ' м')
+  if ch then espDist = v end
+
+  title('Настройка')
   label('Поле зрения')
   ch, v = imgui.SliderInt('##fov', fov, 30, 120, tostring(fov) .. '°')
   if ch then fov = v end
 
+  local AXIS = { 'ось 1', 'ось 2', 'ось 3' }
   label('Ось «вперёд»')
   ch, v = imgui.Combo('##fwd', fwdAxis, AXIS)
   if ch then fwdAxis = v end
@@ -397,7 +435,7 @@ local function tabProjection()
   if ch then upAxis = v end
 
   label('Развернуть «вперёд»')
-  ch, v = imgui.Checkbox('##fsign', fwdSign < 0)
+  ch, v = imgui.Checkbox('##fs', fwdSign < 0)
   if ch then fwdSign = v and -1 or 1 end
 
   label('Зеркалить по X')
@@ -408,79 +446,34 @@ local function tabProjection()
   ch, v = imgui.Checkbox('##my', mirrorY)
   if ch then mirrorY = v end
 
-  label('Точек на экране')
-  ch, v = imgui.SliderInt('##dl', dotLimit, 50, 2000)
-  if ch then dotLimit = v end
-
-  title('Проверка')
+  title('Куда попадает свой игрок')
+  local me = ag.localPlayer()
   local cam = memory.readmatrix(camAddr)
-  if cam then
-    local cx, cy, cz = pos(cam)
-    label('Камера в мире')
-    imgui.Text(('%.1f  %.1f  %.1f'):format(cx, cy, cz))
-  end
-  if playerAddr ~= 0 then
-    local pm = memory.readmatrix(playerAddr)
-    if pm then
-      local px, py, pz = pos(pm)
-      label('Игрок в мире')
-      imgui.Text(('%.1f  %.1f  %.1f'):format(px, py, pz))
-      if cam then
-        local x, y, d = worldToScreen(px, py, pz, cam)
-        label('Игрок на экране')
-        if x then
-          imgui.Text(('%.0f  %.0f   (до него %.1f м)'):format(x, y, d))
-        else
-          imgui.TextColored('за камерой — разверните ось «вперёд»',
-                            1.0, 0.6, 0.3, 1.0)
-        end
+  if me and cam then
+    local px, py, pz = ag.position(me)
+    if px then
+      local x, y, d = worldToScreen(px, py, pz, cam)
+      label('На экране')
+      if x then
+        imgui.Text(('%.0f  %.0f   (центр: %.0f %.0f)')
+                   :format(x, y, sw / 2, sh / 2))
+      else
+        imgui.TextColored('за камерой — разверните «вперёд»', 1.0, 0.6, 0.3, 1.0)
       end
+      label('До камеры')
+      imgui.Text(d and ('%.1f м'):format(d) or '—')
     end
   end
 
   imgui.Spacing()
-  if imgui.Button('Сохранить настройки', WIN_W - 70, 44) then saveFound() end
-end
-
-local function tabFound()
-  title('Адреса этого запуска')
-  label('База движка')
-  imgui.Text(('0x%X'):format(memory.getclientbase() or 0))
-  label('Камера')
-  imgui.Text(camAddr ~= 0 and ('0x%X'):format(camAddr) or 'не найдена')
-  label('Игрок')
-  imgui.Text(playerAddr ~= 0 and ('0x%X'):format(playerAddr) or 'не найден')
-  label('Кандидатов всего')
-  imgui.Text(tostring(#cands))
-
-  title('Сделать находку постоянной')
-  imgui.TextWrapped(
-    'Эти адреса в куче и при перезапуске игры станут другими. Чтобы ' ..
-    'находка пережила перезапуск, нужен указатель на неё из самой ' ..
-    'библиотеки: такой лежит на постоянном смещении от базы.')
-
-  imgui.Spacing()
-  if camAddr ~= 0 then
-    if imgui.Button('Искать указатели на камеру', (WIN_W - 80) / 2, 44) then
-      tracePointers(camAddr, 'камеру')
-    end
-    imgui.SameLine(0, 10)
-  end
-  if playerAddr ~= 0 then
-    if imgui.Button('Искать указатели на игрока', (WIN_W - 80) / 2, 44) then
-      tracePointers(playerAddr, 'игрока')
-    end
-  end
-
-  imgui.Spacing()
-  imgui.Separator()
+  if imgui.Button('Сохранить настройки', WIN_W - 70, 44) then saveCfg() end
   imgui.Spacing()
   imgui.TextWrapped(status)
 end
 
 function onImgui()
   refreshMetrics()
-  drawOverlay()
+  drawEsp()
   if not show then return end
 
   imgui.SetNextWindowSize(WIN_W, WIN_H, imgui.Cond_Always)
@@ -506,9 +499,10 @@ function onImgui()
     imgui.Separator()
 
     if imgui.BeginChild('##body', 0, WIN_H - 150, false) then
-      if     tab == 1 then tabSearch()
-      elseif tab == 2 then tabProjection()
-      else                 tabFound()
+      if     tab == 1 then tabLocal()
+      elseif tab == 2 then tabPlayers()
+      elseif tab == 3 then tabCamera()
+      else                 tabProjection()
       end
     end
     imgui.EndChild()
@@ -516,14 +510,27 @@ function onImgui()
   imgui.End()
 end
 
--- ═════════════════════════════════════════════════════════════════════ main
-
 function main()
   refreshMetrics()
-  loadFound()
+  loadCfg()
 
   registerChatCommand('recon', function() show = not show end)
   log('разведка готова: /recon')
 
-  while true do wait(1000) end
+  -- Ждём, пока движок выдаст игрока, и сразу пишем находку в лог: так
+  -- видно, работают ли статические адреса, даже не открывая меню.
+  while true do
+    local me = ag.localPlayer()
+    if me then
+      local x, y, z = ag.position(me)
+      if x then
+        log(('[разведка] игрок в слоте %d, объект 0x%X, позиция %.1f %.1f %.1f')
+            :format(ag.localIndex() or -1, me, x, y, z))
+        break
+      end
+    end
+    wait(2000)
+  end
+
+  while true do wait(5000) end
 end
