@@ -12,7 +12,9 @@
 
 script_name('RenderObjects')
 script_author('Victor Strand')
-script_version('2.2-agloader')
+script_version('2.3-agloader')
+
+local ag = require 'arizona'
 
 -- Интерфейс загрузчика поднимается позже, чем читается файл скрипта, поэтому
 -- на этапе загрузки и масштаб, и размер экрана ещё нулевые. Обновляем их
@@ -99,31 +101,101 @@ end
 
 -- ═══════════════════════════════════════════════════ источник объектов
 
--- Здесь оригинал звал getAllObjects + getObjectCoordinates + getObjectModel
--- и переводил мировые координаты в экранные через convert3DCoordsToScreen.
--- В новом движке для этого нужны два адреса, которых пока нет:
---   * пул объектов (перебрать сущности, взять модель и координаты);
---   * матрица вида-проекции камеры (спроецировать точку на экран).
--- Оба ищутся вкладкой «Поиск» в меню загрузчика по значению. Пока их нет,
--- функция честно возвращает пустой список: интерфейс и настройки работают,
--- рисовать просто нечего.
-local objectsSource = nil   -- сюда можно подставить свою функцию
+-- Оригинал звал getAllObjects и convert3DCoordsToScreen. Здесь то же самое
+-- собирается из движка напрямую: пул сущностей найден разбором кода, а
+-- камера опознаётся на живой игре — подробности в lib/arizona.lua.
+--
+-- Два условия, без которых рисовать нечего:
+--   * найдено смещение позиции в объектах пула (кнопка в /recon или здесь);
+--   * найдена камера, иначе некуда проецировать.
+
+local sourceNote = 'не готов'
+
+local function sourceReady()
+  return ag.poolPosOffset ~= nil and ag.cam.addr ~= 0
+end
+
+-- Готовит источник: подтягивает настройки, ищет смещение и камеру.
+local function prepareSource()
+  ag.loadProjection()
+
+  local me = ag.localPlayer()
+  if not me then
+    sourceNote = 'игрок не найден — движок ещё не прогрузился'
+    return false
+  end
+  local px, py, pz = ag.position(me)
+  if not px then
+    sourceNote = 'позиция игрока не читается'
+    return false
+  end
+
+  if not ag.poolPosOffset then
+    local off, hits, sample = ag.findPoolPositionOffset(px, py, pz)
+    if not off then
+      sourceNote = ('смещение позиции в пуле не найдено (%d из %d)')
+                   :format(hits or 0, sample or 0)
+      return false
+    end
+    log(('[RenderObjects] смещение позиции в пуле: +%d (подтвердили %d из %d)')
+        :format(off, hits, sample))
+  end
+
+  if ag.cam.addr == 0 then
+    local addr, acc = ag.findCamera()
+    if not addr then
+      sourceNote = 'камера не найдена: ' .. tostring(acc)
+      return false
+    end
+    log(('[RenderObjects] камера 0x%X, точность %.3f'):format(addr, acc))
+  end
+
+  ag.saveProjection()
+  sourceNote = 'готов'
+  return true
+end
 
 local function collectObjects()
-  if objectsSource then
-    local ok, list = pcall(objectsSource, renderRadius)
-    if ok and type(list) == 'table' then return list end
+  if not sourceReady() then return {} end
+
+  local me = ag.localPlayer()
+  if not me then return {} end
+  local px, py, pz = ag.position(me)
+  if not px then return {} end
+
+  local cam = ag.cameraMatrix()
+  if not cam then return {} end
+
+  local out = {}
+  local objs = ag.poolObjects({
+    near = { px, py, pz },
+    radius = renderRadius,
+    max = 600,
+  })
+
+  for _, o in ipairs(objs) do
+    out[#out + 1] = {
+      handle = o.ptr,
+      model  = o.model or 0,
+      sampId = o.index,
+      dist   = o.dist or 0,
+      wx = o.x, wy = o.y, wz = o.z,
+    }
   end
-  return {}
+  return out
 end
 
 local function haveSource()
-  return objectsSource ~= nil
+  return sourceReady()
 end
 
 -- ══════════════════════════════════════════════════════════════ отрисовка
 
-function onFrame()
+-- Перебор пула — это тысячи чтений памяти, каждый кадр столько нельзя.
+-- Оригинал обновлял список раз в 500 мс, здесь так же: в кеше лежат мировые
+-- координаты, а на экранные они пересчитываются уже каждый кадр — это
+-- чистая арифметика без обращений к памяти.
+local function refreshCache()
   objCache = collectObjects()
 
   local inRange = {}
@@ -137,12 +209,25 @@ end
 local function drawEsp()
   if #objCache == 0 then return end
 
-  local px, py = sw / 2, sh / 2   -- точка игрока на экране
+  local cam = ag.cameraMatrix()
+  if not cam then return end
+
+  -- Игрок на экране: от него тянутся линии.
+  local px, py = sw / 2, sh / 2
+  local me = ag.localPlayer()
+  if me then
+    local mx, my, mz = ag.position(me)
+    if mx then
+      local ax, ay = ag.worldToScreen(mx, my, mz, sw, sh, cam)
+      if ax then px, py = ax, ay end
+    end
+  end
+
   local fsz = 13 * MDS
 
   for _, obj in ipairs(objCache) do
-    if obj.onScreen then
-      local sx, sy = obj.sx, obj.sy
+    local sx, sy = ag.worldToScreen(obj.wx, obj.wy, obj.wz, sw, sh, cam)
+    if sx and sx > -200 and sx < sw + 200 and sy > -200 and sy < sh + 200 then
 
       if scanMode then
         local txt = obj.sampId and obj.sampId ~= -1
@@ -402,16 +487,27 @@ local function tabInfo()
   imgui.BulletText('Кеш объектов: каждый кадр, позиция игрока живая')
   imgui.Spacing()
 
-  if not haveSource() then
-    imgui.Separator()
-    imgui.Spacing()
-    imgui.TextColored('Источник объектов не подключён', 1.00, 0.45, 0.30, 1)
+  imgui.Separator()
+  imgui.Spacing()
+  if haveSource() then
+    imgui.TextColored('Источник объектов готов', 0.30, 0.90, 0.45, 1)
+    row('Смещение позиции', ('+%d'):format(ag.poolPosOffset))
+    row('Камера', ('0x%X'):format(ag.cam.addr))
+    row('Поле зрения', tostring(ag.cam.fov) .. '°')
+  else
+    imgui.TextColored('Источник объектов не готов', 1.00, 0.45, 0.30, 1)
     imgui.TextWrapped(
-      'Интерфейс и настройки работают, но рисовать пока нечего: в новом ' ..
-      'движке нет getAllObjects и convert3DCoordsToScreen. Нужны два адреса — ' ..
-      'пул объектов и матрица вида-проекции камеры. Как только они найдены, ' ..
-      'достаточно подставить свою функцию в objectsSource, остальной код ' ..
-      'уже готов.')
+      'Нужны две вещи: смещение позиции в объектах пула и камера. Оба ' ..
+      'определяются на живой игре — встаньте от третьего лица, закройте ' ..
+      'игровые меню и нажмите кнопку. Игра замрёт на пару секунд.')
+    imgui.Spacing()
+    imgui.TextWrapped(sourceNote)
+  end
+
+  imgui.Spacing()
+  if imgui.Button(haveSource() and 'Найти заново' or 'Подготовить источник',
+                  WIN_W - 70, 44) then
+    prepareSource()
   end
 end
 
@@ -538,12 +634,26 @@ function main()
     log('[RenderObjects] scan: ' .. (scanMode and 'ON' or 'OFF'))
   end)
 
-  log('[RenderObjects v2.2] /renderob')
-  if not haveSource() then
-    log('источник объектов не подключён — ESP пока не рисует, интерфейс работает')
-  end
+  log('[RenderObjects v2.3] /renderob')
 
-  while true do wait(1000) end
+  -- Пробуем поднять источник сами: если игрок уже в мире, всё найдётся
+  -- с первого раза и от пользователя ничего не потребуется.
+  lua_thread.create(function()
+    for _ = 1, 30 do
+      if sourceReady() then break end
+      if prepareSource() then
+        log('[RenderObjects] источник готов, ESP работает')
+        break
+      end
+      wait(3000)
+    end
+  end)
+
+  -- Обновление списка объектов, как в оригинале — раз в 500 мс.
+  while true do
+    if sourceReady() then refreshCache() end
+    wait(500)
+  end
 end
 
 function onScriptTerminate()

@@ -27,7 +27,7 @@ end
 
 local show   = false
 local tab    = 1
-local TABS   = { 'Игрок', 'Игроки', 'Камера', 'Проекция', 'Объект', 'Сеть' }
+local TABS   = { 'Игрок', 'Игроки', 'Камера', 'Проекция', 'Пул', 'Объект', 'Сеть' }
 local status = ''
 
 local cands   = {}
@@ -54,6 +54,11 @@ local insOnlyText = false
 local insNote   = 'выберите объект и нажмите «Прочитать»'
 
 -- Проверка сети.
+-- Пул сущностей мира.
+local poolNote  = 'нажмите «Найти смещение позиции»'
+local poolList  = {}
+local poolTypes = {}
+
 local netUrl    = 'https://api.github.com/zen'
 local netState  = 'не запускали'
 local netBody   = ''
@@ -179,6 +184,10 @@ local function autoFindCamera()
   end
   upAxis = bestUp
 
+  -- Находку отдаём библиотеке: её же читают остальные скрипты.
+  ag.cam.addr, ag.cam.fwdAxis, ag.cam.fwdSign = camAddr, fwdAxis, fwdSign
+  ag.cam.upAxis = upAxis
+
   status = ('камера: 0x%X, до игрока %.1f м, точность %.3f. ' ..
             'Ось «вперёд» %d (%s), «вверх» %d')
            :format(camAddr, bestDist, bestDot, fwdAxis,
@@ -211,29 +220,22 @@ end
 -- ══════════════════════════════════════════════════════════════ конфиг
 
 local function saveCfg()
-  local f = io.open(cfgPath, 'w')
-  if not f then return end
-  f:write(('fov=%d\nfwdAxis=%d\nupAxis=%d\nfwdSign=%d\nmirrorX=%s\nmirrorY=%s\n')
-          :format(fov, fwdAxis, upAxis, fwdSign,
-                  tostring(mirrorX), tostring(mirrorY)))
-  f:close()
-  status = 'настройки сохранены'
+  -- Пишем через библиотеку, чтобы файл был один на всех и остальные скрипты
+  -- подхватывали настройки без своей копии разбора.
+  ag.cam.fov, ag.cam.fwdAxis, ag.cam.upAxis = fov, fwdAxis, upAxis
+  ag.cam.fwdSign, ag.cam.mirrorX, ag.cam.mirrorY = fwdSign, mirrorX, mirrorY
+  if ag.saveProjection() then
+    status = 'настройки сохранены, их подхватят другие скрипты'
+  else
+    status = 'не удалось записать файл настроек'
+  end
 end
 
 local function loadCfg()
-  local f = io.open(cfgPath, 'r')
-  if not f then return end
-  for line in f:lines() do
-    local k, v = line:match('^(%w+)=(.*)$')
-    if     k == 'fov'     then fov = tonumber(v) or fov
-    elseif k == 'fwdAxis' then fwdAxis = tonumber(v) or fwdAxis
-    elseif k == 'upAxis'  then upAxis = tonumber(v) or upAxis
-    elseif k == 'fwdSign' then fwdSign = tonumber(v) or fwdSign
-    elseif k == 'mirrorX' then mirrorX = (v == 'true')
-    elseif k == 'mirrorY' then mirrorY = (v == 'true')
-    end
-  end
-  f:close()
+  if not ag.loadProjection() then return end
+  local c = ag.cam
+  fov, fwdAxis, upAxis = c.fov, c.fwdAxis, c.upAxis
+  fwdSign, mirrorX, mirrorY = c.fwdSign, c.mirrorX, c.mirrorY
 end
 
 -- ═══════════════════════════════════════════════════════════ отрисовка
@@ -485,6 +487,98 @@ local function tabProjection()
   imgui.TextWrapped(status)
 end
 
+local function tabPool()
+  title('Пул сущностей мира')
+  imgui.TextWrapped(
+    'Второй крупный массив движка: указатели на предметы, транспорт и ' ..
+    'прочее, 30300 мест. Найден разбором кода вместе с пределом индекса и ' ..
+    'проверкой типа. А вот смещение позиции внутри объекта по коду не ' ..
+    'вычислялось — отрисовка берёт её через матрицу. Зато его видно на ' ..
+    'живой игре: объекты стримятся вокруг игрока, значит верное смещение ' ..
+    'то, где у большинства лежат координаты неподалёку.')
+
+  imgui.Spacing()
+  label('Адрес пула')
+  imgui.Text(('база +0x%X'):format(ag.OFF_POOL))
+  label('Мест в пуле')
+  imgui.Text(tostring(ag.POOL_MAX))
+  label('Смещение позиции')
+  if ag.poolPosOffset then
+    imgui.TextColored(('+%d'):format(ag.poolPosOffset), 0.3, 1.0, 0.4, 1.0)
+  else
+    imgui.TextDisabled('не найдено')
+  end
+
+  imgui.Spacing()
+  if imgui.Button('Найти смещение позиции', WIN_W - 70, 46) then
+    local me = ag.localPlayer()
+    if not me then
+      poolNote = 'игрок не найден'
+    else
+      local px, py, pz = ag.position(me)
+      if not px then
+        poolNote = 'позиция игрока не читается'
+      else
+        local off, hits, sample = ag.findPoolPositionOffset(px, py, pz)
+        if off then
+          poolNote = ('смещение +%d, подтвердили %d объектов из %d')
+                     :format(off, hits, sample)
+          ag.saveProjection()
+          log('[разведка] ' .. poolNote)
+        else
+          poolNote = ('не нашлось: лучший результат %d из %d')
+                     :format(hits or 0, sample or 0)
+        end
+      end
+    end
+  end
+
+  imgui.Spacing()
+  if imgui.Button('Пересчитать список', WIN_W - 70, 44) then
+    local me = ag.localPlayer()
+    local px, py, pz = me and ag.position(me)
+    poolList = ag.poolObjects({
+      near = px and { px, py, pz } or nil,
+      radius = 300, max = 400,
+    })
+    poolTypes = {}
+    for _, o in ipairs(poolList) do
+      poolTypes[o.type or -1] = (poolTypes[o.type or -1] or 0) + 1
+    end
+    poolNote = ('в списке: %d'):format(#poolList)
+  end
+
+  imgui.Spacing()
+  imgui.TextWrapped(poolNote)
+
+  if next(poolTypes) then
+    imgui.Separator()
+    local parts = {}
+    for t, c in pairs(poolTypes) do
+      parts[#parts + 1] = ('тип %d: %d'):format(t, c)
+    end
+    table.sort(parts)
+    imgui.TextWrapped(table.concat(parts, '   '))
+  end
+
+  imgui.Separator()
+  if imgui.BeginChild('##pool', 0, WIN_H - 480, true) then
+    if #poolList == 0 then
+      imgui.TextDisabled('список пуст')
+    end
+    table.sort(poolList, function(a, b)
+      return (a.dist or 1e9) < (b.dist or 1e9)
+    end)
+    for i, o in ipairs(poolList) do
+      if i > 80 then break end
+      imgui.Text(('#%-6d тип %-3d модель %-6d %s')
+                 :format(o.index, o.type or -1, o.model or -1,
+                         o.dist and ('%.1f м'):format(o.dist) or ''))
+    end
+  end
+  imgui.EndChild()
+end
+
 local function tabInspect()
   title('Что лежит в объекте')
   imgui.TextWrapped(
@@ -652,7 +746,8 @@ function onImgui()
       elseif tab == 2 then tabPlayers()
       elseif tab == 3 then tabCamera()
       elseif tab == 4 then tabProjection()
-      elseif tab == 5 then tabInspect()
+      elseif tab == 5 then tabPool()
+      elseif tab == 6 then tabInspect()
       else                 tabNet()
       end
     end
