@@ -76,8 +76,11 @@ function onImgui()
   local w, h = getScreenSize()
   if w and w > 0 then sw, sh = w, h end
 
+  -- Матрица камеры движка живёт один кадр, поэтому читается один раз.
+  ag.beginFrame()
+
   if espOn then
-    local cam = ag.cameraMatrix()
+    local cam = ag.cameraMatrix() or ag.rwMatrixCache
     if cam then
       local me = ag.localPlayer()
       local ax, ay = sw / 2, sh - 40 * MDS

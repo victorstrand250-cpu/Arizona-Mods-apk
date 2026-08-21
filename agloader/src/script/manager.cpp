@@ -114,6 +114,32 @@ void scan_and_load()
     g_scripts.push_back(std::move(s));
   }
 
+  // Сводка на экран: без неё непонятно даже, дошло ли дело до скриптов.
+  {
+    std::string cmds;
+    std::size_t n = 0;
+    for (auto& sc : g_scripts) {
+      for (const auto& name : sc->command_names()) {
+        if (n < 12) {
+          if (!cmds.empty()) {
+            cmds += ' ';
+          }
+          cmds += '/';
+          cmds += name;
+        }
+        ++n;
+      }
+    }
+    char head[160];
+    std::snprintf(head, sizeof(head),
+                  "AGLoader: скриптов %zu из %zu, команд %zu",
+                  ok, total, n);
+    gui::notify(head, 8.0);
+    if (!cmds.empty()) {
+      gui::notify(cmds.c_str(), 8.0);
+    }
+  }
+
   if (failed == 0) {
     AG_LOGI("загружено скриптов: %zu из %zu", ok, total);
   } else {
@@ -254,8 +280,29 @@ bool on_chat_input(const std::string& line)
   }
 
   // Встроенная команда: без неё спрятанную кнопку было бы нечем вернуть.
-  if (name == "agloader") {
+  if (name == "agloader" || name == "ag") {
     gui::set_menu_open(!gui::menu_open());
+    return true;
+  }
+
+  // Список команд: пользователю неоткуда узнать, что зарегистрировали
+  // скрипты, а по одному имени файла не догадаешься.
+  if (name == "cmds") {
+    std::lock_guard<std::mutex> guard { g_lock };
+    for (auto& s : g_scripts) {
+      const auto names = s->command_names();
+      if (names.empty()) {
+        continue;
+      }
+      std::string line = s->info().file + ':';
+      for (const auto& n : names) {
+        line += " /";
+        line += n;
+      }
+      gui::notify(line.c_str(), 10.0);
+      AG_LOGI("%s", line.c_str());
+    }
+    gui::notify("/ag — меню, /cmds — этот список", 10.0);
     return true;
   }
   return false;

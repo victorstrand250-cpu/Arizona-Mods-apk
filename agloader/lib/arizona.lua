@@ -759,6 +759,90 @@ function arizona.distanceTo(ptr, x, y, z)
   return math.sqrt(dx * dx + dy * dy + dz * dz)
 end
 
+-- ═══════════════════════════════════════════════════════ время суток
+--
+-- Найдено декомпиляцией. В движке есть отладочное окно «Timecycle editor»,
+-- и рядом с ним — функция, которая выбирает две точки суток и смешивает их.
+-- Она начинается так:
+--
+--   fVar70 = (float)*0x113E028;                       -- минуты
+--   fVar90 = (float)*0x113E024;                       -- часы
+--   fVar90 = fVar70/60.0 + *0x113E02C/3600.0 + fVar90;
+--   if (23.999 < fVar90) fVar90 = 23.999;
+--
+-- А сам ход часов — в тике мира:
+--
+--   if (*0x113E030 < *0x1318F30 - *0x113E034) {
+--       *0x113E034 += *0x113E030;
+--       if (++*0x113E028 > 59) { *0x113E028 = 0;
+--                                if (++*0x113E024 > 23) *0x113E024 = 0; }
+--   }
+--
+-- Отсюда всё: и где лежат часы с минутами, и чем задаётся скорость хода.
+
+arizona.OFF_CLOCK_INSTANT = 0x113E020  -- uint8, перещёлкнуть время сразу
+arizona.OFF_HOUR          = 0x113E024  -- uint8, 0..23
+arizona.OFF_MINUTE        = 0x113E028  -- uint8, 0..59
+arizona.OFF_SECOND        = 0x113E02C  -- uint16, считается от остатка
+arizona.OFF_MINUTE_MS     = 0x113E030  -- int32, миллисекунд на игровую минуту
+arizona.OFF_CLOCK_TICK    = 0x113E034  -- int32, когда была прошлая минута
+arizona.OFF_ENGINE_MS     = 0x1318F30  -- uint32, время движка, 391 ссылка
+
+-- Вспышка молнии: счётчик, который поднимает яркость сцены.
+arizona.OFF_LIGHTNING     = 0x35E4E9C  -- int32
+
+function arizona.time()
+  local b = getBase()
+  if b == 0 then return nil end
+  local h = memory.readu8(b + arizona.OFF_HOUR)
+  local m = memory.readu8(b + arizona.OFF_MINUTE)
+  if not h or not m then return nil end
+  return h, m, memory.readu16(b + arizona.OFF_SECOND) or 0
+end
+
+-- Ставит время. Это клиентская подсветка: сервер своё время не меняет и
+-- при следующей рассинхронизации может вернуть своё.
+function arizona.setTime(hour, minute)
+  local b = getBase()
+  if b == 0 then return false end
+  hour = math.max(0, math.min(23, math.floor(tonumber(hour) or 0)))
+  minute = math.max(0, math.min(59, math.floor(tonumber(minute) or 0)))
+  local ok = memory.writeu8(b + arizona.OFF_HOUR, hour)
+  ok = memory.writeu8(b + arizona.OFF_MINUTE, minute) and ok
+  return ok and true or false
+end
+
+-- Сколько миллисекунд идёт игровая минута. Ноль останавливает часы.
+function arizona.timeSpeed()
+  local b = getBase()
+  if b == 0 then return nil end
+  return memory.readi32(b + arizona.OFF_MINUTE_MS)
+end
+
+function arizona.setTimeSpeed(ms)
+  local b = getBase()
+  if b == 0 then return false end
+  ms = math.max(0, math.floor(tonumber(ms) or 1000))
+  return memory.writei32(b + arizona.OFF_MINUTE_MS, ms) and true or false
+end
+
+-- Время движка в миллисекундах: им меряются все его собственные задержки.
+function arizona.engineMs()
+  local b = getBase()
+  if b == 0 then return nil end
+  return memory.readu32(b + arizona.OFF_ENGINE_MS)
+end
+
+function arizona.lightning(strength)
+  local b = getBase()
+  if b == 0 then return nil end
+  if strength then
+    memory.writei32(b + arizona.OFF_LIGHTNING,
+                    math.max(0, math.floor(strength)))
+  end
+  return memory.readi32(b + arizona.OFF_LIGHTNING)
+end
+
 -- ═══════════════════════════════════════════════════════════════ радар
 --
 -- Найдено через JNI-методы SetupHudDisplay и drawGameRadarCircle: сами они
@@ -793,6 +877,139 @@ function arizona.setRadarShown(on)
   local b = getBase()
   if b == 0 then return false end
   return memory.writeu8(b + arizona.RADAR.shown, on and 1 or 0) and true or false
+end
+
+-- ═══════════════════════════════════════════════ камера движка (librw)
+--
+-- Движок рисует на librw — это видно по путям исходников в самой
+-- библиотеке (/usr/src/vendor/librw/src/*.cpp). А раз так, у него есть
+-- rw::engine, и от него дорога к камере известна по исходникам librw, а не
+-- на глазок.
+--
+-- Опознан он через defaultBeginUpdateCB. В librw эта функция выглядит так:
+--
+--   engine->currentCamera = cam;
+--   Frame::syncDirty();
+--   engine->device.beginUpdate(cam);
+--
+-- А в библиотеке по 0x298018 лежит ровно она:
+--
+--   adrp x20, 0x974000
+--   ldr  x20, [x20, #2944]    ; GOT -> 0x9C1A00, это и есть rw::engine
+--   ldr  x8,  [x20]           ; сам Engine
+--   str  x0,  [x8]            ; engine->currentCamera = cam   (смещение 0)
+--   bl   0x29C300             ; Frame::syncDirty()
+--   ldr  x1,  [x8, #152]      ; engine->device.beginUpdate
+--   br   x1
+--
+-- Раскладка структур взята из заголовков librw и перепроверена по коду:
+-- по 0x29C2D0 движок пишет в frame->ltm по смещению 112 и читает
+-- privateFlags по смещению 3 — ровно как в rwobjects.h.
+
+arizona.OFF_RW_ENGINE = 0x9C1A00   -- указатель на rw::Engine
+
+arizona.OFF_ENG_CAMERA = 0    -- Engine::currentCamera
+arizona.OFF_ENG_WORLD  = 8    -- Engine::currentWorld
+
+arizona.OFF_CAM_FRAME  = 8    -- Camera::object.object.parent, это Frame*
+arizona.OFF_CAM_VIEWW  = 56   -- Camera::viewWindow, x = tan(поле зрения / 2)
+arizona.OFF_CAM_NEAR   = 72
+arizona.OFF_CAM_FAR    = 76
+arizona.OFF_CAM_PROJ   = 84   -- 1 — перспектива
+arizona.OFF_CAM_VIEWM  = 88   -- Camera::viewMatrix, мир -> экран
+
+arizona.OFF_FRAME_LTM  = 112  -- Frame::ltm, положение в мире
+arizona.OFF_MAT_POS    = 48   -- в rw::Matrix позиция идёт четвёртой
+
+function arizona.rwEngine()
+  local b = getBase()
+  if b == 0 then return nil end
+  local e = memory.deref(b + arizona.OFF_RW_ENGINE)
+  return sanePointer(e) and e or nil
+end
+
+function arizona.rwCamera()
+  local e = arizona.rwEngine()
+  if not e then return nil end
+  local c = memory.deref(e + arizona.OFF_ENG_CAMERA)
+  return sanePointer(c) and c or nil
+end
+
+-- Матрица мир -> экран, как её посчитал сам движок. Четыре вектора по три
+-- числа с выравниванием в 16 байт: right, up, at, pos.
+--
+-- Возвращает 12 чисел одной таблицей либо nil.
+function arizona.viewMatrix()
+  local c = arizona.rwCamera()
+  if not c then return nil end
+  -- Четыре вектора читаются одной пачкой: матрица нужна каждый кадр, и
+  -- двенадцать отдельных чтений тут были бы двенадцатью системными вызовами.
+  local rows = {}
+  for i = 0, 3 do rows[i + 1] = c + arizona.OFF_CAM_VIEWM + i * 16 end
+  local vals, ok = memory.gather(rows, 0, 'f32x3')
+  if not vals then return nil end
+  for i = 1, 4 do
+    if not ok[i] then return nil end
+  end
+  for i = 1, 12 do
+    if not vals[i] or vals[i] ~= vals[i] then return nil end
+  end
+  return vals
+end
+
+-- Где стоит камера и куда смотрит. Берётся из ltm её же кадра — той самой
+-- матрицы, которую движок обновляет каждый кадр.
+function arizona.cameraFrame()
+  local c = arizona.rwCamera()
+  if not c then return nil end
+  local f = memory.deref(c + arizona.OFF_CAM_FRAME)
+  return sanePointer(f) and f or nil
+end
+
+-- Возвращает позицию камеры и её направление «вперёд».
+function arizona.cameraPose()
+  local f = arizona.cameraFrame()
+  if not f then return nil end
+  local ltm = f + arizona.OFF_FRAME_LTM
+  local px = memory.readfloat(ltm + arizona.OFF_MAT_POS)
+  local py = memory.readfloat(ltm + arizona.OFF_MAT_POS + 4)
+  local pz = memory.readfloat(ltm + arizona.OFF_MAT_POS + 8)
+  -- «Вперёд» у rw::Matrix — третий вектор, at.
+  local ax = memory.readfloat(ltm + 32)
+  local ay = memory.readfloat(ltm + 36)
+  local az = memory.readfloat(ltm + 40)
+  if not saneCoord(px) or not ax or ax ~= ax then return nil end
+  return px, py, pz, ax, ay, az
+end
+
+-- Поле зрения по горизонтали в градусах, прямо из камеры.
+function arizona.fov()
+  local c = arizona.rwCamera()
+  if not c then return nil end
+  local w = memory.readfloat(c + arizona.OFF_CAM_VIEWW)
+  if not w or w ~= w or w <= 0.01 or w > 10 then return nil end
+  return math.deg(math.atan(w)) * 2
+end
+
+-- Мировые координаты в экранные по матрице движка.
+--
+-- Ничего подбирать не нужно: движок сам посчитал матрицу, в которой уже
+-- сидят и поле зрения, и соотношение сторон, и все развороты осей. Результат
+-- матрицы — доли экрана от 0 до 1, поэтому остаётся умножить на размер.
+--
+-- Возвращает x, y на экране и глубину, либо nil, если точка за спиной.
+function arizona.rwWorldToScreen(wx, wy, wz, sw, sh, m)
+  m = m or arizona.viewMatrix()
+  if not m then return nil end
+  if not sw then sw, sh = getScreenSize() end
+  if not sw or sw == 0 then return nil end
+
+  local u = m[1] * wx + m[4] * wy + m[7] * wz + m[10]
+  local v = m[2] * wx + m[5] * wy + m[8] * wz + m[11]
+  local w = m[3] * wx + m[6] * wy + m[9] * wz + m[12]
+
+  if w <= 0.001 then return nil end
+  return (u / w) * sw, (v / w) * sh, w
 end
 
 -- ══════════════════════════════════════════════════ камера и проекция
@@ -888,6 +1105,18 @@ end
 --
 -- Возвращает адрес камеры либо nil и причину.
 function arizona.ensureCamera()
+  -- Камера движка не ищется, она просто есть: адрес rw::engine известен из
+  -- разбора кода. Поиск по памяти остаётся запасным путём на случай, если
+  -- игра обновится и смещение уедет.
+  if arizona.useEngineCamera then
+    local c = arizona.rwCamera()
+    if c and arizona.viewMatrix() then
+      arizona.cam.addr = c
+      arizona.cam.fov = math.floor((arizona.fov() or 70) + 0.5)
+      return c, 'камера движка'
+    end
+  end
+
   if arizona.cam.addr ~= 0 and arizona.cameraMatrix() then
     return arizona.cam.addr
   end
@@ -908,9 +1137,30 @@ function arizona.cameraMatrix()
   return memory.readmatrix(arizona.cam.addr)
 end
 
+-- Матрица движка живёт один кадр: её надо перечитывать, но не по разу на
+-- каждый объект. Скрипты зовут это в начале отрисовки.
+arizona.rwMatrixCache = nil
+arizona.useEngineCamera = true
+
+function arizona.beginFrame()
+  arizona.rwMatrixCache = arizona.useEngineCamera and arizona.viewMatrix() or nil
+  return arizona.rwMatrixCache
+end
+
 -- Мировые координаты в экранные. Возвращает x, y и расстояние до камеры,
 -- либо nil, если точка за спиной.
 function arizona.worldToScreen(wx, wy, wz, sw, sh, cam)
+  -- Если матрица движка на месте — считаем по ней: там уже и поле зрения, и
+  -- соотношение сторон, и развороты осей, подбирать нечего.
+  if arizona.useEngineCamera ~= false then
+    local m = arizona.rwMatrixCache
+    if m then
+      local x, y, d = arizona.rwWorldToScreen(wx, wy, wz, sw, sh, m)
+      if x then return x, y, d end
+      return nil
+    end
+  end
+
   cam = cam or arizona.cameraMatrix()
   if not cam then return nil end
   if not sw then sw, sh = getScreenSize() end

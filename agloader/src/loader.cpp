@@ -348,6 +348,38 @@ double frame_time() { return g_frame_time.load(); }
 long long frame_count() { return g_frames.load(); }
 JavaVM* vm() { return g_vm; }
 
+bool inject_touch(int action, int pointer_id, int x, int y)
+{
+  auto fn = engine::anchors().android_multi_touch;
+  if (fn == nullptr || g_jnilib_class == nullptr || g_vm == nullptr) {
+    return false;
+  }
+
+  JNIEnv* env = nullptr;
+  if (g_vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK) {
+    return false;  // не с потока отрисовки — событие ушло бы не туда
+  }
+
+  // Движок ждёт координаты и самого пальца, и обоих отслеживаемых сразу.
+  // Для одного пальца остальные слоты просто повторяют его же.
+  const jint jx = static_cast<jint>(x);
+  const jint jy = static_cast<jint>(y);
+  jint x1 = jx;
+  jint y1 = jy;
+  jint x2 = 0;
+  jint y2 = 0;
+  if (pointer_id != 0) {
+    x1 = 0;
+    y1 = 0;
+    x2 = jx;
+    y2 = jy;
+  }
+
+  fn(env, g_jnilib_class, static_cast<jint>(action),
+     static_cast<jint>(pointer_id), jx, jy, x1, y1, x2, y2);
+  return true;
+}
+
 void set_screen(int width, int height)
 {
   if (width > 0 && height > 0) {

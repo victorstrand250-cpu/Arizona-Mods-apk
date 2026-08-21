@@ -116,6 +116,41 @@ int l_log(lua_State* L)
   const std::string msg = concat_args(L, 1);
   const std::string tag = s != nullptr ? s->info().file : std::string { "?" };
   log::write(log::Level::Script, "agloader", "[%s] %s", tag.c_str(), msg.c_str());
+  // Заодно на экран: лог-консоль спрятана в меню, и без этого ответ на
+  // чат-команду выглядел так, будто её никто не услышал.
+  gui::notify(msg.c_str());
+  return 0;
+}
+
+// touch(действие, палец, x, y) — подложить игре касание экрана.
+//
+// Управление в игре экранное, поэтому вести персонажа можно, нажимая те же
+// места, что и человек: 0 — опустить палец, 2 — вести, 1 — поднять.
+int l_touch(lua_State* L)
+{
+  const int action = static_cast<int>(luaL_checkinteger(L, 1));
+  const int id = static_cast<int>(luaL_optinteger(L, 2, 0));
+  const int x = static_cast<int>(luaL_checknumber(L, 3));
+  const int y = static_cast<int>(luaL_checknumber(L, 4));
+  lua_pushboolean(L, loader::inject_touch(action, id, x, y) ? 1 : 0);
+  return 1;
+}
+
+// notify(текст, [секунды]) — сообщение поверх игры, без записи в лог.
+int l_notify(lua_State* L)
+{
+  const std::string msg = concat_args(L, 1);
+  double seconds = 3.0;
+  if (lua_isnumber(L, lua_gettop(L)) && lua_gettop(L) > 1) {
+    seconds = lua_tonumber(L, lua_gettop(L));
+  }
+  if (seconds < 0.5) {
+    seconds = 0.5;
+  }
+  if (seconds > 30.0) {
+    seconds = 30.0;
+  }
+  gui::notify(msg.c_str(), seconds);
   return 0;
 }
 
@@ -309,6 +344,8 @@ const luaL_Reg kGlobals[] = {
     { "thisScript", l_this_script },
     { "wait", l_wait },
     { "log", l_log },
+    { "notify", l_notify },
+    { "touch", l_touch },
     { "print", l_print },
     { "getScreenSize", l_get_screen_size },
     { "getUiScale", l_get_ui_scale },

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "script/script.h"
 
+#include <algorithm>
 #include <chrono>
 #include <utility>
 
@@ -404,6 +405,17 @@ void Script::clear_command(const std::string& name)
   commands_.erase(it);
 }
 
+std::vector<std::string> Script::command_names() const
+{
+  std::vector<std::string> out;
+  out.reserve(commands_.size());
+  for (const auto& kv : commands_) {
+    out.push_back(kv.first);
+  }
+  std::sort(out.begin(), out.end());
+  return out;
+}
+
 bool Script::call_command(const std::string& name, const std::string& args)
 {
   if (!is_alive()) {
@@ -422,16 +434,6 @@ bool Script::call_command(const std::string& name, const std::string& args)
   lua_pushlstring(L_, args.c_str(), args.size());
   run_protected(1, 0, ("команда /" + name).c_str());
   return true;
-}
-
-std::vector<std::string> Script::command_names() const
-{
-  std::vector<std::string> out;
-  out.reserve(commands_.size());
-  for (const auto& kv : commands_) {
-    out.push_back(kv.first);
-  }
-  return out;
 }
 
 void Script::call_terminate()

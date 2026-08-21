@@ -238,7 +238,7 @@ end
 local function drawEsp()
   if #objCache == 0 then return end
 
-  local cam = ag.cameraMatrix()
+  local cam = ag.cameraMatrix() or ag.rwMatrixCache
   if not cam then return end
 
   -- Игрок на экране: от него тянутся линии.
@@ -581,6 +581,7 @@ local TABS = { '  Список  ', '  Цвета  ', '  Info  ' }
 
 function onImgui()
   refreshMetrics()
+  ag.beginFrame()
   WIN_W = 480 * MDS
 
   drawEsp()

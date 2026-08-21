@@ -3,8 +3,11 @@
 
 #include <GLES3/gl3.h>
 
+#include <algorithm>
+#include <chrono>
 #include <cstdio>
 #include <cstring>
+#include <mutex>
 #include <string>
 #include <vector>
 
@@ -40,6 +43,65 @@ bool g_show_log = true;
 bool g_show_scripts = true;
 bool g_show_modules = false;
 bool g_log_autoscroll = true;
+
+// ────────────────────────────────────────────── сообщения поверх игры
+//
+// Скрипт отвечает через log(), а лог-консоль спрятана в меню — со стороны
+// это выглядит как «команда не сработала». Поэтому каждое сообщение заодно
+// всплывает на экране на несколько секунд.
+struct Toast {
+  std::string text;
+  double until = 0.0;
+};
+
+std::mutex g_toast_lock;
+std::vector<Toast> g_toasts;
+bool g_toasts_enabled = true;
+
+double now_seconds()
+{
+  using clock = std::chrono::steady_clock;
+  static const clock::time_point origin = clock::now();
+  return std::chrono::duration<double>(clock::now() - origin).count();
+}
+
+// Рисуется поверх всего и без окна: сообщение не должно ни перехватывать
+// касания, ни зависеть от того, открыто ли меню.
+void draw_toasts()
+{
+  std::vector<Toast> shown;
+  {
+    std::lock_guard<std::mutex> guard { g_toast_lock };
+    const double t = now_seconds();
+    g_toasts.erase(std::remove_if(g_toasts.begin(), g_toasts.end(),
+                                  [t](const Toast& x) { return x.until < t; }),
+                   g_toasts.end());
+    shown = g_toasts;
+  }
+  if (shown.empty()) {
+    return;
+  }
+
+  ImDrawList* dl = ImGui::GetForegroundDrawList();
+  const float scale = ui_scale();
+  const float pad = 8.0f * scale;
+  const float line = ImGui::GetFontSize() + 6.0f * scale;
+  const float w = static_cast<float>(g_width);
+
+  float y = 96.0f * scale;
+  for (const auto& toast : shown) {
+    const ImVec2 size = ImGui::CalcTextSize(toast.text.c_str());
+    const float bw = size.x + pad * 2.0f;
+    const float x = (w - bw) * 0.5f;
+    dl->AddRectFilled(ImVec2 { x, y }, ImVec2 { x + bw, y + line },
+                      IM_COL32(12, 14, 20, 220), 6.0f * scale);
+    dl->AddRect(ImVec2 { x, y }, ImVec2 { x + bw, y + line },
+                IM_COL32(90, 100, 130, 200), 6.0f * scale);
+    dl->AddText(ImVec2 { x + pad, y + 3.0f * scale },
+                IM_COL32(235, 238, 245, 255), toast.text.c_str());
+    y += line + 4.0f * scale;
+  }
+}
 
 void apply_style(float scale)
 {
@@ -347,6 +409,7 @@ void draw_main_window()
       !g_button_visible) {
     AG_LOGI("кнопка скрыта — меню открывается командой /agloader");
   }
+  ImGui::Checkbox("Ответы скриптов поверх игры", &g_toasts_enabled);
   ImGui::TextDisabled("Меню также открывается командой /agloader");
 
   if (ImGui::Button("Перезагрузить скрипты", ImVec2 { -1.0f, 0.0f })) {
@@ -464,6 +527,8 @@ void render(double dt)
   ImGui_ImplOpenGL3_NewFrame();
   ImGui::NewFrame();
 
+  draw_toasts();
+
   if (g_button_visible) {
     draw_button();
   }
@@ -514,6 +579,30 @@ bool hit_test(float x, float y)
     }
   }
   return false;
+}
+
+void notify(const char* text, double seconds)
+{
+  if (text == nullptr || *text == '\0' || !g_toasts_enabled) {
+    return;
+  }
+  std::lock_guard<std::mutex> guard { g_toast_lock };
+  // Больше шести строк на экране — это уже не подсказка, а помеха.
+  if (g_toasts.size() >= 6) {
+    g_toasts.erase(g_toasts.begin());
+  }
+  g_toasts.push_back(Toast { text, now_seconds() + seconds });
+}
+
+bool notifications_enabled() { return g_toasts_enabled; }
+
+void set_notifications_enabled(bool on)
+{
+  g_toasts_enabled = on;
+  if (!on) {
+    std::lock_guard<std::mutex> guard { g_toast_lock };
+    g_toasts.clear();
+  }
 }
 
 bool menu_open() { return g_menu_open; }

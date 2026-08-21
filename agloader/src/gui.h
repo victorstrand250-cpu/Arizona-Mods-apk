@@ -30,6 +30,17 @@ void render(double dt);
 // Используется тач-обработчиком, чтобы решить, поглощать ли событие.
 bool hit_test(float x, float y);
 
+// Сообщение поверх игры на несколько секунд.
+//
+// Без него ответы скриптов уходили только в лог-консоль внутри меню, и со
+// стороны это выглядело так, будто команда не сработала вовсе. Теперь любой
+// log() из скрипта заодно всплывает на экране.
+void notify(const char* text, double seconds = 3.0);
+
+// Показывать ли всплывающие сообщения. Переключается в меню.
+bool notifications_enabled();
+void set_notifications_enabled(bool on);
+
 bool menu_open();
 void set_menu_open(bool open);
 
